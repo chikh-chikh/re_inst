@@ -4,9 +4,9 @@
 
 # global xinitrc file, used by all X sessions started by xinit (startx)
 
-xxkb &
+setxkbmap -option grp:alt_shift_toggle -layout us,ru &
 
-setxkbmap -layout us,ru -variant -option
-	grp:alt_shift_toggle,terminate:ctrl_alt_bksp &
+#gxkb &
 
 exec awesome
+
