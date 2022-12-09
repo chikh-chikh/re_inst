@@ -1,8 +1,6 @@
 -- Если установлен LuaRocks, убедитесь, что пакеты, установленные через него. (например, lgi).
 -- Если LuaRocks не установлен, ничего не делайте...
 
-pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -53,35 +51,28 @@ end
 -- }}}
 
 -- {{{ Определения переменных
--- Для тем задаются цвета, иконки, шрифт и обои.
 beautiful.init("~/.config/awesome/themes/ru_cost_zenb/theme.lua")
--- gears.filesystem.get_themes_dir() ..
 
--- В дальнейшем он будет использоваться в качестве терминала и редактора по умолчанию.
-terminal = "konsole"
+--awful.spawn(terminal.." -e my_command")
+
+terminal = "konsole .. -e zsh"
+fm = "konsole .. -e ranger"
 browser = "google-chrome"
 editor = os.getenv("nvim") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Autostarting programm
--- Подключение к интернету
 os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
 os.execute("pgrep -u $USER -x kbdd || (kbdd &)")
 os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
 
--- Клавиша по умолчанию.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- Если вам это не нравится или у вас нет такого ключа,
--- я предлагаю вам переназначить Mod4 на другую клавишу с помощью xmodmap или других инструментов.
--- Однако вы можете использовать другой модификатор, например Mod1, но он может взаимодействовать с другими.
 modkey = "Mod4"
+altkey = "Mod1"
 
--- Таблица расположения макетов для заполнения с помощью awful.layout.inc, порядок имеет значение.
 awful.layout.layouts = {
    -- awful.layout.suit.floating,
     awful.layout.suit.tile,
-   -- awful.layout.suit.tile.left,
-   -- awful.layout.suit.tile.bottom,
+   -- awful.layout.suit.tile.left, awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,
    -- awful.layout.suit.fair,
    -- awful.layout.suit.fair.horizontal,
@@ -98,7 +89,6 @@ awful.layout.layouts = {
 -- }}}
 
 -- {{{ Menu
--- Создание запускающего виджета и главного меню
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
@@ -128,6 +118,7 @@ end
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
+
 -- Конфигурация менюбара (mod4 p)
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -136,7 +127,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
-
 -- Создание виджета текстовых часов
 mytextclock = wibox.widget.textclock()
 
@@ -192,7 +182,7 @@ local function set_wallpaper(s)
     end
 end
 
--- Переустановка обоев при изменении геометрии экрана (например, при изменении разрешения)
+--Переустановка обоев при изменении геометрии экрана (например, при изменении разрешения)
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
@@ -229,12 +219,6 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons
     }
-
-	s.mytasklist = awful.widget.tasklist {
-	screen  = s,
-	filter  = awful.widget.tasklist.filter.currenttags,
-	buttons = tasklist_buttons
-	}
 
     -- Создайте wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -273,10 +257,10 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+   -- awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+   --           {description = "view previous", group = "tag"}),	--conflict with collision
+   -- awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+   --           {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
@@ -295,22 +279,22 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
-    -- Управление схемой расположения
+    -- Swap client (->layout) Управление схемой расположения
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
-
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
 
+	--focus screen
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
 
+
+
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -321,14 +305,22 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Стандартная программа
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey,		}, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+              {description = "reload awesome", group = "awesoe"}),
+    awful.key({ modkey, "Shift" }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
+	-- Ranger
+    awful.key({ modkey,		},  "space", function () awful.spawn(fm) end,
+              {description = "open file manager", group = "RU"}),
 
+
+
+
+--[[=========================================================================--]]
+--[[=========================================================================--]]
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
 
@@ -366,14 +358,14 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- DMenu
-    awful.key({ modkey },            "space",     function ()
+    awful.key({ modkey, altkey }, "d",     function ()
     awful.util.spawn("dmenu_run")  end,
               {description = "launch dmenu", group = "RU"}),
 
     -- Launch Browser
     awful.key({ modkey },            "b",     function ()
     awful.util.spawn("google-chrome")  end,
-              {description = "Open a browser", group = "RU"}),
+              {description = "open a browser", group = "RU"}),
 
 --[[
     awful.key({ modkey }, "x",
@@ -446,6 +438,18 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"})
 )
+--[[
+awful.util.table.join(
+  -- Audio
+  awful.key({ }, "XF86AudioRaiseVolume", pulseaudio.volume_up),
+  awful.key({ }, "XF86AudioLowerVolume", pulseaudio.volume_down),
+  awful.key({ }, "XF86AudioMute",  pulseaudio.toggle_muted),
+  -- Microphone
+  awful.key({"Shift"}, "XF86AudioRaiseVolume", pulseaudio.volume_up_mic),
+  awful.key({"Shift"}, "XF86AudioLowerVolume", pulseaudio.volume_down_mic),
+  awful.key({ }, "XF86MicMute",  pulseaudio.toggle_muted_mic)
+)
+--]]
 
 -- Привязать все номера клавиш к тегам.
 -- Будьте внимательны: мы используем коды клавиш, чтобы заставить его работать на любой раскладке клавиатуры.
@@ -565,7 +569,7 @@ awful.rules.rules = {
 
     -- Добавление панелей заголовков к обычным клиентам и диалоговым окнам
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Установите Firefox, чтобы он всегда отображал метку с именем "2" на экране 1.
@@ -646,13 +650,15 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 end)
 
 -- Gups
-beautiful.useless_gap = 5
+beautiful.useless_gap = 7
 
 -- Autostart
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/")
 awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru")
 
+awful.spawn.with_shell(fm)
+awful.spawn.with_shell(terminal)
 
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal
 end)
