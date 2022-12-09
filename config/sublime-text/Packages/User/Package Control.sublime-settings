@@ -1,0 +1,18 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Anaconda",
+		"AutoFileName",
+		"ayu",
+		"DlangAutoFileName",
+		"Emmet",
+		"Package Control",
+		"RailsBase16 Color Schemes",
+		"SublimeREPL",
+	],
+}

@@ -95,3 +95,8 @@ unset __conda_setup
 
 #set -o vi
 
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
+
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin"
