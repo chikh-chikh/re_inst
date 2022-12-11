@@ -8,14 +8,14 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Simple plugins can be specified as strings
-  use 'rstacruz/vim-closer'
+  --use 'rstacruz/vim-closer'
 
   -- Lazy loading:
   -- Load on specific commands
-  use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
+  --use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
 
   -- Load on an autocommand event
-  use {'andymass/vim-matchup', event = 'VimEnter'}
+  --use {'andymass/vim-matchup', event = 'VimEnter'}
 
   -- Load on a combination of conditions: specific filetypes or commands
   -- Also run code after load (see the "config" key)
@@ -27,20 +27,17 @@ return require('packer').startup(function(use)
   }
 
   -- Plugins can have dependencies on other plugins
-  use {
-    'haorenW1025/completion-nvim',
-    opt = true,
-    requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
-  }
+  --use {'haorenW1025/completion-nvim',opt = true,
+  --requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}}
 
   -- Plugins can have post-install/update hooks
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 
   -- Post-install/update hook with neovim command
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  --use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Post-install/update hook with call of vimscript function with argument
-  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
+  --use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
   -- Use dependency and run lua function after load
   use {
@@ -51,13 +48,10 @@ return require('packer').startup(function(use)
   -- You can specify multiple plugins in a single call
   --use {'tjdevries/colorbuddy.vim', {'nvim-treesitter/nvim-treesitter', opt = true}}
 
-  use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = false }
-  }
+  --use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = false }}
 
 
-  use {
-  'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }
-  }
+  --use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }}
 
   --colorscheme
   use { 'gruvbox-community/gruvbox' }

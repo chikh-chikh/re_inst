@@ -1,6 +1,8 @@
 -- Если установлен LuaRocks, убедитесь, что пакеты, установленные через него. (например, lgi).
 -- Если LuaRocks не установлен, ничего не делайте...
 
+pcall(require, "luarocks.loader")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -55,9 +57,10 @@ beautiful.init("~/.config/awesome/themes/ru_cost_zenb/theme.lua")
 
 --awful.spawn(terminal.." -e my_command")
 
-terminal = "konsole .. -e zsh"
-fm = "konsole .. -e ranger"
+terminal = "alacritty"
+fm = terminal .. " -e ranger"
 browser = "yandex-browser-stable"
+
 editor = os.getenv("nvim") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -364,7 +367,7 @@ globalkeys = gears.table.join(
 
     -- Launch Browser
     awful.key({ modkey },            "b",     function ()
-    awful.util.spawn("google-chrome")  end,
+    awful.util.spawn(browser)  end,
               {description = "open a browser", group = "RU"}),
 
 --[[
