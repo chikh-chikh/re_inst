@@ -30,7 +30,7 @@ theme.bg_systray = "#575025"--theme.bg_normal
 
 -- {{{ Borders
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(5)
+theme.border_width  = dpi(3)
 theme.border_normal = "#756b2f"
 theme.border_focus  = "#d1c381"
 theme.border_marked = "#e9e0bf"

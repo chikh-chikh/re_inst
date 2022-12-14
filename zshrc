@@ -1,100 +1,19 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.config/zsh/"
+# history
+HISTFILE=~/.zsh_history
 
-export ZSH_CUSTOM=/"$HOME/.config/zsh/custom/"
+# sourse
+plug "$HOME/.config/zsh/aliases.zsh"
+plug "$HOME/.config/zsh/exports.zsh"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-	zsh-history-substring-search
-	#git
-	#zsh-syntax-highlighting
-	#zsh-autosuggestions
-	#copypath
-	#history
-	#fd
-	#pipenv
-	#pip
-	#sudo
-	#zsh-interactive-cd
-	#python
-)
+#set -o vi
 
-# export TERM=rxvt  #dircolors --print-database | grep '^TERM'
-export MANPATH="/usr/local/man:$MANPATH"
+# plugins
+plug "zap-zsh/supercharge"
+plug "zsh-users/zsh-autosuggestions"
+#plug "zsh-users/zsh-syntax-highlighting"
 
-# You may need to manually set your language environment
-export LANG=ru_RU.UTF-8
-
-# ZSH_THEME="wezm+"
-
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-# Example aliases
-alias bc="kate ~/.bashrc"
-alias zc="kate ~/.zshrc"
-#alias oc="kate ~/.oh-my-zsh"
-alias tc="kate ~/.config/alacritty/alacritty.yml"
-#alias pc="kate ~/.p10k.zsh"
-alias ac="kate ~/.config/awesome/rc.lua"
-alias nc="kate ~/.config/nvim/init.lua"
-
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin"
-
-export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
-
+# Example install completion
+#plug "esc/conda-zsh-completion"
+#

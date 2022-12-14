@@ -1,0 +1,9 @@
+export VISUAL=/usr/bin/nvim
+export EDITOR=/usr/bin/nvim
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export LANG=ru_RU.UTF-8
+export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+export PROMPT='%n@%m%~ '
+#export ZSH="$HOME/.config/zsh/"
+#export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin"
+#export VIMRUNTIME=/usr/share/nvim/runtime/
