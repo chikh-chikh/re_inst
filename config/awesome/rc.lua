@@ -190,6 +190,9 @@ end
 --Переустановка обоев при изменении геометрии экрана (например, при изменении разрешения)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- Without this setting, it defaults to 16px icons which stretch to my wibar height of 24px.
+awesome.set_preferred_icon_size(16)
+
 awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
     -- Каждый экран имеет свою таблицу тегов.
@@ -241,6 +244,76 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 -- }}}
+
+---{{{
+---[[--
+-- These two functions are for moving the current client to the next/previous tag and following view to that tag.
+local function move_to_previous_tag()
+	local c = client.focus
+	if not c then return end
+	local t = c.screen.selected_tag
+	local tags = c.screen.tags
+	local idx = t.index
+	local newtag = tags[gmath.cycle(#tags, idx - 1)]
+	c:move_to_tag(newtag)
+	awful.tag.viewprev()
+end
+local function move_to_next_tag()
+	local c = client.focus
+	if not c then return end
+	local t = c.screen.selected_tag
+	local tags = c.screen.tags
+	local idx = t.index
+	local newtag = tags[gmath.cycle(#tags, idx + 1)]
+	c:move_to_tag(newtag)
+	awful.tag.viewnext()
+end
+
+-- There is no reason to navigate next or previous in my tag list and have to pass by empty tags in route to the next tag with a client. The following two functions bypass the empty tags when navigating to next or previous.
+function view_next_tag_with_client()
+	local initial_tag_index = awful.screen.focused().selected_tag.index
+	while (true) do
+		awful.tag.viewnext()
+		local current_tag = awful.screen.focused().selected_tag
+		local current_tag_index = current_tag.index
+		if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
+			return
+		end
+	end
+end
+function view_prev_tag_with_client()
+	local initial_tag_index = awful.screen.focused().selected_tag.index
+	while (true) do
+		awful.tag.viewprev()
+		local current_tag = awful.screen.focused().selected_tag
+		local current_tag_index = current_tag.index
+		if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
+			return
+		end
+	end
+end
+
+-- Toggle showing the desktop
+local show_desktop = false
+function show_my_desktop()
+	if show_desktop then
+		for _, c in ipairs(client.get()) do
+			c:emit_signal(
+				"request::activate", "key.unminimize", {raise = true}
+			)
+		end
+		show_desktop = false
+	else
+		for _, c in ipairs(client.get()) do
+			c.minimized = true
+		end
+		show_desktop = true
+	end
+end
+
+
+--]]--
+---}}}
 
 -- {{{ Привязки для мыши
 root.buttons(gears.table.join(
@@ -379,6 +452,8 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"})
 )
 -- }}}
+
+
 
 -- {{{
     -- Клавиши управления окном
@@ -576,7 +651,55 @@ awful.rules.rules = {
 }
 
 -- }}}
+---[[--
+-- If I close the last client on a given tag, it will automatically switch to a tag that has a client. That is, there is no reason to stay on a tag that is empty.
+client.connect_signal("unmanage", function(c)
+	local t = c.first_tag or awful.screen.focused().selected_tag
+	for _, cl in ipairs(t:clients()) do
+		if cl ~= c then
+			return
+		end
+	end
+	for _, t in ipairs(awful.screen.focused().tags) do
+		if #t:clients() > 0 then
+			t:view_only()
+			return
+		end
+	end
+end)
 
+move_client_to_screen = function(c, s)
+	function avoid_showing_empty_tag_client_move(c)
+		-- Get the current tag.
+		local t = c.first_tag or awful.screen.focused().selected_tag
+		-- Cycle through all clients on the current tag. If there are 2 or greater clients on the current tag then leave function.
+		for _, cl in ipairs(t:clients()) do
+			if cl ~= c then
+				return
+			end
+		end
+		-- This step is only run if there is one client on the current tag.
+		-- Cycle through all tags on the current screen. We must skip the current tag. We then move to the lowest index tag with one or more clients on it.
+		for _, tg in ipairs(awful.screen.focused().tags) do
+			if tg ~= t then
+				if #tg:clients() > 0 then
+					tg:view_only()
+					break
+				end
+			end
+		end
+	end
+	avoid_showing_empty_tag_client_move(c)
+	-- Move to new screen but also keep it on the same tag index.
+	local index = c.first_tag.index
+	c:move_to_screen(s)
+	local tag = c.screen.tags[index]
+	c:move_to_tag(tag)
+	tag:view_only()
+end
+--]]--
+
+--[[--
 -- {{{ Signals
 -- Signal function для выполнения при появлении нового клиента.
 client.connect_signal("manage", function (c)
@@ -592,6 +715,8 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
+--]]--
+
 
 -- Добавьте панель заголовка, если в правилах titlebars_enabled установлено значение true.
 --[[--
@@ -635,17 +760,40 @@ buttons = buttons,
 end)
 --]]--
 
--- Чтобы фокус следовал за мышью.
---[[--
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+-- Signals
+---[[--
+-- Focus urgent clients automatically
+-- When I launch a client at a particular place, I want to go to that client.
+client.connect_signal("property::urgent", function(c)
+	c.minimized = false
+	c:jump_to()
+end)
+
+-- Signal function to execute when a new client appears.
+client.connect_signal("manage", function (c)
+	-- Set the windows at the slave,
+	-- i.e. put it at the end of others instead of setting it master.
+	-- if not awesome.startup then awful.client.setslave(c) end
+	if awesome.startup
+		and not c.size_hints.user_position
+		and not c.size_hints.program_position then
+		-- Prevent clients from being unreachable after screen count changes.
+		awful.placement.no_offscreen(c)
+	end
 end)
 --]]--
 
---}
+--[[--
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+	c:emit_signal("request::activate", "mouse_enter", {raise = false})
+ end)
+--]]--
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus
-end)
+-- My focus border matches the mouse color.
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
 
 -- Gups
 beautiful.useless_gap = 7

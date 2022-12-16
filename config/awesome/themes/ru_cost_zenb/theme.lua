@@ -12,7 +12,8 @@ theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "JetBrains Mono Medium 12"
+--theme.font      = "JetBrains Mono Medium 12"
+theme.font      = "Noto Mono Nerd Font Complete Mono 12"
 
 
 -- {{{ Colors  b5a642 - base

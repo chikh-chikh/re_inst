@@ -5,38 +5,58 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
 
 	-- Добавляем Packer в список, чтобы он обновлял сам себя
-	use 'wbthomason/packer.nvim'
-
-	use "nvim-lua/plenary.nvim"
-
-	use 'nvim-telescope/telescope-fzf-native.nvim'
-
-	use {'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	-- or                            , branch = '0.1.x',
-		requires = { {'nvim-lua/plenary.nvim'} }
+  use 'wbthomason/packer.nvim'
+  -- Проводник
+  use { 'nvim-tree/nvim-tree.lua',
+    requires = 'nvim-tree/nvim-web-devicons' -- optional, for file icons
+  }
+  -- Подсветка синтаксиса
+  use {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"}
+  -- Поиск
+  -- use 'nvim-telescope/telescope-fzf-native.nvim'
+ 	use {'nvim-telescope/telescope.nvim', tag = '0.1.0',
+                         	-- or       , branch = '0.1.x',
+		requires = 'nvim-lua/plenary.nvim'
+  }
+  --Панель вкладок
+  use {'akinsho/bufferline.nvim', tag = "v3.*",
+    requires = 'nvim-tree/nvim-web-devicons'
+  }
+  -- Статуслайн
+	use {'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function()
+			require('plugins/lualine')
+	
+    end
 	}
+		-- Автодополнение
+	use {'hrsh7th/nvim-cmp',
+		requires = {
+			'L3MON4D3/LuaSnip',
+			'saadparwaiz1/cmp_luasnip',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-emoji',
+			'hrsh7th/cmp-nvim-lsp-signature-help',
+			'hrsh7th/cmp-nvim-lua'
+		},
+		config = function()
+		-- ДАННАЯ ЧАСТЬ ОЧЕНЬ ВАЖНА:
+			require('plugins/cmp')
+		end
+  }
 
+  -- use 'nvim-lua/plenary.nvim'
+	
 	--Темы уточнить
 	use 'terroo/vim-simple-emoji'
 	use 'navarasu/onedark.nvim'
-
-	--colorscheme
-	use { 'gruvbox-community/gruvbox' }
+	use 'gruvbox-community/gruvbox'
 
 	-- LSP сервер
 	--[[--
 	use 'neovim/nvim-lspconfig'
-	--]]--
-
-	-- Иконки для автодополнения
-	--[[--
-	use {
-		'onsails/lspkind-nvim',
-		config = function()
-			require('plugins/lspkind')
-		end
-	}
-	--]]--
 
 	-- Инсталлер для серверов LSP
 	--[[--
@@ -59,33 +79,9 @@ return require('packer').startup(function()
 	}
 	--]]--
 
-	-- Статуслайн
-	use({
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-		config = function()
-			require('plugins/lualine')
-		end
-	})
-
-	-- Автодополнение
-	use {
-		'hrsh7th/nvim-cmp',
-		requires = {
-			'L3MON4D3/LuaSnip',
-			'saadparwaiz1/cmp_luasnip',
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-emoji',
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			'hrsh7th/cmp-nvim-lua'
-		},
-		config = function()
-		-- ДАННАЯ ЧАСТЬ ОЧЕНЬ ВАЖНА:
-			require('plugins/cmp')
-		end
-    }
 end)
+
+
 	-- Simple plugins can be specified as strings
     --[[--
     use 'rstacruz/vim-closer'
@@ -144,15 +140,6 @@ end)
     --[[--
     use {'tjdevries/colorbuddy.vim', {'nvim-treesitter/nvim-treesitter', opt = true}}
     --]]--
-
-    --[[--
-    use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = false }}
-    --]]--
-
-    --[[--
-    use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }}
-    --]]--
-
 
     -- You can alias plugin names
     --[[--

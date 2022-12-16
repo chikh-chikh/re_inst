@@ -1,5 +1,6 @@
 local cmp = require('cmp')
-local lspkind = require('lspkind')
+---[[--
+--local lspkind = require('lspkind')
 cmp.setup{
 	snippet = {
 
@@ -8,7 +9,7 @@ cmp.setup{
 			require'luasnip'.lsp_expand(args.body) -- Luasnip expand
 		end,
 	},
-
+--]]--
 	-- Клавиши, которые будут взаимодействовать в nvim-cmp
 	mapping = {
 
@@ -33,12 +34,13 @@ cmp.setup{
 		{ name = 'buffer' },                  -- Буфферы 🐃
 		{ name = 'path' },                    -- Пути 🪤
 		{ name = "emoji" },                   -- Эмодзи 😳
-	}, {
-	}),
+  }),
+  --[[--
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = 'symbol', -- show only symbol annotations
 			maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 		})
 	}
+  --]]--
 }

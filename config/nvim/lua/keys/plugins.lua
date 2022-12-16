@@ -1,18 +1,18 @@
 --Горячие клавиши для плагинов
 
-require('keys/plugins')
+require("keys/alias")
 
-
-vim.g.mapleader = ' '                                             -- Используем Space, как клавишу для альтернативных хотекеев
+vim.g.mapleader = ' '                                               -- Используем Space, как клавишу для альтернативных хотекеев
 
 -- LSP (все горячие клавиши начинаются с g), кроме ховера
-nm('K', '<cmd>lua vim.lsp.buf.hover()<CR>' )                      -- Ховер для объекта
-nm('gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')                 -- Форматировать документ
-nm('ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')                -- Действия с кодом
-nm('gR', '<cmd>lua vim.lsp.buf.rename()<CR>')                     -- Переименовать объект
+--nm('K', '<cmd>lua vim.lsp.buf.hover()<CR>' )                      -- Ховер для объекта
+--nm('gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')                 -- Форматировать документ
+--nm('ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')                -- Действия с кодом
+--nm('gR', '<cmd>lua vim.lsp.buf.rename()<CR>')                     -- Переименовать объект
 
 -- Отркыть NvimTree
-nm('<leader>v', '<cmd>NeoTreeRevealToggle<CR>')
+nm('<leader>v', '<cmd>NvimTreeToggle<CR>')
+nm('<leader>vv', '<cmd>NvimTreeFocus<CR>')
 
 -- Telescope
 nm('gd', '<cmd>Telescope lsp_definitions<CR>')                       -- Объявления в LSP
@@ -23,23 +23,23 @@ nm('<leader>f', '<cmd>Telescope live_grep<CR>')                      -- Поис
 nm('<leader>q', '<cmd>Telescope buffers<CR>')                        -- Буфферы
 
 -- Git
-nm('<leader>gp', '<cmd>Gitsigns preview_hunk<CR>')
-nm('<leader>gb', '<cmd>Gitsigns blame_line<CR>')
+--nm('<leader>gp', '<cmd>Gitsigns preview_hunk<CR>')
+--nm('<leader>gb', '<cmd>Gitsigns blame_line<CR>')
 
--- SymbolsOutline
-nm('<leader>s', '<cmd>SymbolsOutline<CR>')                        -- Структура для файла
+--l SymbolsOutline
+--nm('<leader>s', '<cmd>SymbolsOutline<CR>')                        -- Структура для файла
 
 -- BufferLine
-nm('ç', '<cmd>bd<CR>')                                            -- Закрыть буффер
-nm('≤', '<cmd>BufferLineCyclePrev<CR>')                           -- Перейти в предыдущий буффер
-nm('≥', '<cmd>BufferLineCycleNext<CR>')                           -- Перейти в следующий буффер
-nm('˘', '<cmd>BufferLineMoveNext<CR>')                            -- Закрыть буффер слева
-nm('¯', '<cmd>BufferLineMovePrev<CR>')                            -- Закрыть буффер справа
+nm('<leader>c', '<cmd>bd<CR>')                                            -- Закрыть буффер
+nm('<leader>h', '<cmd>BufferLineCyclePrev<CR>')                           -- Перейти в предыдущий буффер
+nm('<leader>l', '<cmd>BufferLineCycleNext<CR>')                           -- Перейти в следующий буффер
+--nm('˘', '<cmd>BufferLineMoveNext<CR>')                            -- Закрыть буффер слева
+--nm('¯', '<cmd>BufferLineMovePrev<CR>')                            -- Закрыть буффер справа
 
 -- Formatter
-nm('<leader>l', '<cmd>Format<CR>')
+--nm('<leader>l', '<cmd>Format<CR>')
 
 
 -- Trouble
-nm('<leader>x', '<cmd>TroubleToggle<CR>')                         -- Открыть меню с проблемами LSP
-nm('gr', '<cmd>Trouble lsp_references<CR>')                       -- Референсы в LSP
+--nm('<leader>x', '<cmd>TroubleToggle<CR>')                         -- Открыть меню с проблемами LSP
+--nm('gr', '<cmd>Trouble lsp_references<CR>')                       -- Референсы в LSP
