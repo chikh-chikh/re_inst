@@ -12,8 +12,11 @@
 
 # Environment variables set everywhere
 export EDITOR="nvim"
-
+export VISUAL="nvim"
+export READER="zathura"
 export TERMINAL="alacrytty"
+export PAGER="less"
+export WM="awesome"
 #export BROWSER="brave"
 
 # XDG Paths

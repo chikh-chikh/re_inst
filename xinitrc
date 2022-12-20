@@ -7,4 +7,3 @@
 gxkb &
 
 exec awesome
-

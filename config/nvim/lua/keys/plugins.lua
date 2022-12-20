@@ -10,9 +10,11 @@ vim.g.mapleader = ' '                                               -- Испо�
 --nm('ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')                -- Действия с кодом
 --nm('gR', '<cmd>lua vim.lsp.buf.rename()<CR>')                     -- Переименовать объект
 
--- Отркыть NvimTree
+-- NvimTree 
 nm('<leader>v', '<cmd>NvimTreeToggle<CR>')
 nm('<leader>vv', '<cmd>NvimTreeFocus<CR>')
+-- Ranger
+nm('<leader>r', '<cmd>RnvimrToggle<CR>')
 
 -- Telescope
 nm('gd', '<cmd>Telescope lsp_definitions<CR>')                       -- Объявления в LSP

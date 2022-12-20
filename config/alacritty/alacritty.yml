@@ -1,3 +1,7 @@
+env:
+  # available, otherwise `xterm-256color` is used.
+  TERM: xterm-256color
+
 # Colors(Gruvbox dark)
 colors:
   primary:
@@ -109,7 +113,7 @@ font:
     # Style can be specified to pick a specific face.
     style: Italic
 
-  size: 12.0
+  size: 10.0
 
   ligatures: true
 

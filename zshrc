@@ -16,4 +16,4 @@ plug "zsh-users/zsh-autosuggestions"
 
 # Example install completion
 #plug "esc/conda-zsh-completion"
-#
+

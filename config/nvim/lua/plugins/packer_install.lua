@@ -7,9 +7,12 @@ return require('packer').startup(function()
 	-- Добавляем Packer в список, чтобы он обновлял сам себя
   use 'wbthomason/packer.nvim'
   -- Проводник
-  use { 'nvim-tree/nvim-tree.lua',
-    requires = 'nvim-tree/nvim-web-devicons' -- optional, for file icons
+  use {'nvim-tree/nvim-tree.lua',
+    requires = 'nvim-tree/nvim-web-devicons',
+    tag = 'nightly'
   }
+   -- интеграция с ranger  
+  use 'kevinhwang91/rnvimr'
   -- Подсветка синтаксиса
   use {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"}
   -- Поиск
@@ -26,11 +29,13 @@ return require('packer').startup(function()
 	use {'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 		config = function()
-			require('plugins/lualine')
-	
-    end
-	}
-		-- Автодополнение
+			require('plugins/lualine') end
+  }
+	-- LSP сервер
+	use 'williamboman/mason.nvim' -- Инсталлер для серверов LSP
+	use 'williamboman/mason-lspconfig.nvim'
+	use 'neovim/nvim-lspconfig'
+  -- Автодополнение
 	use {'hrsh7th/nvim-cmp',
 		requires = {
 			'L3MON4D3/LuaSnip',
@@ -40,11 +45,10 @@ return require('packer').startup(function()
 			'hrsh7th/cmp-emoji',
 			'hrsh7th/cmp-nvim-lsp-signature-help',
 			'hrsh7th/cmp-nvim-lua'
-		},
+  	},
 		config = function()
 		-- ДАННАЯ ЧАСТЬ ОЧЕНЬ ВАЖНА:
-			require('plugins/cmp')
-		end
+			require('plugins/cmp') end
   }
 
   -- use 'nvim-lua/plenary.nvim'
@@ -54,30 +58,6 @@ return require('packer').startup(function()
 	use 'navarasu/onedark.nvim'
 	use 'gruvbox-community/gruvbox'
 
-	-- LSP сервер
-	--[[--
-	use 'neovim/nvim-lspconfig'
-
-	-- Инсталлер для серверов LSP
-	--[[--
-	use {
-		'williamboman/nvim-lsp-installer',
-		config = function()
-			require('plugins/lsp-installer')
-		end
-	}
-	--]]--
-
-	-- Удобное меню для обозрения проблем LSP
-	--[[--
-	use {
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup {}
-		end,
-	}
-	--]]--
 
 end)
 
