@@ -15,7 +15,6 @@ nm('<leader>v', '<cmd>NvimTreeToggle<CR>')
 nm('<leader>vv', '<cmd>NvimTreeFocus<CR>')
 -- Ranger
 nm('<leader>r', '<cmd>RnvimrToggle<CR>')
-
 -- Telescope
 nm('gd', '<cmd>Telescope lsp_definitions<CR>')                       -- Объявления в LSP
 nm('<leader>p', '<cmd>Telescope oldfiles<CR>')                       -- Просмотр недавних файлов
@@ -40,7 +39,6 @@ nm('<leader>l', '<cmd>BufferLineCycleNext<CR>')                           -- П�
 
 -- Formatter
 --nm('<leader>l', '<cmd>Format<CR>')
-
 
 -- Trouble
 --nm('<leader>x', '<cmd>TroubleToggle<CR>')                         -- Открыть меню с проблемами LSP

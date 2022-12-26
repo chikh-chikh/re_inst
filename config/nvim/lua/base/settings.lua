@@ -1,40 +1,57 @@
+-- Все время использовать vim.opt - не удобно, поэтому сделаем алиас
+local opt = vim.opt
+--[[ Настройка панелей ]]--
+-- Вертикальные сплиты становятся справа
+-- По умолчанию панели в Neovim ставятся в зависимости от расположения текущей панели.
+-- Данная настройка поможет нам держать панели в порядке
+opt.splitright = true
+-- Горизонтальные сплиты становятся снизу
+opt.splitbelow = true
+--[[ Дополнительные настройки ]]--
+-- Используем системный буфер обмена
+opt.clipboard = 'unnamedplus'
+-- Отключаем дополнение файлов в конце
+opt.fixeol = false
+-- Автодополнение (встроенное в Neovim)
+opt.completeopt = 'menuone,noselect'
+-- Не автокомментировать новые линии при переходе на новую строку
+vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
+
 vim.cmd('filetype plugin indent on')
 
-vim.o.relativenumber = true
---vim.o.number = true
-vim.o.cursorline = true
+opt.termguicolors = true
 
-vim.o.mouse = "a"
+opt.relativenumber = false 
+--opt.number = true
+opt.cursorline = true
+opt.cursorcolumn = true
+
+opt.mouse = "a"
 vim.wo.wrap = false
 vim.wo.number = true
-vim.o.signcolumn = "yes"
+opt.signcolumn = "yes"
 
-vim.o.wildmenu = true
-vim.o.confirm = true
-vim.o.incsearch = true
-vim.o.title = true
-vim.o.guicursor = true
+opt.wildmenu = true
+opt.confirm = true
+opt.incsearch = true
+opt.title = true
+--opt.guicursor = true
 
-vim.o.fileencoding = 'utf-8'
+opt.fileencoding = 'utf-8'
 
-vim.o.shortmess = vim.o.shortmess .. 'c'
-vim.o.hidden = true
---vim.o.whichrap = 'b,s,<,>,[,],h,l'
-vim.o.cmdheight = 1
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.opt.termguicolors = true
---vim.o.conceallevel = 0
-vim.o.showmode = false
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.updatetime = 300
-vim.o.timeoutlen = 200
-vim.o.clipboard = "unnamedplus"
-vim.o.hlsearch = false
-vim.o.ignorecase = true
-vim.o.scrolloff = 3
-vim.o.sidescrolloff = 5
+--opt.shortmess = opt.shortmess .. 'c'
+opt.hidden = true
+--opt.whichrap = 'b,s,<,>,[,],h,l'
+opt.cmdheight = 1
+--opt.conceallevel = 0
+opt.showmode = false
+opt.backup = false
+opt.writebackup = false
+opt.updatetime = 300
+opt.timeoutlen = 200
+opt.hlsearch = false
+opt.ignorecase = true
+opt.scrolloff = 8
+opt.sidescrolloff = 5
 
-
-vim.o.helplang = "ru,en"
+opt.helplang = "ru,en"

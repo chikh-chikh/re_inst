@@ -1,4 +1,8 @@
-alias zc="kate ~/.zshrc"
-alias tc="kate ~/.config/alacritty/alacritty.yml"
-alias ac="kate ~/.config/awesome/rc.lua"
-alias nc="kate ~/.config/nvim/init.lua"
+alias zc="nvim ~/.zshrc"
+alias tc="nvim ~/.config/alacritty/alacritty.yml"
+alias ac="nvim ~/.config/awesome/rc.lua"
+alias nc="nvim ~/.config/nvim/init.lua"
+
+alias as="nvim ~/reinst/config/zsh/aliases.zsh"
+
+alias ls="exa"

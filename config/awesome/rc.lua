@@ -76,12 +76,12 @@ altkey = "Mod1"
 
 awful.layout.layouts = {
    -- awful.layout.suit.floating,
-   -- awful.layout.suit.tile,
+      awful.layout.suit.tile,
    -- awful.layout.suit.tile.left, 
    -- awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,
    -- awful.layout.suit.fair,
-      awful.layout.suit.fair.horizontal,
+   -- awful.layout.suit.fair.horizontal,
    -- awful.layout.suit.spiral,
    -- awful.layout.suit.spiral.dwindle,
    -- awful.layout.suit.max,
@@ -92,9 +92,27 @@ awful.layout.layouts = {
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
 }
--- }}}
 
--- {{{ Menu
+--}}}
+--[[--
+    -- Обои
+local function set_wallpaper(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
+end
+    -- Переустановка обоев при изменении геометрии экрана (например, при изменении разрешения)
+screen.connect_signal("property::geometry", set_wallpaper)
+--]]--
+--{{{ 
+  
+  --Menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
@@ -120,24 +138,23 @@ else
                 }
     })
 end
--- Назначение кнопки меню
+
+  -- Назначение кнопки меню
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
-
--- Конфигурация менюбара (mod4 p)
+  -- Конфигурация менюбара (mod4 p)
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
--- Индикатор раскладки клавиатуры и переключатель
-mykeyboardlayout = awful.widget.keyboardlayout()
+--}}}
 
--- {{{ Wibar - верхняя панель
+--{{{
+  -- Wibar - верхняя панель
 
--- Виджета текстовых часов
+  -- Виджета текстовых часов
 mytextclock = wibox.widget.textclock()
-
--- Wibox для каждого экрана и его отклик
+  -- Индикатор раскладки клавиатуры и переключатель
+mykeyboardlayout = awful.widget.keyboardlayout()
+  -- Wibox для каждого экрана и его отклик
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
@@ -154,7 +171,6 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
-
 local tasklist_buttons = gears.table.join(
 			awful.button({ }, 1, function (c)
                                               if c == client.focus then
@@ -177,28 +193,13 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end
-
---Переустановка обоев при изменении геометрии экрана (например, при изменении разрешения)
-screen.connect_signal("property::geometry", set_wallpaper)
-
 awful.screen.connect_for_each_screen(function(s)
     -- Каждый экран имеет свою таблицу тегов.
     awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 " }, s, {awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1]})
 
     -- Окно подсказки для каждого экрана
     s.mypromptbox = awful.widget.prompt()
---[[-- 
+    --[[-- 
     -- Bиджет imagebox, который будет содержать иконку, указывающую, какой макет мы используем.
     -- Нам нужно по одному layoutbox на экран.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -207,7 +208,7 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
---]]--
+    --]]--
     -- Виджет тегов
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -221,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
     -- Wibox - верхняя панель
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 27 })
     -- Добавление виджетов в wibox
     s.mywibox:setup {	    
         layout = wibox.layout.align.horizontal,
@@ -322,15 +323,45 @@ root.buttons(gears.table.join(
 
 -- {{{ Привязка клавиш
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "вызов главного меню", group = "awesome"}),
+    -- Стандартная программа
+    -- Terminal
+    awful.key({ modkey,		}, "Return", function () awful.spawn(terminal) end,
+              {description = "терминал", group = "RU"}),
+    -- Ranger
+    awful.key({ modkey,		},  "r", function () awful.spawn(fm) end,
+              {description = "файловый менеджер", group = "RU"}),
+    -- Neovim 
+    awful.key({ modkey,		},  "v", function () awful.spawn(editor_cmd) end,
+              {description = "текстовый редактор", group = "RU"}),
+    -- DMenu
+    awful.key({ modkey }, "d", function () awful.util.spawn("dmenu_run") end,
+              {description = "dmenu", group = "RU"}),
+    -- Menubar
+    awful.key({ modkey }, "p", function() menubar.show() end,
+              {description = "menubar", group = "RU"}),
+    -- Browser
+    awful.key({ modkey }, "b", function () awful.util.spawn(browser)  end,
+              {description = "browser", group = "RU"}),
 
-
-              
+    --переключение тега     
+	  ---[[--
+    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+              {description = "view previous", group = "tag"}),			--conflict with collision
+    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+              {description = "view next", group = "tag"}),
+	  --]]--
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
+       
+    --фокус монитора 
+	  --[[--
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+              {description = "focus the next screen", group = "screen"}),
+    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+              {description = "focus the previous screen", group = "screen"}),
+	  --]]--
+
+    --фокус клиента
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -339,37 +370,22 @@ globalkeys = gears.table.join(
             end
         end,
         {description = "go back", group = "client"}),
-	      ---[[--
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),			--conflict with collision
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
-	      --]]--
     awful.key({ modkey,           }, "j", function () awful.client.focus.byidx( 1) end,
-              {description = "фокус на + клиент", group = "client"}),
+              {description = "фокус на след. клиент", group = "client"}),
     awful.key({ modkey,           }, "k", function () awful.client.focus.byidx(-1) end,
-        {description = "фокус на - клиент", group = "client"} ),
-              -- Управление схемой расположения
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-              {description = "переставить окно со следующим ", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
-              {description = "переставить окно с предыдущим", group = "layout"}),
-              --focus screen
-	--[[--
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
-	--]]--
-   -- awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
-             -- {description = "jump to urgent client", group = "client"}),
+        {description = "фокус на пред. клиент", group = "client"} ),
 
---[[=========================================================================--]]
---[[=========================================================================--]]
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "увеличить мастер клиент", group = "layout"}),
+        -- Управление схемой расположения
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+              {description = "переставить окно со след. ", group = "layout"}),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+        {description = "переставить окно с пред.", group = "layout"}),
+
+
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "уменьшить мастер клиент", group = "layout"}),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+              {description = "увеличить мастер клиент", group = "layout"}),
 
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -381,11 +397,22 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
-   -- awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-   --           {description = "select next", group = "layout"}),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+              {description = "select next", group = "layout"}),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+              {description = "select previous", group = "layout"}),
 
-   -- awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-   --           {description = "select previous", group = "layout"}),
+    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+              {description="show help", group="awesome"}),
+    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+              {description = "вызов главного меню", group = "awesome"}),
+    -- awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
+             -- {description = "jump to urgent client", group = "client"}),
+
+    awful.key({ modkey, "Control" }, "r", awesome.restart,
+              {description = "перезапуск awesome", group = "awesome"}),
+    awful.key({ modkey, "Control" }, "q", awesome.quit,
+              {description = "выход из awesome", group = "awesome"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -397,79 +424,29 @@ globalkeys = gears.table.join(
                     )
                   end
               end,
-              {description = "restore minimized", group = "client"}),
-
-
-    -- Стандартная программа
-    awful.key({ modkey,		}, "Return", function () awful.spawn(terminal) end,
-              {description = "терминал", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
-              {description = "перезапуск awesome", group = "awesome"}),
-    awful.key({ modkey, "Control" }, "q", awesome.quit,
-              {description = "выход из awesome", group = "awesome"}),
-
-
-    -- Ranger
-    awful.key({ modkey,		},  "space", function () awful.spawn(fm) end,
-              {description = "файловый менеджер", group = "RU"}),
-    -- DMenu
-    awful.key({ modkey }, "d",     function ()
-    awful.util.spawn("dmenu_run")  end,
-              {description = "запуск dmenu", group = "RU"}),
-    -- Менюбар
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "открыть menubar", group = "launcher"}),
-    -- Launch Browser
-    awful.key({ modkey },            "b",     function ()
-    awful.util.spawn(browser)  end,
-              {description = "открыть браузер", group = "RU"})
-
+              {description = "развернуть", group = "client"})
 )
-
 -- }}}
-
-
 
 -- {{{
     -- Клавиши управления окном
 clientkeys = gears.table.join(
-    awful.key({ "Control" }, "f",
-        function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
-        {description = "на весь экран", group = "client"}),
-
-    awful.key({ "Control" }, "q",      function (c) c:kill()                         end,
+    awful.key({ modkey }, "n", function (c) c.minimized = true end,
+              {description = "свернуть", group = "client"}),
+    awful.key({ modkey }, "c", function (c) c:kill() end,
               {description = "закрыть", group = "client"}),
-
-    awful.key({ "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey }, "x", awful.client.floating.toggle                     ,
               {description = "сделать плавающим", group = "client"}),
-
    -- awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
    --           {description = "move to master", group = "client"}),
-
    -- awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
    --           {description = "move to screen", group = "client"}),
-
-    awful.key({ "Control" }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey }, "t",      function (c) c.ontop = not c.ontop end,
               {description = "закрепить поверх других", group = "client"}),
-
-    awful.key({ "Control" }, "n",
-        function (c)
-            -- В настоящее время клиент имеет фокус ввода, поэтому он не может быть
-            -- свернут, так как свернутые клиенты не могут иметь фокус.
-            c.minimized = true
-        end ,
-        {description = "свернуть", group = "client"}),
-
-    awful.key({ "Control" }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "(ре)максимизировать", group = "client"})
-
+    awful.key({ modkey }, "f", function (c) c.fullscreen = not c.fullscreen c:raise() end,
+              {description = "на весь экран", group = "client"}),
+    awful.key({ modkey }, "m", function (c) c.maximized = not c.maximized c:raise() end,
+              {description = "(ре)максимизировать", group = "client"})
 )
 -- }}}
 
@@ -486,9 +463,9 @@ awful.util.table.join(
 )
 --]]
 
--- Привязать все номера клавиш к тегам.
--- Будьте внимательны: мы используем коды клавиш, чтобы заставить его работать на любой раскладке клавиатуры.
--- Это должно отображаться на верхнем ряду вашей клавиатуры, обычно от 1 до 9.
+  -- Привязать все номера клавиш к тегам.
+  -- Будьте внимательны: мы используем коды клавиш, чтобы заставить его работать на любой раскладке клавиатуры.
+  -- Это должно отображаться на верхнем ряду вашей клавиатуры, обычно от 1 до 9.
 for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
         -- Переключиться на тег
@@ -499,8 +476,9 @@ for i = 1, 9 do
                         if tag then
                            tag:view_only()
                         end
-                  end,
-                  {description = "перейти на тег #"..i, group = "tag"}),
+                  end
+                  --{description = "перейти на тег #"..i, group = "tag"}
+                 ),
          -- Перенести клиент
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
@@ -510,8 +488,9 @@ for i = 1, 9 do
                               client.focus:move_to_tag(tag)
                           end
                      end
-                  end,
-                  {description = "переместить клиент в тег #"..i, group = "tag"}),
+                  end
+                  --{description = "переместить клиент в тег #"..i, group = "tag"}
+                 ),
        -- Временно отобразить клиент в другом теге
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
@@ -520,8 +499,9 @@ for i = 1, 9 do
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-                  end,
-                  {description = "просматривать клиент в теге #" .. i, group = "tag"}),
+                  end
+                  --{description = "просматривать клиент в теге #" .. i, group = "tag"}
+                 ),
         -- Дублировать фокус клиента на тег
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
@@ -531,8 +511,9 @@ for i = 1, 9 do
                               client.focus:toggle_tag(tag)
                           end
                       end
-                  end,
-                  {description = "toggle focused client on tag #" .. i, group = "tag"})
+                  end
+                 -- {description = "toggle focused client on tag #" .. i, group = "tag"}
+                 )
     )
 end
 
