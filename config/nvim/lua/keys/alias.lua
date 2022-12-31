@@ -1,12 +1,12 @@
 -- Алиас для быстрого доступа к методу установки горячих клавиш
-local map = vim.api.nvim_set_keymap 
+local map = vim.api.nvim_set_keymap
 
 --[[
 Метод для установки горячих клавиш (normal)
 key - {string} Строка с горячей клавишей
 command - {string} Команда
 ]]--
-function nm(key, command) 
+function nm(key, command)
 	map('n', key, command, {noremap = true})
 end
 

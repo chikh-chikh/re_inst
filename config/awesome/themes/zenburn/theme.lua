@@ -1,19 +1,20 @@
 -------------------------------
---  "Zenburn" awesome theme  --
+--  "zenburn" awesome theme       --
 --    By Adrian C. (anrxc)   --
 -------------------------------
 
 local themes_path = require("gears.filesystem").get_themes_dir()
+
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
+theme.wallpaper = themes_path .. "zenburn/background.png"
 -- }}}
 
 -- {{{ Styles
 --theme.font      = "JetBrains Mono Medium 12"
-theme.font      = "Noto Mono Nerd Font Complete Mono 12"
+theme.font      = "Noto Sans Mono 12"
 
 
 -- {{{ Colors  b5a642 - base

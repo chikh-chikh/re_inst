@@ -97,36 +97,34 @@ cursor:
 font: 
   # The normal (roman) font face to use.
   normal:
-    family: monospace
-    # Style can be specified to pick a specific face.
-    style: Regular
-
-  # The bold font face
-  bold:
-    family: monospace
+    family: Noto Sans Mono 
     # Style can be specified to pick a specific face.
     style: Bold
-
+  # The bold font face
+  bold:
+    family: Noto Sans Mono 
+    # Style can be specified to pick a specific face.
+    style: Bold
   # The italic font face
   italic:
     family: monospace
     # Style can be specified to pick a specific face.
     style: Italic
 
-  size: 10.0
+  size: 11.0
 
   ligatures: true
 
   offset:
     x: 0
-    y: 0
+    y: -3
   glyph_offset:
     x: 0
     y: 0
 window:
   padding:
-    x: 2
-    y: 2
+    x: 1
+    y: 1
   # scrolling:
   #   # Maximum number of lines in the scrollback buffer.
   #   # Specifying '0' will disable scrolling.
@@ -137,7 +135,7 @@ window:
 
 # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
-
+  opacity: 0.95
   # # If `true`, bold text is drawn using the bright color variants.
   # draw_bold_text_with_bright_colors: true
 
