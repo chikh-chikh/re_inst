@@ -12,13 +12,21 @@ require 'mason-lspconfig'.setup {
 -- инициализация LSP для различных ЯП
 require 'lspconfig/util'
 
-local function config(_config)
-  return vim.tbl_deep_extend('force', {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  }, _config or {})
+
+local no_format = function(client, bufnr)
+  --client.resolved_capabilities.document_formatting = false
+  client.server_capabilities.document_formatting = false
 end
 
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Capabilities
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+
 require 'lspconfig'.sumneko_lua.setup {
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -33,8 +41,8 @@ require 'lspconfig'.sumneko_lua.setup {
       ---[[--
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-        --library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
+        --library = vim.api.nvim_get_runtime_file("", true),
+        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true },
       },
       --]]--
       -- Do not send telemetry data containing a randomized but unique identifier
@@ -45,11 +53,17 @@ require 'lspconfig'.sumneko_lua.setup {
   },
 }
 --]]--
-require 'lspconfig'.pyright.setup {}
+require 'lspconfig'.pyright.setup {
+  capabilities = capabilities,
+  on_attach = no_format
+}
 require 'lspconfig'.r_language_server.setup {}
 require 'lspconfig'.texlab.setup {} --LaTeX
 require 'lspconfig'.zk.setup {} --markdown
-require 'lspconfig'.rust_analyzer.setup {}
+require 'lspconfig'.rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = no_format
+}
 --require'lspconfig'.sqls.setup{}
 require 'lspconfig'.bashls.setup {}
 require 'lspconfig'.vimls.setup {}

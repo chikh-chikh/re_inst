@@ -5,5 +5,7 @@ alias nc="nvim ~/.config/nvim/init.lua"
 
 alias as="nvim ~/reinst/config/zsh/aliases.zsh"
 
-alias l="exa -la"
+alias la="exa -laghm@ --all --icons --color=always"
+alias ll="exa -lghm@ --icons"
+
 alias v="nvim"

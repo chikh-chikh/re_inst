@@ -5,7 +5,7 @@ end
 
 configs.setup {
   -- A list of parser names, or "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "html", "lua", "rust", "python", "yaml", },
+  ensure_installed = { "html", "lua", "rust", "python", "yaml", "r", "latex" },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   -- Automatically install missing parsers when entering buffer

@@ -11,7 +11,7 @@ require("awful.autofocus")
 
 -- Widget and layout library
 local wibox = require("wibox")
-local vicious = require("vicious")
+--local vicious = require("vicious")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -362,7 +362,7 @@ globalkeys = gears.table.join(
               {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
-	  --]] --
+	--]]--
 
   --фокус клиента
   awful.key({ modkey, }, "Tab",

@@ -15,8 +15,14 @@ return require('packer').startup(function()
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'nvim-treesitter/playground'
 
+  use { -- Additional text objects via treesitter
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
+
   -- предпросмотр цветов css
   use 'ap/vim-css-color'
+  use 'norcalli/nvim-colorizer.lua'
   -- Поиск
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use 'nvim-telescope/telescope-fzf-native.nvim'
@@ -24,6 +30,13 @@ return require('packer').startup(function()
   use 'williamboman/mason.nvim' -- Инсталлер для серверов LSP
   use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
+  -- Keep Mason updated
+  use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+  -- Useful status updates for LSP
+  use 'j-hui/fidget.nvim'
+  -- Additional lua configuration, makes nvim stuff amazing
+  use 'folke/neodev.nvim'
+
   -- Автодополнение
   use 'hrsh7th/nvim-cmp' -- движок автодополнения для LSP
   use 'L3MON4D3/LuaSnip' -- движок для снипетов
@@ -59,6 +72,14 @@ return require('packer').startup(function()
     end }
   -- интеграция с ranger
   use 'kevinhwang91/rnvimr'
+  --Терминал
+  use {
+    's1n7ax/nvim-terminal',
+    config = function()
+        vim.o.hidden = true
+        require('nvim-terminal').setup()
+    end,
+  }
   -- автодополнение скобок и кавычек
   use { 'windwp/nvim-autopairs',
     config = function()
@@ -66,9 +87,14 @@ return require('packer').startup(function()
     end }
   --Темы уточнить
   use 'terroo/vim-simple-emoji'
-  use 'navarasu/onedark.nvim'
-  use 'gruvbox-community/gruvbox'
+  --use 'gruvbox-community/gruvbox'
   use 'arcticicestudio/nord-vim'
+  use 'glepnir/zephyr-nvim'
+  use 'ellisonleao/gruvbox.nvim'
+
+  -- LaTeX support
+  use 'lervag/vimtex'
+
 
 end)
 

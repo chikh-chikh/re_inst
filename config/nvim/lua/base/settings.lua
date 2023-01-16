@@ -17,11 +17,11 @@ opt.completeopt = 'menuone,noselect'
 -- Не автокомментировать новые линии при переходе на новую строку
 vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
 
---vim.cmd('filetype plugin indent on')
+vim.cmd('filetype plugin indent on')
 
-opt.termguicolors = false --true
+opt.termguicolors = false
 
-opt.relativenumber = false 
+opt.relativenumber = false
 --opt.number = true
 opt.cursorline = true
 --opt.cursorcolumn = true
@@ -41,7 +41,7 @@ opt.fileencoding = 'utf-8'
 --opt.shortmess = opt.shortmess .. 'c'
 opt.hidden = true
 --opt.whichrap = 'b,s,<,>,[,],h,l'
-opt.cmdheight = 0
+opt.cmdheight = 1
 --opt.conceallevel = 0
 opt.showmode = false
 opt.backup = false
