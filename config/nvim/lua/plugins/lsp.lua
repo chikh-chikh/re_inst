@@ -6,14 +6,34 @@ require 'mason'.setup {
   }
 }
 require 'mason-lspconfig'.setup {
-  ensure_installed = { "sumneko_lua", "pyright", "texlab", "zk", "rust_analyzer", "bashls", "vimls" },
+  ensure_installed = { "lua_ls", "pyright", "texlab", "zk", "rust_analyzer", "bashls", "vimls" },
 }
 
 -- инициализация LSP для различных ЯП
 require 'lspconfig/util'
+---[[--
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    'lua-language-server',
+    'vim-language-server',
+    'bash-language-server',
+    'yaml-language-server',
+    --'r-languageserver',
+    'rust-analyzer',
+    'pyright',
+    'texlab',
+    'zk'
+  },
+  auto_update = false,
+  run_on_start = true,
+  debounce_hours = 5, -- минимум 5 часов между попытками установки / обновления
+}
+--]]--
 
+require 'fidget'.setup {}
 
 local no_format = function(client, bufnr)
+  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   --client.resolved_capabilities.document_formatting = false
   client.server_capabilities.document_formatting = false
 end
@@ -25,20 +45,19 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 
-require 'lspconfig'.sumneko_lua.setup {
+--require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
+        -- path = vim.split(package.path, ';'),
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
         globals = { 'vim', 'use', 'require' },
       },
-      ---[[--
+      --[[--
       workspace = {
         -- Make the server aware of Neovim runtime files
         --library = vim.api.nvim_get_runtime_file("", true),

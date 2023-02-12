@@ -12,34 +12,9 @@ local check_backspace = function() --for Tab
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
---local lspkind = require('lspkind')
-local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
+
+local lspkind = require('lspkind')
+
 -- https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
@@ -90,7 +65,9 @@ cmp.setup {
   },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' }, -- LSP 👄
+		{ name = 'cmp_tabnine' }, -- AI
     { name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
+    { name = 'cmp_nvim_r' },
     { name = 'luasnip' }, -- Luasnip 🐌
     { name = 'buffer' }, -- Буфферы 🐃
     { name = 'path' }, -- Пути 🪤
@@ -99,16 +76,29 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+	 		vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
+        cmp_tabnine = "[TN]",
         nvim_lua = "[NVIM_LUA]",
+        cmp_nvim_r = "[R]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
+	 		if entry.source.name == "cmp_tabnine" then
+	 			local detail = (entry.completion_item.data or {}).detail
+	 			vim_item.kind = ""
+	 			if detail and detail:find('.*%%.*') then
+	 				vim_item.kind = vim_item.kind .. ' ' .. detail
+	 			end
+
+	 			if (entry.completion_item.data or {}).multiline then
+	 				vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+	 			end
+	 		end
+	 		local maxwidth = 80
+	 		vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
       return vim_item
     end,
   },
@@ -147,13 +137,5 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
-
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- The following example advertise capabilities to `clangd`.
-require 'lspconfig'.clangd.setup {
-  capabilities = capabilities,
-}
 
 

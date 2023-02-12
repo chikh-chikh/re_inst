@@ -30,8 +30,8 @@ nm('<leader>q', '<cmd>Telescope buffers<CR>')             -- Буфферы
 nm('<leader>c', '<cmd>bd<CR>')                             -- Закрыть буффер
 nm('<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер
 nm('<leader>h', '<cmd>BufferLineCyclePrev<CR>')            -- Перейти в предыдущий буффер
---nm('˘', '<cmd>BufferLineMoveNext<CR>')                   -- Закрыть буффер слева
---nm('¯', '<cmd>BufferLineMovePrev<CR>')                   -- Закрыть буффер справа
+nm('`', '<cmd>BufferLineMoveNext<CR>')                     -- Перейти в следующий буффер
+nm('~', '<cmd>BufferLineMovePrev<CR>')                     -- Перейти в предыдущий буффер
 
 -- Git
 --nm('<leader>gp', '<cmd>Gitsigns preview_hunk<CR>')

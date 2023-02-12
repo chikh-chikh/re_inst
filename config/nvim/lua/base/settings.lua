@@ -19,7 +19,7 @@ vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
 
 vim.cmd('filetype plugin indent on')
 
-opt.termguicolors = false
+opt.termguicolors = true
 
 opt.relativenumber = false
 --opt.number = true

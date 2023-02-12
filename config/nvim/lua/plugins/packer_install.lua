@@ -9,23 +9,51 @@ return require('packer').startup(function()
   -- набор Lua функций, используется как зависимость в большинстве
   -- плагинов, где есть работа с асинхронщиной
   use 'nvim-lua/plenary.nvim'
+
+  -- Значки для проводника и панели вкладок
+  use 'nvim-tree/nvim-web-devicons'
+  -- Проводник
+  use { 'nvim-tree/nvim-tree.lua', tag = 'nightly' }
+  -- Панель вкладок
+  use { 'akinsho/bufferline.nvim', tag = 'v3.*' }
+
+  -- Статуслайн
+  use { 'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+     -- require('plugins/lualine')
+    end }
+
+  -- Интеграция с ranger
+  use 'kevinhwang91/rnvimr'
+
+  -- Терминал
+  use { 's1n7ax/nvim-terminal',
+    config = function()
+        vim.o.hidden = true
+        require('nvim-terminal').setup()
+    end }
+
+  -- Автодополнение скобок и кавычек
+  use { 'windwp/nvim-autopairs',
+    config = function()
+        require('nvim-autopairs').setup {}
+    end }
+
   -- Подсветка синтаксиса
   use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
   use 'p00f/nvim-ts-rainbow'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'nvim-treesitter/playground'
-
   use { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
   }
 
-  -- предпросмотр цветов css
-  use 'ap/vim-css-color'
-  use 'norcalli/nvim-colorizer.lua'
   -- Поиск
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use 'nvim-telescope/telescope-fzf-native.nvim'
+
   -- LSP сервер
   use 'williamboman/mason.nvim' -- Инсталлер для серверов LSP
   use 'williamboman/mason-lspconfig.nvim'
@@ -34,67 +62,44 @@ return require('packer').startup(function()
   use 'WhoIsSethDaniel/mason-tool-installer.nvim'
   -- Useful status updates for LSP
   use 'j-hui/fidget.nvim'
-  -- Additional lua configuration, makes nvim stuff amazing
-  use 'folke/neodev.nvim'
 
   -- Автодополнение
   use 'hrsh7th/nvim-cmp' -- движок автодополнения для LSP
   use 'L3MON4D3/LuaSnip' -- движок для снипетов
   use 'saadparwaiz1/cmp_luasnip' -- автодополнения для сниппетов
-  -- зависимости для движка автодополнения
+  -- зависимости для движка автодополнения:
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-emoji'
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'hrsh7th/cmp-nvim-lua'
+  use 'jalvesaq/cmp-nvim-r'
   -- набор готовых сниппетов для всех языков
   use 'rafamadriz/friendly-snippets'
   -- ИИ автодополнения
-  use { 'tzachar/cmp-tabnine',
-    run = './install.sh' }
+ 	use {'tzachar/cmp-tabnine', run='./install.sh' } --, requires = 'hrsh7th/nvim-cmp'}
   -- иконки в выпадающем списке автодополнений
   use 'onsails/lspkind-nvim'
-  -- Проводник
-  use { 'nvim-tree/nvim-tree.lua',
-    requires = 'nvim-tree/nvim-web-devicons',
-    tag = 'nightly' }
-  -- панель вкладок
-  use { 'akinsho/bufferline.nvim', tag = "v3.*",
-    requires = 'nvim-tree/nvim-web-devicons' }
-  -- значки для проводника и панели вкладок
-  use 'nvim-tree/nvim-web-devicons'
-  -- Статуслайн
-  use { 'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function()
-      require('plugins/lualine')
-    end }
-  -- интеграция с ranger
-  use 'kevinhwang91/rnvimr'
-  --Терминал
-  use {
-    's1n7ax/nvim-terminal',
-    config = function()
-        vim.o.hidden = true
-        require('nvim-terminal').setup()
-    end,
-  }
-  -- автодополнение скобок и кавычек
-  use { 'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup {}
-    end }
-  --Темы уточнить
-  use 'terroo/vim-simple-emoji'
+
+  --Темы 
   --use 'gruvbox-community/gruvbox'
   use 'arcticicestudio/nord-vim'
-  use 'glepnir/zephyr-nvim'
   use 'ellisonleao/gruvbox.nvim'
+
+  -- Предпросмотр цветов css
+  use 'ap/vim-css-color'
+  use 'norcalli/nvim-colorizer.lua'
 
   -- LaTeX support
   use 'lervag/vimtex'
+  -- R 
+  use "jalvesaq/Nvim-R"
+  -- Markdown 
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 
+  -- Коментирование
+  use 'terrortylor/nvim-comment'
 
 end)
 
@@ -129,10 +134,6 @@ end)
     requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}}
     --]] --
 
--- Plugins can have post-install/update hooks
---[[--
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
-    --]] --
 
 -- Post-install/update hook with call of vimscript function with argument
 --[[--
@@ -148,12 +149,3 @@ end)
     }
     --]] --
 
--- You can specify multiple plugins in a single call
---[[--
-    use {'tjdevries/colorbuddy.vim', {'nvim-treesitter/nvim-treesitter', opt = true}}
-    --]] --
-
--- You can alias plugin names
---[[--
-    use { 'dracula/vim', as = 'dracula' }
-    --]] --

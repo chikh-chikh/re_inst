@@ -1,3 +1,4 @@
+
 require("base/settings")
 require("base/search")
 require("base/tabs")
@@ -11,6 +12,7 @@ require("plugins/bufferline")
 require("plugins/lualine")
 require("plugins/lsp")
 require("plugins/cmp")
+require("plugins/nvim-comment")
 
 
 require("keys/plugins")

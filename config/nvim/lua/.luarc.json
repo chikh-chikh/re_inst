@@ -37,5 +37,6 @@
         "/home/ru/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after",
         "/home/ru/.local/share/nvim/site/pack/packer/start/rnvimr/after",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }
