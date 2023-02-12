@@ -15,10 +15,7 @@ nm('<leader>vv', '<cmd>NvimTreeFocus<CR>')
 -- Ranger
 nm('<leader>r', '<cmd>RnvimrToggle<CR>')
 -- Terminal
-nm('<leader>t', ':lua NTGlobal["terminal"]:toggle()<cr>')
-nm('<leader>1', ':lua NTGlobal["terminal"]:open(1)<cr>')
-nm('<leader>+', ':lua NTGlobal["window"]:change_height(2)<cr>')
-nm('<leader>-', ':lua NTGlobal["window"]:change_height(-2)<cr>')
+
 -- Telescope
 nm('fd', '<cmd>Telescope lsp_definitions<CR>')            -- Объявления в LSP
 nm('<leader>p', '<cmd>Telescope oldfiles<CR>')            -- Просмотр недавних файлов
@@ -30,8 +27,8 @@ nm('<leader>q', '<cmd>Telescope buffers<CR>')             -- Буфферы
 nm('<leader>c', '<cmd>bd<CR>')                             -- Закрыть буффер
 nm('<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер
 nm('<leader>h', '<cmd>BufferLineCyclePrev<CR>')            -- Перейти в предыдущий буффер
-nm('`', '<cmd>BufferLineMoveNext<CR>')                     -- Перейти в следующий буффер
-nm('~', '<cmd>BufferLineMovePrev<CR>')                     -- Перейти в предыдущий буффер
+nm('`', '<cmd>BufferLineMoveNext<CR>')                     -- Переместить буффер
+nm('~', '<cmd>BufferLineMovePrev<CR>')                     -- Переместить буффер
 
 -- Git
 --nm('<leader>gp', '<cmd>Gitsigns preview_hunk<CR>')

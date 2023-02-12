@@ -2,8 +2,6 @@
 local opt = vim.opt
 --[[ Настройка панелей ]]--
 -- Вертикальные сплиты становятся справа
--- По умолчанию панели в Neovim ставятся в зависимости от расположения текущей панели.
--- Данная настройка поможет нам держать панели в порядке
 opt.splitright = true
 -- Горизонтальные сплиты становятся снизу
 opt.splitbelow = true
@@ -49,7 +47,7 @@ opt.writebackup = false
 opt.updatetime = 300
 opt.timeoutlen = 200
 opt.hlsearch = false
-opt.scrolloff = 8
+opt.scrolloff = 7
 opt.sidescrolloff = 5
 
-opt.helplang = "ru,en"
+opt.helplang = "en"

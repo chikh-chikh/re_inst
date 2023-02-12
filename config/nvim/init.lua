@@ -13,6 +13,8 @@ require("plugins/lualine")
 require("plugins/lsp")
 require("plugins/cmp")
 require("plugins/nvim-comment")
+require("plugins/toggleterm")
+require("plugins/gitsigns")
 
 
 require("keys/plugins")
