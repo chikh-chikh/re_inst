@@ -57,7 +57,7 @@ require 'lspconfig'.lua_ls.setup {
       diagnostics = {
         globals = { 'vim', 'use', 'require' },
       },
-      --[[--
+      ---[[--
       workspace = {
         -- Make the server aware of Neovim runtime files
         --library = vim.api.nvim_get_runtime_file("", true),

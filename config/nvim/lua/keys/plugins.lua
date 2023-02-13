@@ -18,10 +18,10 @@ nm('<leader>r', '<cmd>RnvimrToggle<CR>')
 
 -- Telescope
 nm('fd', '<cmd>Telescope lsp_definitions<CR>')            -- Объявления в LSP
-nm('<leader>p', '<cmd>Telescope oldfiles<CR>')            -- Просмотр недавних файлов
-nm('<leader>o', '<cmd>Telescope git_files<CR>')           -- Поиск файлов
+nm('<leader>o', '<cmd>Telescope oldfiles<CR>')            -- Просмотр недавних файлов
+nm('<leader>f', '<cmd>Telescope git_files<CR>')           -- Поиск файлов
 nm('<leader>b', '<cmd>Telescope git_branches<CR>')        -- Ветки в Git
-nm('<leader>f', '<cmd>Telescope live_grep<CR>')           -- Поиск строки
+nm('<leader>s', '<cmd>Telescope live_grep<CR>')           -- Поиск строки
 nm('<leader>q', '<cmd>Telescope buffers<CR>')             -- Буфферы
 -- BufferLine
 nm('<leader>c', '<cmd>bd<CR>')                             -- Закрыть буффер

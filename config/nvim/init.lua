@@ -15,6 +15,7 @@ require("plugins/cmp")
 require("plugins/nvim-comment")
 require("plugins/toggleterm")
 require("plugins/gitsigns")
+require("plugins/presence")
 
 
 require("keys/plugins")
