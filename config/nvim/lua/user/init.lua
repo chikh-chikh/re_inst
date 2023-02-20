@@ -1,7 +1,7 @@
 require 'user.keys.keys'
 require 'user.keys.plug_keys'
 require 'user.plugins'
-
+-- require 'user.vimrc'
 --              AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
 

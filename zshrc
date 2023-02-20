@@ -7,13 +7,13 @@ HISTFILE=~/.zsh_history
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
 
-#set -o vi
-
 # plugins
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 
 # Example install completion
-#plug "esc/conda-zsh-completion"
+plug "esc/conda-zsh-completion"
+
+#set -o vi
 
