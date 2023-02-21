@@ -4,7 +4,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Theme handling library
 local beautiful = require("beautiful") -- for awesome.icon
 
-local M = {}  -- menu
+local M = {} -- menu
 local _M = {} -- module
 
 -- reading
@@ -24,51 +24,50 @@ local editor_cmd = terminal .. " -e " .. editor
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 M.awesome = {
-  { "hotkeys", function() 
-      hotkeys_popup.show_help(nil, awful.screen.focused()) 
-    end },
-  { "manual", terminal .. " -e man awesome" },
-  { "edit config", editor_cmd .. " " .. awesome.conffile },
-  { "Terminal", terminal },
+  { "hotkeys", function()
+    hotkeys_popup.show_help(nil, awful.screen.focused())
+  end },
+  { "manual",          terminal .. " -e man awesome" },
+  { "edit config",     editor_cmd .. " " .. awesome.conffile },
+  { "Terminal",        terminal },
   { "Shutdown/Logout", "oblogout" },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end }
+  { "restart",         awesome.restart },
+  { "quit",            function() awesome.quit() end }
 }
 
 M.favorite = {
-  { "caja", "caja" },
-  { "thunar", "thunar" },
-  { "geany", "geany" },
-  { "clementine", "clementine" },
-  { "firefox", "firefox-bin", awful.util.getdir("config") .. "/firefox.png" },
-  { "chromium", "chromium" },
-  { "&firefox", "firefox" },
-  { "&thunderbird", "thunderbird-bin" },
-  { "libreoffice", "libreoffice" },
-  { "transmission", "transmission-gtk" },
-  { "telegram", "telegram-desktop" },
-  { "gimp", "gimp" },
-  { "inkscape", "inkscape" },
+  { "caja",          "caja" },
+  { "thunar",        "thunar" },
+  { "geany",         "geany" },
+  { "clementine",    "clementine" },
+  { "firefox",       "firefox-bin",        awful.util.getdir("config") .. "/firefox.png" },
+  { "chromium",      "chromium" },
+  { "&firefox",      "firefox" },
+  { "&thunderbird",  "thunderbird-bin" },
+  { "libreoffice",   "libreoffice" },
+  { "transmission",  "transmission-gtk" },
+  { "telegram",      "telegram-desktop" },
+  { "gimp",          "gimp" },
+  { "inkscape",      "inkscape" },
   { "screenshooter", "xfce4-screenshooter" }
 }
 
 M.startup = {
-  { "compton", "compton" },
-  { "nm-applet", "nm-applet" },
+  { "compton",     "compton" },
+  { "nm-applet",   "nm-applet" },
   { "wicd-curses", "wicd-curses" },
-  { "wicd-gtk", "wicd-gtk" }
+  { "wicd-gtk",    "wicd-gtk" }
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function _M.get()
-
   -- Main Menu
   local menu_items = {
-    { "awesome", M.awesome, beautiful.awesome_subicon },
-    { "open terminal", terminal },
+    { "awesome",           M.awesome, beautiful.awesome_subicon },
+    { "open terminal",     terminal },
     { "tools and startup", M.startup },
-    { "favorite", M.favorite }
+    { "favorite",          M.favorite }
   }
 
   return menu_items

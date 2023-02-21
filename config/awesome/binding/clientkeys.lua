@@ -9,9 +9,7 @@ local modkey = RC.vars.modkey
 -- Клавиши управления окном
 function _M.get()
         local clientkeys = gears.table.join(
-
         --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
                 awful.key({ modkey }, "n", function(c) c.minimized = true end,
                         { description = "свернуть", group = "client" }),
                 awful.key({ modkey }, "c", function(c) c:kill() end,

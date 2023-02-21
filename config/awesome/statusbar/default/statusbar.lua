@@ -28,7 +28,7 @@ require("statusbar.default.helper_empty")
 
 -- {{{ Wibar
 
-function WB.setup_common_boxes (s)
+function WB.setup_common_boxes(s)
   -- Wallpaper
   set_wallpaper(s)
 
@@ -39,10 +39,10 @@ function WB.setup_common_boxes (s)
   -- We need one layoutbox per screen.
   s.layoutbox = awful.widget.layoutbox(s)
   s.layoutbox:buttons(gears.table.join(
-    awful.button({ }, 1, function () awful.layout.inc( 1) end),
-    awful.button({ }, 3, function () awful.layout.inc(-1) end),
-    awful.button({ }, 4, function () awful.layout.inc( 1) end),
-    awful.button({ }, 5, function () awful.layout.inc(-1) end)
+    awful.button({}, 1, function() awful.layout.inc(1) end),
+    awful.button({}, 3, function() awful.layout.inc( -1) end),
+    awful.button({}, 4, function() awful.layout.inc(1) end),
+    awful.button({}, 5, function() awful.layout.inc( -1) end)
   ))
 
   -- Create a taglist widget
@@ -64,6 +64,7 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+
 -- {{{ Main
 function _M.init()
   WB.taglist  = deco.taglist()
@@ -72,16 +73,16 @@ function _M.init()
   WB.initdeco()
 
   awful.screen.connect_for_each_screen(function(s)
-    WB.setup_common_boxes (s)
-    
+    WB.setup_common_boxes(s)
+
     -- Create the top wibox
     WB.generate_wibox_one(s)
 
     -- Create the bottom wibox
     WB.generate_wibox_two(s)
   end)
-
 end
+
 -- }}}
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
