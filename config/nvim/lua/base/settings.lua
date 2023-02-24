@@ -36,11 +36,8 @@ opt.title = true
 
 opt.fileencoding = 'utf-8'
 
---opt.shortmess = opt.shortmess .. 'c'
 opt.hidden = true
---opt.whichrap = 'b,s,<,>,[,],h,l'
-opt.cmdheight = 1
---opt.conceallevel = 0
+opt.cmdheight = 0
 opt.showmode = false
 opt.backup = false
 opt.writebackup = false
@@ -50,4 +47,4 @@ opt.hlsearch = false
 opt.scrolloff = 7
 opt.sidescrolloff = 5
 
-opt.helplang = "en"
+opt.helplang = "ru"

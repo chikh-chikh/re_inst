@@ -1,3 +1,44 @@
+local fn = vim.fn
+
+-- Automatically install packer
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	PACKER_BOOTSTRAP = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+	print("Installing packer close and reopen Neovim...")
+	vim.cmd([[packadd packer.nvim]])
+end
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	return
+end
+
+-- Have packer use a popup window
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
+
+
 -- Добавляем Packer как пакет в Neovim
 vim.cmd [[packadd packer.nvim]]
 
@@ -13,15 +54,34 @@ return require('packer').startup(function()
   use 'nvim-tree/nvim-web-devicons'
   -- Проводник
   use { 'nvim-tree/nvim-tree.lua', tag = 'nightly' }
+  use { "Shatur/neovim-session-manager" }
   -- Панель вкладок
   use { 'akinsho/bufferline.nvim', tag = 'v3.*' }
 
   -- Статуслайн
-  use { 'nvim-lualine/lualine.nvim',
+  use { 'nvim-lualine/lualine.nvim' }
+  --[[,
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
       -- require('plugins/lualine')
-    end }
+    end }--]]
+  --Appearance
+  use { "lukas-reineke/indent-blankline.nvim" }
+  use { "goolord/alpha-nvim" }
+  use { "RRethy/vim-illuminate" }
+
+  -- General
+  -- use { "numToStr/Comment.nvim" }
+  -- use { "JoosepAlviste/nvim-ts-context-commentstring" }
+  use { "lewis6991/impatient.nvim" }
+  use { "kylechui/nvim-surround" }
+  use { "mbbill/undotree" } -- Vimscript
+  use { "mg979/vim-visual-multi" } -- Vimscript
+  use { "glacambre/firenvim" } -- Vimscript
+  use { "gbprod/yanky.nvim" }
+
+  -- Mappings
+  use { "folke/which-key.nvim" }
 
   -- Интеграция с ranger
   use 'kevinhwang91/rnvimr'
@@ -49,11 +109,19 @@ return require('packer').startup(function()
   -- Поиск
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use 'nvim-telescope/telescope-fzf-native.nvim'
+  use { "stevearc/dressing.nvim" }
+  use { "nvim-telescope/telescope-bibtex.nvim",
+    config = function()
+      require "telescope".load_extension("bibtex")
+    end,
+  }
 
   -- LSP сервер
   use 'williamboman/mason.nvim' -- Инсталлер для серверов LSP
   use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
+  -- for formatters and linters
+  use 'jose-elias-alvarez/null-ls.nvim'
   -- Keep Mason updated
   use 'WhoIsSethDaniel/mason-tool-installer.nvim'
   -- Useful status updates for LSP
@@ -71,10 +139,14 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'hrsh7th/cmp-nvim-lua'
   use 'jalvesaq/cmp-nvim-r'
+  use "hrsh7th/cmp-cmdline" -- command completions
+  use "f3fora/cmp-spell" -- spelling completions
+  use "hrsh7th/cmp-omni" -- helps Vimtex completions
+  -- use { "aspeddro/cmp-pandoc.nvim" }
   -- набор готовых сниппетов для всех языков
   use 'rafamadriz/friendly-snippets'
   -- ИИ автодополнения
-  use { 'tzachar/cmp-tabnine', run = './install.sh' } --, requires = 'hrsh7th/nvim-cmp'}
+  -- use { 'tzachar/cmp-tabnine', run = './install.sh' } --, requires = 'hrsh7th/nvim-cmp'}
   -- иконки в выпадающем списке автодополнений
   use 'onsails/lspkind-nvim'
 
@@ -82,18 +154,51 @@ return require('packer').startup(function()
   --use 'gruvbox-community/gruvbox'
   use 'arcticicestudio/nord-vim'
   use 'ellisonleao/gruvbox.nvim'
+  -- use { "EdenEast/nightfox.nvim" }
+  -- use { "navarasu/onedark.nvim" }
 
   -- Предпросмотр цветов css
   use 'ap/vim-css-color'
   use 'norcalli/nvim-colorizer.lua'
 
-  -- LaTeX support
-  use 'lervag/vimtex'
   -- R
   use "jalvesaq/Nvim-R"
+
+  -- LaTeX support
+  use "lervag/vimtex" -- essential for LaTeX; Vimscript
+  use "kdheepak/cmp-latex-symbols"
+  use "jbyuki/nabla.nvim" -- show symbols in editor
   -- Markdown
   use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview' }
 
+  use({
+    "gaoDean/autolist.nvim",
+    ft = {
+      "markdown",
+      "text",
+      "tex",
+      "plaintex",
+    },
+    config = function()
+      local autolist = require("autolist")
+      autolist.setup()
+      autolist.create_mapping_hook("i", "<CR>", autolist.new)
+      autolist.create_mapping_hook("i", "<Tab>", autolist.indent)
+      autolist.create_mapping_hook("i", "<S-Tab>", autolist.indent, "<C-D>")
+      autolist.create_mapping_hook("n", "o", autolist.new)
+      autolist.create_mapping_hook("n", "O", autolist.new_before)
+      -- autolist.create_mapping_hook("n", ">>", autolist.indent)
+      -- autolist.create_mapping_hook("n", "<<", autolist.indent)
+      autolist.create_mapping_hook("n", "<leader>r", autolist.force_recalculate)
+      autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
+        vim.api.nvim_create_autocmd("TextChanged", {
+          pattern = "-",
+          callback = function()
+            vim.cmd.normal({autolist.force_recalculate(nil, nil), bang = false})
+          end
+        })
+    end,
+  })
   -- Коментирование
   use 'terrortylor/nvim-comment'
 

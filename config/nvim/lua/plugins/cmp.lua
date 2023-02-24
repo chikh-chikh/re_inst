@@ -28,30 +28,106 @@ tabnine:setup({
   --show_prediction_strength = false
 })
 --]]
-local lspkind = require('lspkind')
+--local lspkind = require('lspkind')
+---[[--
+--   פּ ﯟ   some other good icons
 
+local compare = require('cmp.config.compare')
+
+local kind_icons = {
+  Text = "",
+  Method = "m",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
+--]]--
+-- find more here: https://www.nerdfonts.com/cheat-sheet
 -- https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
   sources = cmp.config.sources {
-    { name = 'nvim_lsp' }, -- LSP 👄
+    { name = 'nvim_lsp', group_index = 2  }, -- LSP
     -- { name = 'cmp_tabnine' }, -- AI
-    { name = 'nvim_lsp_signature_help' }, -- Помощь при введении параметров в методах 🚁
-    { name = 'cmp_nvim_r' },
-    { name = 'luasnip' }, -- Luasnip 🐌
-    { name = 'buffer' }, -- Буфферы 🐃
-    { name = 'path' }, -- Пути 🪤
-    --{ name = "emoji" },                   -- Эмодзи 😳
+    { name = 'nvim_lsp_signature_help', group_index = 2  }, -- Помощь при введении параметров в методах 🚁
+    { name = 'cmp_nvim_r',
+      filetype = { "r" },
+    },
+    { name = "omni" },
+    { name = 'luasnip' }, -- Luasnip
+    { name = 'buffer',
+      keyword_length = 3 }, -- Буфферы
+    { name = "spell",
+      keyword_length = 5,
+      option = {
+        keep_all_entries = false,
+        enable_in_context = function()
+          return true
+        end
+      },
+    },
+    { name = "latex_symbols",
+      filetype = { "tex", "latex" },
+      option = { cache = true }, -- avoids reloading each time
+    },
+    { name = 'path' }, -- Пути
+    --{ name = "emoji" },  -- Эмодзи 😳
+  },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      -- require("copilot_cmp.comparators").prioritize,
+      -- require("copilot_cmp.comparators").score,
+      compare.offset,
+      compare.exact,
+      -- compare.scopes,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      -- compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+      -- require("copilot_cmp.comparators").prioritize,
+      -- require("copilot_cmp.comparators").score,
+    },
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      -- vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
       vim_item.menu = ({
+            -- omni = "[VimTex]",
+            omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
             nvim_lsp = "[LSP]",
-            cmp_tabnine = "[TN]",
+            -- cmp_tabnine = "[TN]",
             nvim_lua = "[NVIM_LUA]",
             cmp_nvim_r = "[R]",
+            spell = "[Spell]",
+            latex_symbols = "[Symbols]",
+            cmdline = "[CMD]",
             luasnip = "[Snippet]",
             buffer = "[Buffer]",
             path = "[Path]",
@@ -95,15 +171,15 @@ cmp.setup {
   -- Клавиши, которые будут взаимодействовать в nvim-cmp
   mapping = {
     -- Вызов меню автодополнения
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     --['<CR>'] = cmp.config.disable,                      -- Я не люблю, когда вещи автодополняются на <Enter>
     --['<C-y>'] = cmp.mapping.confirm({ select = true }), -- А вот на <C-y> вполне ок
     ['<Return>'] = cmp.mapping.confirm({ select = true }),
     -- Используем <C-e> для того чтобы прервать автодополнение
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(), -- Прерываем автодополнение
-      c = cmp.mapping.close(), -- Закрываем автодополнение
-    }),
+    -- ['<C-e>'] = cmp.mapping({
+    --   i = cmp.mapping.abort(), -- Прерываем автодополнение
+    --   c = cmp.mapping.close(), -- Закрываем автодополнение
+    -- }),
     ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
     ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
     ['<C-d>'] = cmp.mapping.scroll_docs( -1),
@@ -132,14 +208,28 @@ cmp.setup {
     end, { "i", "s", }),
   },
 
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
+  },
+  view = {
+    entries = 'custom',
+  },
   window = {
     completion = cmp.config.window.bordered({
       side_padding = 0,
-      col_offset = -1
+      col_offset = -1,
+      border = 'rounded',
+      -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
     }),
     documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      border = 'rounded',
+      -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
     }
+  },
+  experimental = {
+    ghost_text = true,
   },
 }
 
@@ -155,12 +245,11 @@ cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = { { name = "buffer" } }
 })
---[[
+---[[
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
-  }, {
     { name = "cmdline" },
   }),
 })
@@ -168,6 +257,6 @@ cmp.setup.cmdline(":", {
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+require('lspconfig')['pyright'].setup {
   capabilities = capabilities
 }

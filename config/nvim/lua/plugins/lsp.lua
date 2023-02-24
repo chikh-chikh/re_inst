@@ -61,7 +61,8 @@ require 'lspconfig'.lua_ls.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         --library = vim.api.nvim_get_runtime_file("", true),
-        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true,[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true },
+        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true },
       },
       --]]--
       -- Do not send telemetry data containing a randomized but unique identifier

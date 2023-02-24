@@ -3,6 +3,57 @@ local awful = require("awful")
 
 require("awful.autofocus")
 
+-- Если я закрою последнего клиента на данном теге, он автоматически переключится на тег, у которого есть клиент.
+-- То есть, нет причин оставаться на пустом теге.
+client.connect_signal("unmanage", function(c)
+	local t = c.first_tag or awful.screen.focused().selected_tag
+	for _, cl in ipairs(t:clients()) do
+		if cl ~= c then
+			return
+		end
+	end
+	for _, t in ipairs(awful.screen.focused().tags) do
+		if #t:clients() > 0 then
+			t:view_only()
+			return
+		end
+	end
+end)
+
+move_client_to_screen = function(c, s)
+	function avoid_showing_empty_tag_client_move(c)
+		-- Get the current tag.
+		local t = c.first_tag or awful.screen.focused().selected_tag
+		-- Перебирает всех клиентов на текущем теге. Если на текущей теге 2 или более клиентов, то выход из функции.
+		for _, cl in ipairs(t:clients()) do
+			if cl ~= c then
+				return
+			end
+		end
+		-- Этот шаг будет выполнен только в том случае, если на текущем теге находится один клиент.
+		-- Пройдитесь по всем меткам на текущем экране. Мы должны пропустить текущую метку.
+		-- Затем мы переходим к метке с наименьшим индексом, на которой находится один или несколько клиентов.
+		for _, tg in ipairs(awful.screen.focused().tags) do
+			if tg ~= t then
+				if #tg:clients() > 0 then
+					tg:view_only()
+					break
+				end
+			end
+		end
+	end
+
+	avoid_showing_empty_tag_client_move(c)
+	--Переместить на новый экран, но при этом сохранить его в том же индексе тегов.
+	local index = c.first_tag.index
+	c:move_to_screen(s)
+	local tag = c.screen.tags[index]
+	c:move_to_tag(tag)
+	tag:view_only()
+end
+
+
+
 -- Эти две функции предназначены для перемещения текущего клиента в следующий/предыдущий тег
 -- и последующего перехода в этот тег.
 
@@ -69,53 +120,4 @@ function show_my_desktop()
 		end
 		show_desktop = true
 	end
-end
-
--- Если я закрою последнего клиента на данном теге, он автоматически переключится на тег, у которого есть клиент.
--- То есть, нет причин оставаться на пустом теге.
-client.connect_signal("unmanage", function(c)
-	local t = c.first_tag or awful.screen.focused().selected_tag
-	for _, cl in ipairs(t:clients()) do
-		if cl ~= c then
-			return
-		end
-	end
-	for _, t in ipairs(awful.screen.focused().tags) do
-		if #t:clients() > 0 then
-			t:view_only()
-			return
-		end
-	end
-end)
-
-move_client_to_screen = function(c, s)
-	function avoid_showing_empty_tag_client_move(c)
-		-- Get the current tag.
-		local t = c.first_tag or awful.screen.focused().selected_tag
-		-- Перебирает всех клиентов на текущем теге. Если на текущей теге 2 или более клиентов, то выход из функции.
-		for _, cl in ipairs(t:clients()) do
-			if cl ~= c then
-				return
-			end
-		end
-		-- Этот шаг будет выполнен только в том случае, если на текущем теге находится один клиент.
-		-- Пройдитесь по всем меткам на текущем экране. Мы должны пропустить текущую метку.
-		-- Затем мы переходим к метке с наименьшим индексом, на которой находится один или несколько клиентов.
-		for _, tg in ipairs(awful.screen.focused().tags) do
-			if tg ~= t then
-				if #tg:clients() > 0 then
-					tg:view_only()
-					break
-				end
-			end
-		end
-	end
-
-	avoid_showing_empty_tag_client_move(c)
-	--Переместить на новый экран, но при этом сохранить его в том же индексе тегов.
-	local index = c.first_tag.index
-	c:move_to_screen(s)
-	local tag = c.screen.tags[index]
-	c:move_to_tag(tag)
-	tag:view_only()
 end

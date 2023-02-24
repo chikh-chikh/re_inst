@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
 
 # Lua, luarocks, awesome
 sudo apt install build-essential libreadline-dev unzip curl git
@@ -37,6 +38,12 @@ chsh -s $(which zsh)
 # NeoVim
 sudo apt-get install neovim
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
+
+sudo apt install xsel
+pip install pynvim
+npm i -g neovim
+sudo apt install ripgrep
+
 
 # Ranger
 sudo apt install ranger 

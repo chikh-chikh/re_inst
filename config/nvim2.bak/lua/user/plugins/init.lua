@@ -1,4 +1,5 @@
 return {
+
   -- Интеграция с ranger
   { 'kevinhwang91/rnvimr' },
 

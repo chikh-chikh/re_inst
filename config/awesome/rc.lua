@@ -72,11 +72,25 @@ awful.rules.rules = main.rules(
 -- Signals
 require("main.signals")
 
+-- Locale
+os.setlocale(os.getenv("LANG"))
+
 -- Gaps
-beautiful.useless_gap = 7
+beautiful.useless_gap = 5
 
 -- Autostart
+awful.spawn.with_shell("picom")
 awful.spawn.with_shell("feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/")
+awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru")
+
+--awful.spawn.with_shell(fm)
+--awful.spawn.with_shell(terminal)
+
+-- Autostarting programm
+-- интернет
+-- os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
+-- os.execute("pgrep -u $USER -x kbdd || (kbdd &)")
+-- os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
 
 -- Statusbar: Wibar
 local statusbar = require("statusbar.default.statusbar")

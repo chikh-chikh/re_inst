@@ -9,10 +9,6 @@ local _M = {
   -- terminal = "xterm",
   -- terminal = "xfce4-terminal",
   terminal = "alacritty",
-  --fm = terminal .. " -e ranger",
-  --browser = "yandex-browser-stable",
-  --editor = os.getenv("editor") or "nvim",
-  --editor_cmd = terminal .. " -e " .. editor,
   -- device, used in vicious widget
   --wlandev = 'wlan0',
   --wlandev = 'wlp2s0b1', --# void on notebook

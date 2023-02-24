@@ -1,6 +1,7 @@
 require 'user.keys.keys'
 require 'user.keys.plug_keys'
-require 'user.plugins'
+
+
 -- require 'user.vimrc'
 --              AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
@@ -285,32 +286,12 @@ local config = {
         -- true == 1000
 
         cmp = {
-                sources = {
-                        { name = 'nvim_lsp' }, -- LSP 👄
-                        { name = 'cmp_nvim_r' },
-                        { name = 'luasnip' }, -- Luasnip 🐌
-                        { name = 'buffer' }, -- Буфферы 🐃
-                        { name = 'path' }, -- Пути 🪤
-                },
                 source_priority = {
                         nvim_lsp = 1000,
-                        cmp_nvim_r = 1000,
-                        luasnip = 750,
-                        buffer = 500,
-                        path = 250,
-                },
-                formatting = {
-                        fields = { "kind", "abbr", "menu" },
-                        format = function(entry, vim_item)
-                                vim_item.menu = ({
-                                            nvim_lsp = "[LSP]",
-                                            cmp_nvim_r = "[R]",
-                                            luasnip = "[Snippet]",
-                                            buffer = "[Buffer]",
-                                            path = "[Path]",
-                                    })[entry.source.name]
-                                return vim_item
-                        end,
+                        cmp_nvim_r = 250,
+                        luasnip = disabled,
+                        buffer = disabled,
+                        path = 750,
                 },
 
         },
