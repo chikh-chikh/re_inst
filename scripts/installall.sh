@@ -1,8 +1,7 @@
 #!/bin/sh
 
-
+sudo apt install lightdm build-essential libreadline-dev unzip curl wget git
 # Lua, luarocks, awesome
-sudo apt install build-essential libreadline-dev unzip curl git
 
 curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
 tar -zxf lua-5.3.5.tar.gz
@@ -44,7 +43,6 @@ pip install pynvim
 npm i -g neovim
 sudo apt install ripgrep
 
-
 # Ranger
 sudo apt install ranger 
 
@@ -55,9 +53,9 @@ sudo apt install exa
 sudo apt install zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb
 sudo apt install mpv atool fzf ag
 sudo apt-get install locales
+sudo apt install language-pack-ru
 localectl set-locale LANG=ru_RU.UTF-8
 localectl status
-sudo apt install language-pack-ru
 
 sudo dpkg-reconfigure locales
 

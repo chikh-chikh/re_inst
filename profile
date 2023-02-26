@@ -10,7 +10,8 @@
 
 # Environment variables set everywhere
 export EDITOR="nvim"
-export VISUAL="nvim"
+export VISUAL="okular"
+
 export READER="zathura"
 export TERMINAL="alacrytty"
 export PAGER="less"

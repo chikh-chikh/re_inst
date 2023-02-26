@@ -23,6 +23,10 @@ nm('<leader>f', '<cmd>Telescope git_files<CR>')           -- Поиск файл
 nm('<leader>b', '<cmd>Telescope git_branches<CR>')        -- Ветки в Git
 nm('<leader>s', '<cmd>Telescope live_grep<CR>')           -- Поиск строки
 nm('<leader>q', '<cmd>Telescope buffers<CR>')             -- Буфферы
+
+-- BufferLine
+nm('>', '<cmd>BufferLineCycleNext<CR>')
+nm('<', '<cmd>BufferLineCyclePrev<CR>')
 -- BufferLine
 nm('<leader>c', '<cmd>bd<CR>')                             -- Закрыть буффер
 nm('<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер

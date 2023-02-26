@@ -17,3 +17,6 @@ plug "esc/conda-zsh-completion"
 
 #set -o vi
 
+#====================================================
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
