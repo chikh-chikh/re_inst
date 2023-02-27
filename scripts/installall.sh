@@ -1,13 +1,17 @@
 #!/bin/sh
 
-sudo apt install lightdm build-essential libreadline-dev unzip curl wget git
+sudo apt install lightdm build-essential libreadline-dev unzip curl wget git nodejs
 # Lua, luarocks, awesome
 
-curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
+cd $HOME/Downloads/
+
+curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz 
 tar -zxf lua-5.3.5.tar.gz
 cd lua-5.3.5
 make linux test
 sudo make install
+
+cd $HOME/Downloads/
 
 wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
 tar zxpf luarocks-3.8.0.tar.gz
@@ -16,11 +20,14 @@ cd luarocks-3.8.0
 make
 make install
 
+
+cd $HOME/Downloads/
+
 sudo apt install awesome
 
 # Rust,Cargo
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source "$HOME/.cargo/env"
+source "$HOME/.cargo/env/"
 
 # Alacrytty
 sudo apt install cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 #libegl1-mesa-dev
@@ -29,10 +36,13 @@ sudo apt install cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libx
 #cd alacritty
 #cargo build --release
 
-cargo install alacritty
+sudo apt install alacritty
+#cargo install alacritty
 
 sudo apt install zsh
 chsh -s $(which zsh)
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+#zap -u
 
 # NeoVim
 sudo apt-get install neovim
