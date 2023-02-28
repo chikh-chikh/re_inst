@@ -8,7 +8,7 @@ local _M = {
   -- This is used later as the default terminal and editor to run.
   -- terminal = "xterm",
   -- terminal = "xfce4-terminal",
-  terminal = "alacritty",
+  terminal = "/home/ru/.cargo/bin/alacritty",
   -- device, used in vicious widget
   --wlandev = 'wlan0',
   --wlandev = 'wlp2s0b1', --# void on notebook

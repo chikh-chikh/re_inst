@@ -20,4 +20,5 @@ plug "esc/conda-zsh-completion"
 #====================================================
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
+source "$HOME/.cargo/bin"
 #export GPG_TTY=$(tty)

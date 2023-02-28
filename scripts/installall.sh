@@ -1,9 +1,10 @@
 #!/bin/sh
 
-sudo apt install lightdm build-essential libreadline-dev unzip curl wget git nodejs
+sudo apt install build-essential libreadline-dev unzip curl wget nodejs
+
 # Lua, luarocks, awesome
 
-cd $HOME/Downloads/
+cd $HOME/downloads/
 
 curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz 
 tar -zxf lua-5.3.5.tar.gz
@@ -11,8 +12,7 @@ cd lua-5.3.5
 make linux test
 sudo make install
 
-cd $HOME/Downloads/
-
+cd $HOME/downloads/
 wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
 tar zxpf luarocks-3.8.0.tar.gz
 cd luarocks-3.8.0
@@ -20,8 +20,7 @@ cd luarocks-3.8.0
 make
 make install
 
-
-cd $HOME/Downloads/
+cd $HOME/downloads/
 
 sudo apt install awesome
 
@@ -36,8 +35,7 @@ sudo apt install cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libx
 #cd alacritty
 #cargo build --release
 
-sudo apt install alacritty
-#cargo install alacritty
+cargo install alacritty
 
 sudo apt install zsh
 chsh -s $(which zsh)
@@ -45,13 +43,13 @@ zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 #zap -u
 
 # NeoVim
-sudo apt-get install neovim
-sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
+#sudo apt-get install neovim
+#sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
 
-sudo apt install xsel
-pip install pynvim
-npm i -g neovim
-sudo apt install ripgrep
+#sudo apt install xsel
+#pip3 install pynvim
+#npm i -g neovim
+#sudo apt install ripgrep
 
 # Ranger
 sudo apt install ranger 
