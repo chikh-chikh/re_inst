@@ -75,3 +75,18 @@ sudo tar -xpf tsetup.4.5.2.tar.xz -C /opt
 sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
 sudo chmod -R 775 /opt/Telegram
 
+: 1677669450:0;sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" >> /etc/apt/sources.list
+: 1677669469:0;echo "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" >> /etc/apt/sources.list
+: 1677669567:0;echo "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" >> sudo /etc/apt/sources.list
+: 1677670442:21;sudo vi /etc/apt/sources.list
+: 1677670534:1;wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+: 1677670545:0;gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+: 1677670566:10;sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/"
+: 1677670651:4;sudo apt-get update
+: 1677670665:267;sudo apt-get install r-base\
+
+: 1677670975:0;sudo apt-get install r-base-dev
+: 1677671017:0;deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
+: 1677671098:17;R -v
+: 1677671125:0;R --version
+

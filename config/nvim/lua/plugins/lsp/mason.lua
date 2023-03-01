@@ -9,10 +9,10 @@ local servers = {
 	-- "html",
 	-- "tsserver",
 	"pyright",
-  -- "r_language_server"
+  "r_language_server",
 	-- "bashls",
 	-- "jsonls",
-	-- "yamlls",
+	"yamlls",
 }
 
 local settings = {
@@ -43,7 +43,7 @@ require('mason-tool-installer').setup {
     'vim-language-server',
     'bash-language-server',
     'yaml-language-server',
-    -- 'r-languageserver',
+    'r-languageserver',
     'rust-analyzer',
     'pyright',
     'texlab',

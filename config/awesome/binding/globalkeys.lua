@@ -10,7 +10,7 @@ local menubar = require("menubar")
 -- Resource Configuration
 local modkey = RC.vars.modkey
 local terminal = RC.vars.terminal
-local fm = terminal .. " -e ranger"
+local fm = terminal .. " -e " .. RC.vars.fm
 
 local browser = "yandex-browser-stable"
 local editor = os.getenv("editor") or "nvim"

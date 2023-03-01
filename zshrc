@@ -6,6 +6,7 @@ HISTFILE=~/.zsh_history
 # sourse
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
+plug "$HOME/.config/zsh/sourced.zsh"
 
 # plugins
 plug "zap-zsh/supercharge"
@@ -17,8 +18,3 @@ plug "esc/conda-zsh-completion"
 
 #set -o vi
 
-#====================================================
-[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-
-source "$HOME/.cargo/bin"
-#export GPG_TTY=$(tty)

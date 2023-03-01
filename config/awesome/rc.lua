@@ -88,7 +88,7 @@ awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru")
 
 -- Autostarting programm
 -- интернет
--- os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
+os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
 -- os.execute("pgrep -u $USER -x kbdd || (kbdd &)")
 -- os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
 

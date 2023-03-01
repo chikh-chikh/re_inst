@@ -8,24 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# Environment variables set everywhere
-export EDITOR="nvim"
-export VISUAL="okular"
-
-export READER="zathura"
-export TERMINAL="alacrytty"
-export PAGER="less"
-export WM="awesome"
-#export BROWSER="brave"
-
-# XDG Paths
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-
-# zsh config dir
-#export ZDOTDIR=$HOME/.config/zsh
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -40,4 +22,5 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
+
 

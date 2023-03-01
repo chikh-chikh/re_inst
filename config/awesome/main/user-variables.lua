@@ -9,6 +9,7 @@ local _M = {
   -- terminal = "xterm",
   -- terminal = "xfce4-terminal",
   terminal = "/home/ru/.cargo/bin/alacritty",
+  fm = "/home/ru/.local/bin/ranger",
   -- device, used in vicious widget
   --wlandev = 'wlan0',
   --wlandev = 'wlp2s0b1', --# void on notebook
