@@ -7,15 +7,18 @@ local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Menubar library
 local menubar = require("menubar")
+
 -- Resource Configuration
-local modkey = RC.vars.modkey
+local browser = RC.vars.browser
+
 local terminal = RC.vars.terminal
-local fm = terminal .. " -e " .. RC.vars.fm
+local fm_cmd = terminal .. " -e " .. RC.vars.fm
+local editor_cmd = terminal .. " -e " .. RC.vars.editor
 
-local browser = "yandex-browser-stable"
-local editor = os.getenv("editor") or "nvim"
-local editor_cmd = terminal .. " -e " .. editor
+local runner = RC.vars.runner
+local buf_chng = RC.vars.buf_chng
 
+local modkey = RC.vars.modkey
 
 local _M = {}
 
@@ -104,16 +107,16 @@ function _M.get()
     awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
       { description = "терминал", group = "RU" }),
     -- Ranger
-    awful.key({ modkey, }, "r", function() awful.spawn(fm) end,
+    awful.key({ modkey, }, "r", function() awful.spawn(fm_cmd) end,
       { description = "файловый менеджер", group = "RU" }),
     -- Neovim
     awful.key({ modkey, }, "v", function() awful.spawn(editor_cmd) end,
       { description = "текстовый редактор", group = "RU" }),
     -- DMenu
-    awful.key({ modkey }, "d", function() awful.spawn("rofi -show") end,
-      { description = "rofi", group = "RU" }),
-    awful.key({ modkey }, "a", function() awful.spawn("rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' ") end,
-      { description = "буфер", group = "RU" }),
+    awful.key({ modkey }, "d", function() awful.spawn(runner) end,
+      { description = "runner", group = "RU" }),
+    awful.key({ modkey }, "a", function() awful.spawn(buf_chng) end,
+      { description = "буфер обмена", group = "RU" }),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
       { description = "menubar", group = "RU" }),

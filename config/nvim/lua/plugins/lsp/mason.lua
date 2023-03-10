@@ -9,7 +9,7 @@ local servers = {
 	-- "html",
 	-- "tsserver",
 	"pyright",
-  "r_language_server",
+  -- "r_language_server",
 	-- "bashls",
 	-- "jsonls",
 	"yamlls",
@@ -31,7 +31,7 @@ local settings = {
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
-	automatic_installation = true,
+	automatic_installation = false,
 })
 
 -- инициализация LSP для различных ЯП
@@ -43,14 +43,14 @@ require('mason-tool-installer').setup {
     'vim-language-server',
     'bash-language-server',
     'yaml-language-server',
-    'r-languageserver',
+    -- 'r-languageserver',
     'rust-analyzer',
     'pyright',
     'texlab',
     'zk'
   },
   auto_update = false,
-  run_on_start = true,
+  run_on_start = false,
   debounce_hours = 1, -- минимум 5 часов между попытками установки / обновления
 }
 --]]--

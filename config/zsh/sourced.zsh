@@ -2,4 +2,5 @@
 #====================================================
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-source "$HOME/.cargo/bin"
+[ -f "$HOME/.Renviron" ] && source "$HOME/.Renviron"
+

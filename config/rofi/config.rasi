@@ -1,5 +1,6 @@
 configuration {
 	modi: "drun,filebrowser,keys,run,window";
+	/* modi: "clipboard:greenclip print";  */
 	font: "mono 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/
