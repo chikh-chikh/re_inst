@@ -8,13 +8,16 @@ function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
             build-essential libreadline-dev unzip curl wget git python3 \
-            aptitude deb-get nala exa cmus\
+            aptitude deb-get nala exa cmus picom\
             zsh fzf htop gh rofi\
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
             mpv atool fzf ag bat fd-find fasd silversearcher-ag \
             ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             locales language-pack-ru console-cyrillic;
+
+        #deb-get
+        deb-get install google-chrome-stable zoom exodus discord
 
         #Telegramm
         sudo tar -xpf tsetup.4.5.2.tar.xz -C /opt
@@ -60,21 +63,11 @@ function backup_configs {
     mv -iv ~/.config/greenclip.toml    ~/.config/greenclip.toml.old
     # mv -iv ~/.config/    ~/.config/
     # mv -iv ~/.config/    ~/.config/
-    # mv -iv ~/.config/    ~/.config/
-    # mv -iv ~/.config/    ~/.config/
 
     mv -iv ~/.zshrc               ~/.zshrc.old
     # mv -iv ~/.bashrc              ~/.bashrc.old
     mv -iv ~/.profile             ~/.profile.old
     mv -iv ~/.xinitrc             ~/.xinitrc.old
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
-    # mv -iv ~/.            ~/.
     # mv -iv ~/.            ~/.
     # mv -iv ~/.            ~/.
     # mv -iv ~/.            ~/.
@@ -132,7 +125,7 @@ function install_awesome {
     make install
     # Awesome
     echo -e "\u001b[7m Installing Awesome...\u001b[0m"
-    cd $HOME/downloads/
+    # cd $HOME/downloads/
     sudo apt install awesome
 
 }

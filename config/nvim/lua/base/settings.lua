@@ -13,9 +13,9 @@ opt.fixeol = false
 -- Автодополнение (встроенное в Neovim)
 opt.completeopt = 'menuone,noselect'
 -- Не автокомментировать новые линии при переходе на новую строку
-vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
+-- vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
 
-vim.cmd('filetype plugin indent on')
+-- vim.cmd('filetype plugin indent on')
 
 opt.termguicolors = true
 

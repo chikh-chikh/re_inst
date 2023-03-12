@@ -79,7 +79,7 @@ function _M.init()
     WB.generate_wibox_one(s)
 
     -- Create the bottom wibox
-    WB.generate_wibox_two(s)
+    -- WB.generate_wibox_two(s)
   end)
 end
 

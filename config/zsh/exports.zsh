@@ -25,7 +25,7 @@ export R_HOME=/usr/local/lib/R
 #export R_HOME=$HOME/.local/lib/R
 
 # export VIMRUNTIME=$HOME/.local/share/nvim/
-# export VIMRUNTIME=/usr/share/nvim/runtime/
+export VIMRUNTIME=/usr/share/nvim/runtime
 
 export LANG=ru_RU.UTF-8
 

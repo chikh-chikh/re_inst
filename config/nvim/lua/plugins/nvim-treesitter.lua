@@ -5,14 +5,31 @@ end
 
 configs.setup {
   -- A list of parser names, or "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "html", "lua", "rust", "python", "yaml", "r", "latex" },
+  ensure_installed = {
+    "latex",
+    "markdown_inline",
+    "markdown",
+    "lua",
+    "python",
+    "vim",
+    "yaml",
+    "perl",
+    "json",
+    "html",
+    "help",
+    "haskell",
+    "gitignore",
+    "bibtex",
+    "rust",
+    "r",
+  },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
   -- List of parsers to ignore installing (for "all")
-  ignore_install = { "" }, --{ "javascript" },-- List of parsers to ignore installing
+  ignore_install = { "latex" }, --{ "javascript" },-- List of parsers to ignore installing
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
   autopairs = {
@@ -21,10 +38,10 @@ configs.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true, -- false will disable the whole extension
-    disable = { "" }, -- list of language that will be disabled
+    disable = { "css","latex" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
   },
-  indent = { enable = true, disable = { "yaml" } },
+  indent = { enable = true, disable = { "python", "css", "yaml" } },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,

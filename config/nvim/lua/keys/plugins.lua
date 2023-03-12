@@ -2,6 +2,7 @@
 require("keys/alias")
 --vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 vim.g.mapleader = ' '                                               -- Используем Space, как клавишу для альтернативных хотекеев
+vim.g.maplocalleader = ' '                                               -- Используем Space, как клавишу для альтернативных хотекеев
 
 -- LSP (все горячие клавиши начинаются с g), кроме ховера   
 nm('K', '<cmd>lua vim.lsp.buf.hover()<CR>')                       -- Ховер для объекта

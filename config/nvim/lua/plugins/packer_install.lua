@@ -12,16 +12,16 @@ if fn.empty(fn.glob(install_path)) > 0 then
 		install_path,
 	})
 	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+	-- vim.cmd([[packadd packer.nvim]])
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -40,7 +40,7 @@ packer.init({
 
 
 -- Добавляем Packer как пакет в Neovim
-vim.cmd [[packadd packer.nvim]]
+-- vim.cmd [[packadd packer.nvim]]
 
 -- Используем данный коллбэк как список для плагинов
 return require('packer').startup(function()
@@ -55,23 +55,19 @@ return require('packer').startup(function()
   -- Проводник
   use { 'nvim-tree/nvim-tree.lua', tag = 'nightly' }
   use { "Shatur/neovim-session-manager" }
+  use { "ahmedkhalf/project.nvim" }
+
   -- Панель вкладок
   use { 'akinsho/bufferline.nvim', tag = 'v3.*' }
-
   -- Статуслайн
   use { 'nvim-lualine/lualine.nvim' }
-  --[[,
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function()
-      -- require('plugins/lualine')
-    end }--]]
   --Appearance
   use { "lukas-reineke/indent-blankline.nvim" }
   use { "goolord/alpha-nvim" }
   use { "RRethy/vim-illuminate" }
 
   -- General
-  -- use { "numToStr/Comment.nvim" }
+  use { "numToStr/Comment.nvim" }
   -- use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "lewis6991/impatient.nvim" }
   use { "kylechui/nvim-surround" }
@@ -87,14 +83,10 @@ return require('packer').startup(function()
   use 'kevinhwang91/rnvimr'
 
   -- Терминал
-  use { 'akinsho/toggleterm.nvim', tag = '*', config = function()
-  end }
+  use 'akinsho/toggleterm.nvim'
 
   -- Автодополнение скобок и кавычек
-  use { 'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup {}
-    end }
+  use 'windwp/nvim-autopairs'
 
   -- Подсветка синтаксиса
   use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
@@ -107,9 +99,9 @@ return require('packer').startup(function()
   }
 
   -- Поиск
-  use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
+  use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-fzf-native.nvim'
-  use { "stevearc/dressing.nvim" }
+  use 'stevearc/dressing.nvim'
   use { "nvim-telescope/telescope-bibtex.nvim",
     config = function()
       require "telescope".load_extension("bibtex")
@@ -143,6 +135,7 @@ return require('packer').startup(function()
   use "f3fora/cmp-spell" -- spelling completions
   use "hrsh7th/cmp-omni" -- helps Vimtex completions
   -- use { "aspeddro/cmp-pandoc.nvim" }
+  -- use { "garbas/vim-snipmate" }
   -- набор готовых сниппетов для всех языков
   use 'rafamadriz/friendly-snippets'
   -- ИИ автодополнения
@@ -169,7 +162,8 @@ return require('packer').startup(function()
   use "kdheepak/cmp-latex-symbols"
   use "jbyuki/nabla.nvim" -- show symbols in editor
   -- Markdown
-  use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview' }
+  use({ "iamcco/markdown-preview.nvim",  run = function() vim.fn["mkdp#util#install"]() end, })
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   use({
     "gaoDean/autolist.nvim",

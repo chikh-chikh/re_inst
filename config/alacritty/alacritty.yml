@@ -125,7 +125,7 @@ window:
   padding:
     x: 1
     y: 1
-  # scrolling:
+  scrolling:
   #   # Maximum number of lines in the scrollback buffer.
   #   # Specifying '0' will disable scrolling.
   history: 10000
@@ -135,7 +135,7 @@ window:
 
 # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
-  opacity: 0.95
+  opacity: 0.8
   # # If `true`, bold text is drawn using the bright color variants.
   # draw_bold_text_with_bright_colors: true
 

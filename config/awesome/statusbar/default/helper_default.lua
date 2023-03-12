@@ -40,7 +40,7 @@ function WB.add_widgets_right(s)
         mykeyboardlayout,
         wibox.widget.systray(),
         mytextclock,
-        --    s.layoutbox,
+        -- s.layoutbox,
     }
 end
 
@@ -50,7 +50,7 @@ function WB.generate_wibox_one(s)
     -- layout: l_left, tasklist, l_right
 
     -- Create the wibox
-    s.wibox_top = awful.wibar({ position = "top", screen = s, height = 25 })
+    s.wibox_top = awful.wibar({ position = "top", screen = s, height = 23})
 
     -- Add widgets to the wibox
     s.wibox_top:setup {

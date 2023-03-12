@@ -66,6 +66,16 @@ local kind_icons = {
 -- https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
+  	-- preselect = cmp.PreselectMode.None,
+  completion = {
+    -- autocomplete = {
+    --   cmp.TriggerEvent.TextChanged,
+    --   cmp.TriggerEvent.InsertEnter,
+    -- },
+    completeopt = "menu,noselect",
+    -- completeopt = "menuone,noinsert,noselect",
+    keyword_length = 1,
+  },
   sources = cmp.config.sources {
     { name = 'nvim_lsp', group_index = 2  }, -- LSP
     -- { name = 'cmp_tabnine' }, -- AI
@@ -248,7 +258,8 @@ cmp.setup.cmdline("/", {
 ---[[
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
+  -- sources = cmp.config.sources({
+  sources = ({
     { name = "path" },
     { name = "cmdline" },
   }),
@@ -256,6 +267,8 @@ cmp.setup.cmdline(":", {
 --]]
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Capabilities
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['pyright'].setup {
   capabilities = capabilities

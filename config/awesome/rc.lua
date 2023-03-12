@@ -30,7 +30,7 @@ local main = {
   tags       = require("main.tags"),
   menu       = require("main.menu"),
   rules      = require("main.rules"),
-  brokefunck = require("main.brokefunc")
+  brockcochranfunc = require("main.brockcochranfunc")
 }
 
 -- Custom Local Library: Keys and Mouse Binding
@@ -79,18 +79,18 @@ os.setlocale(os.getenv("LANG"))
 beautiful.useless_gap = 5
 
 -- Autostart
+awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+-- awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/")
-awful.spawn.with_shell("setxkbmap -option grp:alt_shift_toggle -layout us,ru")
 
 --awful.spawn.with_shell(fm)
 --awful.spawn.with_shell(terminal)
 
 -- Autostarting programm
 -- интернет
-os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
-os.execute("pgrep -u $USER -x kbdd || (kbdd &)")
-os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
+-- os.execute("pgrep -u $USER -x nm-applet || (nm-applet &)")
+-- os.execute("pgrep -u $USER -x kbdd || (kbdd &)")
+-- os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
 
 -- Statusbar: Wibar
 local statusbar = require("statusbar.default.statusbar")

@@ -34,6 +34,9 @@ require("mason-lspconfig").setup({
 	automatic_installation = false,
 })
 
+-- статус загрузки LSP
+require 'fidget'.setup {}
+
 -- инициализация LSP для различных ЯП
 require 'lspconfig/util'
 ---[[--

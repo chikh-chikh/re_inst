@@ -1,4 +1,5 @@
-version = '0.20.2'
+-- version = '0.20.2'
+
 ---@diagnostic disable
 local xplr = xplr -- The globally exposed configuration to be overridden.
 ---@diagnostic enable
@@ -15,7 +16,7 @@ local xplr = xplr -- The globally exposed configuration to be overridden.
 -- See https://xplr.dev/en/upgrade-guide
 --
 -- ```lua
--- version = "0.0.0"
+version = "0.20.2"
 -- ```
 
 -- # Configuration ------------------------------------------------------------
@@ -716,7 +717,7 @@ xplr.config.node_types.directory.style = {
 -- xplr.config.node_types.directory.meta.foo = "foo"
 -- xplr.config.node_types.directory.meta.bar = "bar"
 -- ```
-xplr.config.node_types.directory.meta.icon = "ð"
+xplr.config.node_types.directory.meta.icon = ""
 
 -- The style for the file nodes.
 --
@@ -734,7 +735,7 @@ xplr.config.node_types.file.style = {}
 -- xplr.config.node_types.file.meta.foo = "foo"
 -- xplr.config.node_types.file.meta.bar = "bar"
 -- ```
-xplr.config.node_types.file.meta.icon = "ƒ"
+xplr.config.node_types.file.meta.icon = ""
 
 -- The style for the symlink nodes.
 --
@@ -755,7 +756,7 @@ xplr.config.node_types.symlink.style = {
 -- xplr.config.node_types.symlink.meta.foo = "foo"
 -- xplr.config.node_types.symlink.meta.bar = "bar"
 -- ```
-xplr.config.node_types.symlink.meta.icon = "§"
+xplr.config.node_types.symlink.meta.icon = ""
 
 -- Metadata and style based on mime types.
 -- It is possible to use the wildcard `*` to match all mime sub types. It will
@@ -771,18 +772,18 @@ xplr.config.node_types.symlink.meta.icon = "§"
 -- Example:
 --
 -- ```lua
--- xplr.config.node_types.mime_essence = {
---   application = {
---     -- application/*
---     ["*"] = { meta = { icon = "a" } }
---
---     -- application/pdf
---     pdf = { meta = { icon = "" }, style = { fg = "Blue" } },
---
---     -- application/zip
---     zip = { meta = { icon = ""} },
---   },
--- }
+xplr.config.node_types.mime_essence = {
+  application = {
+    -- application/*
+    ["*"] = { meta = { icon = "a" } },
+
+    -- application/pdf
+    pdf = { meta = { icon = "" }, style = { fg = "Blue" } },
+
+    -- application/zip
+    zip = { meta = { icon = ""} },
+  },
+}
 -- ```
 xplr.config.node_types.mime_essence = {}
 
@@ -796,8 +797,8 @@ xplr.config.node_types.mime_essence = {}
 -- Example:
 --
 -- ```lua
--- xplr.config.node_types.extension.md = { meta = { icon = "" }, style = { fg = "Blue" } }
--- xplr.config.node_types.extension.rs = { meta = { icon = "🦀" } }
+xplr.config.node_types.extension.md = { meta = { icon = "" }, style = { fg = "Blue" } }
+xplr.config.node_types.extension.rs = { meta = { icon = "🦀" } }
 -- ```
 xplr.config.node_types.extension = {}
 
@@ -811,8 +812,8 @@ xplr.config.node_types.extension = {}
 -- Example:
 --
 -- ```lua
--- xplr.config.node_types.special["Cargo.toml"] = { meta = { icon = "" } }
--- xplr.config.node_types.special["Downloads"] = { meta = { icon = "" }, style = { fg = "Blue" } }
+xplr.config.node_types.special["Cargo.toml"] = { meta = { icon = "" } }
+xplr.config.node_types.special["Downloads"] = { meta = { icon = "" }, style = { fg = "Blue" } }
 -- ```
 xplr.config.node_types.special = {}
 
@@ -833,23 +834,23 @@ xplr.config.node_types.special = {}
 -- ![demo](https://s6.gifyu.com/images/layout.png)
 --
 -- ```lua
--- xplr.config.layouts.builtin.default = {
---   Horizontal = {
---     config = {
---       margin = 1,
---       horizontal_margin = 2,
---       vertical_margin = 3,
---       constraints = {
---         { Percentage = 50 },
---         { Percentage = 50 },
---       }
---     },
---     splits = {
---       "Table",
---       "HelpMenu",
---     }
---   }
--- }
+xplr.config.layouts.builtin.default = {
+  Horizontal = {
+    config = {
+      margin = 1,
+      horizontal_margin = 2,
+      vertical_margin = 3,
+      constraints = {
+        { Percentage = 50 },
+        { Percentage = 50 },
+      }
+    },
+    splits = {
+      "Table",
+      "HelpMenu",
+    }
+  }
+}
 -- ```
 
 -- The default layout

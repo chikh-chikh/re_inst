@@ -1,3 +1,5 @@
+-- https://brockcochran.com/1/rc.lua-2023-02-11.txt
+
 -- Standard awesome library
 local awful = require("awful")
 
