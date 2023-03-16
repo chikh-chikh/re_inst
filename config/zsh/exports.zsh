@@ -21,7 +21,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 #export ZDOTDIR=$HOME/.config/zsh
 #export ZSH="$HOME/.config/zsh/"
 
-export R_HOME=/usr/local/lib/R
+export R_HOME=/usr/lib/R
 #export R_HOME=$HOME/.local/lib/R
 
 # export VIMRUNTIME=$HOME/.local/share/nvim/

@@ -14,10 +14,16 @@ theme.wallpaper = themes_path .. "zenburn/background.png"
 
 -- {{{ Styles
 --theme.font      = "JetBrains Mono Medium 12"
-theme.font      = "Noto Sans Mono 12"
+theme.font      = "Noto Sans Mono 11"
 
+theme.taglist_fg_focus    = "#3992af"
+theme.taglist_fg_occupied = "#164b5d"
+theme.taglist_fg_urgent   = "#ED7572"
+theme.taglist_fg_empty    = "#828282"
+theme.taglist_spacing     = 2
+theme.taglist_font        = "awesomewm-font 12"
 
--- {{{ Colors  b5a642 - base
+-- {{{ Colors  #b5a642 - base
 --текст на панели
 theme.fg_normal  = "#e9e0bf"
 theme.fg_focus   = "#3b361c"
@@ -32,7 +38,7 @@ theme.bg_systray = "#575025"--theme.bg_normal
 
 -- {{{ Borders
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(3)
+theme.border_width  = dpi(5)
 theme.border_normal = "#756b2f"
 theme.border_focus  = "#d1c381"
 theme.border_marked = "#e9e0bf"
@@ -50,7 +56,7 @@ theme.titlebar_bg_normal = "#756b2f"
 -- titlebar_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- Example:
---theme.taglist_bg_focus = "#CC9393"
+-- theme.taglist_bg_focus = "#CC9393"
 -- }}}
 
 -- {{{ Widgets

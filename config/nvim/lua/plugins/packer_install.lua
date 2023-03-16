@@ -156,6 +156,8 @@ return require('packer').startup(function()
 
   -- R
   use "jalvesaq/Nvim-R"
+  -- use "REditorSupport/languageserver"
+  -- use "jozefhajnala/languageserversetup"
 
   -- LaTeX support
   use "lervag/vimtex" -- essential for LaTeX; Vimscript
@@ -198,6 +200,11 @@ return require('packer').startup(function()
 
   -- Git
   use 'lewis6991/gitsigns.nvim'
+  use {
+   'ldelossa/gh.nvim',
+   requires = { { 'ldelossa/litee.nvim' } }
+  }
+
 
   -- Discord
   use { 'andweeb/presence.nvim' }

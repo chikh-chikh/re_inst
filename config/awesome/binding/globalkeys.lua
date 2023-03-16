@@ -20,6 +20,10 @@ local buf_chng = RC.vars.buf_chng
 
 local modkey = RC.vars.modkey
 
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+
+
 local _M = {}
 
 -- reading
@@ -29,6 +33,13 @@ local _M = {}
 
 function _M.get()
   local globalkeys = gears.table.join(
+    awful.key({ modkey }, "l", function() logout_popup.launch() end,
+      {description = "Show logout screen", group = "custom"}),
+
+    awful.key({}, "XF86AudioRaiseVolume", function () volume_widget:inc(5) end),
+    awful.key({}, "XF86AudioLowerVolume", function () volume_widget:dec(5) end),
+    awful.key({}, "XF86AudioMute", function () volume_widget:toggle() end),
+
 
     awful.key({ modkey, }, "s", hotkeys_popup.show_help,
       { description = "show help", group = "awesome" }),

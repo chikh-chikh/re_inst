@@ -6,11 +6,15 @@ function run {
     $@&
   fi
 }
-run feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/
-run setxkbmap -option grp:alt_shift_toggle -layout us,ru
-run /home/ru/.local/bin/greenclip daemon
+run feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/ &
 
 run nm-tray
+# # run nm-applet 
+# run kbdd &
+run setxkbmap -option grp:alt_shift_toggle -layout us,ru
+# run xscreensaver -nosplash &
+
+run /home/ru/.local/bin/greenclip daemon &
 
 # run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 #run xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal

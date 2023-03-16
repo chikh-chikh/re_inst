@@ -93,9 +93,10 @@ awful.spawn.with_shell("picom")
 -- os.execute("pgrep -u $USER -x xscreensaver || (xscreensaver -nosplash &)")
 
 -- Statusbar: Wibar
-local statusbar = require("statusbar.default.statusbar")
+local statusbar = require("statusbar.ru.statusbar")
+-- local statusbar = require("statusbar.default.statusbar")
+-- local statusbar = require("statusbar.vicious.statusbar")
 --local statusbar = require("statusbar.stacked.statusbar")
---local statusbar = require("statusbar.vicious.statusbar")
 --local statusbar = require("statusbar.lain.statusbar")
 --local statusbar = require("statusbar.arrow.statusbar")
 

@@ -13,6 +13,7 @@ local home = os.getenv("HOME")
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- beautiful.init(home .. "/.config/awesome/themes/clone/theme.lua")
 beautiful.init(home .. "/.config/awesome/themes/zenburn/theme.lua")
+-- beautiful.init(home .. "/.config/awesome/themes/ru/theme.lua")
 
 if (RC.vars.wallpaper) then
     local wallpaper = RC.vars.wallpaper

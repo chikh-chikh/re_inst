@@ -187,6 +187,11 @@ _G.packer_plugins = {
     path = "/home/ru/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["gh.nvim"] = {
+    loaded = true,
+    path = "/home/ru/.local/share/nvim/site/pack/packer/start/gh.nvim",
+    url = "https://github.com/ldelossa/gh.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/ru/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -206,6 +211,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ru/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["litee.nvim"] = {
+    loaded = true,
+    path = "/home/ru/.local/share/nvim/site/pack/packer/start/litee.nvim",
+    url = "https://github.com/ldelossa/litee.nvim"
   },
   ["lspkind-nvim"] = {
     loaded = true,
@@ -421,10 +431,10 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'autolist.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType plaintex ++once lua require("packer.load")({'autolist.nvim'}, { ft = "plaintex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'autolist.nvim'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'autolist.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType text ++once lua require("packer.load")({'autolist.nvim'}, { ft = "text" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'autolist.nvim'}, { ft = "tex" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 

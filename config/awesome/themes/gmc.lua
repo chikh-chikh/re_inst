@@ -139,7 +139,28 @@ _M.color = {
     ['deepOrangeA100'] = '#ff9e80',
     ['deepOrangeA200'] = '#ff6e40',
     ['deepOrangeA400'] = '#ff3d00',
-    ['deepOrangeA700'] = '#dd2c00'
+    ['deepOrangeA700'] = '#dd2c00',
+
+
+    ['brassyA7']   = '#948722',
+    ['brassyA6']   = '#9f912d',
+    ['brassyA5']   = '#aa9c38',
+    ['brassyA4']   = '#b5a642',
+    ['brassyA3']   = '#c0b14c',
+    ['brassyA2']   = '#ccbb56',
+    ['brassyA1']   = '#d7c661',
+
+    ['brassy50']   = '#f5f0df',
+    ['brassy100']  = '#e9e0bf',
+    ['brassy200']  = '#ddd1a0',
+    ['brassy300']  = '#d1c381',
+    ['brassy400']  = '#c3b462',
+    ['brassy500']  = '#b5a642',
+    ['brassy600']  = '#958838',
+    ['brassy700']  = '#756b2f',
+    ['brassy800']  = '#575025',
+    ['brassy900']  = '#3b361c',
+    ['brassy950']  = '#211e12'
 }
 
 return _M

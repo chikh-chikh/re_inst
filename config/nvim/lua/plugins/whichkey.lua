@@ -83,19 +83,24 @@ local opts = {
 -- GENERAL MAPPINGS
 
 local mappings = {
-  ["b"] = { "<cmd>VimtexCompile<CR>"            , "build" },
-  ["c"] = { "<cmd>VimtexCountWords!<CR>"        , "count" },
-  ["d"] = { "<cmd>bdelete!<CR>"                 , "delete buffer" },
-  ["e"] = { "<cmd>NvimTreeToggle<CR>"           , "explorer" },
-  ["i"] = { "<cmd>VimtexTocOpen<CR>"            , "index" },
-  ["q"] = { "<cmd>wqa!<CR>"                     , "quit" },
+
   -- ["r"] = { ""                                  , "reorder list" },
-  -- ["r"] = { "<cmd>lua require('autolist').force_recalculate()<CR>" , "reorder list" },
+  -- [""] = { "<cmd>lua require('autolist').force_recalculate()<CR>" , "reorder list" },
+  -- [""] = { "<cmd>lua require('autolist').invert_entry()<CR>"  , "checkmark" },
+  -- ["q"] = { "<cmd>wqa!<CR>"                     , "quit" },
+  -- ["w"] = { "<cmd>wa!<CR>"                      , "write" },
+  ["e"] = { "<cmd>NvimTreeToggle<CR>"           , "explorer" },
   ["u"] = { "<cmd>UndotreeToggle<CR>"           , "undo" },
-  -- ["v"] = { "<cmd>VimtexView<CR>"               , "view" },
-  ["w"] = { "<cmd>wa!<CR>"                      , "write" },
+  ["d"] = { "<cmd>bdelete!<CR>"                 , "delete buffer" },
   ["x"] = { ""                                  , "checkmark" },
-  -- ["x"] = { "<cmd>lua require('autolist').invert_entry()<CR>"  , "checkmark" },
+
+  l = {
+    name = "LaTeX",
+      b = { "<cmd>VimtexCompile<CR>"            , "build" },
+      c = { "<cmd>VimtexCountWords!<CR>"        , "count" },
+      i = { "<cmd>VimtexTocOpen<CR>"            , "index" },
+      v = { "<cmd>VimtexView<CR>"               , "view" },
+  },
   a = {
     name = "ACTIONS",
     a = { "<cmd>lua PdfAnnots()<CR>", "annotate"},

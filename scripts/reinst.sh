@@ -17,10 +17,10 @@ function install_packages {
             locales language-pack-ru console-cyrillic;
 
         #deb-get
-        deb-get install google-chrome-stable zoom exodus discord
+        deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
 
         #Telegramm
-        sudo tar -xpf tsetup.4.5.2.tar.xz -C /opt
+        sudo tar -xpf tsetup* -C /opt
         sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
         sudo chmod -R 775 /opt/Telegram
 
