@@ -14,7 +14,7 @@ local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popu
 -- local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
 -- local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 -- local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
-local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+-- local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 -- local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local word_clock = require("awesome-wm-widgets.word-clock-widget.word-clock")
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -73,14 +73,14 @@ function WB.add_widgets_right(s)
             --horizontal_bar, vertical_bar, icon,icon_and_text, arc  
             widget_type = 'vertical_bar'
         },
-        github_contributions_widget({
-            username = 'RU927',
-            days = 180,
-            color_of_empty_cells = '#756b2f',
-            theme = 'leftpad', --'pink','dracula','leftpad','teal','classic','standard',
-            margin_top = 1,
-            with_border = false
-        }),
+        -- github_contributions_widget({
+        --     username = 'RU927',
+        --     days = 180,
+        --     color_of_empty_cells = '#575025cc',
+        --     theme = 'leftpad', --'pink','dracula','leftpad','teal','classic','standard',
+        --     margin_top = 1,
+        --     with_border = false
+        -- }),
         -- mytextclock,
         -- logout_popup.widget{},
         word_clock{
