@@ -10,23 +10,24 @@ local dpi = xresources.apply_dpi
 theme.font          = "Noto Sans Mono 11"
 -- theme.taglist_font  = "Inconsolata Medium 9"
 
-theme.bg_normal     = gmc.color['white']     .. "cc"
-theme.bg_focus      = gmc.color['red300']    .. "cc"
-theme.bg_urgent     = gmc.color['orange900'] .. "cc"
-theme.bg_minimize   = gmc.color['grey500']   .. "cc"
-theme.bg_systray    = gmc.color['grey100']   .. "cc"
+theme.bg_normal     = gmc.color['brassy700']     .. "cc"
+theme.bg_focus      = gmc.color['brassy300']    .. "cc"
+theme.bg_urgent     = gmc.color['brassy950'] .. "cc"
+theme.bg_minimize   = gmc.color['brassy100']   .. "cc"
 
-theme.fg_normal     = gmc.color['black']
-theme.fg_focus      = gmc.color['white']
-theme.fg_urgent     = gmc.color['white']
-theme.fg_minimize   = gmc.color['white']
+theme.bg_systray    = gmc.color['brassy800']   .. "cc"
 
-theme.useless_gap   = dpi(20)
-theme.border_width  = dpi(7)
+theme.fg_normal     = gmc.color['brassy100']
+theme.fg_focus      = gmc.color['brassy900']
+theme.fg_urgent     = gmc.color['brassy100']
+theme.fg_minimize   = gmc.color['brassy100']
 
-theme.border_normal = gmc.color['blue500']   .. "cc"
-theme.border_focus  = gmc.color['red300']    .. "cc"
-theme.border_marked = gmc.color['orange500'] .. "cc"
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(5)
+
+theme.border_normal = gmc.color['brassy700']   .. "cc"
+theme.border_focus  = gmc.color['brassy300']    .. "cc"
+theme.border_marked = gmc.color['brassy100'] .. "cc"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -38,35 +39,41 @@ theme.border_marked = gmc.color['orange500'] .. "cc"
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
 
-theme.taglist_bg_focus = gmc.color['red500'] .. "cc"
+theme.taglist_bg_focus = gmc.color['brassy300'] .. "cc"
 --theme.taglist_bg_focus = "png:" .. theme_path .. "misc/copycat-holo/taglist_bg_focus.png"
-theme.taglist_fg_focus = gmc.color['white']
+-- theme.taglist_fg_focus = gmc.color['brassy900']
 
+theme.taglist_fg_focus    = gmc.color['orange300']
+theme.taglist_fg_occupied = gmc.color['orange900']
+theme.taglist_fg_urgent   = gmc.color['red600']
+theme.taglist_fg_empty    = gmc.color['brassy300']
+theme.taglist_spacing     = 2
+theme.taglist_font        = "awesomewm-font 12"
 
-theme.tasklist_bg_normal = gmc.color['white']    .. "88"
+theme.tasklist_bg_normal = gmc.color['brassy700']    .. "88"
 --theme.tasklist_bg_normal = "png:" .. theme_path .. "misc/copycat-holo/bg_focus.png"
-theme.tasklist_bg_focus  = gmc.color['red300']   .. "88"
+theme.tasklist_bg_focus  = gmc.color['brassy300']   .. "88"
 --theme.tasklist_bg_focus  = "png:" .. theme_path .. "misc/copycat-holo/bg_focus_noline.png"
-theme.tasklist_fg_focus  = gmc.color['black']
+theme.tasklist_fg_focus  = gmc.color['brassy900']
 
-theme.titlebar_bg_normal = gmc.color['white']   .. "cc"
-theme.titlebar_bg_focus  = gmc.color['white']   .. "cc"
-theme.titlebar_fg_focus  = gmc.color['black']   .. "cc"
+theme.titlebar_bg_normal = gmc.color['brassy700']   .. "cc"
+theme.titlebar_bg_focus  = gmc.color['brassy300']   .. "cc"
+theme.titlebar_fg_focus  = gmc.color['brassy900']   .. "cc"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, gmc.color['black']
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, gmc.color['white']
-)
+-- local taglist_square_size = dpi(4)
+-- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+--     taglist_square_size, gmc.color['black']
+-- )
+-- theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+--     taglist_square_size, gmc.color['white']
+-- )
 
 -- Display the taglist squares
 
 -- override
-theme.taglist_squares_sel      = theme_path .. "taglist/clone/square_sel.png"
-theme.taglist_squares_unsel    = theme_path .. "taglist/clone/square_unsel.png"
+-- theme.taglist_squares_sel      = theme_path .. "taglist/clone/square_sel.png"
+-- theme.taglist_squares_unsel    = theme_path .. "taglist/clone/square_unsel.png"
 
 -- alternate override
 -- theme.taglist_squares_sel   = theme_path .. "taglist/copycat-blackburn/square_sel.png"
@@ -81,14 +88,14 @@ theme.taglist_squares_unsel    = theme_path .. "taglist/clone/square_unsel.png"
 theme.menu_submenu_icon  = theme_path .. "misc/default/submenu.png"
 
 theme.menu_height = 20      -- dpi(15)
-theme.menu_width  = 180     -- dpi(100)
+theme.menu_width  = 130     -- dpi(100)
 --theme.menu_context_height = 20
 
-theme.menu_bg_normal = gmc.color['white']  .. "cc"
-theme.menu_bg_focus  = gmc.color['red300'] .. "cc"
-theme.menu_fg_focus  = gmc.color['black']
+theme.menu_bg_normal = gmc.color['brassy700']  .. "cc"
+theme.menu_bg_focus  = gmc.color['brassy300'] .. "cc"
+theme.menu_fg_focus  = gmc.color['brassy900']
 
-theme.menu_border_color = gmc.color['blue500'] .. "cc"
+theme.menu_border_color = gmc.color['brassy100'] .. "cc"
 theme.menu_border_width = 1
 
 -- You can add as many variables as
