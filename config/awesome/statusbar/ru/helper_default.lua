@@ -85,7 +85,7 @@ function WB.add_widgets_right(s)
         -- logout_popup.widget{},
         word_clock{
             -- font = 'Carter One 12',
-            accent_color = '#f57c00',
+            accent_color = '#a32822',
             main_color = '#d1c381',
             is_human_readable = true,
             military_time = true,

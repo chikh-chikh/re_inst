@@ -42,21 +42,21 @@ theme.border_marked = gmc.color['redA700']      .. "cc"
 theme.taglist_bg_focus    = gmc.color['brassy200']
 -- theme.taglist_bg_focus    = "png:" .. theme_path .. "misc/copycat-holo/taglist_bg_focus.png"
 theme.taglist_fg_focus    = gmc.color['brassy800']
-theme.taglist_fg_occupied = gmc.color['orange700']
+theme.taglist_fg_occupied = gmc.color['rdB1']
 theme.taglist_fg_urgent   = gmc.color['redA700']
 theme.taglist_fg_empty    = gmc.color['brassy200']
 theme.taglist_spacing     = 2
 theme.taglist_font        = "awesomewm-font 12"
 
-theme.tasklist_bg_normal = gmc.color['brassy800']    .. "88"
---theme.tasklist_bg_normal = "png:" .. theme_path .. "misc/copycat-holo/bg_focus.png"
-theme.tasklist_bg_focus  = gmc.color['brassy200']   .. "88"
---theme.tasklist_bg_focus  = "png:" .. theme_path .. "misc/copycat-holo/bg_focus_noline.png"
-theme.tasklist_fg_focus  = gmc.color['brassy900']
+-- theme.tasklist_bg_normal = gmc.color['brassy800']   .. "88"
+-- --theme.tasklist_bg_normal = "png:" .. theme_path .. "misc/copycat-holo/bg_focus.png"
+-- theme.tasklist_bg_focus  = gmc.color['brassy200']   .. "88"
+-- --theme.tasklist_bg_focus  = "png:" .. theme_path .. "misc/copycat-holo/bg_focus_noline.png"
+-- theme.tasklist_fg_focus  = gmc.color['brassy900']
 
-theme.titlebar_bg_normal = gmc.color['brassy800']   .. "cc"
-theme.titlebar_bg_focus  = gmc.color['brassy200']   .. "cc"
-theme.titlebar_fg_focus  = gmc.color['brassy900']   .. "cc"
+-- theme.titlebar_bg_normal = gmc.color['brassy800']   .. "cc"
+-- theme.titlebar_bg_focus  = gmc.color['brassy200']   .. "cc"
+-- theme.titlebar_fg_focus  = gmc.color['brassy900']   .. "cc"
 
 -- Generate taglist squares:
 -- local taglist_square_size = dpi(4)
