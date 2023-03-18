@@ -8,11 +8,11 @@ function run {
 }
 run feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/ &
 
+run nm-applet &
+run kbdd &
+run xscreensaver -nosplash &
 run nm-tray
-# # run nm-applet 
-# run kbdd &
 run setxkbmap -option grp:alt_shift_toggle -layout us,ru
-# run xscreensaver -nosplash &
 
 run /home/ru/.local/bin/greenclip daemon &
 

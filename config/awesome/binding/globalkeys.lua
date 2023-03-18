@@ -1,7 +1,7 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
--- local hotkeys_popup = require("awful.hotkeys_popup").widget
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Включение виджета помощи по горячим клавишам для VIM
 -- и других приложений при открытии клиента с соответствующим именем:
 local hotkeys_popup = require("awful.hotkeys_popup")

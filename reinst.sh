@@ -7,7 +7,7 @@ git submodule update --init --recursive
 function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
-            build-essential libreadline-dev unzip curl wget git python3 \
+            build-essential libreadline-dev unzip curl wget git python3 pipx \
             aptitude deb-get nala exa cmus picom\
             zsh fzf htop gh rofi\
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
@@ -15,6 +15,19 @@ function install_packages {
             ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             locales language-pack-ru console-cyrillic;
+
+        #ranger vifm ueberzug
+        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev  
+        sudo apt install ranger
+        # pip3 install ranger-fm
+        # pipx run --spec ranger-fm ranger
+        sudo apt install vifm
+        pip3 install ./scripts/ueberzug_18.1.9.orig.tar.gz
+        ln -s "$HOME/reinst/config/vifm/scripts/vifmrun" /home/ru/.local/bin
+        ln -s "$HOME/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
+        sudo ln -s "$HOME/.local/bin/ranger" /usr/local/bin/
+        sudo ln -s "$HOME/.local/bin/ranger" /usr/local/bin/
+        sudo ln -s "$HOME/.local/bin/ueberzug" /usr/local/bin/
 
         #deb-get
         deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
@@ -29,11 +42,11 @@ function install_packages {
         mv greenclip ~/.local/bin
         chmod 775 ~/.local/bin/greenclip
 
-        sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
-        sudo ln -sfnv /usr/bin/batcat /usr/bin/bat;
+        # sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
+        # sudo ln -sfnv /usr/bin/batcat /usr/bin/bat;
             
-        sudo dpkg-reconfigure console-setup;
-        sudo dpkg-reconfigure locales;
+        # sudo dpkg-reconfigure console-setup;
+        # sudo dpkg-reconfigure locales;
 
         localectl set-locale LANG=ru_RU.UTF-8;
             
