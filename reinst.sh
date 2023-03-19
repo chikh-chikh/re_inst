@@ -25,9 +25,6 @@ function install_packages {
         pip3 install ./scripts/ueberzug_18.1.9.orig.tar.gz
         ln -s "$HOME/reinst/config/vifm/scripts/vifmrun" /home/ru/.local/bin
         ln -s "$HOME/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
-        sudo ln -s "$HOME/.local/bin/ranger" /usr/local/bin/
-        sudo ln -s "$HOME/.local/bin/ranger" /usr/local/bin/
-        sudo ln -s "$HOME/.local/bin/ueberzug" /usr/local/bin/
 
         #deb-get
         deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
@@ -107,6 +104,8 @@ function setup_symlinks {
     # ln -sfnv "$PWD/bashrc"          ~/.bashrc
     ln -sfnv "$PWD/profile"         ~/.profile
     ln -sfnv "$PWD/xinitrc"         ~/.xinitrc
+    ln -sfnv "$PWD/zshenv"          ~/.zshenv
+    # ln -sfnv "$PWD/"                ~/.
     # ln -sfnv "$PWD/"                ~/.
 
     # ln -sfnv "$PWD/.bashrc" ~/

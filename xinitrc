@@ -6,8 +6,8 @@ setxkbmap -option grp:alt_shift_toggle -layout us,ru &
 
 gxkb &
 
-systemctl --user import-environment DISPLAY &
+# systemctl --user import-environment DISPLAY &
 
-greenclip daemon &
+# greenclip daemon &
 
 exec awesome
