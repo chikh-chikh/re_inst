@@ -1,7 +1,7 @@
 local awful = require("awful")
 awful.util = require("awful.util")
 
-theme_path = awful.util.getdir("config") .. "/themes/ru/"
+theme_path = awful.util.getdir("config") .. "/themes/burberry/"
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- default variables

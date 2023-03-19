@@ -1,6 +1,7 @@
 -- You can use your own layout icons like this:
 
-local layout_icons = "clone"
+-- local layout_icons = "clone"
+local layout_icons = "zenburn"
 local layout_path = theme_path .. "layouts/" .. layout_icons .. "/"
 
 -- default awful related
