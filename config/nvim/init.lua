@@ -1,7 +1,7 @@
 
-require("base/settings")
-require("base/search")
-require("base/tabs")
+require("core/options")
+require("core/keymaps_main")
+require("core/keymaps_plugins")
 
 require("plugins/packer_install") -- To read packer.nvim
 require("plugins/colorscheme")
@@ -12,6 +12,8 @@ require("plugins/bufferline")
 require("plugins/lualine")
 require("plugins/lsp/init")
 require("plugins/cmp")
+require("plugins/nvim-comment")
+
 
 require("plugins/toggleterm")
 require("plugins/gitsigns")
@@ -40,7 +42,4 @@ require("plugins/gh")
 
 
 
-
-require("keys/plugins")
-require("keys/main")
 

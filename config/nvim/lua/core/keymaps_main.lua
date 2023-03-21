@@ -1,4 +1,4 @@
-require('keys/alias')
+require('core/alias')
 
 nm('<C-h>', '<C-w>h')
 nm('<C-j>', '<C-w>j')

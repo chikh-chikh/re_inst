@@ -1,5 +1,5 @@
 --Горячие клавиши для плагинов
-require("keys/alias")
+require("core/alias")
 --vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 vim.g.mapleader = ' '                                               -- Используем Space, как клавишу для альтернативных хотекеев
 vim.g.maplocalleader = ' '                                               -- Используем Space, как клавишу для альтернативных хотекеев
