@@ -12,7 +12,7 @@ require("plugins/bufferline")
 require("plugins/lualine")
 require("plugins/lsp/init")
 require("plugins/cmp")
-require("plugins/nvim-comment")
+
 require("plugins/toggleterm")
 require("plugins/gitsigns")
 require("plugins/presence")
@@ -26,11 +26,11 @@ require("plugins/surround")
 require("plugins/yanky")
 -- require("plugins/")
 require("plugins/autocommands")
-require("plugins/autolist")
+
 require("plugins/dressing")
 -- require("plugins/")
-require("plugins/illuminate")
-require("plugins/impatient")
+
+
 require("plugins/indentline")
 -- require("plugins/")
 require("plugins/undotree")
