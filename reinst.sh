@@ -14,7 +14,7 @@ function install_packages {
             mpv atool fzf ag bat fd-find fasd silversearcher-ag \
             ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
-            locales language-pack-ru console-cyrillic;
+            locales language-pack-ru console-cyrillic
 
         #ranger vifm ueberzug
         sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev  
@@ -30,9 +30,9 @@ function install_packages {
         deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
 
         #Telegramm
-        sudo tar -xpf tsetup* -C /opt
-        sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
-        sudo chmod -R 775 /opt/Telegram
+        # sudo tar -xpf tsetup* -C /opt
+        # sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
+        # sudo chmod -R 775 /opt/Telegram
 
         #Greenclip (rofi clipboard manager)
         wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
@@ -134,7 +134,7 @@ function install_awesome {
     cd luarocks-3.8.0
     ./configure --with-lua-include=/usr/local/include
     make
-    make install
+    sudo make install
     # Awesome
     echo -e "\u001b[7m Installing Awesome...\u001b[0m"
     # cd $HOME/downloads/
@@ -187,6 +187,8 @@ function install_r {
     sudo apt-get update
     sudo apt-get install r-base
     sudo apt-get install r-base-dev
+    sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+    sudo apt install --no-install-recommends r-cran-tidyverse
     # deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
     R --version
 }
