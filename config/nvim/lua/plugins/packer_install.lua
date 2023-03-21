@@ -156,7 +156,7 @@ return require('packer').startup(function()
 
   -- R
   use "jalvesaq/Nvim-R"
-  -- use "REditorSupport/languageserver"
+  use "REditorSupport/languageserver"
   -- use "jozefhajnala/languageserversetup"
 
   -- LaTeX support
