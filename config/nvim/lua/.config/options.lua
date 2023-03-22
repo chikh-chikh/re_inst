@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.snippets = "luasnip"
+
 local options = {
 --  spell = true,
 --  spelllang = { 'ru_ru' },
