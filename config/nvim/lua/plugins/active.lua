@@ -43,12 +43,12 @@ local plugins = {
     -- 'undotree',
     -- 'vimtex'
 }
-
+---[[--
 local errors = {}
 local error_plugins = {}
-
+---[[--
 for _, plugin in pairs(plugins) do
-    local no_errors, err_msg =  pcall(require, 'lua.plugins.' .. plugin)
+    local no_errors, err_msg =  pcall(require, 'plugins.' .. plugin)
     if not no_errors then
         table.insert(errors, err_msg)
         table.insert(error_plugins, plugin)
@@ -60,3 +60,4 @@ for i, err_msg in pairs(errors) do
         title = 'Error loading : ' .. error_plugins[i],
     })
 end
+--]]--

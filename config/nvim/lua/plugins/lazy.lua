@@ -16,7 +16,7 @@ if not status_ok then
     return
 end
 
-local plugins = require('lua.plugins.list')
+local plugins = require('plugins.list')
 ---[[--
 lazy.setup({
     root = vim.fn.stdpath('data') .. '/lazy', -- directory where plugins will be installed
