@@ -8,6 +8,7 @@ local plugins = {
     -- Appearance and UI
     'gruvbox',
     'bufferline',
+    'alpha',
     -- 'colorizer',
     -- 'indentline',
     -- 'notify',
@@ -26,8 +27,8 @@ local plugins = {
 
     -- LSP Stuff
     -- 'mason',
-    -- 'lsp',
-    -- 'cmp',
+    'lsp',
+    'cmp',
     -- 'null-ls',
     -- 'lsp-lines',
     -- 'lsp-signature',
