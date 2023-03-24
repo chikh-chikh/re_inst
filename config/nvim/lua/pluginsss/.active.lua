@@ -27,8 +27,8 @@ local plugins = {
 
     -- LSP Stuff
     -- 'mason',
-    'lsp',
-    'cmp',
+    -- 'lsp',
+    -- 'cmp',
     -- 'null-ls',
     -- 'lsp-lines',
     -- 'lsp-signature',

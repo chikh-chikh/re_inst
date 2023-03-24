@@ -6,4 +6,4 @@ end
 require "plugins.lsp.mason"
 -- require "plugins.lsp.texlab"
 require ("plugins.lsp.handlers").setup()
-require "plugins.lsp.null-ls"
+-- require "plugins.lsp.null-ls"

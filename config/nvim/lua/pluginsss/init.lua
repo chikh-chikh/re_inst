@@ -69,8 +69,8 @@ return {
     -- { 'michaelb/sniprun', build = 'bash ./install.sh', cmd = 'SnipRun' },
     -- { '2kabhishek/co-author.nvim', cmd = 'GitCoAuthors' },
  
-    -- "Shatur/neovim-session-manager",
-    -- "ahmedkhalf/project.nvim",
+     "Shatur/neovim-session-manager",
+    "ahmedkhalf/project.nvim",
 
 
 
