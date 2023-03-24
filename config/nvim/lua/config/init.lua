@@ -5,8 +5,10 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
   callback = function()
     require "config.autocmds"
-    require "config.keymaps_main"
-    require "config.keymaps_plugins"
+    -- require "config.keymaps_main"
+    -- require "config.keymaps_plugins"
+    require "config.keymaps"
+
     -- require "config.diagnostic"
   end,
 })

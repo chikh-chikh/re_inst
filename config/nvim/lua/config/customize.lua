@@ -15,7 +15,7 @@ Customize = {
   -- {{{ Enable or disable plugins.
 
   plugins = {
-    ["Comment.nvim"] = { enabled = false },
+    ["Comment.nvim"] = { enabled = true },
     ["LuaSnip"] = { enabled = true },
     ["alpha-nvim"] = { enabled = true },
     ["bufferline.nvim"] = { enabled = true },
@@ -30,7 +30,7 @@ Customize = {
     ["gitsigns.nvim"] = { enabled = false },
     ["gruvbox.nvim"] = { enabled = true },
     ["harpoon"] = { enabled = false },
-    ["indent-blankline"] = { enabled = true, defaults = false },
+    ["indent-blankline"] = { enabled = false, defaults = false },
     ["leap.nvim"] = { enabled = false },
     ["markdown-preview.nvim"] = { enabled = false },
     ["mason.nvim"] = { enabled = true },
@@ -40,7 +40,7 @@ Customize = {
     ["mini-indentscope"] = { enabled = false },
     ["mini-pairs"] = { enabled = false },
     ["mini-surround"] = { enabled = false },
-    ["neo-tree.nvim"] = { enabled = true },
+    ["neo-tree.nvim"] = { enabled = false },
     ["neoconf.nvim"] = { enabled = false },
     ["neodev.nvim"] = { enabled = false },
     ["neoformat"] = { enabled = false },
@@ -62,7 +62,7 @@ Customize = {
     ["nvim-spectre"] = { enabled = false },
     ["nvim-surround"] = { enabled = false },
     ["nvim-transparent"] = { enabled = false },
-    ["nvim-tree"] = { enabled = false },
+    ["nvim-tree"] = { enabled = true },
     ["nvim-treesitter"] = { enabled = true },
     ["nvim-ts-rainbow"] = { enabled = false },
     ["nvim-unimpaired"] = { enabled = false },

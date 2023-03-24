@@ -21,6 +21,7 @@ return {
       vim.cmd([[Neotree close]])
     end,
     -- keys = function() return {} end,
+    -- keys = { "<c-e>" },
     keys = false,
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
@@ -37,7 +38,7 @@ return {
         follow_current_file = true,
       },
       window = {
-        position = "right",
+        position = "left",
       },
     },
     dependencies = {
@@ -58,12 +59,14 @@ return {
       "NvimTreeToggle",
     },
 
+    -- keys = { "<c-e>" },
+    keys = false,
     opts = {
       filters = {
         custom = { ".git" },
       },
       view = {
-        side = "right",
+        side = "left",
         width = 30,
       },
     },

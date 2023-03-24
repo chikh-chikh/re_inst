@@ -117,6 +117,9 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     enabled = Is_Enabled("lualine.nvim"),
+
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+
     opts = function(_, opts)
       if Use_Defaults("lualine.nvim") then
         -- Use LazyVim default setup.
@@ -313,7 +316,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     enabled = Is_Enabled("which-key.nvim"),
-    keys = false,
+    keys = { "<leader>" },
   },
 
   -- ----------------------------------------------------------------------- }}}

@@ -15,12 +15,37 @@ return {
   },
 
   -- ----------------------------------------------------------------------- }}}
-  -- {{{ nvim-lspconfi
+  -- {{{ nvim-lspconfig
 
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     enabled = Is_Enabled("nvim-lspconfig"),
+
+    dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    {
+      "j-hui/fidget.nvim",
+      opts = {
+        window = {
+          blend = 0,
+        },
+        sources = {
+          ["null-ls"] = {
+            ignore = true,
+          },
+        },
+      },
+    },
+  },
+  event = "VeryLazy",
+  config = function()
+    require "plugins.lsp"
+  end,
+
+
     opts = function(_, opts)
       opts.servers = {
         ansiblels = {},

@@ -2,7 +2,7 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 
-import: 
+import:
   - ~/reinst/config/alacritty/gruvbox_material.yml
   # - ~/reinst/config/alacritty/gruvbox_dark.yml
 
