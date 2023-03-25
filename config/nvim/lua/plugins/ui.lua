@@ -40,39 +40,12 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     enabled = Is_Enabled("gitsigns.nvim"),
-
-    opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "契" },
-        topdelete = { text = "契" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-
-      on_attach = function(buffer)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-        end
-
-        -- stylua: ignore start
-        map('n', ']h', gs.next_hunk, 'Next Hunk')
-        map('n', '[h', gs.prev_hunk, 'Prev Hunk')
-        map({ 'n', 'v' }, '<leader>ghs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
-        map({ 'n', 'v' }, '<leader>ghr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
-        map('n', '<leader>ghS', gs.stage_buffer, 'Stage Buffer')
-        map('n', '<leader>ghu', gs.undo_stage_hunk, 'Undo Stage Hunk')
-        map('n', '<leader>ghR', gs.reset_buffer, 'Reset Buffer')
-        map('n', '<leader>ghp', gs.preview_hunk, 'Preview Hunk')
-        map('n', '<leader>ghb', function() gs.blame_line({ full = true }) end, 'Blame Line')
-        map('n', '<leader>ghd', gs.diffthis, 'Diff This')
-        map('n', '<leader>ghD', function() gs.diffthis('~') end, 'Diff This ~')
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'GitSigns Select Hunk')
-      end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
+    config = function()
+      require"../setup/gitsigns"
+    end
   },
 
   {
@@ -123,14 +96,16 @@ return {
         -- Use LazyVim default setup.
         opts = {}
       else
-        -- Use my customizations.
-        opts.options              = require("setup.lualine").options
-        opts.sections             = require("setup.lualine").sections
-        opts.inactive_sections    = require("setup.lualine").inactive_sections
-        opts.tabline              = require("setup.lualine").tabline
-        opts.winbar               = require("setup.lualine").winbar
-        opts.inactive_winbar      = require("setup.lualine").inactive_winbar
-        opts.extensions           = require("setup.lualine").extensions
+            ---- Use my customizations.
+        opts = require "setup.lln"
+            ----or
+        -- opts.options              = require("setup.lualine").options
+        -- opts.sections             = require("setup.lualine").sections
+        -- opts.inactive_sections    = require("setup.lualine").inactive_sections
+        -- opts.tabline              = require("setup.lualine").tabline
+        -- opts.winbar               = require("setup.lualine").winbar
+        -- opts.inactive_winbar      = require("setup.lualine").inactive_winbar
+        -- opts.extensions           = require("setup.lualine").extensions
       end
     end,
   },

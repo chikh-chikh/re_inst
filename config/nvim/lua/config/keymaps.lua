@@ -20,6 +20,17 @@ if Is_Enabled("vim-easy-align") then
     nmap <leader>2 gaip=<space>
   ]])
 end
+
+-- BufferLine
+Keymap("n", ">", "<cmd>BufferLineCycleNext<CR>" )
+Keymap("n", "<", "<cmd>BufferLineCyclePrev<CR>" )
+-- BufferLine
+Keymap("n", '<leader>d', '<cmd>bd<CR>')                             -- Закрыть буффер
+Keymap("n", '<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер
+Keymap("n", '<leader>h', '<cmd>BufferLineCyclePrev<CR>')            -- Перейти в предыдущий буффер
+Keymap("n", '`', '<cmd>BufferLineMoveNext<CR>')                     -- Переместить буффер
+Keymap("n", '~', '<cmd>BufferLineMovePrev<CR>')
+
 --]]
 -- ------------------------------------------------------------------------- }}}
 -- {{{ Easy align
@@ -63,10 +74,6 @@ Keymap("n", "<leader>i", "<cmd>set list!<cr>")
 -- Stay in indent mode.
 Keymap("v", "<", "<gv")
 Keymap("v", ">", ">gv")
-
--- BufferLine
-Keymap("n", ">", "<cmd>BufferLineCycleNext<CR>" )
-Keymap("n", "<", "<cmd>BufferLineCyclePrev<CR>" )
 
 -- Visual yank
 Keymap("v", "<leader>cc", '"+y')
@@ -245,7 +252,7 @@ if Is_Enabled("nvim-dap-ui") then
 end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ f - Find & tmux
+-- {{{ f - Find &zo tmux
 
 if Is_Enabled("telescope.nvim") then
   Keymap("n", "<leader>fC", "<cmd>Telescope commands<cr>")
@@ -344,25 +351,25 @@ if Is_Enabled("vimtex") then
 end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ n - File explorers
+-- {{{ e - File explorers
 
 if Is_Enabled("neo-tree.nvim") or Is_Enabled("nvim-tree") then
   -- nvim_tree takes precedence when both are true.
   if Is_Enabled("nvim-tree") then
     -- Keymap("n", "<c-e>", "<cmd>NvimTreeToggle<cr>")
     Keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
-    Keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>")
-    Keymap("n", "<leader>nr", "<cmd>NvimTreeRefresh<cr>")
+    Keymap("n", "<leader>ef", "<cmd>NvimTreeFindFile<cr>")
+    Keymap("n", "<leader>er", "<cmd>NvimTreeRefresh<cr>")
   else
     -- Keymap("n", "<c-e>", "<cmd>Neotree toggle<cr>")
     Keymap("n", "<leader>e", "<cmd>Neotree toggle<cr>")
-    Keymap("n", "<leader>nf", "<cmd>Neotree focus<cr>")
-    Keymap("n", "<leader>nr", "<cmd>Neotree show<cr>")
+    Keymap("n", "<leader>ef", "<cmd>Neotree focus<cr>")
+    Keymap("n", "<leader>er", "<cmd>Neotree show<cr>")
   end
 end
 
 if Is_Enabled("noice.nvim") then
-  Keymap("n", "<leader>nh", "<cmd>NoiceHistory<cr>")
+  Keymap("n", "<leader>eh", "<cmd>NoiceHistory<cr>")
 end
 
 -- ------------------------------------------------------------------------- }}}
@@ -395,11 +402,11 @@ Keymap("n", "<leader>pu", "<cmd>Lazy update<cr>")
 -- ------------------------------------------------------------------------- }}}
 -- {{{ r - Runners
 
-if Is_Enabled("vim-tmux-runner") then
-  Keymap("n", "<leader>ra", "<cmd>VtrReattachRunner<cr>")
-  Keymap("n", "<leader>rr", "<cmd>VtrResizeRunner<cr>")
-  Keymap("n", "<leader>rR", "<cmd>VtrReorientRunner<cr>")
-end
+-- if Is_Enabled("vim-tmux-runner") then
+--   Keymap("n", "<leader>ra", "<cmd>VtrReattachRunner<cr>")
+--   Keymap("n", "<leader>rr", "<cmd>VtrResizeRunner<cr>")
+--   Keymap("n", "<leader>rR", "<cmd>VtrReorientRunner<cr>")
+-- end
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ s - Split & Sorts
@@ -438,7 +445,8 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>Tl", [[<cmd>lua Customize.toggleterm.lazygit()<cr>]])
   Keymap("n", "<leader>Tm", [[<cmd>lua Customize.toggleterm.neomutt()<cr>]])
   -- Keymap("n", "<leader>r", [[<cmd>lua Customize.toggleterm.ranger()<cr>]])
-  Keymap("n", "<c-r>", [[<cmd>lua Customize.toggleterm.ranger()<cr>]])
+  ----!!
+  Keymap("n", "<leader>r", "<cmd>RnvimrToggle<CR>")
 end
 
 -- ------------------------------------------------------------------------- }}}
@@ -468,3 +476,9 @@ Keymap(
 )
 
 -- ------------------------------------------------------------------------- }}}
+-- {{{ u - Undotree
+
+Keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
+
+-- ------------------------------------------------------------------------- }}}
+

@@ -2,6 +2,18 @@ Is_Enabled = require("config.functions").is_enabled
 Constants = require("config.constants")
 
 return {
+  -- {{{ Интеграция с ranger
+
+
+
+  { "kevinhwang91/rnvimr",
+    enabled = Is_Enabled("rnvimr"),
+    -- keys = { "<c-r>" },
+    lazy = false,
+    -- keys = { "<leader>r" },
+  },
+
+  -------------------------------------------------------------------------- }}}
   -- {{{ bufferline
 
   {
@@ -13,7 +25,6 @@ return {
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
-      -- options = require ("lua/setup/bufferline")
       options = require "setup.bufferline",
       -- options = {
       --   diagnostics = "nvim_lsp",
@@ -60,7 +71,8 @@ return {
     end,
     -- keys = function() return {} end,
     -- keys = { "<c-e>" },
-    keys = false,
+    keys = { "<leader>e" },
+    -- keys = false,
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
       if vim.fn.argc() == 1 then
@@ -98,7 +110,8 @@ return {
     },
 
     -- keys = { "<c-e>" },
-    keys = false,
+    -- keys = false,
+    keys = { "<leader>e" },
     opts = {
       filters = {
         custom = { ".git" },

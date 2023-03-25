@@ -1,6 +1,16 @@
 Is_Enabled = require("config.functions").is_enabled
 
 return {
+	-- {{{ undotree
+
+  {
+    'mbbill/undotree',
+		enabled = Is_Enabled("undotree"),
+    cmd = 'UndotreeToggle',
+    lazy = true
+  },
+
+	-- ----------------------------------------------------------------------- }}}
 	-- {{{ Comment.nvim
 
 	{
