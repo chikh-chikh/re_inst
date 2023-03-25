@@ -2,6 +2,44 @@ Is_Enabled = require("config.functions").is_enabled
 Constants = require("config.constants")
 
 return {
+  -- {{{ bufferline
+
+  {
+    "akinsho/bufferline.nvim",
+    enabled = Is_Enabled("bufferline.nvim"),
+    event = "VeryLazy",
+    keys = {
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+    },
+    opts = {
+      -- options = require ("lua/setup/bufferline")
+      options = require "setup.bufferline",
+      -- options = {
+      --   diagnostics = "nvim_lsp",
+      --   always_show_bufferline = false,
+      --   diagnostics_indicator = function(_, _, diag)
+      --     local icons = require("lazyvim.config").icons.diagnostics
+      --     local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+      --       .. (diag.warning and icons.Warn .. diag.warning or "")
+      --     return vim.trim(ret)
+      --   end,
+      --   offsets = {
+      --     {
+      --       -- filetype = "neo-tree",
+      --       filetype = "NvimTree",
+      --       -- text = "Neo-tree",
+      --       text = "",
+      --       padding = 1,
+      --       highlight = "Directory",
+      --       text_align = "left",
+      --     },
+      --   },
+      -- },
+    },
+  },
+
+  -- ----------------------------------------------------------------------- }}}
   -- {{{ gem-browse
 
   {
