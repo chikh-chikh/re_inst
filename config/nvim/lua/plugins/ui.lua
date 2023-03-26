@@ -10,6 +10,7 @@ return {
     "goolord/alpha-nvim",
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("alpha-nvim"),
+    lazy = false,
   },
 
   -- ----------------------------------------------------------------------- }}}
@@ -44,7 +45,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require"../setup/gitsigns"
+      require"plugins.setup.gitsigns"
     end
   },
 
@@ -97,7 +98,7 @@ return {
         opts = {}
       else
             ---- Use my customizations.
-        opts = require "setup.lln"
+        opts = require "plugins.setup.lln"
             ----or
         -- opts.options              = require("setup.lualine").options
         -- opts.sections             = require("setup.lualine").sections
@@ -253,9 +254,11 @@ return {
 
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     enabled = Is_Enabled("which-key.nvim"),
+    lazy = false,
     keys = { "<leader>" },
+
   },
 
   -- ----------------------------------------------------------------------- }}}

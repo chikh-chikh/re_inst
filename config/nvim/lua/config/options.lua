@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = "<Bslash>"
+
 vim.g.snippets = "luasnip"
 
 local options = {

@@ -1,5 +1,4 @@
 -- Personal normal keybindings
-Keymap("n", "<leader><CR>", ":noh<CR>")     -- clears highlights
 
 Keymap("n", '<C-h>', '<C-w>h')
 Keymap("n", '<C-j>', '<C-w>j')

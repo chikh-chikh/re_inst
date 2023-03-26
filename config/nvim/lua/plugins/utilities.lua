@@ -73,7 +73,7 @@ return {
     version = "*",
     opts = {
       size = 13,
-      open_mapping = [[<c-\>]],
+      -- open_mapping = [[<c-\>]],
       shade_filetypes = {},
       shade_terminals = true,
       shading_factor = "1",
@@ -83,6 +83,7 @@ return {
     },
     keys = {
       {
+        "<Bslash><Bslash>",
         "<leader>Tf",
         "<leader>Tl",
         "<leader>Tr",

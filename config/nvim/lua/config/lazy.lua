@@ -14,7 +14,7 @@ vim.opt.runtimepath:prepend(lazypath)
 -- vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "<Bslash>"
 
 -- require('lazy').setup('plugins')
 require("lazy").setup({

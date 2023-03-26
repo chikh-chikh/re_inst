@@ -25,7 +25,7 @@ return {
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
-      options = require "setup.bufferline",
+      options = require "plugins.setup.bufferline",
       -- options = {
       --   diagnostics = "nvim_lsp",
       --   always_show_bufferline = false,
@@ -111,7 +111,7 @@ return {
 
     -- keys = { "<c-e>" },
     -- keys = false,
-    keys = { "<leader>e" },
+    -- keys = { "<leader>e" },
     opts = {
       filters = {
         custom = { ".git" },
