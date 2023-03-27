@@ -66,7 +66,7 @@ return {
   -- {{{ nvim-colorizer
 
   {
-    "NvChad/nvim-colorizer.lua",
+    "norcalli/nvim-colorizer.lua",
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("nvim-colorizer.lua"),
     event = "VeryLazy",
@@ -139,7 +139,8 @@ return {
     end,
 
     dependencies = {
-      "mrjones2014/nvim-ts-rainbow",
+      -- "mrjones2014/nvim-ts-rainbow",
+      "p00f/nvim-ts-rainbow",
     },
   },
 
@@ -147,7 +148,8 @@ return {
   -- {{{ nvim-ts-rainbow
 
   {
-    "mrjones2014/nvim-ts-rainbow",
+    -- "mrjones2014/nvim-ts-rainbow",
+    "p00f/nvim-ts-rainbow",
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("nvim-ts-rainbow"),
   },

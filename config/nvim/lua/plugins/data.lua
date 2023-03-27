@@ -14,7 +14,7 @@ return {
   },
   keys = { { "<leader><leader>db", ":tab DBUI<cr>" } },
   init = function()
-    require "plugins.setup.database"
+    require "plugins.configs.database"
   end,
   },
 
@@ -25,7 +25,7 @@ return {
   enabled = Is_Enabled("nvim-r"),
   ft = { "r" },
   -- keys = { { "\rf", "" } },
-  keys = { "<Bslash>rf" },
+  -- keys = { "<Bslash>rf" },
   },
 
   -- ----------------------------------------------------------------------- }}}

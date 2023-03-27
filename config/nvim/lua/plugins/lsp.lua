@@ -42,7 +42,7 @@ return {
   },
   event = "VeryLazy",
   config = function()
-    require "plugins.lsp"
+    require "plugins.configs.lsp"
   end,
 
 

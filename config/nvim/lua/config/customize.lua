@@ -65,7 +65,7 @@ Customize = {
     ["nvim-transparent"] = { enabled = false },
     ["nvim-tree"] = { enabled = true },
     ["nvim-treesitter"] = { enabled = true },
-    ["nvim-ts-rainbow"] = { enabled = false },
+    ["nvim-ts-rainbow"] = { enabled = true },
     ["nvim-unimpaired"] = { enabled = false },
     ["nvim-web-devicons"] = { enabled = true },
     ["one-small-step-for-vimkind"] = { enabled = false },

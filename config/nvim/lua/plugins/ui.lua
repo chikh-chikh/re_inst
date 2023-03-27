@@ -11,6 +11,9 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("alpha-nvim"),
     lazy = false,
+    config = function()
+     require "plugins.configs.alpha"
+    end,
   },
 
   -- ----------------------------------------------------------------------- }}}
@@ -45,7 +48,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require"plugins.setup.gitsigns"
+      require"plugins.configs.gitsigns"
     end
   },
 
@@ -98,7 +101,7 @@ return {
         opts = {}
       else
             ---- Use my customizations.
-        opts = require "plugins.setup.lln"
+        opts = require "plugins.configs.lln"
             ----or
         -- opts.options              = require("setup.lualine").options
         -- opts.sections             = require("setup.lualine").sections
@@ -258,6 +261,9 @@ return {
     enabled = Is_Enabled("which-key.nvim"),
     lazy = false,
     keys = { "<leader>" },
+    config = function()
+      require "plugins.configs.which-key"
+    end,
 
   },
 

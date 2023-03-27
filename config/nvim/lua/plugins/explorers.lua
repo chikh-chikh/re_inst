@@ -25,7 +25,7 @@ return {
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
-      options = require "plugins.setup.bufferline",
+      options = require "plugins.configs.bufferline",
       -- options = {
       --   diagnostics = "nvim_lsp",
       --   always_show_bufferline = false,
@@ -100,7 +100,8 @@ return {
   -- {{{ nvim-tree
 
   {
-    "kyazdani42/nvim-tree.lua",
+    -- "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     enabled = Is_Enabled("nvim-tree"),
 
     cmd = {
