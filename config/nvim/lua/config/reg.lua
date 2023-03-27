@@ -1,131 +1,3 @@
--- {{{ Global definitions
-
-Customize = require("config.customize")
-Functions = require("config.functions")
-Keymap = Functions.keymap
-Is_Enabled = Functions.is_enabled
-
-
-require("config.keymaps_main")
--- ------------------------------------------------------------------------- }}}
--- {{{ Bdelete
----[[
-if Is_Enabled("vim-easy-align") then
-  vim.cmd([[
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-    nmap <bar>     gaip*<bar>
-    nmap <leader>0 gaip*,
-    nmap <leader>1 gaip=,
-    nmap <leader>2 gaip=<space>
-  ]])
-end
-
--- BufferLine
-Keymap("n", ">", "<cmd>BufferLineCycleNext<CR>" )
-Keymap("n", "<", "<cmd>BufferLineCyclePrev<CR>" )
--- BufferLine
-Keymap("n", '<leader>d', '<cmd>bd<CR>')                             -- Закрыть буффер
-Keymap("n", '<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер
-Keymap("n", '<leader>h', '<cmd>BufferLineCyclePrev<CR>')            -- Перейти в предыдущий буффер
-Keymap("n", '`', '<cmd>BufferLineMoveNext<CR>')                     -- Переместить буффер
-Keymap("n", '~', '<cmd>BufferLineMovePrev<CR>')
-
---]]
--- ------------------------------------------------------------------------- }}}
--- {{{ Easy align
----[[
-if Is_Enabled("vim-easy-align") then
-  vim.cmd([[
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-    nmap <bar>     gaip*<bar>
-    nmap <leader>0 gaip*,
-    nmap <leader>1 gaip=,
-    nmap <leader>2 gaip=<space>
-  ]])
-end
---]]
--- ------------------------------------------------------------------------- }}}
--- {{{ General mappings.
-
--- Delete the current line.
-Keymap("n", "-", "dd")
-
--- Select (charwise) the contents of the current line, excluding indentation.
-Keymap("n", "vv", "^vg_")
-
--- Select entire buffer
-Keymap("n", "vaa", "ggvGg_")
-Keymap("n", "Vaa", "ggVG")
-Keymap("n", "<leader>V", "V`]")
-
--- Save all files.
-Keymap("n", "<F2>", "<cmd>wall<cr>")
-
--- Delete current buffer.
-if Is_Enabled("vim-bbye") then
-  Keymap("n", "Q", "<cmd>Bdelete!<cr>")
-end
-
--- Toggle [in]visible characters.
-Keymap("n", "<leader>i", "<cmd>set list!<cr>")
-
--- Stay in indent mode.
-Keymap("v", "<", "<gv")
-Keymap("v", ">", ">gv")
-
--- Visual yank
-Keymap("v", "<leader>cc", '"+y')
-
--- Obfuscate
-Keymap("n", "<f3>", "mmggg?G`m")
-
--- Alternative ESC key to avoid <Ctrl-[>.  Useful when a RCP is used to connect
--- to a remote host.
-Keymap("i", ";;", "<esc>")
-Keymap("c", ";;", "<esc>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Folding commands.
-
--- Author: Karl Yngve Lervåg
---    See: https://github.com/lervag/dotnvim
-
--- Close all fold except the current one.
-Keymap("n", "zv", "zMzvzz")
-
--- Close current fold when open. Always open next fold.
-Keymap("n", "zj", "zcjzOzz")
-
--- Close current fold when open. Always open previous fold.
-Keymap("n", "zk", "zckzOzz")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Keep the cursor in place while joining lines.
-
-Keymap("n", "J", "mzJ`z")
-Keymap("n", "<leader>J", "myvipJ`ygq<cr>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Shell commands.
-
--- Execute the current line of test as a shell command.
-Keymap("n", "<localleader>E", [[0mMvg_"ky :exec "r!" getreg("k")<cr>]])
-Keymap("v", "<localleader>E", [["ky :exec "r!" getreg("k")<cr>]])
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Quit all
-
-Keymap("n", "<c-q>", "<cmd>qall!<cr>")
-Keymap("n", "<leader>qq", "<cmd>qall!<cr>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ leader + space
-
-Keymap("n", "<leader><space>", "<cmd>nohlsearch<cr>")
-
--- ------------------------------------------------------------------------- }}}
 -- {{{ H - Help
 
 Keymap("n", "<leader>HH", "<cmd>silent vert bo help<cr>")
@@ -336,7 +208,7 @@ if Is_Enabled("vimtex") then
   Keymap("n", "<leader>lX", "<Plug>(vimtex-reload-state)")
   Keymap("n", "<leader>la", "<Plug>(vimtex-context-menu)")
   Keymap("n", "<leader>lc", "<Plug>(vimtex-clean-full)")
-  Keymap("n", "<leader>le", "<Plug>(vimtex-error)")
+  Keymap("n", "<leader>le", "<Plug>(vimtex-error)", { desc = 'build' })
   Keymap("n", "<leader>lg", "<Plug>(vimtex-status)")
   Keymap("n", "<leader>li", "<Plug>(vimtex-info)")
   Keymap("n", "<leader>lk", "<Plug>(vimtex-stop)")
@@ -345,9 +217,10 @@ if Is_Enabled("vimtex") then
   Keymap("n", "<leader>lo", "<Plug>(vimtex-compile-output)")
   Keymap("n", "<leader>lq", "<Plug>(vimtex-log)")
   Keymap("n", "<leader>ls", "<Plug>(vimtex-toggle-main)")
-  Keymap("n", "<leader>lt", "<Plug>(vimtex-toc_open)")
-  Keymap("n", "<leader>lv", "<Plug>(vimtex-view)")
+  Keymap("n", "<leader>lt", "<Plug>(vimtex-toc_open)", { desc = 'index' })
+  Keymap("n", "<leader>lv", "<Plug>(vimtex-view)", { desc = 'view' })
   Keymap("n", "<leader>lx", "<Plug>(vimtex-reload)")
+  Keymap("n", "<leader>lw", "<Plug>(vimtex-count-words)", { desc = 'count' })
 end
 
 -- ------------------------------------------------------------------------- }}}
@@ -356,12 +229,12 @@ end
 if Is_Enabled("neo-tree.nvim") or Is_Enabled("nvim-tree") then
   -- nvim_tree takes precedence when both are true.
   if Is_Enabled("nvim-tree") then
-    -- Keymap("n", "<c-e>", "<cmd>NvimTreeToggle<cr>")
+    -- Keymap("n", "<A-e>", "<cmd>NvimTreeToggle<cr>")
     Keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
     Keymap("n", "<leader>ef", "<cmd>NvimTreeFindFile<cr>")
     Keymap("n", "<leader>er", "<cmd>NvimTreeRefresh<cr>")
   else
-    -- Keymap("n", "<c-e>", "<cmd>Neotree toggle<cr>")
+    -- Keymap("n", "<A-e>", "<cmd>Neotree toggle<cr>")
     Keymap("n", "<leader>e", "<cmd>Neotree toggle<cr>")
     Keymap("n", "<leader>ef", "<cmd>Neotree focus<cr>")
     Keymap("n", "<leader>er", "<cmd>Neotree show<cr>")
@@ -484,3 +357,85 @@ Keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
 
 -- ------------------------------------------------------------------------- }}}
 
+local register = {
+  ['<leader>'] = {
+    H = {
+      name = '+Help',
+    },
+    L = {
+      name = '+LSP',
+    },
+    V = {
+      name = '+Linewise reselection of what you just pasted',
+    },
+    S = {
+      name = '+Gitsigns',
+    },
+    a = {
+      name = '+Alpha',
+    },
+    b = {
+      name = '+Buffer adjustments',
+    },
+    c = {
+      name = '+Copy & Paste & tmux',
+    },
+    D = {
+      name = '+Debug Adapter Protocol',
+    },
+    d = {
+      name = '+DAP)',
+    },
+    f = {
+      name = '+Find & tmux',
+    },
+    g = {
+      name = '+git',
+    },
+    k = {
+      name = '+kill runner',
+    },
+    l = {
+      name = '+VimTex',
+    },
+    e = {
+      name = '+File explorers',
+    },
+    o = {
+      name = '+Options',
+    },
+    p = {
+      name = '+Package manager',
+    },
+    r = {
+      name = '+Runners',
+    },
+    s = {
+      name = '+Split & Sort',
+    },
+    t = {
+      name = '+Terminals',
+    },
+    w = {
+      name = '+Wiki & WhiteSpace',
+    },
+    u = {
+      name = '+Undotree',
+    },
+    A = {
+    name = "ACTIONS",
+    },
+    M = {
+      name = '+MANAGE SESSION'
+    },
+    P = {
+      name = '+PANDOC'
+    },
+    R = {
+      name = '+SURROUND'
+    },
+    T = {
+      name = '+TEMPLATES'
+    },
+  }
+}

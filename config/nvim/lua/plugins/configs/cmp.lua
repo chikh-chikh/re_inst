@@ -76,6 +76,9 @@ cmp.setup {
     -- completeopt = "menuone,noinsert,noselect",
     keyword_length = 1,
   },
+
+    sources = Constants.completion.sources,
+  --[[--
   sources = cmp.config.sources {
     { name = 'nvim_lsp', group_index = 2  }, -- LSP
     -- { name = 'cmp_tabnine' }, -- AI
@@ -103,6 +106,8 @@ cmp.setup {
     { name = 'path' }, -- Пути
     --{ name = "emoji" },  -- Эмодзи 😳
   },
+--]]--
+
   sorting = {
     priority_weight = 2,
     comparators = {
@@ -125,6 +130,11 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
+      vim_item.kind =
+       string.format("%s", Constants.icons.lsp_kinds[vim_item.kind])
+      vim_item.menu = (Constants.completion.source_mapping)[entry.source.name]
+
+      --[[--
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       -- vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
@@ -142,6 +152,7 @@ cmp.setup {
             buffer = "[Buffer]",
             path = "[Path]",
           })[entry.source.name]
+      --]]--
       --[[ or
       if entry.source.name == 'cmp_tabnine' then
         if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
@@ -229,12 +240,14 @@ cmp.setup {
     completion = cmp.config.window.bordered({
       side_padding = 0,
       col_offset = -1,
-      border = 'rounded',
+      -- border = 'rounded',
+      border = Constants.display_border.border,
       -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
     }),
     documentation = {
       -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      border = 'rounded',
+      -- border = 'rounded',
+      border = Constants.display_border.border,
       -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
     }
   },

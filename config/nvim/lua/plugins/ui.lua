@@ -259,8 +259,9 @@ return {
     "folke/which-key.nvim",
     -- event = "VeryLazy",
     enabled = Is_Enabled("which-key.nvim"),
-    lazy = false,
+    lazy = true,
     keys = { "<leader>" },
+
     config = function()
       require "plugins.configs.which-key"
     end,

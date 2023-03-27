@@ -24,7 +24,7 @@ return {
      'ap/vim-css-color',
      'norcalli/nvim-colorizer.lua',
     -- 'stevearc/oil.nvim',
-    
+
     -- Utilities
   --Appearance
     "lukas-reineke/indent-blankline.nvim",
@@ -34,7 +34,7 @@ return {
     'lewis6991/gitsigns.nvim',
     'sindrets/diffview.nvim',
     'TimUntersberger/neogit',
-    
+
   -- General
     -- Коментирование
     'terrortylor/nvim-comment',
@@ -51,7 +51,7 @@ return {
      'lewis6991/gitsigns.nvim',
     -- Discord
      'andweeb/presence.nvim',
-  
+
     -- Интеграция с ranger
      'kevinhwang91/rnvimr',
     -- Автодополнение скобок и кавычек
@@ -68,7 +68,7 @@ return {
     { 'folke/which-key.nvim', lazy = true },
     -- { 'michaelb/sniprun', build = 'bash ./install.sh', cmd = 'SnipRun' },
     -- { '2kabhishek/co-author.nvim', cmd = 'GitCoAuthors' },
- 
+
      "Shatur/neovim-session-manager",
     "ahmedkhalf/project.nvim",
 
@@ -79,26 +79,26 @@ return {
     "jalvesaq/Nvim-R",
     -- "REditorSupport/languageserver"
     -- "jozefhajnala/languageserversetup"
-  
+
   -- LaTeX support
-   'lervag/vimtex', 
+   'lervag/vimtex',
    'kdheepak/cmp-latex-symbols',
    'jbyuki/nabla.nvim', -- show symbols in editor
 
     -- Markdown
-    { 
+    {
       "iamcco/markdown-preview.nvim",
       build = function()
-        vim.fn["mkdp#util#install"]() 
-      end, 
+        vim.fn["mkdp#util#install"]()
+      end,
     },
 
-    -- { 
+    -- {
     --   "iamcco/markdown-preview.nvim",
-    --   build = "cd app && npm install", 
-    --   setup = function() 
+    --   build = "cd app && npm install",
+    --   setup = function()
     --     vim.g.mkdp_filetypes = { "markdown" }
-    --   end, 
+    --   end,
     --   ft = { "markdown" },
     -- },
 
@@ -148,18 +148,17 @@ return {
              'hrsh7th/cmp-nvim-lua',
              -- 'hrsh7th/cmp-emoji',
              -- 'hrsh7th/cmp-nvim-lsp-signature-help',
-       
+
              'jalvesaq/cmp-nvim-r',
              -- 'f3fora/cmp-spell', -- spelling completions
              -- 'hrsh7th/cmp-omni', -- helps Vimtex completions
              -- 'aspeddro/cmp-pandoc.nvim',
              -- --??'garbas/vim-snipmate',
-      
+
              'L3MON4D3/LuaSnip', -- движок для снипетов
              'saadparwaiz1/cmp_luasnip', -- автодополнения для сниппетов
              'rafamadriz/friendly-snippets',   -- набор готовых сниппетов для всех языков
 
-             -- { 'tzachar/cmp-tabnine', build = './install.sh' } ,   -- ИИ автодополнения
 
              'onsails/lspkind-nvim', -- иконки в выпадающем списке автодополнений
 
@@ -185,7 +184,7 @@ return {
             -- 'nvim-telescope/telescope-hop.nvim',
             -- 'renerocksai/telekasten.nvim',
             -- 'renerocksai/calendar-vim',
-      
+
             -- { "nvim-telescope/telescope-bibtex.nvim",
             --  config = function()
             --    require "telescope".load_extension("bibtex")
