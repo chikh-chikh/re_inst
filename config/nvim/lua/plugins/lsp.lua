@@ -45,7 +45,7 @@ return {
     require "plugins.configs.lsp"
   end,
 
-
+--[[
     opts = function(_, opts)
       opts.servers = {
         ansiblels = {},
@@ -128,6 +128,7 @@ return {
         },
       }
     end,
+--]]
   },
 
   -- ----------------------------------------------------------------------- }}}

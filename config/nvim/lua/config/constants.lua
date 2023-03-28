@@ -37,6 +37,7 @@ Constants = {
       "texlab",
       -- "tsserver",
       "yamlls",
+      "r_language_server",
     },
     mason = {
       "bash-language-server",
@@ -60,6 +61,7 @@ Constants = {
       "texlab",
       -- "typescript-language-server",
       "yaml-language-server",
+      "r-languageserver",
     },
     treesitter = {
       "bash",
@@ -72,8 +74,8 @@ Constants = {
       -- "javascript",
       "json",
       "lua",
-      -- "markdown",
-      -- "markdown_inline",
+      "markdown",
+      "markdown_inline",
       "python",
       -- "query",
       -- "regex",
@@ -85,6 +87,7 @@ Constants = {
       -- "typescript",
       "vim",
       "yaml",
+      "r"
     },
   },
 

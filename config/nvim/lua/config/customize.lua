@@ -29,10 +29,10 @@ Customize = {
     ["gem-browse"] = { enabled = false },
     ["gitsigns.nvim"] = { enabled = true },
     ["gruvbox.nvim"] = { enabled = true },
-    ["harpoon"] = { enabled = false },
-    ["indent-blankline"] = { enabled = false, defaults = false },
-    ["leap.nvim"] = { enabled = false },
-    ["markdown-preview.nvim"] = { enabled = false },
+    ["harpoon"] = { enabled = true },
+    ["indent-blankline"] = { enabled = true, defaults = false },
+    ["leap.nvim"] = { enabled = true },
+    ["markdown-preview.nvim"] = { enabled = true },
     ["mason.nvim"] = { enabled = true },
     ["mason-nvim-dap.nvim"] = { enabled = false },
     ["mini-ai"] = { enabled = false },
@@ -61,7 +61,7 @@ Customize = {
     ["nvim-notify"] = { enabled = false },
     ["nvim-r"] = { enabled = true },
     ["nvim-spectre"] = { enabled = false },
-    ["nvim-surround"] = { enabled = false },
+    ["nvim-surround"] = { enabled = true },
     ["nvim-transparent"] = { enabled = false },
     ["nvim-tree"] = { enabled = true },
     ["nvim-treesitter"] = { enabled = true },
@@ -79,17 +79,17 @@ Customize = {
     ["telescope.nvim"] = { enabled = true },
     ["telescope-dap.nvim"] = { enabled = false },
     ["telescope-fzf-native.nvim"] = { enabled = true },
-    ["todo-comments.nvim"] = { enabled = false },
+    ["todo-comments.nvim"] = { enabled = true },
     ["toggleterm.nvim"] = { enabled = true },
     ["tokyonight.nvim"] = { enabled = false },
-    ["trouble.nvim"] = { enabled = false },
+    ["trouble.nvim"] = { enabled = true },
     ["undotree"] = { enabled = true },
     ["vim-bbye"] = { enabled = false },
     ["vim-bundle-abbreviate"] = { enabled = false },
     ["vim-bundle-fzf"] = { enabled = false },
     ["vim-bundle-plantuml"] = { enabled = false },
     ["vim-bundle-tmux-runner"] = { enabled = false },
-    ["vim-bundle-vimtex"] = { enabled = false },
+    ["vim-bundle-vimtex"] = { enabled = true },
     ["vim-bundle-wiki.vim"] = { enabled = false },
     ["vim-bundler"] = { enabled = false },
     ["vim-commentary"] = { enabled = true },
@@ -97,8 +97,8 @@ Customize = {
     ["vim-easy-align"] = { enabled = false },
     ["vim-endwise"] = { enabled = false },
     ["vim-eunuch"] = { enabled = false },
-    ["vim-fugitive"] = { enabled = false },
-    ["vim-illuminate"] = { enabled = false },
+    ["vim-fugitive"] = { enabled = true },
+    ["vim-illuminate"] = { enabled = true },
     ["vim-most-minimal-folds"] = { enabled = true },
     ["vim-projectionist"] = { enabled = false },
     ["vim-rails"] = { enabled = false },
@@ -106,16 +106,16 @@ Customize = {
     ["vim-rbenv"] = { enabled = false },
     ["vim-repeat"] = { enabled = false },
     ["vim-startuptime"] = { enabled = true },
-    ["vim-surround"] = { enabled = false },
+    ["vim-surround"] = { enabled = true },
     ["vim-tmux-navigator"] = { enabled = false },
     ["vim-tmux-runner"] = { enabled = false },
     ["vim-unimpaired"] = { enabled = false },
     ["vim-visual-increment"] = { enabled = false },
-    ["vimtex"] = { enabled = false },
+    ["vimtex"] = { enabled = true },
     ["virtcolumn.nvim"] = { enabled = false },
     ["which-key.nvim"] = { enabled = true },
-    ["wiki.vim"] = { enabled = false },
-    ["wiki-ft.vim"] = { enabled = false },
+    ["wiki.vim"] = { enabled = true },
+    ["wiki-ft.vim"] = { enabled = true },
     ["zen-mode.nvim"] = { enabled = false },
   },
 
@@ -163,6 +163,19 @@ Customize.toggleterm = {
     local t = Terminal:new({ cmd = "ranger", direction = "float" })
     return t:toggle()
   end,
+
+  xplr = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "xplr", direction = "float" })
+    return t:toggle()
+  end,
+
+  vifmrun = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "vifmrun", direction = "float" })
+    return t:toggle()
+  end,
+
 }
 
 -- ------------------------------------------------------------------------- }}}

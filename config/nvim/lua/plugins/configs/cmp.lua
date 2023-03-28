@@ -12,6 +12,10 @@ local check_backspace = function() --for Tab
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
+
+Constants = require("config.constants")
+
+
 --[[
 local tabnine = require('cmp_tabnine.config')
 tabnine:setup({
@@ -72,8 +76,8 @@ cmp.setup {
     --   cmp.TriggerEvent.TextChanged,
     --   cmp.TriggerEvent.InsertEnter,
     -- },
-    completeopt = "menu,noselect",
-    -- completeopt = "menuone,noinsert,noselect",
+    -- completeopt = "menu,noselect",
+    completeopt = "menuone,noinsert,noselect",
     keyword_length = 1,
   },
 
@@ -176,8 +180,8 @@ cmp.setup {
         vim_item.dup = 0
       end
       --]]
-      local maxwidth = 80
-      vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+      -- local maxwidth = 80
+      -- vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
       --vim_item.abbr = vim_item.abbr:match("[^(]+")
       return vim_item
     end,
@@ -233,9 +237,9 @@ cmp.setup {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  view = {
-    entries = 'custom',
-  },
+  -- view = {
+  --   entries = 'custom',
+  -- },
   window = {
     completion = cmp.config.window.bordered({
       side_padding = 0,
@@ -251,9 +255,9 @@ cmp.setup {
       -- winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
     }
   },
-  experimental = {
-    ghost_text = true,
-  },
+  -- experimental = {
+  --   ghost_text = true,
+  -- },
 }
 
 cmp.setup.filetype("gitcommit", {

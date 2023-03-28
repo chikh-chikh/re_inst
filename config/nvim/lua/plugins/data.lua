@@ -23,9 +23,11 @@ return {
   {
   "jalvesaq/Nvim-R",
   enabled = Is_Enabled("nvim-r"),
+  lazy = false,
   ft = { "r" },
   -- keys = { { "\rf", "" } },
   -- keys = { "<Bslash>rf" },
+
   },
 
   -- ----------------------------------------------------------------------- }}}

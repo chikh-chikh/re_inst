@@ -1,7 +1,11 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "<Bslash>"
+-- vim.g.maplocalleader = " "
+-- vim.g.maplocalleader = ","
 
-vim.g.snippets = "luasnip"
+--for R
+vim.g.mapleader = vim.api.nvim_replace_termcodes('<BSlash>', false, false, true)
+
+-- vim.g.snippets = "luasnip"
 
 local options = {
 --  spell = true,
@@ -62,7 +66,7 @@ local options = {
   showbreak = "  ",                          -- установка отступа обернутых строк
   scrolloff = 10,                             -- минимальное количество экранных строк над и под курсором
   sidescrolloff = 7,                         -- минимальное количество столбцов экрана по обе стороны от курсора, если обернуть `false`.
-  -- guifont = "monospace:h17",                 -- шрифт, используемый в графических приложениях neovim
+  guifont = "monospace:h17",                 -- шрифт, используемый в графических приложениях neovim
 }
 
 -- vim.wo.wrap = false

@@ -19,16 +19,16 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       -- "hrsh7th/cmp-nvim-lsp-signature-help",
-      -- 'hrsh7th/cmp-omni', -- helps Vimtex completions
+      'hrsh7th/cmp-omni', -- helps Vimtex completions
       "f3fora/cmp-spell",
-      -- "windwp/nvim-autopairs",
-      -- 'aspeddro/cmp-pandoc.nvim',
+      "windwp/nvim-autopairs",
+      'aspeddro/cmp-pandoc.nvim',
 
-      -- 'jalvesaq/cmp-nvim-r',
+      'jalvesaq/cmp-nvim-r',
 
       'L3MON4D3/LuaSnip', -- движок для снипетов
       "saadparwaiz1/cmp_luasnip", -- автодополнения для сниппетов
-      -- 'rafamadriz/friendly-snippets',   -- набор готовых сниппетов для всех языков
+      'rafamadriz/friendly-snippets',   -- набор готовых сниппетов для всех языков
 
       -- { 'tzachar/cmp-tabnine', build = './install.sh' } ,   -- ИИ автодополнения
     },
@@ -42,4 +42,3 @@ return {
   },
   -- ----------------------------------------------------------------------- }}}
 }
-
