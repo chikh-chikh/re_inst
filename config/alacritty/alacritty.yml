@@ -6,6 +6,10 @@ import:
   - ~/reinst/config/alacritty/gruvbox_material.yml
   # - ~/reinst/config/alacritty/gruvbox_dark.yml
 
+    #=======
+import: 
+  - ~/reinst/config/alacritty/gruvbox_material.yml
+  # - ~/reinst/config/alacritty/gruvbox_dark.yml
 
   # - ~/reinst/config/alacritty/font1.yml
   # - ~/reinst/config/alacritty/font2.yml
