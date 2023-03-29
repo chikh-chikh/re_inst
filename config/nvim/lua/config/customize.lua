@@ -158,6 +158,30 @@ Customize.toggleterm = {
     return t:toggle()
   end,
 
+  node = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t= Terminal:new({ cmd = "node", direction = "horizontal" })
+    return t:toggle()
+  end,
+
+  ncdu = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "ncdu", direction = "horizontal" })
+    return t:toggle()
+  end,
+
+  htop = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "htop", direction = "float" })
+    return t:toggle()
+  end,
+
+  python = function()
+    local Terminal = require("toggleterm.terminal").Terminal
+    local t = Terminal:new({ cmd = "python", direction = "horizontal" })
+    return t:toggle()
+  end,
+
   ranger = function()
     local Terminal = require("toggleterm.terminal").Terminal
     local t = Terminal:new({ cmd = "ranger", direction = "float" })

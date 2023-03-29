@@ -1,11 +1,13 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-  return
-end
+-- local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+-- if not status_ok then
+--   return
+-- end
 
-configs.setup {
+local M = {}
+-- configs.setup {
+-- local opts = {
   -- A list of parser names, or "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = {
+ M.ensure_installed = {
     "latex",
     "markdown_inline",
     "markdown",
@@ -22,39 +24,39 @@ configs.setup {
     "bibtex",
     "rust",
     "r",
-  },
+  }
   -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  M.sync_install = false -- install languages synchronously (only applied to `ensure_installed`)
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+  M.auto_install = true
   -- List of parsers to ignore installing (for "all")
-  ignore_install = { "latex" }, --{ "javascript" },-- List of parsers to ignore installing
+  M.ignore_install = { "latex" } --{ "javascript" },-- List of parsers to ignore installing
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-  autopairs = {
+  M.autopairs = {
     enable = true,
-  },
-  highlight = {
+  }
+  M.highlight = {
     -- `false` will disable the whole extension
     enable = true, -- false will disable the whole extension
     disable = { "css","latex" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
-  },
-  indent = { enable = true, disable = { "python", "css", "yaml" } },
-  context_commentstring = {
+  }
+  M.indent = { enable = true, disable = { "python", "css", "yaml" } }
+  M.context_commentstring = {
     enable = true,
     enable_autocmd = false,
-  },
-  rainbow = {
+  }
+  M.rainbow = {
     enable = true,
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
-  },
-  playground = {
+  }
+  M.playground = {
     enable = false,
     disable = {},
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
@@ -71,14 +73,12 @@ configs.setup {
       goto_node = '<cr>', -- Перейти к текущему узлу в буфере кода
       show_help = '?',
     }
-  },
-  query_linter = {
+  }
+  M.query_linter = {
     enable = false,
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold" },
   }
-}
+-- }
 
---сворачивание строк [zo][zc]
---vim.opt.foldmethod = "expr"
---vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+return M

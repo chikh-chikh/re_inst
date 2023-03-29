@@ -95,22 +95,8 @@ return {
     "nvim-lualine/lualine.nvim",
     enabled = Is_Enabled("lualine.nvim"),
     lazy = false,
-    opts = function(_, opts)
-      if Use_Defaults("lualine.nvim") then
-        -- Use LazyVim default setup.
-        opts = {}
-      else
-            ---- Use my customizations.
-        opts = require "plugins.configs.lln"
-            ----or
-        -- opts.options              = require("setup.lualine").options
-        -- opts.sections             = require("setup.lualine").sections
-        -- opts.inactive_sections    = require("setup.lualine").inactive_sections
-        -- opts.tabline              = require("setup.lualine").tabline
-        -- opts.winbar               = require("setup.lualine").winbar
-        -- opts.inactive_winbar      = require("setup.lualine").inactive_winbar
-        -- opts.extensions           = require("setup.lualine").extensions
-      end
+    config = function()
+      require "plugins.configs.lualine"
     end,
   },
 

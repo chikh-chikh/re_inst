@@ -10,7 +10,7 @@ return {
     enabled = Is_Enabled("rnvimr"),
     -- keys = { "<c-r>" },
     lazy = false,
-    -- keys = { "<leader>r" },
+    -- keys = { "" },
   },
 
   -------------------------------------------------------------------------- }}}

@@ -71,24 +71,27 @@ return {
     "akinsho/toggleterm.nvim",
     enabled = Is_Enabled("toggleterm.nvim"),
     version = "*",
-    opts = {
-      size = 13,
-      -- open_mapping = [[<c-\>]],
-      shade_filetypes = {},
-      shade_terminals = true,
-      shading_factor = "1",
-      start_in_insert = true,
-      persist_size = true,
-      direction = "horizontal",
-    },
-    keys = {
-      {
-        "<Bslash><Bslash>",
-        "<leader>Tf",
-        "<leader>Tl",
-        "<leader>Tr",
-      },
-    },
+    -- opts = {
+    --   size = 13,
+    --   -- open_mapping = [[<c-\>]],
+    --   shade_filetypes = {},
+    --   shade_terminals = true,
+    --   shading_factor = "1",
+    --   start_in_insert = true,
+    --   persist_size = true,
+    --   direction = "horizontal",
+    -- },
+    -- keys = {
+    --   {
+    --     "<Bslash><Bslash>",
+    --     "<leader>Tf",
+    --     "<leader>Tl",
+    --     "<leader>Tr",
+    --   },
+      config = function()
+          require "plugins.configs.toggleterm"
+      end,
+    -- },
   },
 
   -- ----------------------------------------------------------------------- }}}

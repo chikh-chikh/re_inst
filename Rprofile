@@ -1,0 +1,21 @@
+# опция для всех процессов сессии, как интерактивных, так и неинтерактивных
+# options(repos = c(CRAN = "https://cran.rstudio.org"))
+
+# только если работа идёт в интерактивном режиме
+# меняем scientific-формат на обычный разрядный
+if (interactive()) {
+  options(scipen = 999)
+}
+
+# options(scipen = 999)
+# getOption('scipen')
+
+
+options(download.file.method = "wget")
+options(langserver_library = "/home/ru/R/x86_64-pc-linux-gnu-library/4.2")
+
+# languageserversetup::languageserver_install( confirmBeforeInstall = FALSE, strictLibrary = FALSE, fullReinstall = FALSE )
+
+# languageserversetup::languageserver_add_to_rprofile()
+
+

@@ -7,7 +7,10 @@ return {
     'mbbill/undotree',
 		enabled = Is_Enabled("undotree"),
     cmd = 'UndotreeToggle',
-    lazy = true
+    lazy = true,
+    config = function()
+      require "plugins.configs.undotree"
+    end,
   },
 
 	-- ----------------------------------------------------------------------- }}}
@@ -115,6 +118,9 @@ return {
 		ft = { "tex", "texx" },
 		enabled = Is_Enabled("vimtex"),
 		dependencies = { "Traap/vim-bundle-vimtex" },
+    config = function()
+          require "plugins.configs.vimtex"
+    end,
 	},
 
 	-- ----------------------------------------------------------------------- }}}

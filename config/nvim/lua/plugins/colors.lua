@@ -69,7 +69,7 @@ return {
     "norcalli/nvim-colorizer.lua",
     event = { "BufReadPost", "BufNewFile" },
     enabled = Is_Enabled("nvim-colorizer.lua"),
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     config = true,
   },
 
@@ -134,9 +134,7 @@ return {
       ensure_installed = Constants.ensure_installed.treesitter,
     },
 
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
+    -- opts = require "plugins.configs.treesitter",
 
     dependencies = {
       -- "mrjones2014/nvim-ts-rainbow",

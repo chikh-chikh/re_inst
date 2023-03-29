@@ -1,5 +1,7 @@
-local O = {}
-  O.options = {
+local lualine = require "lualine"
+lualine.setup{
+
+  options = {
     icons_enabled = true,
     globalstatus = true,
     theme = "auto",
@@ -12,16 +14,14 @@ local O = {}
     --   statusline = {},
     -- },
     ignore_focus = {},
-    always_divide_middle = true,
-    globalstatus = false,
     refresh = {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
     },
-  }
+  },
 
-  O.sections = {
+  sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "db_ui#statusline" },
     lualine_c = { { "filename", file_status = true, path = 1 } },
@@ -36,20 +36,19 @@ local O = {}
                 },
     lualine_y = { "filetype" },
     lualine_z = { "progress", "location" },
-  }
+  },
 
-  O.inactive_sections = {
+  inactive_sections = {
     lualine_a = {},
     lualine_b = {},
     lualine_c = { "filename" },
     lualine_x = { "location" },
     lualine_y = {},
     lualine_z = {},
-  }
+  },
 
-  O.tabline = {}
-  O.winbar = {}
-  O.inactive_winbar = {}
-  O.extensions = {}
-
-return O
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {},
+}

@@ -17,7 +17,7 @@ function install_packages {
             locales language-pack-ru console-cyrillic
 
         #ranger vifm ueberzug
-        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev  
+        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev
         sudo apt install ranger
         # pip3 install ranger-fm
         # pipx run --spec ranger-fm ranger
@@ -41,12 +41,12 @@ function install_packages {
 
         # sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
         # sudo ln -sfnv /usr/bin/batcat /usr/bin/bat;
-            
+
         # sudo dpkg-reconfigure console-setup;
         # sudo dpkg-reconfigure locales;
 
         localectl set-locale LANG=ru_RU.UTF-8;
-            
+
 }
 
 function install_zap_zsh {
@@ -58,19 +58,22 @@ function install_zap_zsh {
 
 function backup_configs {
     echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
-    mv -iv ~/.config/awesome/          ~/.config/awesome.old/      
-    mv -iv ~/.config/alacritty/        ~/.config/alacritty.old/    
-    mv -iv ~/.config/ranger/           ~/.config/ranger.old/       
-    mv -iv ~/.config/rofi/             ~/.config/rofi.old/         
-    mv -iv ~/.config/xplr/             ~/.config/xplr.old/         
-    mv -iv ~/.config/vifm/             ~/.config/vifm.old/         
-    mv -iv ~/.config/zathura/          ~/.config/zathura.old/      
-    mv -iv ~/.config/nvim/             ~/.config/nvim.old/          
-    mv -iv ~/.config/tmux/             ~/.config/tmux.old/          
-    mv -iv ~/.config/zsh/              ~/.config/zsh.old/           
-    mv -iv ~/.config/htop/             ~/.config/htop.old/         
-    mv -iv ~/.config/greenclip.cfg     ~/.config/greenclip.cfg.old 
+    mv -iv ~/.config/awesome/          ~/.config/awesome.old/
+    mv -iv ~/.config/alacritty/        ~/.config/alacritty.old/
+    mv -iv ~/.config/ranger/           ~/.config/ranger.old/
+    mv -iv ~/.config/rofi/             ~/.config/rofi.old/
+    mv -iv ~/.config/xplr/             ~/.config/xplr.old/
+    mv -iv ~/.config/vifm/             ~/.config/vifm.old/
+    mv -iv ~/.config/zathura/          ~/.config/zathura.old/
+    mv -iv ~/.config/nvim/             ~/.config/nvim.old/
+    mv -iv ~/.config/tmux/             ~/.config/tmux.old/
+    mv -iv ~/.config/zsh/              ~/.config/zsh.old/
+    mv -iv ~/.config/htop/             ~/.config/htop.old/
+    mv -iv ~/.config/greenclip.cfg     ~/.config/greenclip.cfg.old
     mv -iv ~/.config/greenclip.toml    ~/.config/greenclip.toml.old
+    mv -iv ~/.config/lazygit/          ~/.config/lazygit
+    # mv -iv ~/.config/    ~/.config/
+    # mv -iv ~/.config/    ~/.config/
     # mv -iv ~/.config/    ~/.config/
     # mv -iv ~/.config/    ~/.config/
 
@@ -93,18 +96,24 @@ function setup_symlinks {
     ln -sfnv "$PWD/config/xplr/"          ~/.config/
     ln -sfnv "$PWD/config/vifm/"          ~/.config/
     ln -sfnv "$PWD/config/zathura/"       ~/.config/
-    ln -sfnv "$PWD/config/nvim"           ~/.config/
-    ln -sfnv "$PWD/config/tmux"           ~/.config/
-    ln -sfnv "$PWD/config/zsh"            ~/.config/
+    ln -sfnv "$PWD/config/nvim/"          ~/.config/
+    ln -sfnv "$PWD/config/tmux/"          ~/.config/
+    ln -sfnv "$PWD/config/zsh/"           ~/.config/
     ln -sfnv "$PWD/config/htop/"          ~/.config/
+    ln -sfnv "$PWD/config/lazygit/"       ~/.config/
     ln -sfnv "$PWD/config/greenclip.cfg"  ~/.config/
     ln -sfnv "$PWD/config/greenclip.toml" ~/.config/
 
-    ln -sfnv "$PWD/zshrc"           ~/.zshrc
-    # ln -sfnv "$PWD/bashrc"          ~/.bashrc
-    ln -sfnv "$PWD/profile"         ~/.profile
-    ln -sfnv "$PWD/xinitrc"         ~/.xinitrc
-    ln -sfnv "$PWD/zshenv"          ~/.zshenv
+    ln -sfnv "$PWD/zshrc"                 ~/.zshrc
+    # ln -sfnv "$PWD/bashrc"                ~/.bashrc
+    ln -sfnv "$PWD/profile"               ~/.profile
+    ln -sfnv "$PWD/xinitrc"               ~/.xinitrc
+    ln -sfnv "$PWD/zshenv"                ~/.zshenv
+    ln -sfnv "$PWD/Rprofile"              ~/.Rprofile
+    ln -sfnv "$PWD/Renviron"              ~/.Renviron
+    # ln -sfnv "$PWD/"                ~/.
+    # ln -sfnv "$PWD/"                ~/.
+    # ln -sfnv "$PWD/"                ~/.
     # ln -sfnv "$PWD/"                ~/.
     # ln -sfnv "$PWD/"                ~/.
 
@@ -121,12 +130,12 @@ function install_awesome {
     echo -e "\u001b[7m Installing Lua...\u001b[0m"
     # Lua
     cd $HOME/downloads/
-    curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz 
+    curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
     tar -zxf lua-5.3.5.tar.gz
     cd lua-5.3.5
     make linux test
     sudo make install
-    # Luarocks 
+    # Luarocks
     echo -e "\u001b[7m Installing Luarocks...\u001b[0m"
     cd $HOME/downloads/
     wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
@@ -147,7 +156,7 @@ function install_alacritty {
     echo -e "\u001b[7m Installing Rust \u001b[0m"
     # Rust,Cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    # source "$HOME/.cargo/env/"
+    source "$HOME/.cargo/env/"
     echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
     # Alacritty
     #git clone https://github.com/alacrytty/alacritty.git
@@ -168,7 +177,7 @@ function install_neovim {
 
 function install_nodejs{
     echo -e "\u001b[7m Installing NodeJS... \u001b[0m"
-    # nodejs 
+    # nodejs
     sudo apt remove nodejs
     sudo apt autoremove
     curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
