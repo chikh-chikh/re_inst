@@ -16,15 +16,22 @@ function install_packages {
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             locales language-pack-ru console-cyrillic
 
+        #fonts
+
+        unzip JetBrainsMono.zip -d ~/.local/share/fonts/
+
+        unzip RobotoMono.zip -d ~/.local/share/fonts/
+        sudo fc-cache -fr
+
         #ranger vifm ueberzug
         sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev
         sudo apt install ranger
         # pip3 install ranger-fm
         # pipx run --spec ranger-fm ranger
         sudo apt install vifm
-        pip3 install ./scripts/ueberzug_18.1.9.orig.tar.gz
-        ln -s "$HOME/reinst/config/vifm/scripts/vifmrun" /home/ru/.local/bin
-        ln -s "$HOME/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
+        pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
+        ln -s "$PWD/config/vifm/scripts/vifmrun" /home/ru/.local/bin
+        ln -s "$PWD/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
 
         #deb-get
         deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux

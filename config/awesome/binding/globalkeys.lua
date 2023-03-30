@@ -33,7 +33,7 @@ local _M = {}
 
 function _M.get()
   local globalkeys = gears.table.join(
-    awful.key({ modkey }, "l", function() logout_popup.launch() end,
+    awful.key({ modkey }, "i", function() logout_popup.launch() end,
       {description = "Show logout screen", group = "custom"}),
 
     awful.key({}, "XF86AudioRaiseVolume", function () volume_widget:inc(5) end),
@@ -57,18 +57,19 @@ function _M.get()
     awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
       { description = "jump to urgent client", group = "client" }),
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    --brockcochranfunc
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    --brockcochranfunc
     -- Horizontal Vim navigation keys to go left and right on tags.
-    awful.key({ altkey }, "h", function() view_prev_tag_with_client() end,
-      {description = "view previous", group = "tag"}),
-    awful.key({ altkey }, "l", function() view_next_tag_with_client() end,
-      {description = "view next tag with client on it", group = "tag"}),
+    -- awful.key({ "Mod1" }, "h", function() view_prev_tag_with_client() end,
+    --   {description = "view previous", group = "tag"}),
+    -- awful.key({ "Mod1" }, "l", function() view_next_tag_with_client() end,
+    --   {description = "view next tag with client on it", group = "tag"}),
     -- Horizontal Vim navigation keys to move the client to the next or previous tag and follow there
-    awful.key({ modkey, altkey }, "h", function(c) move_to_previous_tag() end,
-      {description = "move client to previous tag", group = "tag"}),
-    awful.key({ modkey, altkey }, "l", function(c) move_to_next_tag() end,
-      {description = "move cliet to next tag", group = "tag"}),
+    -- awful.key({ modkey, "Mod1" }, "h", function(c) move_to_previous_tag() end,
+    --   {description = "move client to previous tag", group = "tag"}),
+    -- awful.key({ modkey, "Mod1" }, "l", function(c) move_to_next_tag() end,
+    --   {description = "move cliet to next tag", group = "tag"}),
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     --фокус монитора?
     --[[--
@@ -104,10 +105,10 @@ function _M.get()
       { description = "increase the number of master clients", group = "layout" }),
     awful.key({ modkey, "Shift" }, "l", function() awful.tag.incnmaster( -1, nil, true) end,
       { description = "decrease the number of master clients", group = "layout" }),
-    awful.key({ modkey, "Control" }, "h", function() awful.tag.incncol(1, nil, true) end,
-      { description = "increase the number of columns", group = "layout" }),
-    awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol( -1, nil, true) end,
-      { description = "decrease the number of columns", group = "layout" }),
+    -- awful.key({ modkey, "Control" }, "h", function() awful.tag.incncol(1, nil, true) end,
+    --   { description = "increase the number of columns", group = "layout" }),
+    -- awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol( -1, nil, true) end,
+    --   { description = "decrease the number of columns", group = "layout" }),
     awful.key({ modkey, }, "space", function() awful.layout.inc(1) end,
       { description = "select next", group = "layout" }),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc( -1) end,

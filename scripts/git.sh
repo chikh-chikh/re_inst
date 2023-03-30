@@ -1,4 +1,4 @@
-
+#!/bin/sh
 git config --global user.name "Rustam Uzairov"
 git config --global user.email "mr.uzairov@gmail.com"
 git config --global merge.tool vimdiff

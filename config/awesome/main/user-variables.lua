@@ -20,6 +20,8 @@ local _M = {
   --wlandev = 'wlp2s0b1', --# void on notebook
   wlandev = 'wlp7s0',
   modkey = "Mod4",
+  -- altkey = "Mod1",
+
 }
 
 return _M

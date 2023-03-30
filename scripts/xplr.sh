@@ -1,4 +1,4 @@
-
+#!/bin/sh
 git clone https://github.com/sayanarijit/xplr.git
 cd xplr
 cargo build --locked --release --bin xplr

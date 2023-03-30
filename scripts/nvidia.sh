@@ -1,4 +1,4 @@
-
+#!/bin/sh
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
 sudo ubuntu-drivers devices

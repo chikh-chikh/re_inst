@@ -16,6 +16,14 @@ function _M.get()
       { description = "закрыть", group = "client" }),
     awful.key({ modkey }, "x", awful.client.floating.toggle,
       { description = "сделать плавающим", group = "client" }),
+
+-- brockcochranfunc
+-- монитор?
+	-- awful.key({ modkey, "Control" }, "h", function (c) move_client_to_screen(c, c.screen.index-1) end,
+	-- 	{description = "move client one screen left", group = "client"}),
+	-- awful.key({ modkey, "Control" }, "l", function (c) move_client_to_screen(c, c.screen.index+1) end,
+	-- 	{description = "move client one screen right", group = "client"}),
+
     -- awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
     --           {description = "move to master", group = "client"}),
     -- awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
