@@ -1,19 +1,20 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-  return
-end
+-- local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+-- if not status_ok then
+--   return
+-- end
 
-configs.setup {
+local options = {}
+  options = {
   ensure_installed = Constants.ensure_installed.treesitter,
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   auto_install = true,
-  ignore_install = { "latex" },
+  ignore_install = { "latex" }, --{ "javascript" },-- List of parsers to ignore installing
   autopairs = {
     enable = true,
   },
   highlight = {
-    enable = true,
-    disable = { "css","latex" },
+    enable = true, -- false will disable the whole extension
+    disable = { "css","latex" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { "python", "css", "yaml" } },
@@ -23,17 +24,16 @@ configs.setup {
   },
   rainbow = {
     enable = true,
-    -- disable = { "jsx", "cpp" },
     extended_mode = true,
     max_file_lines = nil,
-    -- colors = {},
-    -- termcolors = {}
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
   },
   playground = {
     enable = false,
     disable = {},
-    updatetime = 25,
-    persist_queries = false,
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
     keybindings = {
       toggle_query_editor = 'o', -- Переключает редактор запросов, когда игровая площадка сфокусирована.
       toggle_hl_groups = 'i', -- Переключает видимость групп подсветки.
@@ -53,3 +53,5 @@ configs.setup {
     lint_events = { "BufWrite", "CursorHold" },
   }
 }
+
+return options

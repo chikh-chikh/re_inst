@@ -113,28 +113,37 @@ return {
     version = false,
     build = ":TSUpdate",
 
-    opts = {
-      autopairs = { enable = true },
-      autotag = { enable = true, disable = { "xml" } },
-      context_commenting = { enable = true, enable_autocmd = false },
-      highlight = {
-        enable = true,
-        disable = Constants.disabled.treesitter,
-        additional_vim_regex_highlighting = true,
-      },
-      indent = { enable = true, disable = { "yml", "yaml" } },
-      playground = { enable = true },
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = 1500,
-        colors = Constants.colors.rainbow,
-      },
-      disable = { "latex" },
-      ensure_installed = Constants.ensure_installed.treesitter,
-    },
+    -- opts = {
+    --   autopairs = { enable = true },
+    --   autotag = { enable = true, disable = { "xml" } },
+    --   context_commenting = { enable = true, enable_autocmd = false },
+    --   highlight = {
+    --     enable = true,
+    --     disable = Constants.disabled.treesitter,
+    --     additional_vim_regex_highlighting = true,
+    --   },
+    --   indent = { enable = true, disable = { "yml", "yaml" } },
+    --   playground = { enable = true },
+    --   rainbow = {
+    --     enable = true,
+    --     extended_mode = true,
+    --     max_file_lines = 1500,
+    --     colors = Constants.colors.rainbow,
+    --   },
+    --   disable = { "latex" },
+    --   ensure_installed = Constants.ensure_installed.treesitter,
+    -- },
 
-    -- opts = require "plugins.configs.treesitter",
+    -- config = function()
+    --     -- require("plugins.configs.treesitt").init()
+    --     require("plugins.configs.treesitter")
+    -- end,
+
+    -- opts = require "plugins.configs.treesittr",
+
+    opts = {
+      opts = require "plugins.configs.treesittr",
+    },
 
     dependencies = {
       -- "mrjones2014/nvim-ts-rainbow",

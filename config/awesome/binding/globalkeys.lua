@@ -1,7 +1,7 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
-local hotkeys_popup = require("awful.hotkeys_popup").widget
+-- local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Включение виджета помощи по горячим клавишам для VIM
 -- и других приложений при открытии клиента с соответствующим именем:
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -56,6 +56,19 @@ function _M.get()
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
       { description = "jump to urgent client", group = "client" }),
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    --brockcochranfunc
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    -- Horizontal Vim navigation keys to go left and right on tags.
+    awful.key({ altkey }, "h", function() view_prev_tag_with_client() end,
+      {description = "view previous", group = "tag"}),
+    awful.key({ altkey }, "l", function() view_next_tag_with_client() end,
+      {description = "view next tag with client on it", group = "tag"}),
+    -- Horizontal Vim navigation keys to move the client to the next or previous tag and follow there
+    awful.key({ modkey, altkey }, "h", function(c) move_to_previous_tag() end,
+      {description = "move client to previous tag", group = "tag"}),
+    awful.key({ modkey, altkey }, "l", function(c) move_to_next_tag() end,
+      {description = "move cliet to next tag", group = "tag"}),
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     --фокус монитора?
     --[[--

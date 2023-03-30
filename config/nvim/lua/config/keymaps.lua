@@ -445,10 +445,10 @@ if Is_Enabled("toggleterm.nvim") then
   Keymap("n", "<leader>Tf", [[<cmd>lua Customize.toggleterm.float()<cr>]])
   Keymap("n", "<leader>Tl", [[<cmd>lua Customize.toggleterm.lazygit()<cr>]])
   Keymap("n", "<leader>Tm", [[<cmd>lua Customize.toggleterm.neomutt()<cr>]])
-  -- Keymap("n", "<leader>r", [[<cmd>lua Customize.toggleterm.ranger()<cr>]])
+  -- Keymap("n", "<leader>r", [[<cmd>lua Customize.toggleterm.ranger()<cr>]], { desc = 'ranger' })
   ----!!
-  -- Keymap("n", "<leader>r", "<cmd>RnvimrToggle<CR>")
-  Keymap("n", "<A-r>", "<cmd>RnvimrToggle<CR>", { desc = 'ranger' })
+  Keymap("n", "<leader>r", "<cmd>RnvimrToggle<CR>", { desc = 'ranger' })
+  -- Keymap("n", "<A-r>", "<cmd>RnvimrToggle<CR>", { desc = 'ranger' })
 end
 
 -- ------------------------------------------------------------------------- }}}
