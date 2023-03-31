@@ -7,20 +7,25 @@ git submodule update --init --recursive
 function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
-            build-essential libreadline-dev unzip curl wget git python3 pipx \
-            aptitude deb-get nala exa cmus picom\
+            xauth xorg
+            build-essential libreadline-dev unzip curl wget git python3 pipx pip3 xsel\
+            #cargo
+            libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
+            aptitude nala exa cmus picom\
             zsh fzf htop gh rofi\
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
-            mpv atool fzf ag bat fd-find fasd silversearcher-ag \
+            mpv atool bat fd-find fasd silversearcher-ag \
             ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             locales language-pack-ru console-cyrillic
 
         #fonts
-
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
         unzip JetBrainsMono.zip -d ~/.local/share/fonts/
-
         unzip RobotoMono.zip -d ~/.local/share/fonts/
+        cp $PWD/reinst/set/awesomewm-font.ttf ~/.local/share/fonts/
+
         sudo fc-cache -fr
 
         #ranger vifm ueberzug
@@ -34,6 +39,7 @@ function install_packages {
         ln -s "$PWD/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
 
         #deb-get
+        curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
         deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
 
         #Telegramm
@@ -154,7 +160,7 @@ function install_awesome {
     # Awesome
     echo -e "\u001b[7m Installing Awesome...\u001b[0m"
     # cd $HOME/downloads/
-    sudo apt install awesome
+    sudo apt install awesome awesome-extra
 
 }
 
@@ -166,7 +172,7 @@ function install_alacritty {
     source "$HOME/.cargo/env/"
     echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
     # Alacritty
-    git clone https://github.com/alacrytty/alacritty.git
+    git clone https://github.com/alacritty/alacritty.git
     cd alacritty
     cargo build --release
     #cargo install alacritty

@@ -10,9 +10,9 @@ run feh --bg-fill --randomize ~/.config/awesome/themes/wallpaper/
 run setxkbmap -option grp:alt_shift_toggle -layout us,ru
 
 run nm-applet
-# run kbdd &
-# run xscreensaver -nosplash &
-run nm-tray
+run kbdd &
+run xscreensaver -nosplash &
+# run nm-tray
 
 run /home/ru/.local/bin/greenclip daemon
 
