@@ -58,7 +58,7 @@ function install_packages {
 
 function install_zap_zsh {
     echo -e "\u001b[7m Installing zap-zsh...\u001b[0m"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)" "" --unattended
+    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)" # "" --unattended
     chsh -s $(which zsh)
 
 }
@@ -166,10 +166,10 @@ function install_alacritty {
     source "$HOME/.cargo/env/"
     echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
     # Alacritty
-    #git clone https://github.com/alacrytty/alacritty.git
-    #cd alacritty
-    #cargo build --release
-    cargo install alacritty
+    git clone https://github.com/alacrytty/alacritty.git
+    cd alacritty
+    cargo build --release
+    #cargo install alacritty
 
 }
 
@@ -182,7 +182,7 @@ function install_neovim {
 
 }
 
-function install_nodejs{
+function install_nodejs {
     echo -e "\u001b[7m Installing NodeJS... \u001b[0m"
     # nodejs
     sudo apt remove nodejs
