@@ -8,49 +8,19 @@ function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
             xauth xorg
-            build-essential libreadline-dev unzip curl wget git python3 pipx pip3 xsel\
+            build-essential libreadline-dev unzip curl wget python3 pipx pip3 \
+            cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             #cargo
             libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
-            aptitude nala exa cmus picom\
-            zsh fzf htop gh rofi\
+            #sound
+            pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
+            aptitude nala exa zsh \
+            cmus tmux picom fzf htop gh lazygit rofi \
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
-            mpv atool bat fd-find fasd silversearcher-ag \
+            pandoc pandoc-citeproc \
+            atool bat fd-find fasd silversearcher-ag \
             ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
-            cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             locales language-pack-ru console-cyrillic
-
-        #fonts
-        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
-        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
-        unzip JetBrainsMono.zip -d ~/.local/share/fonts/
-        unzip RobotoMono.zip -d ~/.local/share/fonts/
-        cp $PWD/reinst/set/awesomewm-font.ttf ~/.local/share/fonts/
-
-        sudo fc-cache -fr
-
-        #ranger vifm ueberzug
-        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev
-        sudo apt install ranger
-        # pip3 install ranger-fm
-        # pipx run --spec ranger-fm ranger
-        sudo apt install vifm
-        pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
-        ln -s "$PWD/config/vifm/scripts/vifmrun" /home/ru/.local/bin
-        ln -s "$PWD/reinst/config/vifm/scripts/vifmimg" /home/ru/.local/bin
-
-        #deb-get
-        curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
-        deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
-
-        #Telegramm
-        # sudo tar -xpf tsetup* -C /opt
-        # sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
-        # sudo chmod -R 775 /opt/Telegram
-
-        #Greenclip (rofi clipboard manager)
-        wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
-        mv greenclip ~/.local/bin
-        chmod 775 ~/.local/bin/greenclip
 
         # sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
         # sudo ln -sfnv /usr/bin/batcat /usr/bin/bat;
@@ -58,9 +28,98 @@ function install_packages {
         # sudo dpkg-reconfigure console-setup;
         # sudo dpkg-reconfigure locales;
 
-        localectl set-locale LANG=ru_RU.UTF-8;
+        # localectl set-locale LANG=ru_RU.UTF-8;
+}
+
+function install_fonts {
+    echo -e "\u001b[7m Installing fonts \u001b[0m"
+        #fonts
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
+        unzip JetBrainsMono.zip -d ~/.local/share/fonts/
+        unzip RobotoMono.zip -d ~/.local/share/fonts/
+        cp $PWD/set/awesomewm-font.ttf ~/.local/share/fonts/
+        sudo fc-cache -fr
+}
+
+function install_file_managers {
+    echo -e "\u001b[7m Installing file managers \u001b[0m"
+        #ranger vifm ueberzug
+        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus
+        sudo apt install ranger
+        # pip3 install ranger-fm
+        # pipx run --spec ranger-fm ranger
+        sudo apt install vifm
+        pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
+        ln -s "$PWD/config/vifm/scripts/vifmrun" /home/ru/.local/bin
+        ln -s "$PWD/config/vifm/scripts/vifmimg" /home/ru/.local/bin
 
 }
+function install_telegram {
+    echo -e "\u001b[7m Installing telegram \u001b[0m"
+        #Telegramm
+        wget https://telegram.org/dl/desktop/linux
+        sudo tar -xpf tsetup* -C /opt
+        sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
+        sudo chmod -R 775 /opt/Telegram
+
+}
+function install_greenclip {
+    echo -e "\u001b[7m Installing greenclip \u001b[0m"
+            #Greenclip (rofi clipboard manager)
+        wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+        mv greenclip ~/.local/bin
+        chmod 775 ~/.local/bin/greenclip
+
+}
+function install_debget {
+    echo -e "\u001b[7m Installing deb-get \u001b[0m"
+        #deb-get
+        curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+        deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
+}
+function install_lazygit {
+    echo -e "\u001b[7m Installing  \u001b[0m"
+        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+        tar xf lazygit.tar.gz lazygit
+        sudo install lazygit /usr/local/bin
+        rm -rf lazygit.tar.gz
+        lazygit --version
+
+}
+function install_latex {
+    echo -e "\u001b[7m Installing latex \u001b[0m"
+        sudo apt install texlive
+        # sudo apt install texlive-latex-extra
+        # sudo apt install texlive-full
+        latexmk --version
+
+}
+function install_zotero_bibtex {
+    echo -e "\u001b[7m Installing zotero  \u001b[0m"
+        wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
+        sudo apt update
+        sudo apt install zotero
+        # https://www.zotero.org/download/
+        # tar -xvf Zotero*
+        # sudo mv ~/Downloads/Zotero_linux-x86_64 /opt/zotero
+        # cd /opt/zotero
+        # sudo ./set_launcher_icon
+        # sudo ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
+
+
+    echo -e "\u001b[7m Installing bibtex  \u001b[0m"
+        BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+         curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi "https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}/zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
+
+        mkdir -p ~/texmf/bibtex/bib
+        ln -s $PWD/config/latex/bst ~/texmf/bibtex
+}
+# function install_ {
+#     echo -e "\u001b[7m Installing  \u001b[0m"
+#
+# }
 
 function install_zap_zsh {
     echo -e "\u001b[7m Installing zap-zsh...\u001b[0m"
@@ -84,7 +143,7 @@ function backup_configs {
     mv -iv ~/.config/htop/             ~/.config/htop.old/
     mv -iv ~/.config/greenclip.cfg     ~/.config/greenclip.cfg.old
     mv -iv ~/.config/greenclip.toml    ~/.config/greenclip.toml.old
-    mv -iv ~/.config/lazygit/          ~/.config/lazygit
+    mv -iv ~/.config/lazygit/          ~/.config/lazygit.old
     # mv -iv ~/.config/    ~/.config/
     # mv -iv ~/.config/    ~/.config/
     # mv -iv ~/.config/    ~/.config/
@@ -142,7 +201,7 @@ function setup_symlinks {
 function install_awesome {
     echo -e "\u001b[7m Installing Lua...\u001b[0m"
     # Lua
-    cd $HOME/downloads/
+    cd $HOME/Downloads/
     curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
     tar -zxf lua-5.3.5.tar.gz
     cd lua-5.3.5
@@ -150,9 +209,9 @@ function install_awesome {
     sudo make install
     # Luarocks
     echo -e "\u001b[7m Installing Luarocks...\u001b[0m"
-    cd $HOME/downloads/
+    cd $HOME/Downloads/
     wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
-    tar zxpf luarocks-3.8.0.tar.gz
+    tar -zxpf luarocks-3.8.0.tar.gz
     cd luarocks-3.8.0
     ./configure --with-lua-include=/usr/local/include
     make
@@ -170,12 +229,12 @@ function install_alacritty {
     # Rust,Cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     source "$HOME/.cargo/env/"
-    echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
     # Alacritty
-    git clone https://github.com/alacritty/alacritty.git
-    cd alacritty
-    cargo build --release
-    #cargo install alacritty
+    echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
+    # git clone https://github.com/alacritty/alacritty.git
+    # cd alacritty
+    # cargo build --release
+    cargo install alacritty
 
 }
 
@@ -184,6 +243,7 @@ function install_neovim {
     deb-get install neovim;
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70;
     pip3 install pynvim;
+    pip3 install neovim-remote
     npm i -g neovim;
 
 }
@@ -210,7 +270,7 @@ function install_r {
     sudo apt-get install r-base
     sudo apt-get install r-base-dev
     sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
-    sudo apt install --no-install-recommends r-cran-tidyverse
+    # sudo apt install --no-install-recommends r-cran-tidyverse
     # deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
     R --version
 }
