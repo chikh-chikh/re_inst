@@ -161,6 +161,7 @@ function backup_configs {
 
 function setup_symlinks {
     echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
+    mkdir -p $HOME/.config
     ln -sfnv "$PWD/config/awesome/"       ~/.config/
     ln -sfnv "$PWD/config/alacritty/"     ~/.config/
     ln -sfnv "$PWD/config/ranger/"        ~/.config/
