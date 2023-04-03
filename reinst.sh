@@ -10,16 +10,14 @@ function install_packages {
             xauth xorg
             build-essential libreadline-dev unzip curl wget python3 pipx pip3 \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
-            #cargo
-            libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
-            #sound
+            libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
             pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
             aptitude nala exa zsh \
             cmus tmux picom fzf htop gh lazygit rofi \
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
             pandoc pandoc-citeproc \
             atool bat fd-find fasd silversearcher-ag \
-            ripgrep xsel tmux ncdu powerline autorandr libnotify-bin \
+            ripgrep xsel ncdu powerline autorandr libnotify-bin \
             locales language-pack-ru console-cyrillic
 
         # sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
@@ -31,102 +29,10 @@ function install_packages {
         # localectl set-locale LANG=ru_RU.UTF-8;
 }
 
-function install_fonts {
-    echo -e "\u001b[7m Installing fonts \u001b[0m"
-        #fonts
-        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
-        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
-        unzip JetBrainsMono.zip -d ~/.local/share/fonts/
-        unzip RobotoMono.zip -d ~/.local/share/fonts/
-        cp $PWD/set/awesomewm-font.ttf ~/.local/share/fonts/
-        sudo fc-cache -fr
-}
-
-function install_file_managers {
-    echo -e "\u001b[7m Installing file managers \u001b[0m"
-        #ranger vifm ueberzug
-        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus
-        sudo apt install ranger
-        # pip3 install ranger-fm
-        # pipx run --spec ranger-fm ranger
-        sudo apt install vifm
-        pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
-        ln -s "$PWD/config/vifm/scripts/vifmrun" /home/ru/.local/bin
-        ln -s "$PWD/config/vifm/scripts/vifmimg" /home/ru/.local/bin
-
-}
-function install_telegram {
-    echo -e "\u001b[7m Installing telegram \u001b[0m"
-        #Telegramm
-        wget https://telegram.org/dl/desktop/linux
-        sudo tar -xpf tsetup* -C /opt
-        sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
-        sudo chmod -R 775 /opt/Telegram
-
-}
-function install_greenclip {
-    echo -e "\u001b[7m Installing greenclip \u001b[0m"
-            #Greenclip (rofi clipboard manager)
-        wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
-        mv greenclip ~/.local/bin
-        chmod 775 ~/.local/bin/greenclip
-
-}
-function install_debget {
-    echo -e "\u001b[7m Installing deb-get \u001b[0m"
-        #deb-get
-        curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
-        deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
-}
-function install_lazygit {
-    echo -e "\u001b[7m Installing  \u001b[0m"
-        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-        tar xf lazygit.tar.gz lazygit
-        sudo install lazygit /usr/local/bin
-        rm -rf lazygit.tar.gz
-        lazygit --version
-
-}
-function install_latex {
-    echo -e "\u001b[7m Installing latex \u001b[0m"
-        sudo apt install texlive
-        # sudo apt install texlive-latex-extra
-        # sudo apt install texlive-full
-        latexmk --version
-
-}
-function install_zotero_bibtex {
-    echo -e "\u001b[7m Installing zotero  \u001b[0m"
-        wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
-        sudo apt update
-        sudo apt install zotero
-        # https://www.zotero.org/download/
-        # tar -xvf Zotero*
-        # sudo mv ~/Downloads/Zotero_linux-x86_64 /opt/zotero
-        # cd /opt/zotero
-        # sudo ./set_launcher_icon
-        # sudo ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
-
-
-    echo -e "\u001b[7m Installing bibtex  \u001b[0m"
-        BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-         curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi "https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}/zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
-
-        mkdir -p ~/texmf/bibtex/bib
-        ln -s $PWD/config/latex/bst ~/texmf/bibtex
-}
 # function install_ {
 #     echo -e "\u001b[7m Installing  \u001b[0m"
 #
 # }
-
-function install_zap_zsh {
-    echo -e "\u001b[7m Installing zap-zsh...\u001b[0m"
-    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)" # "" --unattended
-    chsh -s $(which zsh)
-
-}
 
 function backup_configs {
     echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
@@ -202,7 +108,8 @@ function setup_symlinks {
 function install_awesome {
     echo -e "\u001b[7m Installing Lua...\u001b[0m"
     # Lua
-    cd $HOME/Downloads/
+    mkdir -p $HOME/Downloads
+    cd $HOME/Downloads
     curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
     tar -zxf lua-5.3.5.tar.gz
     cd lua-5.3.5
@@ -226,6 +133,8 @@ function install_awesome {
 
 
 function install_alacritty {
+    echo -e "\u001b[7m Install Dependens \u001b[0m"
+    sudo apt install libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
     echo -e "\u001b[7m Installing Rust \u001b[0m"
     # Rust,Cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -236,17 +145,12 @@ function install_alacritty {
     # cd alacritty
     # cargo build --release
     cargo install alacritty
-
 }
 
-function install_neovim {
-    echo -e "\u001b[7m Installing neovim... \u001b[0m"
-    deb-get install neovim;
-    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70;
-    pip3 install pynvim;
-    pip3 install neovim-remote
-    npm i -g neovim;
-
+function install_zap_zsh {
+    echo -e "\u001b[7m Installing zap-zsh...\u001b[0m"
+    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)" # "" --unattended
+    chsh -s $(which zsh)
 }
 
 function install_nodejs {
@@ -258,7 +162,6 @@ function install_nodejs {
     sudo apt install -y nodejs
     node -v
     npm -v
-
 }
 
 function install_r {
@@ -276,23 +179,161 @@ function install_r {
     R --version
 }
 
+function install_neovim {
+    echo -e "\u001b[7m Installing neovim... \u001b[0m"
+    deb-get install neovim;
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70;
+    pip3 install pynvim;
+    pip3 install neovim-remote
+    npm i -g neovim;
+}
 
-function setup_dotfiles {
+function install_greenclip {
+    echo -e "\u001b[7m Installing greenclip \u001b[0m"
+            #Greenclip (rofi clipboard manager)
+        wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+        mv greenclip ~/.local/bin
+        chmod 775 ~/.local/bin/greenclip
+}
+
+function install_latex {
+    echo -e "\u001b[7m Installing latex \u001b[0m"
+        sudo apt install texlive
+        # sudo apt install texlive-latex-extra
+        # sudo apt install texlive-full
+        latexmk --version
+}
+
+function install_zotero_bibtex {
+    echo -e "\u001b[7m Installing zotero  \u001b[0m"
+        wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
+        sudo apt update
+        sudo apt install zotero
+        # https://www.zotero.org/download/
+        # tar -xvf Zotero*
+        # sudo mv ~/Downloads/Zotero_linux-x86_64 /opt/zotero
+        # cd /opt/zotero
+        # sudo ./set_launcher_icon
+        # sudo ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
+
+
+    echo -e "\u001b[7m Installing bibtex  \u001b[0m"
+        BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+        curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi "https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}/zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
+
+        mkdir -p ~/texmf/bibtex/bib
+        ln -s $PWD/config/latex/bst ~/texmf/bibtex
+}
+
+function install_lazygit {
+    echo -e "\u001b[7m Installing  \u001b[0m"
+        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+        tar xf lazygit.tar.gz lazygit
+        sudo install lazygit /usr/local/bin
+        rm -rf lazygit.tar.gz
+        lazygit --version
+}
+
+function install_file_managers {
+    echo -e "\u001b[7m Installing file managers \u001b[0m"
+        sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus ranger vifm
+        pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
+        mkdir -p $HOME/.local/bin
+        ln -s "$PWD/config/vifm/scripts/vifmrun" $HOME/.local/bin
+        ln -s "$PWD/config/vifm/scripts/vifmimg" $HOME/.local/bin
+        # pip3 install ranger-fm
+        # pipx run --spec ranger-fm ranger
+}
+
+function install_fonts {
+    echo -e "\u001b[7m Installing fonts \u001b[0m"
+        #fonts
+        mkdir -p $HOME/Downloads
+        cd $HOME/Downloads
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
+        mkdir -p $HOME/.local/share/fonts
+        unzip JetBrainsMono.zip -d ~/.local/share/fonts/
+        unzip RobotoMono.zip -d ~/.local/share/fonts/
+        cp $PWD/set/awesomewm-font.ttf ~/.local/share/fonts/
+        sudo fc-cache -fr
+}
+
+function install_debget {
+    echo -e "\u001b[7m Installing deb-get \u001b[0m"
+        #deb-get
+        curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+        deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
+}
+
+function install_telegram {
+    echo -e "\u001b[7m Installing telegram \u001b[0m"
+        #Telegramm
+        wget https://telegram.org/dl/desktop/linux
+        sudo tar -xpf linux -C /opt
+        sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
+        sudo chmod -R 775 /opt/Telegram
+}
+
+
+function all {
     echo -e "\u001b[7m Setting up Dotfiles... \u001b[0m"
     install_packages
-    install_zap_zsh
     backup_configs
     setup_symlinks
     install_awesome
     install_alacritty
-    install_neovim
+    install_zap_zsh
     install_nodejs
     install_r
+    install_neovim
+    install_greenclip
+    install_latex
+    install_zotero_bibtex
+    install_lazygit
+    install_file_managers
+    install_fonts
+    install_debget
+    install_telegram
+    echo -e "\u001b[7m Done! \u001b[0m"
+}
+
+function wm {
+    echo -e "\u001b[7m Setting up Windows Managers... \u001b[0m"
+    install_awesome
+    install_fonts
+    echo -e "\u001b[7m Done! \u001b[0m"
+}
+
+function terminals {
+    echo -e "\u001b[7m Setting up Terminals... \u001b[0m"
+    install_alacritty
+    install_zap_zsh
+    install_lazygit
+    echo -e "\u001b[7m Done! \u001b[0m"
+}
+
+function editors {
+    echo -e "\u001b[7m Setting up Editors \u001b[0m"
+    install_nodejs
+    install_neovim
+    install_greenclip
+    install_latex
+    install_zotero_bibtex
+    echo -e "\u001b[7m Done! \u001b[0m"
+}
+
+function changers {
+    echo -e "\u001b[7m Setting up Changers  \u001b[0m"
+    install_file_managers
+    install_debget
+    install_telegram
     echo -e "\u001b[7m Done! \u001b[0m"
 }
 
 if [ "$1" = "--all" -o "$1" = "-a" ]; then
-    setup_dotfiles
+    all
     exit 0
 fi
 
@@ -300,16 +341,28 @@ fi
 echo -e "\u001b[32;1m Setting up Dotfiles...\u001b[0m"
 
 echo -e " \u001b[37;1m\u001b[4mSelect an option:\u001b[0m"
-echo -e "  \u001b[34;1m (0) Setup everything \u001b[0m"
+echo -e "  \u001b[34;1m (a) ALL(1-17) \u001b[0m"
+echo -e "  \u001b[34;1m (w) WINDOWS MANAGER(4,15) \u001b[0m"
+echo -e "  \u001b[34;1m (t) TERMINAL(5,6,13) \u001b[0m"
+echo -e "  \u001b[34;1m (e) EDITOR(7,9-12) \u001b[0m"
+echo -e "  \u001b[34;1m (f) CHANGERS(14,16,17) \u001b[0m"
 echo -e "  \u001b[34;1m (1) Install packages \u001b[0m"
-echo -e "  \u001b[34;1m (2) Install zap-zsh \u001b[0m"
-echo -e "  \u001b[34;1m (3) Backup current config \u001b[0m"
-echo -e "  \u001b[34;1m (4) Setup symlinks \u001b[0m"
-echo -e "  \u001b[34;1m (5) Install awesome \u001b[0m"
-echo -e "  \u001b[34;1m (6) Install alacritty \u001b[0m"
-echo -e "  \u001b[34;1m (7) Install neovim \u001b[0m"
-echo -e "  \u001b[34;1m (8) Install nodejs \u001b[0m"
-echo -e "  \u001b[34;1m (9) Install r \u001b[0m"
+echo -e "  \u001b[34;1m (2) Backup current config \u001b[0m"
+echo -e "  \u001b[34;1m (3) Setup symlinks \u001b[0m"
+echo -e "  \u001b[34;1m (4) Install awesome \u001b[0m"
+echo -e "  \u001b[34;1m (5) Install alacritty \u001b[0m"
+echo -e "  \u001b[34;1m (6) Install zap-zsh \u001b[0m"
+echo -e "  \u001b[34;1m (7) Install nodejs \u001b[0m"
+echo -e "  \u001b[34;1m (8) Install r \u001b[0m"
+echo -e "  \u001b[34;1m (9) Install neovim \u001b[0m"
+echo -e "  \u001b[34;1m (10) Install greenclip \u001b[0m"
+echo -e "  \u001b[34;1m (11) Install latex \u001b[0m"
+echo -e "  \u001b[34;1m (12) Install zotero bibtex \u001b[0m"
+echo -e "  \u001b[34;1m (13) Install lazygit \u001b[0m"
+echo -e "  \u001b[34;1m (14) Install file managers \u001b[0m"
+echo -e "  \u001b[34;1m (15) Install fonts \u001b[0m"
+echo -e "  \u001b[34;1m (16) Install deb-get \u001b[0m"
+echo -e "  \u001b[34;1m (17) Install telegram \u001b[0m"
 echo -e "  \u001b[31;1m (*) Anything else to exit \u001b[0m"
 
 echo -en "\u001b[32;1m ==> \u001b[0m"
@@ -318,8 +371,24 @@ read -r option
 
 case $option in
 
-"0")
-    setup_dotfiles
+"a")
+    all
+    ;;
+
+"w")
+    wm
+    ;;
+
+"t")
+    terminals
+    ;;
+
+"e")
+    editors
+    ;;
+
+"f")
+  changers
     ;;
 
 "1")
@@ -327,35 +396,67 @@ case $option in
     ;;
 
 "2")
-    install_zap_zsh
-    ;;
-
-"3")
     backup_configs
     ;;
 
-"4")
+"3")
     setup_symlinks
     ;;
 
-"5")
+"4")
     install_awesome
     ;;
 
-"6")
+"5")
     install_alacritty
     ;;
 
-"7")
-    install_neovim
+"6")
+    install_zap_zsh
     ;;
 
-"8")
+"7")
     install_nodejs
     ;;
 
-"9")
+"8")
     install_r
+    ;;
+
+"9")
+    install_neovim
+    ;;
+
+"10")
+    install_greenclip
+    ;;
+
+"11")
+    install_latex
+    ;;
+
+"12")
+    install_zotero_bibtex
+    ;;
+
+"13")
+    install_lazygit
+    ;;
+
+"14")
+    install_file_managers
+    ;;
+
+"15")
+    install_fonts
+    ;;
+
+"16")
+    install_debget
+    ;;
+
+"17")
+    install_telegram
     ;;
 
 *)
