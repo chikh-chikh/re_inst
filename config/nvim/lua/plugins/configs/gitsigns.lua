@@ -1,6 +1,7 @@
 local gitsigns = require "gitsigns"
 
 gitsigns.setup {
+-- local options = {
   signs = {
     add          = {  hl = "GitSignsAdd",     text = '▎', numhl = "GitSignsAddNr",    linehl = "GitSignsAddLn"    },
     change       = {  hl = "GitSignsChange",  text = '▎', numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -55,3 +56,4 @@ gitsigns.setup {
     enable = false
   },
 }
+-- return options

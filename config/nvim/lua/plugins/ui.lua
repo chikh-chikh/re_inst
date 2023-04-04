@@ -47,6 +47,13 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    -- opts = function()
+    --   return require("plugins.configs.gitsigns").options
+    -- end,
+    -- config = function(_, opts)
+    --   require("gitsigns").setup(opts)
+    -- end,
+
     config = function()
       require"plugins.configs.gitsigns"
     end
@@ -95,6 +102,13 @@ return {
     "nvim-lualine/lualine.nvim",
     enabled = Is_Enabled("lualine.nvim"),
     lazy = false,
+    -- opts = function()
+    --   return require "plugins.configs.lualine"
+    -- end,
+    -- config = function(_, opts)
+    --   require("lualine").setup(opts)
+    -- end,
+
     config = function()
       require "plugins.configs.lualine"
     end,

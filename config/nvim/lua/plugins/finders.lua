@@ -32,19 +32,25 @@ return {
     enabled = Is_Enabled("telescope.nvim"),
     cmd = "Telescope",
     keys = false,
-    opts = {
-      defaults = {
-        layout_config = { prompt_position = "top" },
-        layout_strategy = "horizontal",
-        prompt_prefix = " ",
-        selection_caret = " ",
-        sorting_strategy = "ascending",
-        winblend = 0,
-      },
-      pickers = {
-        colorscheme = { enable_preview = true },
-      },
-    },
+    -- opts = {
+    --   defaults = {
+    --     layout_config = { prompt_position = "top" },
+    --     layout_strategy = "horizontal",
+    --     prompt_prefix = " ",
+    --     selection_caret = " ",
+    --     sorting_strategy = "ascending",
+    --     winblend = 0,
+    --   },
+    --   pickers = {
+    --     colorscheme = { enable_preview = true },
+    --   },
+    opts = function()
+      return require "plugins.configs.telescope"
+    end,
+    config = function(_, opts)
+      require("telescope").setup(opts)
+    end,
+
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",

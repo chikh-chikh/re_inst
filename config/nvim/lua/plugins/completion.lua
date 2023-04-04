@@ -21,11 +21,11 @@ return {
       -- "hrsh7th/cmp-nvim-lsp-signature-help",
       'hrsh7th/cmp-omni', -- helps Vimtex completions
       "f3fora/cmp-spell",
-      { "windwp/nvim-autopairs",
-      config = function()
-          require "plugins.configs.autopairs"
-      end
-      },
+      -- { "windwp/nvim-autopairs",
+      -- config = function()
+      --     require "plugins.configs.autopairs"
+      -- end
+      -- },
       'aspeddro/cmp-pandoc.nvim',
 
       'jalvesaq/cmp-nvim-r',

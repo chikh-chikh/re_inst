@@ -21,7 +21,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     enabled = Is_Enabled("nvim-lspconfig"),
-
+    --[[--
     dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -41,11 +41,12 @@ return {
     },
   },
   event = "VeryLazy",
-  config = function()
-    require "plugins.configs.lsp"
-  end,
+  -- config = function()
+  --   require "plugins.configs.lsp"
+  -- end,
+  --]]--
 
---[[
+  ---[[
     opts = function(_, opts)
       opts.servers = {
         ansiblels = {},
@@ -59,7 +60,18 @@ return {
         html = {},
         jsonls = {},
         marksman = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "off",
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true
+              },
+            },
+          },
+        },
         svelte = {},
         tsserver = {},
         yamlls = {},
@@ -70,6 +82,10 @@ return {
             Lua = {
               workspace = {
                 checkThirdParty = false,
+                -- library = {
+                --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                --   [vim.fn.stdpath("config") .. "/lua"] = true,
+                -- },
               },
               completion = {
                 workspaceWord = true,
@@ -82,6 +98,7 @@ return {
               },
               diagnostics = {
                 enable = false,
+				        globals = { "vim" , 'use', 'require'},
                 groupSeverity = {
                   strong = "Warning",
                   strict = "Warning",

@@ -11,3 +11,4 @@ gxkb &
 # greenclip daemon &
 
 exec awesome
+

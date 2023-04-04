@@ -113,15 +113,13 @@ return {
     -- keys = { "<c-e>" },
     -- keys = false,
     -- keys = { "<leader>e" },
-    opts = {
-      filters = {
-        custom = { ".git" },
-      },
-      view = {
-        side = "left",
-        width = 30,
-      },
-    },
+    opts = function()
+      return require "plugins.configs.nvim-tree"
+    end,
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+      vim.g.nvimtree_side = opts.view.side
+    end,
   },
 
   -------------------------------------------------------------------------- }}}

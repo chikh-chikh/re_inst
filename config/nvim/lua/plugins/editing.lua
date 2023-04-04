@@ -81,6 +81,10 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		enabled = Is_Enabled("nvim-autopairs"),
 		config = true,
+    config = function()
+      require "plugins.configs.autopairs"
+    end,
+
 	},
 
 	-- ----------------------------------------------------------------------- }}}
@@ -119,7 +123,7 @@ return {
 		enabled = Is_Enabled("vimtex"),
 		dependencies = { "Traap/vim-bundle-vimtex" },
     config = function()
-          require "plugins.configs.vimtex"
+      require "plugins.configs.vimtex"
     end,
 	},
 

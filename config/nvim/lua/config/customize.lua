@@ -56,7 +56,7 @@ Customize = {
     ["nvim-dap-ruby"] = { enabled = false },
     ["nvim-dap-ui"] = { enabled = false },
     ["nvim-dap-virtual-text"] = { enabled = false },
-    ["nvim-lspconfig"] = { enabled = true },
+    ["nvim-lspconfig"] = { enabled = false },
     ["nvim-navic"] = { enabled = false },
     ["nvim-notify"] = { enabled = false },
     ["nvim-r"] = { enabled = true },

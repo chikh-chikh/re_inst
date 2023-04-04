@@ -256,7 +256,7 @@ Constants = {
   completion = {
     source_mapping = {
       buffer = "[Buffer]",
-      latex_symbols = "[LaTeX]",
+      latex_symbols = "[Symbols]",
       luasnip = "[Snippet]",
       nvim_lsp = "[LSP]",
       nvim_lua = "[Lua]",
@@ -264,11 +264,13 @@ Constants = {
       spell = "[Spell]",
       cmp_nvim_r = "[R]",
       cmdline = "[CMD]",
+      omni = "[VimTex]",
       -- omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
     },
 
     sources = {
-      { name = "buffer", keyword_length = 2, max_item_count = 30 },
+      { name = "nvim_lsp", keyword_length = 2, max_item_count = 30, group_index = 2 },
+      { name = "buffer", keyword_length = 3, max_item_count = 30 },
       { name = "calc", keyword_length = 2, max_item_count = 30 },
       -- { name = "latex_symbols", keyword_length = 1, max_item_count = 30 },
       { name = "latex_symbols",
@@ -278,14 +280,13 @@ Constants = {
         max_item_count = 30
       },
       { name = "luasnip", keyword_length = 2, max_item_count = 30 },
-      { name = "nvim_lsp", keyword_length = 2, max_item_count = 30, group_index = 2 },
       { name = 'nvim_lsp_signature_help', group_index = 2 },
       { name = 'cmp_nvim_r',
         filetype = { "r" },
       },
       { name = "omni" },
       { name = "nvim_lua", keyword_length = 1, max_item_count = 30 },
-      { name = "path", keyword_length = 3, max_item_count = 30 },
+      { name = "path", keyword_length = 2, max_item_count = 30 },
       { name = "spell", keyword_length = 5, max_item_count = 30,
           option = {
             keep_all_entries = false,
