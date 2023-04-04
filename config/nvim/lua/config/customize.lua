@@ -33,7 +33,7 @@ Customize = {
     ["indent-blankline"] = { enabled = true, defaults = false },
     ["leap.nvim"] = { enabled = true },
     ["markdown-preview.nvim"] = { enabled = true },
-    ["mason.nvim"] = { enabled = true },
+    ["mason.nvim"] = { enabled = false },
     ["mason-nvim-dap.nvim"] = { enabled = false },
     ["mini-ai"] = { enabled = false },
     ["mini-comment"] = { enabled = false },

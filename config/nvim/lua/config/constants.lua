@@ -34,10 +34,10 @@ Constants = {
       -- "rust_analyzer",
       -- "solargraph",
       -- "sqlls",
-      "texlab",
+      -- "texlab",
       -- "tsserver",
       "yamlls",
-      "r_language_server",
+      -- "r_language_server",
     },
     mason = {
       "bash-language-server",
@@ -58,10 +58,10 @@ Constants = {
       -- "solargraph",
       -- "sqlls",
       "stylua",
-      "texlab",
+      -- "texlab",
       -- "typescript-language-server",
       "yaml-language-server",
-      "r-languageserver",
+      -- "r-languageserver",
     },
     treesitter = {
       "bash",
@@ -124,6 +124,12 @@ Constants = {
   -- {{{ icons
 
   icons = {
+    mason = {
+      package_pending = " ",
+      package_installed = " ",
+      package_uninstalled = " ﮊ",
+      -- package_installed = "◍",
+    },
     dap = {
       expanded = "",
       collapsed = "",

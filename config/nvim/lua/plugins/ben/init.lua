@@ -98,18 +98,6 @@ return {
     --   ft = { "markdown" },
     -- },
 
-    -- Terminal
-    -- { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
-
-    -- {
-    --     'folke/zen-mode.nvim',
-    --     cmd = 'ZenMode',
-    --     lazy = true,
-    --     dependencies = {
-    --         'folke/twilight.nvim',
-    --     },
-    -- },
-
     -- LSP сервер
     {
         -- 'neovim/nvim-lspconfig',

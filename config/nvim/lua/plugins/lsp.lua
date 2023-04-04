@@ -1,6 +1,6 @@
-Constants = require("config.constants")
-Is_Enabled = require("config.functions").is_enabled
 
+Is_Enabled = require("config.functions").is_enabled
+Constants = require "config.constants"
 return {
   -- {{{ mason.nvim
 
@@ -11,9 +11,47 @@ return {
     keys = { { "<leader>cm", "<cmd>Mason<cr> " } },
     opts = {
       ensure_installed = Constants.ensure_installed.mason,
+     	ui = {
+        border = "none",
+        icons = Constants.icons.mason,
+        keymaps = {
+          toggle_server_expand = "<CR>",
+          install_server = "i",
+          update_server = "u",
+          check_server_version = "c",
+          update_all_servers = "U",
+          check_outdated_servers = "C",
+          uninstall_server = "X",
+          cancel_installation = "<C-c>",
+        },
+      },
+      log_level = vim.log.levels.INFO,
+      max_concurrent_installers = 4,
+    },
+
+    dependencies = {
+
+      { "williamboman/mason-lspconfig.nvim",
+        opts = {
+          ensure_installed = Constants.ensure_installed.lsp_config,
+          automatic_installation = false,
+        },
+      },
+
+      { "j-hui/fidget.nvim",
+        opts = {
+          -- window = {
+          --   blend = 0,
+          -- },
+          -- sources = {
+          --   ["null-ls"] = {
+          --     ignore = true,
+          --   },
+          -- },
+        },
+      },
     },
   },
-
   -- ----------------------------------------------------------------------- }}}
   -- {{{ nvim-lspconfig
 
@@ -21,32 +59,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     enabled = Is_Enabled("nvim-lspconfig"),
-    --[[--
-    dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    {
-      "j-hui/fidget.nvim",
-      opts = {
-        window = {
-          blend = 0,
-        },
-        sources = {
-          ["null-ls"] = {
-            ignore = true,
-          },
-        },
-      },
-    },
-  },
-  event = "VeryLazy",
-  -- config = function()
-  --   require "plugins.configs.lsp"
-  -- end,
-  --]]--
-
-  ---[[
     opts = function(_, opts)
       opts.servers = {
         ansiblels = {},
@@ -60,18 +72,7 @@ return {
         html = {},
         jsonls = {},
         marksman = {},
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "off",
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                useLibraryCodeForTypes = true
-              },
-            },
-          },
-        },
+        pyright = {},
         svelte = {},
         tsserver = {},
         yamlls = {},
@@ -82,10 +83,6 @@ return {
             Lua = {
               workspace = {
                 checkThirdParty = false,
-                -- library = {
-                --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                --   [vim.fn.stdpath("config") .. "/lua"] = true,
-                -- },
               },
               completion = {
                 workspaceWord = true,
@@ -98,7 +95,6 @@ return {
               },
               diagnostics = {
                 enable = false,
-				        globals = { "vim" , 'use', 'require'},
                 groupSeverity = {
                   strong = "Warning",
                   strict = "Warning",
@@ -145,8 +141,7 @@ return {
         },
       }
     end,
---]]
   },
-
   -- ----------------------------------------------------------------------- }}}
 }
+
