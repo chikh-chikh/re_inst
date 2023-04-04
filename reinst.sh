@@ -75,7 +75,7 @@ function setup_symlinks {
     ln -sfnv "$PWD/config/xplr/"          ~/.config/
     ln -sfnv "$PWD/config/vifm/"          ~/.config/
     ln -sfnv "$PWD/config/zathura/"       ~/.config/
-    ln -sfnv "$PWD/config/nvim/"          ~/.config/
+    # ln -sfnv "$PWD/config/nvim/"          ~/.config/
     ln -sfnv "$PWD/config/tmux/"          ~/.config/
     ln -sfnv "$PWD/config/zsh/"           ~/.config/
     ln -sfnv "$PWD/config/htop/"          ~/.config/
@@ -186,6 +186,9 @@ function install_neovim {
     pip3 install pynvim;
     pip3 install neovim-remote
     npm i -g neovim;
+
+    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+    ln -s $HOME/reinst/config/nvchad/lua/custom $HOME/.config/nvim/lua
 }
 
 function install_greenclip {
