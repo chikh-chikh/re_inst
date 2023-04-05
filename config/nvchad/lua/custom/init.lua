@@ -11,7 +11,7 @@ vim.g.mapleader = " "
 -- vim.g.maplocalleader = " "
 -- vim.g.maplocalleader = ","
 --for R
-vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<BSlash>', false, false, true)
+vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<Bslash>', false, false, true)
 --[[
 
 -- vim.g.snippets = "luasnip"

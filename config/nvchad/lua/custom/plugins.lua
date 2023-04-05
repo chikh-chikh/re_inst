@@ -10,8 +10,8 @@ local plugins = {
   {
   "kevinhwang91/rnvimr",
   enabled = Is_Enabled("rnvimr"),
-  -- keys = { "<leader>r" },
   lazy = false,
+  -- keys = { "<leader>r" },
   },
   -- ----------------------------------------------------------------------- }}}
   -- {{{ vim-dadbod-ui
@@ -32,10 +32,10 @@ local plugins = {
   -- ----------------------------------------------------------------------- }}}
   -- {{{ Nvim-R
   {
-  "jalvesaq/Nvim-R",
-  enabled = Is_Enabled("nvim-r"),
-  ft = { "r" },
-  -- keys = { "<Bslash>rf" },
+    "jalvesaq/Nvim-R",
+    enabled = Is_Enabled("nvim-r"),
+    ft = { "r" },
+    -- keys = { "<Bslash>rf" },
   },
 
   -- ----------------------------------------------------------------------- }}}

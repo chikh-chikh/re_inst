@@ -57,8 +57,8 @@ M.general = {
 		["<"] = { "<gv", "tab del" },
 		[">"] = { ">gv", "tab add" },
 		-- Move text up and down
-		["<A-j>"] = { ":m .+1<CR>==", "move down" },
-		["<A-k>"] = { ":m .-2<CR>==", "move up" },
+		["<A-j>"] = { ":m .+1<CR>==", "move down string" },
+		["<A-k>"] = { ":m .-2<CR>==", "move up string" },
 
 		["P"] = { '"_dP', "" },
 		["p"] = { '"_dp', "" },
@@ -81,33 +81,22 @@ M.general = {
 	},
 }
 
-
 M.nvimtree = {
-  plugin = true,
-  n = {
-
-  },
+	plugin = true,
+	n = {},
 }
 
 M.nvimtree = {
-  plugin = true,
-  n = {
-
-  },
+	plugin = true,
+	n = {},
 }
 
-M.nvimtree = {
-  plugin = true,
-  n = {
-		["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
-  },
-}
 
 M.rnvimr = {
-  plugin = true,
-  n = {
-    ["<leader>r"] = { "<cmd> RnvimrToggle <CR>", "ranger" },
-  },
+	-- plugin = true,
+	n = {
+		["<leader>r"] = { "<cmd> RnvimrToggle <CR>", "ranger" },
+	},
 }
 
 M.undotree = {
@@ -115,11 +104,6 @@ M.undotree = {
 		["<leader>u"] = { "<cmd> UndotreeToggle <CR>", "toggle undotree" },
 	},
 }
-
-
-
-
-
 
 -- more keybinds!
 
