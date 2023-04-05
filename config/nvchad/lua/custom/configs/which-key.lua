@@ -42,99 +42,93 @@ local opts = {
 	nowait = true, -- use `nowait` when creating keymaps
 }
 
--- hjknoyz
-
--- GENERAL MAPPINGS
-
+local mappings = {
+  ["e"] = { "<cmd>NvimTreeToggle<CR>"           , "explorer" },
+  ["u"] = { "<cmd>UndotreeToggle<CR>"           , "undo" },
+  ["r"] = { "<cmd>RnvimrToggle<CR>"             , "undo" },
+}
 
 local register = {
 	["<leader>"] = {
 		-- H = {
 		--   name = '+Help',
 		-- },
-		L = {
-			name = "+LSP",
-		},
-		V = {
-			name = "+Linewise reselection of what you just pasted",
-		},
-		S = {
-			name = "+Gitsigns",
-		},
 		a = {
-			name = "+Alpha",
-		},
-		b = {
-			name = "+Buffer adjustments",
-		},
-		c = {
-			name = "+Copy & Paste & tmux",
-		},
-		D = {
-			name = "+Debug Adapter Protocol",
+			name = "+Actions",
 		},
 		d = {
-			name = "+DAP)",
+			name = "+panDoc)",
 		},
+		-- b = {
+		-- 	name = "+Buffer adjustments",
+		-- },
+		-- c = {
+		-- 	name = "+Copy & Paste & tmux",
+		-- },
+		-- D = {
+		-- 	name = "+Debug Adapter Protocol",
+		-- },
+		-- d = {
+		-- 	name = "+DAP)",
+		-- },
 		f = {
-			name = "+Find & tmux",
+			name = "+Find & Tmux",
 		},
 		g = {
-			name = "+git",
+			name = "Git",
 		},
-		k = {
-			name = "+kill runner",
+		i = {
+			name = "+LSP",
 		},
+		-- k = {
+		-- 	name = "+kill runner",
+		-- },
 		l = {
-			name = "+VimTex",
+			name = "+LaTeX",
 		},
-		e = {
-			name = "+File explorers",
+		m = {
+			name = "+MANAGE SESSION",
 		},
-		o = {
-			name = "+Options",
-		},
+		-- o = {
+		-- 	name = "+Options",
+		-- },
 		p = {
-			name = "+Package manager",
+			name = "+Lazy",
 		},
-		r = {
-			name = "+Runners",
-		},
-		s = {
-			name = "+Split & Sort",
-		},
+		-- r = {
+		-- 	name = "+Runners",
+		-- },
+		-- s = {
+		-- 	name = "+Split & Sort",
+		-- },
 		t = {
 			name = "+Terminals",
 		},
 		w = {
 			name = "+Wiki & WhiteSpace",
 		},
-		u = {
-			name = "+Undotree",
-		},
-		A = {
-			name = "ACTIONS",
-		},
-		M = {
-			name = "+MANAGE SESSION",
-		},
-		P = {
-			name = "+PANDOC",
-		},
-		R = {
-			name = "+SURROUND",
-		},
-		T = {
+		-- A = {
+		-- 	name = "ACTIONS",
+		-- },
+		-- P = {
+		-- 	name = "+PANDOC",
+		-- },
+		y = {
 			name = "+TEMPLATES",
 		},
+		z = {
+			name = "+SURROUND",
+		},
 	},
-	["<BSlash>"] = {
+
+	["<Bslash>"] = {
 		r = {
-			name = "+",
+			name = "+R",
 		},
 	},
 }
 
 which_key.setup(setup)
--- which_key.register(mappings, opts)
+-- which_key.opts(opts)
+-- which_key.mappings(mappings)
 which_key.register(register)

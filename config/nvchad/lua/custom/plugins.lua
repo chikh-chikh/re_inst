@@ -94,11 +94,11 @@ local plugins = {
   -- {{{ which-key
   {
     "folke/which-key.nvim",
-      -- opts = overrides.whichkey.opts,
-      -- register = overrides.whichkey.register,
-    -- config = function ()
-    --   require "custom.configs.which-key"
-    -- end,
+    -- opts = overrides.whichkey.opts,
+    -- register = overrides.whichkey.register,
+    config = function ()
+      require "custom.configs.which-key"
+    end,
 
   },
 	-- ----------------------------------------------------------------------- }}}
