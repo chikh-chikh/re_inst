@@ -1,20 +1,12 @@
-local overrides = require("custom.configs.overrides")
+-- Constants = require("custom.configs.constants")
 local functions = require("custom.configs.functions")
 Is_Enabled = functions.is_enabled
 
 
---@type NvPluginSpec[]
-local plugins = {
+return {
 
-  -- {{{ ranger
-  {
-  "kevinhwang91/rnvimr",
-  enabled = Is_Enabled("rnvimr"),
-  -- keys = { "<leader>r" },
-  lazy = false,
-  },
-  -- ----------------------------------------------------------------------- }}}
   -- {{{ vim-dadbod-ui
+
   {
   "kristijanhusak/vim-dadbod-ui",
   enabled = Is_Enabled("vim-dadbod-ui"),
@@ -94,53 +86,5 @@ local plugins = {
 	},
 
 	-- ----------------------------------------------------------------------- }}}
-
-
-
-
-  -- Override plugin definition options
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- format & linting
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
-      },
-    },
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
-  },
-
-  -- override plugin configs
-  {
-    "williamboman/mason.nvim",
-    opts = overrides.mason
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
-
-  -- Install a plugin
-  {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup()
-    end,
-  },
-
 }
 
-return plugins

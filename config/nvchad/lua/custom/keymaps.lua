@@ -5,87 +5,6 @@ Functions = require("config.functions")
 Keymap = Functions.keymap
 Is_Enabled = Functions.is_enabled
 
-
-require("config.keymaps_main")
--- ------------------------------------------------------------------------- }}}
--- {{{ Bdelete
----[[
-if Is_Enabled("vim-easy-align") then
-  vim.cmd([[
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-    nmap <bar>     gaip*<bar>
-    nmap <leader>0 gaip*,
-    nmap <leader>1 gaip=,
-    nmap <leader>2 gaip=<space>
-  ]])
-end
-
--- BufferLine
-Keymap("n", ">", "<cmd>BufferLineCycleNext<CR>" )
-Keymap("n", "<", "<cmd>BufferLineCyclePrev<CR>" )
--- BufferLine
-Keymap("n", '<leader>d', '<cmd>bd<CR>')                             -- Закрыть буффер
-Keymap("n", '<leader>l', '<cmd>BufferLineCycleNext<CR>')            -- Перейти в следующий буффер
-Keymap("n", '<leader>h', '<cmd>BufferLineCyclePrev<CR>')            -- Перейти в предыдущий буффер
-Keymap("n", '`', '<cmd>BufferLineMoveNext<CR>')                     -- Переместить буффер
-Keymap("n", '~', '<cmd>BufferLineMovePrev<CR>')
-
---]]
--- ------------------------------------------------------------------------- }}}
--- {{{ Easy align
----[[
-if Is_Enabled("vim-easy-align") then
-  vim.cmd([[
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-    nmap <bar>     gaip*<bar>
-    nmap <leader>0 gaip*,
-    nmap <leader>1 gaip=,
-    nmap <leader>2 gaip=<space>
-  ]])
-end
---]]
--- ------------------------------------------------------------------------- }}}
--- {{{ General mappings.
-
--- Delete the current line.
-Keymap("n", "-", "dd")
-
--- Select (charwise) the contents of the current line, excluding indentation.
-Keymap("n", "vv", "^vg_")
-
--- Select entire buffer
-Keymap("n", "vaa", "ggvGg_")
-Keymap("n", "Vaa", "ggVG")
-Keymap("n", "<leader>V", "V`]")
-
--- Save all files.
-Keymap("n", "<F2>", "<cmd>wall<cr>")
-
--- Delete current buffer.
-if Is_Enabled("vim-bbye") then
-  Keymap("n", "Q", "<cmd>Bdelete!<cr>")
-end
-
--- Toggle [in]visible characters.
-Keymap("n", "<leader>i", "<cmd>set list!<cr>")
-
--- Stay in indent mode.
-Keymap("v", "<", "<gv")
-Keymap("v", ">", ">gv")
-
--- Visual yank
-Keymap("v", "<leader>cc", '"+y')
-
--- Obfuscate
-Keymap("n", "<f3>", "mmggg?G`m")
-
--- Alternative ESC key to avoid <Ctrl-[>.  Useful when a RCP is used to connect
--- to a remote host.
-Keymap("i", ";;", "<esc>")
-Keymap("c", ";;", "<esc>")
-
 -- ------------------------------------------------------------------------- }}}
 -- {{{ Folding commands.
 
@@ -94,41 +13,10 @@ Keymap("c", ";;", "<esc>")
 
 -- Close all fold except the current one.
 Keymap("n", "zv", "zMzvzz")
-
 -- Close current fold when open. Always open next fold.
 Keymap("n", "zj", "zcjzOzz")
-
 -- Close current fold when open. Always open previous fold.
 Keymap("n", "zk", "zckzOzz")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Keep the cursor in place while joining lines.
-
-Keymap("n", "J", "mzJ`z")
-Keymap("n", "<leader>J", "myvipJ`ygq<cr>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Shell commands.
-
--- Execute the current line of test as a shell command.
-Keymap("n", "<localleader>E", [[0mMvg_"ky :exec "r!" getreg("k")<cr>]])
-Keymap("v", "<localleader>E", [["ky :exec "r!" getreg("k")<cr>]])
-
--- ------------------------------------------------------------------------- }}}
--- {{{ Quit all
-
-Keymap("n", "<c-q>", "<cmd>qall!<cr>")
-Keymap("n", "<leader>qq", "<cmd>qall!<cr>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ leader + space
-
-Keymap("n", "<leader><space>", "<cmd>nohlsearch<cr>")
-
--- ------------------------------------------------------------------------- }}}
--- {{{ H - Help
-
-Keymap("n", "<leader>HH", "<cmd>silent vert bo help<cr>")
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ L - LSP
@@ -186,24 +74,12 @@ if Is_Enabled("gitsigns.nvim") then
 end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ a - Alpha
+-- {{{ a -
 
-if Is_Enabled("alpha-nvim") then
-  Keymap("n", "<leader>aa", "<cmd>Alpha<cr>")
-end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ b - Buffer adjustments.
+-- {{{ b 
 
-Keymap("n", "<leader>bh", "<cmd>vertical resize -1<cr>")
-Keymap("n", "<leader>bj", "<cmd>resize +1<cr>")
-Keymap("n", "<leader>bk", "<cmd>resize -1<cr>")
-Keymap("n", "<leader>bl", "<cmd>vertical resize +1<cr>")
-Keymap(
-  "n",
-  "<leader>bx",
-  [[<cmd>w<cr><cmd>luafile %<cr><cmd>echo "Sourced " . @%<cr>]]
-)
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ c - Copy & Paste & tmux
@@ -216,40 +92,7 @@ if Is_Enabled("vim-tmux-runner") then
 end
 
 -- ------------------------------------------------------------------------- }}}
--- {{{ D/d - Debug Adapter Protocol (DAP).
-
-if Is_Enabled("nvim-dap") then
-  Keymap("n", "<leader>dC", [[<cmd>lua require("dap").run_to_cursor()<cr>]])
-  Keymap("n", "<leader>db", [[<cmd>lua require("dap").step_back()<cr>]])
-  Keymap("n", "<leader>dc", [[<cmd>lua require("dap").continue()<cr>]])
-  Keymap("n", "<leader>dd", [[<cmd>lua require("dap").disconnect()<cr>]])
-  Keymap("n", "<leader>dg", [[<cmd>lua require("dap").session()<cr>]])
-  Keymap("n", "<leader>di", [[<cmd>lua require("dap").step_into()<cr>]])
-  Keymap("n", "<leader>dl", [[<cmd>lua require("dap").open_logfile()<cr>]])
-  Keymap("n", "<leader>do", [[<cmd>lua require("dap").step_over()<cr>]])
-  Keymap("n", "<leader>dp", [[<cmd>lua require("dap").pause()<cr>]])
-  Keymap("n", "<leader>dq", [[<cmd>lua require("dap").close()<cr>]])
-  Keymap("n", "<leader>ds", [[<cmd>lua require("dap").continue()<cr>]])
-  Keymap("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<cr>]])
-  Keymap("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<cr>]])
-
-  Keymap("n", "<leader>dw", [[<cmd>lua require("dap.ui.widgets").hover()<cr>]])
-  Keymap("n", "<leader>Dd", [[<cmd>lua require("osv").run_this()<cr>]])
-  Keymap(
-    "n",
-    "<leader>Ds",
-    [[<cmd>lua require("osv").launch({ port = 8686})<cr>]]
-  )
-
-  Keymap("n", "<F5>", [[<cmd>lua  require("dap").continue()<cr>]])
-  Keymap("n", "<F10>", [[<cmd>lua require("dap").step_over()<cr>]])
-  Keymap("n", "<F11>", [[<cmd>lua require("dap").step_into()<cr>]])
-  Keymap("n", "<F12>", [[<cmd>lua require("dap").step_out()<cr>]])
-end
-
-if Is_Enabled("nvim-dap-ui") then
-  Keymap("n", "<leader>dU", [[<cmd>lua require("dapui").toggle()<cr>]])
-end
+-- {{{ D/d - 
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ f - Find &zo tmux
@@ -308,13 +151,6 @@ if Is_Enabled("vim-fugitive") then
   Keymap("n", "<leader>gp", "<cmd>G push<cr>")
   Keymap("n", "<leader>gs", "<cmd>G<cr>")
 end
-
-if Is_Enabled("vim-bundle-plantuml") then
-  Keymap("n", "<leader>gu", "<cmd>call GenerateUmlDiagram<cr>")
-end
-
-Keymap("n", "gk", [[0mMvg_"ky <cmd>exec 'r!kjv -b -d -w 65' getreg('k')<cr>]])
-Keymap("v", "gk", [["ky <cmd>exec 'r!kjv -b -d -w 65' getreg('k')<cr>]])
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ k - kill runner
@@ -457,12 +293,12 @@ end
 Keymap(
   "n",
   "<leader>wa",
-  "<cmd>edit /home/traap/git/wiki/journal/Acronyms.md<cr>"
+  "<cmd>edit $HOME/git/wiki/journal/A.md<cr>"
 )
 Keymap(
   "n",
   "<leader>wb",
-  "<cmd>edit /home/traap/git/wiki/journal/Backlog.md<cr>"
+  "<cmd>edit $HOME/git/wiki/journal/B.md<cr>"
 )
 Keymap("n", "<leader>we", "<cmd>WikiExport<cr>")
 Keymap("n", "<leader>wi", "<cmd>WikiIndex<cr>")
@@ -471,12 +307,6 @@ Keymap("n", "<leader>wr", "<cmd>%s/\r//g<cr>")
 Keymap("n", "<leader>wt", "mz<cmd>%s/\t/  /g<cr><cmd>let @/=''<cr>`z")
 Keymap("n", "<leader>ww", [[mz<cmd>%s//\\s\\+$////<cr><cmd>let @/=''<cr>`z]])
 Keymap("n", "<leader>wZ", "<cmd>WikiFzfTags<cr>")
-Keymap("n", "<leader>wv", "<cmd><cr>")
-Keymap(
-  "n",
-  "<leader>wz",
-  "<cmd>execute !g.traap_pdf_viewer g.wiki_root/printed/api.expand('%:p:t:r').pdf &<cr>"
-)
 
 -- ------------------------------------------------------------------------- }}}
 -- {{{ u - Undotree

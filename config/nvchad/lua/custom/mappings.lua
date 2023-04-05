@@ -86,6 +86,7 @@ M.plugins = {
   n = {
     ["<leader>e"] = {"<cmd> NvimTreeToggle <CR>", "Toggle nvimtree"},
     ["<leader>r"] = {"<cmd> RnvimrToggle <CR>", "Ranger"},
+    ["<leader>u"] = {"<cmd> UndotreeToggle <CR>", "Toggle UndoTree"}
     -- ["<leader>ff"] = {"<cmd> Telescope <CR>", "Telescope"},
   },
 }
