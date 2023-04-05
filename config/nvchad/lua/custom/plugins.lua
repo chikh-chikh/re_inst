@@ -34,15 +34,12 @@ local plugins = {
   {
   "jalvesaq/Nvim-R",
   enabled = Is_Enabled("nvim-r"),
-  lazy = false,
   ft = { "r" },
-  -- keys = { { "\rf", "" } },
   -- keys = { "<Bslash>rf" },
-
   },
 
   -- ----------------------------------------------------------------------- }}}
--- {{{ undotree
+  -- {{{ undotree
   {
     'mbbill/undotree',
 		enabled = Is_Enabled("undotree"),
@@ -94,7 +91,17 @@ local plugins = {
 	},
 
 	-- ----------------------------------------------------------------------- }}}
+  -- {{{ which-key
+  {
+    "folke/which-key.nvim",
+      -- opts = overrides.whichkey.opts,
+      -- register = overrides.whichkey.register,
+    -- config = function ()
+    --   require "custom.configs.which-key"
+    -- end,
 
+  },
+	-- ----------------------------------------------------------------------- }}}
 
 
 

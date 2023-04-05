@@ -1,11 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
+- /home/ru/reinst
 - /home/ru/Git/nvim/Traap/nvim
-- /home/ru/Git/nvim/TR/nvim
 - /home/ru/Git/nvim/benbrastmckie/.config
 - /home/ru/Git/nvim/adalessa
 - /home/ru/Git/dots/Traap
-- /home/ru/reinst
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false

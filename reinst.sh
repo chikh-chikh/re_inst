@@ -10,6 +10,7 @@ function install_packages {
             xauth xorg
             build-essential libreadline-dev unzip curl wget python3 pipx pip3 \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
+            libxml2-dev \
             libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
             pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
             aptitude nala exa zsh \
@@ -172,7 +173,7 @@ function install_r {
     sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/"
     sudo apt-get update
     sudo apt-get install r-base
-    sudo apt-get install r-base-dev
+    sudo apt-get install r-base-dev libxml2-dev
     sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
     # sudo apt install --no-install-recommends r-cran-tidyverse
     # deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
