@@ -130,6 +130,13 @@ function install_awesome {
     # cd $HOME/downloads/
     sudo apt install awesome awesome-extra
 
+    git clone https://github.com/RU927/wm.git $HOME/git/wm
+    # git clone git@github.com:RU927/wm.git $HOME/git/wm
+    ln -s $HOME/git/wm/awesome /home/ru/.config/awesome
+
+    # git remote add origin git@github.com:RU927/wm.git
+    # git remote add origin git@github.com:RU927/editors.git
+
 }
 
 
@@ -188,8 +195,12 @@ function install_neovim {
     pip3 install neovim-remote
     npm i -g neovim;
 
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
-    ln -s $HOME/reinst/config/nvchad/lua/custom $HOME/.config/nvim/lua
+    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+
+    git clone https://github.com/RU927/editors.git $HOME/git/editors
+    # git clone git@github.com.RU927/editors.git $HOME/git/editors
+    ln -s $HOME/git/editors/nvchad/lua/custom $HOME/.config/nvim/lua/custom
+    
 }
 
 function install_greenclip {
