@@ -1,9 +1,3 @@
-__pycache__/
-.json
-
-.luarc.json
-lazy-lock.json
-
 
 # Added by cargo
 
@@ -13,3 +7,4 @@ config/ranger/plugins/__pycache__
 config/nvim/plugin
 config/nvim/lazy-lock.json
 config/vifm/vifminfo.json
+config/lazygit/state.yml

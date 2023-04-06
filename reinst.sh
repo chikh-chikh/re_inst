@@ -195,12 +195,9 @@ function install_neovim {
     pip3 install neovim-remote
     npm i -g neovim;
 
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-
+    ##git clone git@github.com.RU927/editors.git $HOME/git/editors
     git clone https://github.com/RU927/editors.git $HOME/git/editors
-    # git clone git@github.com.RU927/editors.git $HOME/git/editors
-    ln -s $HOME/git/editors/nvchad/lua/custom $HOME/.config/nvim/lua/custom
-    
+    ln -vsf $HOME/git/editors/NvChad $HOME/.config/nvim
 }
 
 function install_greenclip {
