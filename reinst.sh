@@ -8,14 +8,14 @@ function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
             xauth xorg \
-            build-essential libreadline-dev unzip curl wget python3 pipx pip3 \
+            build-essential libreadline-dev unzip curl wget python3 pipx \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             libxml2-dev \
             libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
             connman cmst connman-gtk connman-ui \
             pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
             aptitude nala exa zsh \
-            cmus tmux picom fzf htop gh lazygit rofi \
+            cmus tmux picom fzf htop gh rofi \
             zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
             pandoc pandoc-citeproc \
             atool bat fd-find fasd silversearcher-ag \
@@ -77,7 +77,6 @@ function setup_symlinks {
     ln -sfnv "$PWD/config/xplr/"          ~/.config/
     ln -sfnv "$PWD/config/vifm/"          ~/.config/
     ln -sfnv "$PWD/config/zathura/"       ~/.config/
-    ln -sfnv "$PWD/config/latex/"         ~/.config/
     # ln -sfnv "$PWD/config/nvim/"          ~/.config/
     ln -sfnv "$PWD/config/tmux/"          ~/.config/
     ln -sfnv "$PWD/config/zsh/"           ~/.config/
@@ -207,13 +206,21 @@ function install_neovim {
     mkdir -p $HOME/git/editors
     git clone https://github.com/RU927/editors.git $HOME/git/editors
     ln -vsf $HOME/git/editors/NvChad $HOME/.config/nvim
+
+    ln -vsf $HOME/git/editors/nvim/after/ $HOME/.config/nvim/
+    ln -vsf $HOME/git/editors/nvim/minimal/ $HOME/.config/nvim/
+    ln -vsf $HOME/git/editors/nvim/snippets/ $HOME.config/nvim/
+    ln -vsf $HOME/git/editors/nvim/templates/ $HOME/.config/nvim/
+
     # git remote add origin git@github.com:RU927/editors
+    # ln -sfnv "$HOME/git/editors/latex/"         ~/.config/
 }
 
 function install_greenclip {
     echo -e "\u001b[7m Installing greenclip \u001b[0m"
             #Greenclip (rofi clipboard manager)
         wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+        mkdir -p $HOME/.local/bin
         mv greenclip ~/.local/bin
         chmod 775 ~/.local/bin/greenclip
 }
@@ -247,7 +254,7 @@ function install_zotero_bibtex {
           /zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
 
         mkdir -p ~/texmf/bibtex/bib
-        ln -s $PWD/config/latex/bst ~/texmf/bibtex
+        ln -s "$HOME/git/editors/latex/bst" ~/texmf/bibtex
 }
 
 function install_lazygit {
