@@ -7,11 +7,12 @@ git submodule update --init --recursive
 function install_packages {
     echo -e "\u001b[7m Installing required packages... \u001b[0m"
         sudo apt install \
-            xauth xorg
+            xauth xorg \
             build-essential libreadline-dev unzip curl wget python3 pipx pip3 \
             cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
             libxml2-dev \
-            libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
+            libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
+            connman cmst connman-gtk connman-ui \
             pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
             aptitude nala exa zsh \
             cmus tmux picom fzf htop gh lazygit rofi \
@@ -65,17 +66,18 @@ function backup_configs {
     # mv -iv ~/.            ~/.
     echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
 }
-
+## -f удаляет имеющийся линк
 function setup_symlinks {
     echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
     mkdir -p $HOME/.config
-    ln -sfnv "$PWD/config/awesome/"       ~/.config/
+    # ln -sfnv "$PWD/config/awesome/"       ~/.config/
     ln -sfnv "$PWD/config/alacritty/"     ~/.config/
     ln -sfnv "$PWD/config/ranger/"        ~/.config/
     ln -sfnv "$PWD/config/rofi/"          ~/.config/
     ln -sfnv "$PWD/config/xplr/"          ~/.config/
     ln -sfnv "$PWD/config/vifm/"          ~/.config/
     ln -sfnv "$PWD/config/zathura/"       ~/.config/
+    ln -sfnv "$PWD/config/latex/"         ~/.config/
     # ln -sfnv "$PWD/config/nvim/"          ~/.config/
     ln -sfnv "$PWD/config/tmux/"          ~/.config/
     ln -sfnv "$PWD/config/zsh/"           ~/.config/
@@ -109,33 +111,39 @@ function setup_symlinks {
 function install_awesome {
     echo -e "\u001b[7m Installing Lua...\u001b[0m"
     # Lua
-    mkdir -p $HOME/Downloads
-    cd $HOME/Downloads
+    # mkdir -p $HOME/Downloads
+    # cd $HOME/Downloads
     curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
     tar -zxf lua-5.3.5.tar.gz
+    rm -rf lua-5.3.5.tar.gz
     cd lua-5.3.5
     make linux test
     sudo make install
+    cd -
+    rm -rf lua-5.3.5
     # Luarocks
     echo -e "\u001b[7m Installing Luarocks...\u001b[0m"
-    cd $HOME/Downloads/
+    # cd $HOME/Downloads
     wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
     tar -zxpf luarocks-3.8.0.tar.gz
+    rm -rf luarocks-3.8.0.tar.gz
     cd luarocks-3.8.0
     ./configure --with-lua-include=/usr/local/include
     make
     sudo make install
+    cd -
+    rm -rf luarocks-3.8.0
     # Awesome
     echo -e "\u001b[7m Installing Awesome...\u001b[0m"
     # cd $HOME/downloads/
     sudo apt install awesome awesome-extra
 
-    git clone https://github.com/RU927/wm.git $HOME/git/wm
+    mkdir -p $HOME/git/wm
+    git clone https://github.com/RU927/wm $HOME/git/wm
     # git clone git@github.com:RU927/wm.git $HOME/git/wm
-    ln -s $HOME/git/wm/awesome /home/ru/.config/awesome
-
-    # git remote add origin git@github.com:RU927/wm.git
-    # git remote add origin git@github.com:RU927/editors.git
+    rm -r $HOME/.config/awesome/
+    ln -s $HOME/git/wm/awesome $HOME/.config/
+    # git remote add origin git@github.com:RU927/wm
 
 }
 
@@ -196,8 +204,10 @@ function install_neovim {
     npm i -g neovim;
 
     ##git clone git@github.com.RU927/editors.git $HOME/git/editors
+    mkdir -p $HOME/git/editors
     git clone https://github.com/RU927/editors.git $HOME/git/editors
     ln -vsf $HOME/git/editors/NvChad $HOME/.config/nvim
+    # git remote add origin git@github.com:RU927/editors
 }
 
 function install_greenclip {
@@ -230,8 +240,11 @@ function install_zotero_bibtex {
 
 
     echo -e "\u001b[7m Installing bibtex  \u001b[0m"
-        BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-        curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi "https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}/zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
+        BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" \
+          | grep -Po '"tag_name": "v\K[^"]*')
+        curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi \
+          "https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}\
+          /zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
 
         mkdir -p ~/texmf/bibtex/bib
         ln -s $PWD/config/latex/bst ~/texmf/bibtex
@@ -239,8 +252,10 @@ function install_zotero_bibtex {
 
 function install_lazygit {
     echo -e "\u001b[7m Installing  \u001b[0m"
-        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" \
+          | grep -Po '"tag_name": "v\K[^"]*')
+        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_\
+          ${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
         tar xf lazygit.tar.gz lazygit
         sudo install lazygit /usr/local/bin
         rm -rf lazygit.tar.gz

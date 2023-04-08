@@ -2,18 +2,13 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 
-import:
-  - ~/reinst/config/alacritty/gruvbox_material.yml
-  # - ~/reinst/config/alacritty/gruvbox_dark.yml
-
-    #=======
 import: 
-  - ~/reinst/config/alacritty/gruvbox_material.yml
-  # - ~/reinst/config/alacritty/gruvbox_dark.yml
+  - ~/.config/alacritty/gruvbox_material.yml
+  # - ~/.config/alacritty/gruvbox_dark.yml
 
-  # - ~/reinst/config/alacritty/font1.yml
-  - ~/reinst/config/alacritty/font2.yml
-  # - ~/reinst/config/alacritty/font3.yml
+  # - ~/.config/alacritty/font1.yml
+  - ~/.config/alacritty/font2.yml
+  # - ~/.config/alacritty/font3.yml
 
 font:
   size: 12.0
