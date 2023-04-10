@@ -1,0 +1,12 @@
+#!/bin/bash
+# ------------------------------------------------------------------------------
+# Build amber 
+# ------------------------------------------------------------------------------
+if [[ -d ${AMBERPATH} ]]; then
+  dir=$(pwd)
+  cd ${AMBERPATH}
+  rake build:amber
+  cd ${dir}
+else
+  echo "WARNING: amber is not installed."
+fi

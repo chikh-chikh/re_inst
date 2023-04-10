@@ -1,0 +1,67 @@
+# {{{ Stooges: Honoring Larry, Moe, and Curly ... Nyuk, nyuk, nyuk.
+#!/bin/bash
+#
+# Bash scripting cheatsheet => https://devhints.io/bash
+
+echo "$HOSTNAME running $OSTYPE"
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Disable ctrl-s, ctrl-q, and set infinite history.
+
+stty -ixon
+HISTSIZE='' HISTFILESIZE=''
+
+# -------------------------------------------------------------------------- }}}
+# Define directory exports that my_functions use.
+# BBHOME=$HOME/bb
+# export BBHOME
+
+CFGHOME=$HOME/.config
+export CFGHOME
+
+GITHOME=$HOME/git
+export GITHOME
+
+GITPATH=$GITHOME
+export GITPATH
+
+DOTHOME=$GITHOME/reinst
+export DOTHOME
+
+BASHHOME=$DOTHOME/bash
+export BASHHOME
+
+BINHOME=$BASHHOME/bin
+export BINHOME
+
+# SSHHOME=$GITHOME/ssh
+# export SSHHOME
+#
+# WIKIHOME=$GITHOME/wiki
+# export WIKIHOME
+ 
+# {{{ Customize my shell. Array order matters.
+
+# my_array=("functions" "exports" "aliases" "paths" "completions" "prompt")
+#
+# for m in "${my_array[@]}"; do
+# 	[[ -f "$BASHHOME/my_$m" ]] && source "$BASHHOME/my_$m"
+# done
+
+# Load my keys.
+# sshkeys
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Customize my bash experience.
+
+# Define functions and paths for this shell.
+dofile=${HOME}/git/reinst/bash
+
+# Customize my shell.
+my_array=("functions" "exports" "aliases" "paths" "completions" "prompt" )
+for m in ${my_array[@]}; do
+  x=$dofile/my_$m
+  source $x
+done
+
+# -------------------------------------------------------------------------- }}}

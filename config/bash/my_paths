@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# {{{ Linux only machines.
+
+# NOTE: When order matters:  PrependToPath (beginn) and appendToPath (end).
+
+# Programming languages.
+prependToPath "$HOME"/.cargo/bin
+
+# Ruby Environment Manager
+if programExists rbenv; then
+  eval "$(rbenv init - n)"
+fi
+
+# prependToPath only prepends to the path when the directory exists.
+prependToPath "$HOME"/.local/share/nvim/mason/bin
+prependToPath "$HOME"/bin
+prependToPath "$BASHHOME"/bin
+
+# -------------------------------------------------------------------------- }}}

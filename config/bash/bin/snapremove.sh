@@ -1,3 +1,4 @@
+#!/bin/sh
 sudo snap remove lxd
 sudo snap remove core20
 sudo snap remove snapd

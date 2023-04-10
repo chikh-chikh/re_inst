@@ -6,7 +6,8 @@ HISTFILE=~/.zsh_history
 # sourse
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
-plug "$HOME/.config/zsh/sourced.zsh"
+# plug "$HOME/.config/zsh/sourced.zsh"
+plug "$HOME/.config/zsh/zshrc-personal"
 
 # plugins
 plug "zap-zsh/supercharge"
@@ -19,11 +20,4 @@ plug "esc/conda-zsh-completion"
 #set -o vi
 
 
-case ${TERM} in
-  xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD/#$HOME/\~}\007"'
-        ;;
-  screen*)
-    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOST%%.*}:${PWD/#$HOME/\~}\033\\"'
-    ;;
-esac
+# source .zshrc-personal

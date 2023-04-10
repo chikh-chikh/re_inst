@@ -1,0 +1,133 @@
+[user]
+    email = mr.uzairov@gmail.com
+    name = Rustam Uzairov
+    /* signingkey =  */
+
+[commit]
+    /* gpgSign = true */
+
+/* [credential] */
+/*     helper = cache --timeout 3600 */
+/* [credential] */
+/*   helper = store */
+
+[core]
+    editor = nvim
+    /* pager = delta --dark */
+    excludesFile = ~/.gitignore.global
+/* [core] */
+/*   excludesfile = ~/.gitignore_global */
+/*   editor       = vim */
+/*   autocrlf     = input */
+/*   eol          = lf */
+/*   preloadindex = true */
+/*   fscache      = true */
+
+[color]
+  ui          = auto
+  branch      = auto
+  diff        = auto
+  interactive = auto
+  status      = auto
+
+[color  "status"]
+  added     = green
+  changed   = yellow  bold
+  untracked = red  bold
+
+[code]
+  pager = cat
+
+
+/* [interactive] */
+/*     diffFilter = delta --color-only --highlight-removed */
+/**/
+/* [color] */
+/*     ui = true */
+/**/
+/* [protocol] */
+/*     version = 2 */
+
+/* [push] */
+/*     autoSetupRemote = true */
+/* [push] */
+/*   default = simple */
+/**/
+/* [pull] */
+/*     rebase = true */
+/**/
+/* [rebase] */
+/*     autoStash = true */
+/* [rebase] */
+/*   autoSquash = true */
+/* [branch] */
+/*   autosetuprebase = always */
+/**/
+/* [init] */
+/*     defaultBranch = main */
+/**/
+/* [merge] */
+/*     conflictstyle = diff3 */
+/**/
+/* [diff] */
+/*     colorMoved = default */
+/* [diff] */
+/* 	tool = meld */
+/**/
+/* [include] */
+/*     path = ~/.config/delta/delta.gitconfig */
+/* [include] */
+/*     path = ~/git/ssh/gitconfig-private */
+/**/
+/* [delta] */
+/*     features = mantis-shrimp */
+/**/
+/* [filter "lfs"] */
+/* 	clean = git-lfs clean -- %f */
+/* 	process = git-lfs filter-process */
+/* 	required = true */
+/* 	smudge = git-lfs smudge -- %f */
+/**/
+/* [rerere] */
+/*   autoupdate = true */
+/*   enable     = true */
+/**/
+/* [gpg] */
+/*   program = gpg */
+/**/
+/* [fetch] */
+/*   prune = true */
+/**/
+/* [gc] */
+/*   auto = 256 */
+/**/
+/**/
+/* [help] */
+/* 	format = html */
+
+[alias]
+  br     = branch
+  co     = checkout
+  db     = branch  -d
+  head   = rev-parse HEAD
+  logd   = log  --color  --graph  --abbrev-commit  --pretty=format:'%Cred%h%Creset  -%C(yellow)%d%Creset  %s  %Cgreen(%cD)  %C(bold  blue)<%an>%Creset'
+  logg   = log  --color  --graph  --abbrev-commit  --pretty=format:'%Cred%h%Creset  -%C(yellow)%d%Creset  %s  %Cgreen(%cr)  %C(bold  blue)<%an>%Creset'
+  logi   = log  --color  --graph  --abbrev-commit  --pretty=format:'%Cred%h%Creset  -%C(yellow)%d%Creset  %s  %Cgreen(%ci)  %C(bold  blue)<%an>%Creset'
+  to     = log  --no-walk  --tags  --pretty=format:'%C(auto)%aI  %H  %d'  --decorate=full
+  tt     = log  --no-walk  --tags  --pretty=format:'%C(auto)%H  %d'  --decorate=full
+  t3     = log  --no-walk  --tags  --pretty=format:'%C(auto)%h  %d'  --decorate=full
+  master = checkout  master
+  pf     = push  --force
+  pom    = push  origin  master
+  rbc    = rebase  --continue
+  rbi    = rebase  -i  origin/master
+  rbs    = rebase  --skip
+  suo    = push  --set-upstream  origin
+  cma    = commit  --all  -m
+  gm     = "!git  checkout  $1;git  merge  @{1-}"
+  sl     = stash list
+  sp     = stash pop
+  ss     = stash save
+  st     = status  --short  --branch
+  undo   = "!f()  {  git  reset  --hard  $(git  rev-parse  --abbrev-ref  HEAD)@{${1-1}};  };  f"
+  pushup = push  -u  origin  HEAD

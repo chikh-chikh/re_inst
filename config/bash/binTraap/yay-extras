@@ -1,0 +1,14 @@
+#!/bin/bash
+yay -S --noconfirm \
+    npm \
+    okular \
+    rbenv \
+    ripgrep \
+    ruby-build \
+    texlive-bin \
+    texlive-core \
+    texlive-latexextra \
+    texlive-music \
+    texlive-pictures \
+    texlive-publishers \
+    texlive-science

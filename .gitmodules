@@ -1,0 +1,6 @@
+[submodule ".config/nvim"]
+    path = .config/nvim
+    url = ../editors/NvChad
+[submodule ".config/awesome"]
+    path = .config/awesome
+    url = ../wm/awesome

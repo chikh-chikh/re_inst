@@ -4,7 +4,6 @@
 /target
 config/ranger/__pycache__
 config/ranger/plugins/__pycache__
-config/nvim/plugin
 config/nvim/lazy-lock.json
 config/vifm/vifminfo.json
 config/lazygit/state.yml

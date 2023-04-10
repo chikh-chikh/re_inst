@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# Simple Note-Taking with fzf and Vim
+# Casey Brant
+# https://medium.com/adorableio/simple-note-taking-with-fzf-and-vim-2a647a39cfa
+#
+set -e
+
+fuz() {
+  previous_file="$1"
+  file_to_edit=$(select_file "$previous_file")
+
+  if [ -n "$file_to_edit" ]; then
+    "$EDITOR" "$file_to_edit"
+    fuz "$file_to_edit"
+  fi
+}
+
+select_file() {
+  given_file="$1"
+  fzf --preview="bat --color=always --style=numbers {}" \
+      --preview-window=right:50%:wrap \
+      --query="$given_file"
+}
+
+# Kick start Note-Taking
+fuz "$@"

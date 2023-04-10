@@ -1,7 +1,7 @@
 #!/bin/sh
-git config --global user.name "Rustam Uzairov"
-git config --global user.email "mr.uzairov@gmail.com"
-git config --global merge.tool vimdiff
+# git config --global user.name "Rustam Uzairov"
+# git config --global user.email "mr.uzairov@gmail.com"
+# git config --global merge.tool vimdiff
 
 #git config --global gpg.format ssh
 #git config --global user.signingkey /home/ru/.ssh/*.pub
@@ -17,6 +17,6 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 cat /home/ru/.ssh/id_rsa.pub
 
-git remote set-url origin git@github.com:ru927/reinst
+# git remote set-url origin git@github.com:ru927/reinst
 
 
