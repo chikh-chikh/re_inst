@@ -1,6 +1,6 @@
 [submodule "config/nvim"]
-    path = .config/nvim
+    path = config/nvim
     url = ../editors.git
 [submodule "config/awesome"]
-    path = .config/awesome
+    path = config/awesome
     url = ../wm.git
