@@ -1,8 +1,0 @@
-[submodule "config/nvim"]
-    path = config/nvim
-    ; url = ../editors.git
-    url = https://github.com/RU927/editors/NvChad
-[submodule "config/awesome"]
-    path = config/awesome
-    ; url = ../wm.git
-    url = https://github.com/RU927/wm
