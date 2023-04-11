@@ -1,6 +1,6 @@
 [submodule "config/nvim"]
     path = config/nvim
-    url = ../editors/NvChad
+    url = ../editors.git
 [submodule "config/awesome"]
     path = config/awesome
-    url = ../wm/awesome
+    url = ../wm.git
