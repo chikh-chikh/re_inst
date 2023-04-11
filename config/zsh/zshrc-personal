@@ -27,15 +27,43 @@ HISTSIZE= HISTFILESIZE=
 # fi
 
 # -------------------------------------------------------------------------- }}}
+# Define directory exports that my_functions use.
+# BBHOME=$HOME/bb
+# export BBHOME
+
+CFGHOME=$HOME/.config
+export CFGHOME
+
+GITHOME=$HOME/git
+export GITHOME
+
+GITPATH=$GITHOME
+export GITPATH
+
+DOTHOME=$GITHOME/reinst
+export DOTHOME
+
+BASHHOME=$DOTHOME/config/bash
+export BASHHOME
+
+BINHOME=$BASHHOME/bin
+export BINHOME
+
+# SSHHOME=$GITHOME/ssh
+# export SSHHOME
+#
+# WIKIHOME=$GITHOME/wiki
+# export WIKIHOME
+ 
 # {{{ Customize my bash experience.
 
 # Define functions and paths for this shell.
-dotfiles=${HOME}/git/reinst/config/bash
+dofile=${HOME}/git/reinst/config/bash
 
 # Customize my shell.
 my_array=("functions" "exports" "aliases" "paths")
 for m in ${my_array[@]}; do
-  x=$dotfiles/my_$m
+  x=$dofile/my_$m
   source $x
 done
 

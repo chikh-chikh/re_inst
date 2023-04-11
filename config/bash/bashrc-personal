@@ -28,7 +28,7 @@ export GITPATH
 DOTHOME=$GITHOME/reinst
 export DOTHOME
 
-BASHHOME=$DOTHOME/bash
+BASHHOME=$DOTHOME/config/bash
 export BASHHOME
 
 BINHOME=$BASHHOME/bin
@@ -55,7 +55,7 @@ export BINHOME
 # {{{ Customize my bash experience.
 
 # Define functions and paths for this shell.
-dofile=${HOME}/git/reinst/bash
+dofile=${HOME}/git/reinst/config/bash
 
 # Customize my shell.
 my_array=("functions" "exports" "aliases" "paths" "completions" "prompt" )

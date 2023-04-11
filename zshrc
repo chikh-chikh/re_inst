@@ -6,7 +6,6 @@ HISTFILE=~/.zsh_history
 # sourse
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
-# plug "$HOME/.config/zsh/sourced.zsh"
 plug "$HOME/.config/zsh/zshrc-personal"
 
 # plugins
