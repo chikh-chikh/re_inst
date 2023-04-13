@@ -48,6 +48,7 @@ function backup_configs {
     mv -iv ~/.config/nvim/             ~/.config/nvim.old/
     mv -iv ~/.config/tmux/             ~/.config/tmux.old/
     mv -iv ~/.config/zsh/              ~/.config/zsh.old/
+    mv -iv ~/.config/sheldon/          ~/.config/sheldon.old/
     mv -iv ~/.config/htop/             ~/.config/htop.old/
     mv -iv ~/.config/greenclip.cfg     ~/.config/greenclip.cfg.old
     mv -iv ~/.config/greenclip.toml    ~/.config/greenclip.toml.old
@@ -82,14 +83,15 @@ function setup_symlinks {
     ln -sfnv "$PWD/config/zsh/"           ~/.config/
     ln -sfnv "$PWD/config/htop/"          ~/.config/
     ln -sfnv "$PWD/config/lazygit/"       ~/.config/
+    ln -sfnv "$PWD/config/sheldon/"       ~/.config/
     ln -sfnv "$PWD/config/greenclip.cfg"  ~/.config/
     ln -sfnv "$PWD/config/greenclip.toml" ~/.config/
 
-    ln -sfnv "$PWD/zshrc"                 ~/.zshrc
-    # ln -sfnv "$PWD/bashrc"                ~/.bashrc
+    ln -sfnv "$PWD/shell/zshrc"           ~/.zshrc
+    ln -sfnv "$PWD/shell/zshenv"          ~/.zshenv
+    ln -sfnv "$PWD/shell/bashrc"          ~/.bashrc
     ln -sfnv "$PWD/profile"               ~/.profile
     ln -sfnv "$PWD/xinitrc"               ~/.xinitrc
-    ln -sfnv "$PWD/zshenv"                ~/.zshenv
     ln -sfnv "$PWD/Rprofile"              ~/.Rprofile
     ln -sfnv "$PWD/Renviron"              ~/.Renviron
     # ln -sfnv "$PWD/"                ~/.
@@ -162,9 +164,12 @@ function install_alacritty {
     cargo install alacritty
 }
 
-function install_zap_zsh {
-    echo -e "\u001b[7m Installing zap-zsh...\u001b[0m"
-    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)" # "" --unattended
+function install_sheldon {
+  
+    echo -e "\u001b[7m Compiling Sheldon...\u001b[0m"
+    cargo install sheldon
+    sheldon lock
+
     chsh -s $(which zsh)
 }
 
@@ -318,7 +323,7 @@ function all {
     setup_symlinks
     install_awesome
     install_alacritty
-    install_zap_zsh
+    install_sheldon
     install_nodejs
     install_r
     install_neovim
@@ -343,7 +348,7 @@ function wm {
 function terminals {
     echo -e "\u001b[7m Setting up Terminals... \u001b[0m"
     install_alacritty
-    install_zap_zsh
+    install_sheldon
     install_lazygit
     echo -e "\u001b[7m Done! \u001b[0m"
 }
@@ -385,7 +390,7 @@ echo -e "  \u001b[34;1m (2) Backup current config \u001b[0m"
 echo -e "  \u001b[34;1m (3) Setup symlinks \u001b[0m"
 echo -e "  \u001b[34;1m (4) Install awesome \u001b[0m"
 echo -e "  \u001b[34;1m (5) Install alacritty \u001b[0m"
-echo -e "  \u001b[34;1m (6) Install zap-zsh \u001b[0m"
+echo -e "  \u001b[34;1m (6) Install sheldon \u001b[0m"
 echo -e "  \u001b[34;1m (7) Install nodejs \u001b[0m"
 echo -e "  \u001b[34;1m (8) Install r \u001b[0m"
 echo -e "  \u001b[34;1m (9) Install neovim \u001b[0m"
@@ -446,7 +451,7 @@ case $option in
     ;;
 
 "6")
-    install_zap_zsh
+    install_sheldon
     ;;
 
 "7")
