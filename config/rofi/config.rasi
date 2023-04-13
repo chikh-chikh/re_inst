@@ -4,7 +4,7 @@ configuration{
     font: "Roboto Nerd Font 12";
     show-icons: true;
     icon-theme: "Oranchelo";
-    terminal: "alacrtty";
+    terminal: "alacritty";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;

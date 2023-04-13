@@ -1,4 +1,97 @@
 #!/bin/bash
+# Environment variables
+
+# Fzf
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
+export FZF_COMPLETION_TRIGGER=','
+export FZF_DEFAULT_OPTS="
+--layout=reverse --info=inline --height=80% --multi --cycle --margin=1 --border=rounded
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
+&& (exa -TFl --group-directories-first --icons --git -L 2 --no-user {} | less)) || echo {} 2> /dev/null | head -200'
+--prompt=' ' --pointer='>' --marker='✔'
+--color='hl:148,hl+:154,prompt:blue,pointer:032,marker:010,bg+:000,gutter:000'
+--preview-window=right:65%
+--bind '?:toggle-preview'
+--bind 'ctrl-a:select-all'
+--bind 'ctrl-y:execute-silent(echo {+} | clipcopy)'
+--bind 'ctrl-e:execute(nvim-qt {+})'
+--bind 'ctrl-v:execute(code {+})'"
+
+export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
+export FZF_TMUX_OPTS='-p 90%'
+
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias: "
+export ZSH_TMUX_AUTOSTART='false'
+export ZSH_TMUX_AUTOSTART_ONCE='false'
+export ZSH_TMUX_AUTOCONNECT='false'
+export DISABLE_AUTO_TITLE='true'
+
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.npm/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.luarocks/bin:$PATH
+
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+
+# export GPG_TTY=$(tty)
+
+
+
+
+# Environment variables set everywhere
+
+# export EDITOR=/usr/bin/nvim
+# export VISUAL=/usr/bin/nvim
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
+export READER="zathura"
+
+export TERMINAL="alacritty"
+export WM="awesome"
+#export BROWSER="brave"
+
+# XDG Paths
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+# zsh config dir
+#export ZDOTDIR=$HOME/.config/zsh
+#export ZSH="$HOME/.config/zsh/"
+
+# export R_HOME=/usr/lib/R
+#export R_HOME=$HOME/.local/lib/R
+
+# export VIMRUNTIME=$HOME/.local/share/nvim/
+export VIMRUNTIME=/usr/share/nvim/runtime
+
+export LANG=ru_RU.UTF-8
+
+export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+
+
+
+
+
+
+
+# {{{ History and path
+
+export HISTCONTROL=ignoreboth:erasedups
+
+# PS1='[\u@\h \W]\$ '
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Ibus settings
+
+#type ibus-setup in terminal to change settings and start the daemon
+#delete the hashtags of the next lines and restart
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=dbus
+#export QT_IM_MODULE=ibus
+
+# -------------------------------------------------------------------------- }}}
 # {{{ Default Browers, File Manager, and 256 colors.
 # if [[ -z $WSL_DISTRO_NAME ]]; then
 #   if programExists brave-browser; then
