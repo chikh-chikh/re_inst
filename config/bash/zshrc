@@ -41,11 +41,16 @@ fi
 export ZSH_PLUG_DIR="${HOME}/.local/share/zsh/plugins"
 # if [ ! -d "${ZSH_PLUG_DIR}" ]; then mkdir -p "$ZSH_PLUG_DIR"; then
 #   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUG_DIR/zsh-autosuggestions
+#   git clone https://github.com/zsh-users/zsh-history-substring-search $ZSH_PLUG_DIR/zsh-history-substring-search
 #   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUG_DIR/zsh-syntax-highlighting
 # fi
 
 if [[ -f $ZSH_PLUG_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   . $ZSH_PLUG_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [[ -f $ZSH_PLUG_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  . $ZSH_PLUG_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh
 fi
 
 if [[ -f $ZSH_PLUG_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
@@ -491,10 +496,13 @@ case "${TERM}" in
         bindkey "^[[3~" delete-char #Del key
         bindkey "^[[A" history-beginning-search-backward #Up Arrow
         bindkey "^[[B" history-beginning-search-forward #Down Arrow
-        bindkey "^[Oc" forward-word # control + right arrow
-        bindkey "^[Od" backward-word # control + left arrow
+        bindkey "^[[1;5C" forward-word # control + right arrow
+        bindkey "^[[1;5D" backward-word # control + left arrow
         bindkey "^H" backward-kill-word # control + backspace
-        bindkey "^[[3^" kill-word # control + delete
+        bindkey "^[[3;5~" kill-word # control + delete
+        #plugins keys 
+        bindkey '^[[1;5A' history-substring-search-up # control + up arrow
+        bindkey '^[[1;5B' history-substring-search-down # control + down arrow
     ;;
 
     linux)
@@ -519,7 +527,7 @@ case "${TERM}" in
         bindkey "^[[3^" kill-word # control + delete
     ;;
 esac
-
+#принимает несколько слов или их частей (слово*ово)  
 bindkey "^R" history-incremental-pattern-search-backward 
 bindkey "^S" history-incremental-pattern-search-forward
 
