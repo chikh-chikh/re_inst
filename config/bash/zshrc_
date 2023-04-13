@@ -44,11 +44,6 @@ done
 
 # -------------------------------------------------------------------------- }}}
 
-# plugins
-# plug "zap-zsh/supercharge"
-# plug "zsh-users/zsh-autosuggestions"
-# plug "zsh-users/zsh-syntax-highlighting"
-
 #set -o vi
 # bindkey '^ ' autosuggest-accept
 bindkey '^A' beginning-of-line
@@ -61,25 +56,6 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-## Стек Каталогов
-DIRSTACKFILE="$HOME/.cache/zsh/dirs"
-if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-  [[ -d $dirstack[1] ]] && cd $dirstack[1]
-fi
-chpwd() {
-  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-}
-
-DIRSTACKSIZE=20
-
-setopt autopushd pushdsilent pushdtohome
-
-## Удалить повторяющиеся записи
-setopt pushdignoredups
-
-## Это Отменяет +/- операторы.
-setopt pushdminus
 
 ## Приглашение
 autoload -U colors && colors

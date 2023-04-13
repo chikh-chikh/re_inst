@@ -37,14 +37,12 @@ if ! [[ "${PATH}" =~ "^${HOME}/bin" ]]; then
     export PATH="${HOME}/bin:${PATH}"
 fi
 
-
 #plugins
 export ZSH_PLUG_DIR="${HOME}/.local/share/zsh/plugins"
 # if [ ! -d "${ZSH_PLUG_DIR}" ]; then mkdir -p "$ZSH_PLUG_DIR"; then
 #   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUG_DIR/zsh-autosuggestions
 #   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUG_DIR/zsh-syntax-highlighting
 # fi
-
 
 if [[ -f $ZSH_PLUG_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   . $ZSH_PLUG_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -278,7 +276,7 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
+zstyle ':completion:*:descriptions' format '%U%F{YELLOW}%d%f%u'
 
 if command -v terraform >/dev/null 2>&1; then
     autoload -U +X bashcompinit && bashcompinit
@@ -305,34 +303,46 @@ case $USER in
     ;;
 
     *)  
-        PROMPT='%B%F{blue}%n@%m%k %(?..%F{blue}[%F{253}%?%F{blue}] )${prompt_is_ssh}%B%F{cyan}%1~${git_prompt}%F{cyan} %# %b%f%k'
+        # PROMPT='%B%F{blue}%n@%m%k %(?..%F{blue}[%F{253}%?%F{blue}] )${prompt_is_ssh}%B%F{cyan}%1~${git_prompt}%F{cyan} %# %b%f%k'
+        PROMPT='%B%F{red}%n%B%F{reset_color}*%B%F{blue}%m%k %(?..%F{blue}[%F{253}%?%F{blue}] )${prompt_is_ssh}%B%F{cyan}%1~${git_prompt}%F{cyan} '
+        RPROMPT='%B%F{YELLOW}%~'
 
     ;;
 esac
 
-# Keep history of `cd` as in with `pushd` and make `cd -<TAB>` work.
-DIRSTACKSIZE=16
-setopt auto_pushd
+## Стек Каталогов
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=20
+# Сохранение истории `cd` в составе `pushd` и обеспечение работы `cd -<TAB>`
+setopt auto_pushd pushdsilent pushdtohome
+## Удалить повторяющиеся записи
 setopt pushd_ignore_dups
+## Это Отменяет +/- операторы.
 setopt pushd_minus
 
-# Ignore lines prefixed with '#'.
+# Игнорировать записи с префиксом '#'.
 setopt interactivecomments
-
-# Ignore duplicate in history.
+# Игнорируйте дубликаты в истории.
 setopt hist_ignore_dups
-
-# Prevent record in history entry if preceding them with at least one space
+# Запрет записи в истории, если перед ней есть пробелы.
 setopt hist_ignore_space
 
-# Nobody need flow control anymore. Troublesome feature.
+# Nobody need flow control anymore. Проблемная функция.
 #stty -ixon
 setopt noflowcontrol
 
-# Ensure that / is added after tab complation to directories.
-# without disabling it, $LBUFFER does not have the slash at the end
-# and it's required for _append_path_to_buffer thing..
-#setopt AUTO_PARAM_SLASH
+# Убедитесь, что / добавляется после табуляции к каталогам.
+# если не отключить его, $LBUFFER не будет иметь слэша в конце.
+# а он необходим для работы _append_path_to_buffer...
+# setopt AUTO_PARAM_SLASH
 #unsetopt AUTO_REMOVE_SLASH
 
 _select_path_with_fzy() {
@@ -476,8 +486,8 @@ case "${TERM}" in
         bindkey "^[[M" kill-word # control + delete
     ;;
     rxvt*|xterm*)
-        bindkey "^[[7~" beginning-of-line #Home key
-        bindkey "^[[8~" end-of-line #End key
+        bindkey "^E" beginning-of-line #Home key
+        bindkey "^A" end-of-line #End key
         bindkey "^[[3~" delete-char #Del key
         bindkey "^[[A" history-beginning-search-backward #Up Arrow
         bindkey "^[[B" history-beginning-search-forward #Down Arrow
