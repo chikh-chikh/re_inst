@@ -1,0 +1,3 @@
+[submodule "config/editors"]
+	path = config/editors
+	url = https://github.com/RU927/editors
