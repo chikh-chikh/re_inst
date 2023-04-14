@@ -1,6 +1,7 @@
 [submodule "config/wm"]
 	path = config/wm
 	url = ../wm/
+	branch = main
 [submodule "config/editors"]
 	path = config/editors
 	url = ../editors/
