@@ -38,14 +38,12 @@ if ! [[ "${PATH}" =~ "^${HOME}/bin" ]]; then
 fi
 
 #plugins
-#sheldon add base16 --github chriskempson/base16-shell
-eval "$(sheldon source)"
-# if [ -d "$XDG_CONFIG_HOME/sheldon" ]; then
-# if [ -d "~/.config/sheldon" ]; then
-#   if command -v sheldon &>/dev/null; then
-#     eval "$(sheldon source)"
-#   fi
-# fi
+if [ -f "$HOME/.config/sheldon/plugins.toml" ]; then
+  # if [ which $sheldon &> /dev/null ]; then      # истина при любом имени
+  if (( $+commands[sheldon] )); then              # только для zsh
+     eval "$(sheldon source)"
+  fi
+fi
 
 # Colors.
 red='\e[0;31m'
