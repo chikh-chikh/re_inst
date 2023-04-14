@@ -2,5 +2,5 @@
 	path = config/editors
 	url = https://github.com/RU927/editors
 [submodule "config/awesome"]
-	path = config/awesome
-	url = https://github.com/RU927/wm/tree/main/awesome
+	path = config/wm
+	url = https://github.com/RU927/wm
