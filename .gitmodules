@@ -1,9 +1,3 @@
 [submodule "config/wm"]
 	path = config/wm
 	url = ../wm/
-[submodule "config/editors"]
-	path = config/editors
-	url = ../editors/
-[submodule "config/awesome"]
-	path = config/awesome
-	url = ../wm/awesome
