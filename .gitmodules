@@ -4,3 +4,6 @@
 [submodule "config/editors"]
 	path = config/editors
 	url = ../editors/
+[submodule "config/awesome"]
+	path = config/awesome
+	url = ../wm/awesome
