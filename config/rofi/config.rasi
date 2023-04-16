@@ -104,7 +104,7 @@ configuration {
     }
 }
 
-@theme "gruvchad"
+@theme "brassy"
 
 
 /*----- Main Window -----*/
@@ -124,11 +124,11 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      3px solid;
-    border-radius:               10px;
+    border-radius:               0px;
     border-color:                @border-col;
     cursor:                      "default";
     /* Backgroud Colors */
-    background-color:            @background-col;
+    background-color:            @bg-col;
     /* Backgroud Image */
     //background-image:          url("/path/to/image.png", none);
     /* Simple Linear Gradient */
@@ -144,52 +144,50 @@ mainbox {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     20px;
+    padding:                     10px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
     border-color:                @border-col;
     background-color:            @bg-col;
-    children:                    [ "inputbar", "message", "listview" ];
+    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
 }
 
 /*----- Inputbar -----*/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     0px;
     margin:                      0px;
-    padding:                     2px;
-    border:                      2px solid;
-    border-radius:               5px;
+    padding:                     3px;
+    border:                      1px solid;
+    border-radius:               0px;
     border-color:                @border-col;
-    background-color:            @bg-col;
+    background-color:            @bg-col-light;
     text-color:                  @fg-col;
-    children:                    [ "textbox-prompt-colon", "entry", "mode-switcher" ];
-    children: [prompt,entry];
+    children:                    [entry];
 }
 
 prompt {
     enabled:                     true;
     background-color:            @blue;
     text-color:                  @bg-col;
-    padding: 6px;
-    border-radius: 3px;
-    margin: 20px 0px 0px 20px;
+    padding:                     6px;
+    border-radius:               15px;
+    margin: 20px 0px 0px 0px;
 }
 textbox-prompt-colon {
-    enabled:                     true;
+    enabled:                     false;
     padding:                     5px 0px;
     expand:                      false;
     str:                         "  ";
     background-color:            @bg-col;
-    text-color:                  @foreground-color;
+    text-color:                  @fg-color;
 }
 entry {
     enabled:                     true;
-    padding: 6px;
-    padding:                     6px 0px;
-    margin: 20px 0px 0px 10px;
-    text-color: @fg-col;
-    background-color: @bg-col;
+    padding:                     1px 40px;
+    margin:                      20px 0px 0px 10px;
+    text-color:                  @fg-col;
+    background-color:            @bg-col-light;
     cursor:                      text;
     placeholder:                 "Search...";
     placeholder-color:           inherit;
@@ -222,7 +220,7 @@ case-indicator {
 /*----- Listview -----*/
 listview {
     enabled:                     true;
-    columns:                     1;
+    columns:                     3;
     lines:                       8;
     cycle:                       true;
     dynamic:                     true;
@@ -234,10 +232,9 @@ listview {
 
 
     spacing:                     3px;
-    padding:                     4px 0px 0px;
+    padding:                     3px 3px 3px;
     margin:                      0px 0px 0px 0px;
     border:                      1px 1px 1px;
-    border:                      1px solid;
     border-radius:               0px;
     border-color:                @border-col;
     background-color:            @bg-col-light;
@@ -253,25 +250,57 @@ scrollbar {
 
 /*----- Elements -----*/
 element {
-    padding: 5px;
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
     padding:                     1px 10px;
-    border:                      2px solid;
+    border:                      1px solid;
     border-radius:               10px;
     border-color:                @border-col;
     background-color:            @bg-col;
     text-color:                  @fg-col;
     cursor:                      pointer;
 }
-element selected {
-    background-color:  @selected-col;
-    text-color: @fg-col2  ;
+element normal.normal {
+    background-color:            var(normal-background);
+    text-color:                  var(normal-foreground);
 }
+element normal.urgent {
+    background-color:            var(urgent-background);
+    text-color:                  var(urgent-foreground);
+}
+element normal.active {
+    background-color:            var(active-background);
+    text-color:                  var(active-foreground);
+}
+element selected.normal {
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
+}
+element selected.urgent {
+    background-color:            var(selected-urgent-background);
+    text-color:                  var(selected-urgent-foreground);
+}
+element selected.active {
+    background-color:            var(selected-active-background);
+    text-color:                  var(selected-active-foreground);
+}
+element alternate.normal {
+    background-color:            var(alternate-normal-background);
+    text-color:                  var(alternate-normal-foreground);
+}
+element alternate.urgent {
+    background-color:            var(alternate-urgent-background);
+    text-color:                  var(alternate-urgent-foreground);
+}
+element alternate.active {
+    background-color:            var(alternate-active-background);
+    text-color:                  var(alternate-active-foreground);
+}
+
 element-icon {
-    background-color: inherit;
-    text-color:       inherit;
+    background-color:            inherit;
+    text-color:                  inherit;
     size:                        20px;
     cursor:                      inherit;
 }
@@ -286,36 +315,31 @@ element-text {
 
 /*----- Mode Switcher -----*/
 mode-switcher{
-    background-color: inherit;
-    text-color:       inherit;
     enabled:                     true;
-    spacing: 0;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
+    padding:                     3px;
+    border:                      1px solid;
     border-radius:               0px;
-    border-color:                @border-col;
-    background-color:            transparent;
-    text-color:                  @foreground-col;
-}
-button {
-    padding: 10px;
-    text-color: @grey;
-    vertical-align: 0.5; 
-    horizontal-align: 0.5;
-
-    padding:                     5px 10px;
-    border:                      0px solid;
-    border-radius:               10px;
     border-color:                @border-col;
     background-color:            @bg-col-light;
     text-color:                  inherit;
+}
+button {
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+
+    padding:                     0px 0px;
+    border:                      1px solid;
+    border-radius:               10px;
+    border-color:                @border-col;
+    background-color:            @bg-col;
+    text-color:                  @fg-col;
     cursor:                      pointer;
 }
 button selected {
-    background-color:            @bg-col;
-    text-color:                  @blue;
+    background-color:            @selected;
+    text-color:                  @fg-col2;
 }
 
 /*----- Message -----*/
