@@ -550,8 +550,6 @@ bindkey "^S" history-incremental-pattern-search-forward
 if [ -f ~/.alert ]; then echo '>>> Check ~/.alert'; fi
 
 
-alias v='nvim'
-
 my_array=("functions" "exports" "aliases" "paths")
 
 for m in "${my_array[@]}"; do

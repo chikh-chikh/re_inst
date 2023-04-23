@@ -1,27 +1,27 @@
 [user]
     email = mr.uzairov@gmail.com
     name = Rustam Uzairov
-    /* signingkey =  */
+    ; signingkey = 
 
 [commit]
-    /* gpgSign = true */
+    ; gpgSign = true 
 
-/* [credential] */
-/*     helper = cache --timeout 3600 */
-/* [credential] */
-/*   helper = store */
+; [credential] 
+;     helper = cache --timeout 3600 
+; [credential] 
+;   helper = store 
 
 [core]
     editor = nvim
-    /* pager = delta --dark */
+    ; pager = delta --dark 
     excludesFile = ~/.gitignore.global
-/* [core] */
-/*   excludesfile = ~/.gitignore_global */
-/*   editor       = vim */
-/*   autocrlf     = input */
-/*   eol          = lf */
-/*   preloadindex = true */
-/*   fscache      = true */
+; [core] 
+;   excludesfile = ~/.gitignore_global 
+;   editor       = vim 
+;   autocrlf     = input 
+;   eol          = lf 
+;   preloadindex = true 
+;   fscache      = true 
 
 [color]
   ui          = auto
@@ -39,71 +39,71 @@
   pager = cat
 
 
-/* [interactive] */
-/*     diffFilter = delta --color-only --highlight-removed */
-/**/
-/* [color] */
-/*     ui = true */
-/**/
-/* [protocol] */
-/*     version = 2 */
+; [interactive] 
+;     diffFilter = delta --color-only --highlight-removed 
+;
+; [color] 
+;     ui = true 
+;
+; [protocol] 
+;     version = 2 
 
-/* [push] */
-/*     autoSetupRemote = true */
-/* [push] */
-/*   default = simple */
-/**/
-/* [pull] */
-/*     rebase = true */
-/**/
-/* [rebase] */
-/*     autoStash = true */
-/* [rebase] */
-/*   autoSquash = true */
-/* [branch] */
-/*   autosetuprebase = always */
-/**/
-/* [init] */
-/*     defaultBranch = main */
-/**/
-/* [merge] */
-/*     conflictstyle = diff3 */
-/**/
-/* [diff] */
-/*     colorMoved = default */
-/* [diff] */
-/* 	tool = meld */
-/**/
-/* [include] */
-/*     path = ~/.config/delta/delta.gitconfig */
-/* [include] */
-/*     path = ~/git/ssh/gitconfig-private */
-/**/
-/* [delta] */
-/*     features = mantis-shrimp */
-/**/
-/* [filter "lfs"] */
-/* 	clean = git-lfs clean -- %f */
-/* 	process = git-lfs filter-process */
-/* 	required = true */
-/* 	smudge = git-lfs smudge -- %f */
-/**/
-/* [rerere] */
-/*   autoupdate = true */
-/*   enable     = true */
-/**/
-/* [gpg] */
-/*   program = gpg */
-/**/
-/* [fetch] */
-/*   prune = true */
-/**/
-/* [gc] */
-/*   auto = 256 */
-/**/
-/**/
-/* [help] */
-/* 	format = html */
+; [push] 
+;     autoSetupRemote = true 
+; [push] 
+;   default = simple 
+;
+; [pull] 
+;     rebase = true 
+;
+; [rebase] 
+;     autoStash = true 
+; [rebase] 
+;   autoSquash = true 
+; [branch] 
+;   autosetuprebase = always 
+;
+; [init] 
+;     defaultBranch = main 
+;
+; [merge] 
+;     conflictstyle = diff3 
+;
+; [diff] 
+;     colorMoved = default 
+; [diff] 
+; 	tool = meld 
+;
+; [include] 
+;     path = ~/.config/delta/delta.gitconfig 
+; [include] 
+;     path = ~/git/ssh/gitconfig-private 
+;
+; [delta] 
+;     features = mantis-shrimp 
+;
+; [filter "lfs"] 
+; 	clean = git-lfs clean -- %f 
+; 	process = git-lfs filter-process 
+; 	required = true 
+; 	smudge = git-lfs smudge -- %f 
+;
+; [rerere] 
+;   autoupdate = true 
+;   enable     = true 
+;
+; [gpg] 
+;   program = gpg 
+;
+; [fetch] 
+;   prune = true 
+;
+; [gc] 
+;   auto = 256 
+;
+;
+; [help] 
+; 	format = html 
 
 [alias]
   br     = branch
