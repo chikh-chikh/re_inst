@@ -26,17 +26,9 @@ export ZSH_TMUX_AUTOSTART_ONCE='false'
 export ZSH_TMUX_AUTOCONNECT='false'
 export DISABLE_AUTO_TITLE='true'
 
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.npm/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.luarocks/bin:$PATH
-
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 # export GPG_TTY=$(tty)
-
-
-
 
 # Environment variables set everywhere
 
@@ -69,12 +61,6 @@ export VIMRUNTIME=/usr/share/nvim/runtime
 export LANG=ru_RU.UTF-8
 
 export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
-
-
-
-
-
-
 
 # {{{ History and path
 

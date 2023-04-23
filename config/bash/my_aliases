@@ -1,21 +1,17 @@
-#!/bin/bash 
+#!/bin/bash
 alias zc="nvim ~/.zshrc"
 alias tc="nvim ~/.config/alacritty/alacritty.yml"
 alias ac="nvim ~/.config/awesome/rc.lua"
 alias nc="nvim ~/.config/nvim/init.lua"
 
-alias as="nvim ~/reinst/config/zsh/aliases.zsh"
-
-alias la="exa -laghm@ --all --icons --color=always"
-alias ll="exa -lghm@ --icons"
-
 alias v="nvim"
-
 
 # {{{ List
 
-alias la='ls -a'
-alias ll='ls -la'
+alias la="exa -laghm@ --all --icons --color=always"
+alias ll="exa -lghm@ --icons"
+# alias la='ls -a'
+# alias ll='ls -la'
 alias l='ls'
 alias l.="ls -A | egrep '^\.'"
 
@@ -194,10 +190,6 @@ alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 # alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 
-
-
-
-
 # {{{ Operating system specific settings.
 # if osType "/darwin"; then
 # 	alias la='ls -A'
@@ -291,7 +283,7 @@ alias snv='switchNeovim'
 alias sp='source $BASHHOME/my_paths'
 alias ssh='ssh -A'
 alias ta='tmux attach'
-alias v='vim'
+# alias v='vim'
 alias vg='vim +G'
 alias vp='vim +PlugUpdate'
 alias wlv='cat ~/.lunarvim_in_use_okay_to_delete'
@@ -423,10 +415,6 @@ alias kyt='tmux kill-session -t youtube'
 
 # -------------------------------------------------------------------------- }}}
 
-
-
-
-
 # Aliases
 alias ..="cd ../"
 alias ...="cd ../../"
@@ -497,7 +485,7 @@ alias java8="export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre"
 alias java11="export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/"
 alias jupn="jupyter notebook"
 # alias la="ls -AXb --group-directories-first --sort=extension"
-alias la="lsd -A --group-dirs first --classify"
+# alias la="lsd -A --group-dirs first --classify"
 alias ldir="ls -d */"
 alias litu="sudo light -A 10"
 alias litd="sudo light -U 10"
@@ -554,17 +542,17 @@ alias yayu="yay -Syu"
 alias ytdl="youtube-dl"
 
 if [ -f "/usr/bin/grc" ]; then
-    alias df="grc df"
-    alias gcc="grc gcc"
-    alias iwconfig="grc iwconfig"
-    alias last="grc last"
-    alias make="grc make"
-    alias mount="grc mount"
-    alias mtr="grc mtr"
-    alias ping="grc ping"
-    alias ps="grc ps"
-    alias traceroute="grc traceroute"
-    alias wdiff="grc wdiff"
+	alias df="grc df"
+	alias gcc="grc gcc"
+	alias iwconfig="grc iwconfig"
+	alias last="grc last"
+	alias make="grc make"
+	alias mount="grc mount"
+	alias mtr="grc mtr"
+	alias ping="grc ping"
+	alias ps="grc ps"
+	alias traceroute="grc traceroute"
+	alias wdiff="grc wdiff"
 fi
 
 alias vimrc="vim ~/.vimrc"
@@ -581,4 +569,3 @@ alias p2k="$EDITOR ~/.config/shell/powerlevel2k.zsh"
 # if [ -f "/usr/bin/kdeconnect-cli" ]; then
 #     alias send="kdeconnect-cli -d "$(kdeconnect-cli -a --id-only)" --share"
 # fi
-

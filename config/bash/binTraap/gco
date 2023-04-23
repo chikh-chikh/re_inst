@@ -1,3 +1,0 @@
-#!/bin/sh
-# $1 path to repository to clone.
-git clone --depth 1 $1

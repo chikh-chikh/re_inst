@@ -9,14 +9,16 @@ prependToPath "$HOME"/.cargo/bin
 
 # Ruby Environment Manager
 if programExists rbenv; then
-  eval "$(rbenv init - n)"
+	eval "$(rbenv init - n)"
 fi
 
 # prependToPath only prepends to the path when the directory exists.
-prependToPath "$HOME"/.local/share/nvim/mason/bin
 prependToPath "$HOME"/bin
 prependToPath "$HOME"/.bin
 prependToPath "$HOME"/.local/bin
-prependToPath "$BASHHOME"/bin
+appendToPath "$HOME"/.local/share/nvim/mason/bin
+appendToPath "$BASHHOME"/bin
 
+prependToPath "$HOME"/.npm/bin
+prependToPath "$HOME"/.luarocks/bin
 # -------------------------------------------------------------------------- }}}

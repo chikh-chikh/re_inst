@@ -17,7 +17,7 @@ rbac_auth
 # Basic zsh config.
 umask 077
 ZDOTDIR=${ZDOTDIR:-${HOME}}
-ZSHDDIR="${HOME}/.config/zsh.d"
+ZSHDDIR="${HOME}/.config/zsh"
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='128000'
 SAVEHIST='128000'
@@ -28,15 +28,43 @@ export TEMP="$TMP"
 export TMPDIR="$TMP"
 export TMPPREFIX="${TMPDIR}/zsh"
 
+# Define directory exports that my_functions use.
+# BBHOME=$HOME/bb
+# export BBHOME
+
+CFGHOME=$HOME/.config
+export CFGHOME
+
+GITHOME=$HOME/git
+export GITHOME
+
+GITPATH=$GITHOME
+export GITPATH
+
+DOTHOME=$GITHOME/reinst
+export DOTHOME
+
+BASHHOME=$DOTHOME/config/bash
+export BASHHOME
+
+BINHOME=$BASHHOME/bin
+export BINHOME
+
+# SSHHOME=$GITHOME/ssh
+# export SSHHOME
+#
+# WIKIHOME=$GITHOME/wiki
+# export WIKIHOME
+
 if [ ! -d "${TMP}" ]; then mkdir "${TMP}"; fi
 
 # Use hostname in TMUX_TMPDIR as $HOME may be on nfs.
 export TMUX_TMPDIR="${TMPDIR}/tmux-${HOST}-${UID}"
 if [ ! -d "${TMUX_TMPDIR}" ]; then mkdir -p "${TMUX_TMPDIR}"; fi
 
-if ! [[ "${PATH}" =~ "^${HOME}/bin" ]]; then
-    export PATH="${HOME}/bin:${PATH}"
-fi
+# if ! [[ "${PATH}" =~ "^${HOME}/bin" ]]; then
+#     export PATH="${HOME}/bin:${PATH}"
+# fi
 
 #plugins
 if [ -f "$HOME/.config/sheldon/plugins.toml" ]; then
@@ -523,3 +551,9 @@ if [ -f ~/.alert ]; then echo '>>> Check ~/.alert'; fi
 
 
 alias v='nvim'
+
+my_array=("functions" "exports" "aliases" "paths")
+
+for m in "${my_array[@]}"; do
+	[[ -f "$BASHHOME/my_$m" ]] && source "$BASHHOME/my_$m"
+done

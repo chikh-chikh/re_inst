@@ -1,3 +1,0 @@
-#!/bin/bash
-echo "git clone ssh://git@bitbucket:7999/$1.git"
-git clone ssh://git@bitbucket:7999/$1.git

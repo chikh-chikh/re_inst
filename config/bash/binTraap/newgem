@@ -1,2 +1,0 @@
-#!/bin/bash
-bundle gem --ci=github --test=rspec --exe --coc $1
