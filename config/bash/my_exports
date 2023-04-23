@@ -1,72 +1,31 @@
 #!/bin/bash
 # Environment variables
 
-# Fzf
-export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
-export FZF_COMPLETION_TRIGGER=','
-export FZF_DEFAULT_OPTS="
---layout=reverse --info=inline --height=80% --multi --cycle --margin=1 --border=rounded
---preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
-&& (exa -TFl --group-directories-first --icons --git -L 2 --no-user {} | less)) || echo {} 2> /dev/null | head -200'
---prompt=' ' --pointer='>' --marker='✔'
---color='hl:148,hl+:154,prompt:blue,pointer:032,marker:010,bg+:000,gutter:000'
---preview-window=right:65%
---bind '?:toggle-preview'
---bind 'ctrl-a:select-all'
---bind 'ctrl-y:execute-silent(echo {+} | clipcopy)'
---bind 'ctrl-e:execute(nvim-qt {+})'
---bind 'ctrl-v:execute(code {+})'"
-
-export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
-export FZF_TMUX_OPTS='-p 90%'
-
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias: "
 export ZSH_TMUX_AUTOSTART='false'
 export ZSH_TMUX_AUTOSTART_ONCE='false'
 export ZSH_TMUX_AUTOCONNECT='false'
 export DISABLE_AUTO_TITLE='true'
 
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-
 # export GPG_TTY=$(tty)
 
-# Environment variables set everywhere
+export R_HOME=/usr/lib/R
 
-# export EDITOR=/usr/bin/nvim
-# export VISUAL=/usr/bin/nvim
-export EDITOR="nvim"
-export VISUAL="nvim"
-export PAGER="less"
-export READER="zathura"
-
-export TERMINAL="alacritty"
-export WM="awesome"
-#export BROWSER="brave"
-
-# XDG Paths
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-
-# zsh config dir
-#export ZDOTDIR=$HOME/.config/zsh
-#export ZSH="$HOME/.config/zsh/"
-
-# export R_HOME=/usr/lib/R
-#export R_HOME=$HOME/.local/lib/R
-
-# export VIMRUNTIME=$HOME/.local/share/nvim/
 export VIMRUNTIME=/usr/share/nvim/runtime
 
 export LANG=ru_RU.UTF-8
 
-export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/anaconda3/envs/JupyterSystemEnv/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
 # {{{ History and path
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# PS1='[\u@\h \W]\$ '
+# XDG Paths
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Ibus settings
@@ -79,51 +38,22 @@ export HISTCONTROL=ignoreboth:erasedups
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Default Browers, File Manager, and 256 colors.
-# if [[ -z $WSL_DISTRO_NAME ]]; then
-#   if programExists brave-browser; then
-#     export BROWSER=$(which brave-browser)
-#   elif programExists brave; then
-#     export BROWSER=$(which brave)
-#   elif programExists chrome; then
-#     export BROWSER=$(which chrome)
-#   elif programExists firefox; then
-#     export BROWSER=$(which firefox)
-#   else
-#     export BROWSER=""
-#   fi
-# else
-#   export BROWSER=brave.exe
-# fi
-# export FILE=ranger
-# export TERM=xterm-256color
+if programExists brave-browser; then
+	export BROWSER=$(which brave-browser)
+elif programExists google-chrome; then
+	export BROWSER=$(which google-chrome)
+elif programExists yandex-browser; then
+	export BROWSER=$(which yandex-browser)
+elif programExists firefox; then
+	export BROWSER=$(which firefox)
+else
+	export BROWSER=""
+fi
+export FILE=ranger
+export TERM=xterm-256color
 
-# I enable warning when I am debugging .bashrc
-# echoWarning=0
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Darwin CLI and LS colors.
-
-# if osType "darwin"; then
-#   export CLICOLOR=1
-#   export LSCOLORS=GxFxBxDxCxegedabagacad
-# fi
-
-# -------------------------------------------------------------------------- }}}
-# {{{ amber location.
-
-# if dirExists ${GITHOME}/amber; then
-#    AMBERPATH=${GITHOME}/amber
-# else
-#   AMBERPATH=""
-#   [[ $echoWarning == 1 ]] && echo "WARNING: amber is not installed."
-# fi
-# export AMBERPATH
-#
-# if [[ -d ${AMBERPATH} ]]; then
-#   newfactoryitem() {
-#     ${AMBERPATH}/bin/newfactoryitem "$@"
-#   }
-# fi
+# export TERM=alacritty
+export WM=awesome
 
 # -------------------------------------------------------------------------- }}}
 # {{{ autodoc location.
@@ -159,70 +89,43 @@ export HISTCONTROL=ignoreboth:erasedups
 # export DOTNET_ROOT
 
 # -------------------------------------------------------------------------- }}}
-# {{{ emend location.
-
-# if dirExists ${GITHOME}/emend; then
-#    EMENDPATH=${GITHOME}/emend
-# else
-#   EMENDPATH=""
-#   [[ $echoWarning == 1 ]] && echo "WARNING: emend is not installed."
-# fi
-# export EMENDPATH
-#
-# if [[ -d ${EMENDPATH} ]]; then
-#   newcomponent() {
-#     ${EMENDPATH}/bin/newcomponent "$@"
-#   }
-# fi
-
-# -------------------------------------------------------------------------- }}}
 # {{{ Editor.
 
-# export MANWIDTH=76
-# if osType "msys"; then
-#   EDITOR=$(which vim)
-# elif programExists nvim; then
-#   EDITOR=$(which nvim)
-# elif programExists lvim; then
-#   EDITOR=$(which lvim)
-# else
-#   EDITOR=$(which vim)
-# fi
-# export EDITOR
+export MANWIDTH=76
+if programExists nvim; then
+	EDITOR=$(which nvim)
+elif programExists lvim; then
+	EDITOR=$(which lvim)
+else
+	EDITOR=$(which vim)
+fi
+export EDITOR
 
-# -------------------------------------------------------------------------- }}}
-# {{{ emend location and function.  These must go together.
-
-# if dirExists ${GITHOME}/emend; then
-#    EMENDPATH=${GITHOME}/emend
-# else
-#   EMENDPATH=""
-# fi
-# export EMENDPATH
-#
-# if [[ -d ${EMENDPATH} ]]; then
-#   newcomponent() {
-#     ${EMENDPATH}/bin/newcomponent "$@"
-#   }
-# fi
-
+export VISUAL="nvim"
+export PAGER="less"
+export READER="zathura"
 # -------------------------------------------------------------------------- }}}
 # {{{ FZF customizations
 
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+# Fzf
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
+export FZF_COMPLETION_TRIGGER=','
+export FZF_DEFAULT_OPTS="
+--layout=reverse --info=inline --height=80% --multi --cycle --margin=1 --border=rounded
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
+&& (exa -TFl --group-directories-first --icons --git -L 2 --no-user {} | less)) || echo {} 2> /dev/null | head -200'
+--prompt=' ' --pointer='>' --marker='✔'
+--color='hl:148,hl+:154,prompt:blue,pointer:032,marker:010,bg+:000,gutter:000'
+--preview-window=right:65%
+--bind '?:toggle-preview'
+--bind 'ctrl-a:select-all'
+--bind 'ctrl-y:execute-silent(echo {+} | clipcopy)'
+--bind 'ctrl-e:execute(nvim-qt {+})'
+--bind 'ctrl-v:execute(code {+})'"
 
-# -------------------------------------------------------------------------- }}}
-# {{{ HISTCONTROL
-
-# export HISTCONTROL=ignoreboth:erasedups
-
-# -------------------------------------------------------------------------- }}}
-# {{{ JAVA locations.
-
-# if dirExists ${HOME}/build/lclasses/main; then
-#   CLASSPATH=build/classes/main:build/classes/test
-#   export CLASSPATH
-# fi
+export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
+export FZF_TMUX_OPTS='-p 90%'
 
 # -------------------------------------------------------------------------- }}}
 # {{{ newdoc location and functions.  These must go together.
