@@ -101,13 +101,8 @@ sshkill() {
 }
 
 latexmkkill() {
-	if osType "msys"; then
-		for pid in $(ps aux | awk '/latexmk/ {print $1}'); do kill -9 $pid; done
-		for pid in $(ps aux | awk '/perl/    {print $1}'); do kill -9 $pid; done
-	else
-		for pid in $(ps aux | awk '/latexmk/ {print $2}'); do kill -9 $pid; done
-		for pid in $(ps aux | awk '/perl/    {print $2}'); do kill -9 $pid; done
-	fi
+	for pid in $(ps aux | awk '/latexmk/ {print $2}'); do kill -9 $pid; done
+	for pid in $(ps aux | awk '/perl/    {print $2}'); do kill -9 $pid; done
 }
 
 sshstart() {
@@ -225,3 +220,23 @@ todos() {
 	$EDITOR "$(rg -le '- \[ \]' --sort created | fzf)"
 	cd - || return
 }
+
+unLock() {
+	for pid in $(ps aux | awk 'apt {print $2}'); do
+		kill -9 $pid
+	done
+}
+# 	sudo lsof /var/lib/dpkg/lock
+# 	sudo lsof /var/lib/apt/lists/lock
+# 	sudo lsof /var/cache/apt/archives/lock
+# 	sudo kill -9 PID
+# 	sudo rm /var/lib/apt/lists/lock
+# 	sudo rm /var/cache/apt/archives/lock
+# 	sudo rm /var/lib/dpkg/lock
+# 	sudo dpkg --configure -a
+#
+# 	sudo lsof /var/lib/dpkg/lock-frontend
+# 	sudo kill -9 PID
+# 	sudo rm /var/lib/dpkg/lock-frontend
+# 	sudo dpkg --configure -a
+# }
