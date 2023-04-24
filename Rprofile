@@ -13,7 +13,7 @@ if (interactive()) {
 
 # options(download.file.method = "wget")
 # options(langserver_library = "/home/ru/R/x86_64-pc-linux-gnu-library/4.2")
-options(langserver_library = "$HOME/.local/share/nvim/mason/packages/r-languageserver")
+# options(langserver_library = "$HOME/.local/share/nvim/mason/packages/r-languageserver")
 
 # languageserversetup::languageserver_install( confirmBeforeInstall = FALSE, strictLibrary = FALSE, fullReinstall = FALSE )
 
