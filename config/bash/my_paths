@@ -21,4 +21,7 @@ appendToPath "$BASHHOME"/bin
 
 prependToPath "$HOME"/.npm/bin
 prependToPath "$HOME"/.luarocks/bin
+
+appendToPath "$HOME"/.local/share/bob/nvim-bin
+
 # -------------------------------------------------------------------------- }}}

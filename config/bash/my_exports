@@ -11,7 +11,7 @@ export DISABLE_AUTO_TITLE='true'
 
 export R_HOME=/usr/lib/R
 
-export VIMRUNTIME=/usr/share/nvim/runtime
+#export VIMRUNTIME=/usr/share/nvim/runtime
 
 export LANG=ru_RU.UTF-8
 
