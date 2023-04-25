@@ -70,7 +70,7 @@ function backup_configs {
 ## -f удаляет имеющийся линк
 function setup_symlinks {
 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
-	mkdir -p $HOME/.config
+	mkdir -p ~/.config
 	# ln -sfnv "$PWD/config/awesome/"       ~/.config/
 	ln -sfnv "$PWD/config/alacritty/" ~/.config/
 	ln -sfnv "$PWD/config/ranger/" ~/.config/
@@ -112,8 +112,8 @@ function setup_symlinks {
 function install_awesome {
 	echo -e "\u001b[7m Installing Lua...\u001b[0m"
 	# Lua
-	# mkdir -p $HOME/Downloads
-	# cd $HOME/Downloads
+	# mkdir -p ~/Downloads
+	# cd ~/Downloads
 	curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
 	tar -zxf lua-5.3.5.tar.gz
 	rm -rf lua-5.3.5.tar.gz
@@ -124,7 +124,7 @@ function install_awesome {
 	rm -rf lua-5.3.5
 	# Luarocks
 	echo -e "\u001b[7m Installing Luarocks...\u001b[0m"
-	# cd $HOME/Downloads
+	# cd ~/Downloads
 	wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
 	tar -zxpf luarocks-3.8.0.tar.gz
 	rm -rf luarocks-3.8.0.tar.gz
@@ -136,14 +136,14 @@ function install_awesome {
 	rm -rf luarocks-3.8.0
 	# Awesome
 	echo -e "\u001b[7m Installing Awesome...\u001b[0m"
-	# cd $HOME/downloads/
+	# cd ~/downloads/
 	sudo apt install awesome awesome-extra
 
-	mkdir -p $HOME/git/wm
-	git clone https://github.com/RU927/wm $HOME/git/wm
-	# git clone git@github.com:RU927/wm.git $HOME/git/wm
-	rm -r $HOME/.config/awesome/
-	ln -s $HOME/git/wm/awesome $HOME/.config/
+	mkdir -p ~/git/wm
+	git clone https://github.com/RU927/wm ~/git/wm
+	# git clone git@github.com:RU927/wm.git ~/git/wm
+	rm -r ~/.config/awesome/
+	ln -s ~/git/wm/awesome ~/.config/
 	# git remote add origin git@github.com:RU927/wm
 
 }
@@ -154,7 +154,7 @@ function install_alacritty {
 	echo -e "\u001b[7m Installing Rust \u001b[0m"
 	# Rust,Cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	source "$HOME/.cargo/env/"
+	source "~/.cargo/env/"
 	# Alacritty
 	echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
 	# git clone https://github.com/alacritty/alacritty.git
@@ -199,39 +199,39 @@ function install_r {
 }
 
 function install_neovim {
-	echo -e "\u001b[7m Installing neovim... \u001b[0m"
-	# deb-get install neovim
-
-	git clone https://github.com/neovim/neovim.git
-	cd neovim
-	git checkout release-0.9
-	make CMAKE_BUILD_TYPE=Release
-	sudo make install
-
-	sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
+	echo -e "\u001b[7m Installing depth... \u001b[0m"
 	pip3 install pynvim
 	pip3 install neovim-remote
 	npm i -g neovim
 
-	# git clone git@github.com.RU927/editors.git $HOME/git/editors
-	mkdir -p $HOME/git/editors
-	git clone https://github.com/RU927/editors.git $HOME/git/editors
+	echo -e "\u001b[7m Installing nvim version managers... \u001b[0m"
+	cargo install bob-nvim
+	bob use stable
 
-	ln -vsf $HOME/git/editors/NvChad $HOME/.config/nvim
+	sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
 
-	ln -vsf $HOME/git/editors/tex/ $HOME/git/editors/NvChad/lua/custom/
+	echo -e "\u001b[7m Cloning repos... \u001b[0m"
+	mkdir -p ~/git/editors
+	git clone https://github.com/RU927/editors.git ~/git/editors
+	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
-	ln -svf /home/ru/git/editors/lvim/ ~/.config
+	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) -y
+
+	echo -e "\u001b[7m Symlinks ... \u001b[0m"
+	ln -vsf ~/git/editors/NvChad ~/.config/nvim
+	ln -vsf ~/git/editors/tex ~/git/editors/NvChad/lua/custom/
+
+	ln -svf ~/git/editors/lvim ~/.config/
 
 	# git remote add origin git@github.com:RU927/editors
-	# ln -sfnv "$HOME/git/editors/latex/"         ~/.config/
+	# ln -sfnv "~/git/editors/latex/"         ~/.config/
 }
 
 function install_greenclip {
 	echo -e "\u001b[7m Installing greenclip \u001b[0m"
 	#Greenclip (rofi clipboard manager)
 	wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
-	mkdir -p $HOME/.local/bin
+	mkdir -p ~/.local/bin
 	mv greenclip ~/.local/bin
 	chmod 775 ~/.local/bin/greenclip
 }
@@ -264,7 +264,7 @@ function install_zotero_bibtex {
           /zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
 
 	# mkdir -p ~/texmf/bibtex/bib
-	# ln -svf "$HOME/git/editors/latex/bst" ~/texmf/bibtex
+	# ln -svf "~/git/editors/latex/bst" ~/texmf/bibtex
 }
 
 function install_lazygit {
@@ -283,9 +283,9 @@ function install_file_managers {
 	echo -e "\u001b[7m Installing file managers \u001b[0m"
 	sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus ranger vifm
 	pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
-	mkdir -p $HOME/.local/bin
-	ln -s "$PWD/config/vifm/scripts/vifmrun" $HOME/.local/bin
-	ln -s "$PWD/config/vifm/scripts/vifmimg" $HOME/.local/bin
+	mkdir -p ~/.local/bin
+	ln -s "$PWD/config/vifm/scripts/vifmrun" ~/.local/bin
+	ln -s "$PWD/config/vifm/scripts/vifmimg" ~/.local/bin
 	# pip3 install ranger-fm
 	# pipx run --spec ranger-fm ranger
 }
@@ -293,11 +293,11 @@ function install_file_managers {
 function install_fonts {
 	echo -e "\u001b[7m Installing fonts \u001b[0m"
 	#fonts
-	mkdir -p $HOME/Downloads
-	cd $HOME/Downloads
+	mkdir -p ~/Downloads
+	cd ~/Downloads
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
-	mkdir -p $HOME/.local/share/fonts
+	mkdir -p ~/.local/share/fonts
 	unzip JetBrainsMono.zip -d ~/.local/share/fonts/
 	unzip RobotoMono.zip -d ~/.local/share/fonts/
 	cp $PWD/set/awesomewm-font.ttf ~/.local/share/fonts/
