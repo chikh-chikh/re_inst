@@ -213,12 +213,12 @@ function install_neovim {
 	echo -e "\u001b[7m Cloning repos... \u001b[0m"
 	mkdir -p ~/git/editors
 	git clone https://github.com/RU927/editors.git ~/git/editors
-	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+	git clone https://github.com/NvChad/NvChad ~/.config/NvChad --depth 1
 
 	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) -y
 
 	echo -e "\u001b[7m Symlinks ... \u001b[0m"
-	ln -vsf ~/git/editors/NvChad ~/.config/nvim
+	ln -vsf ~/git/editors/NvChad/lua/custom ~/.config/NvChad/lua
 	ln -vsf ~/git/editors/tex ~/git/editors/NvChad/lua/custom/
 
 	ln -svf ~/git/editors/lvim ~/.config/
