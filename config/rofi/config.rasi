@@ -80,6 +80,8 @@ configuration {
     display-combi: "Combi";
     display-keys: "Keys";
 
+    display-clipboard: "Clip";
+
 /*---- Misc setting ----*/
     terminal: "rofi-sensible-terminal";
 /*  terminal: "alacritty";*/

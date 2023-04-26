@@ -147,30 +147,18 @@ export FZF_TMUX_OPTS='-p 90%'
 # -------------------------------------------------------------------------- }}}
 #
 
-export NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
-export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"/home/ru/.local/share/lunarvim"}"
-export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"/home/ru/.config/lvim"}"
-export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/home/ru/.cache/lvim"}"
-export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"/home/ru/.local/share/lunarvim/lvim"}"
+#export NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
+#export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"/home/ru/.local/share/lunarvim"}"
+#export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"/home/ru/.config/lvim"}"
+#export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/home/ru/.cache/lvim"}"
+#export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"/home/ru/.local/share/lunarvim/lvim"}"
 
-alias lvim="nvim -u /home/ru/.local/share/lunarvim/lvim/init.lua"
+#alias lvim="nvim -u /home/ru/.local/share/lunarvim/lvim/init.lua"
 
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-basic-ide="NVIM_APPNAME=nvim-basic-ide nvim"
+# alias nvim-chad="NVIM_APPNAME=nvim-NvChad nvim"
+alias nvim-astro="NVIM_APPNAME=nvim-AstroNvim nvim"
+alias nvim-lazy="NVIM_APPNAME=nvim-LazyVim nvim"
+alias nvim-kick="NVIM_APPNAME=nvim-Kickstart nvim"
+alias nvim-lazyman="NVIM_APPNAME=nvim-Lazyman nvim"
 
-function nvims() {
-  items=("default" "NvChad" "AstroNvim" "kickstart" "LazyVim" "nvim-basic-ide")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=30% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
-bindkey -s "^n" nvims
+#alias v="NVIM_APPNAME=nvim nvim"

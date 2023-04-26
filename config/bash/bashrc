@@ -43,7 +43,7 @@ export BINHOME
 #
 # WIKIHOME=$GITHOME/wiki
 # export WIKIHOME
- 
+
 # {{{ Customize my shell. Array order matters.
 
 my_array=("functions" "exports" "aliases" "paths" "completions" "prompt")
@@ -56,5 +56,11 @@ done
 # sshkeys
 
 # -------------------------------------------------------------------------- }}}
-
 echo ${HOSTNAME} "on" ${OSTYPE}
+
+# Source the Lazyman shell initialization for aliases and nvims selector
+# shellcheck source=.config/nvim-Lazyman/.lazymanrc
+#[ -f ~/.config/nvim-Lazyman/.lazymanrc ] && source ~/.config/nvim-Lazyman/.lazymanrc
+# Source the Lazyman .nvimsbind for nvims key binding
+# shellcheck source=.config/nvim-Lazyman/.nvimsbind
+#[ -f ~/.config/nvim-Lazyman/.nvimsbind ] && source ~/.config/nvim-Lazyman/.nvimsbind
