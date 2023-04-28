@@ -240,3 +240,25 @@ unLock() {
 # 	sudo rm /var/lib/dpkg/lock-frontend
 # 	sudo dpkg --configure -a
 # }
+
+setvenv() {
+	if [[ ! -d "$1" ]]; then
+		python3 -m venv "$1"
+	fi
+	source "$1"/bin/activate
+	if fileExists requirements.txt; then
+		pip install -r requirements.txt
+	fi
+}
+
+set_venv() {
+	if dirExists "$1"; then
+		source "$1"/bin/activate
+	else
+		python3 -m venv "$1"
+		source "$1"/bin/activate
+	fi
+	if fileExists requirements.txt; then
+		pip install -r requirements.txt
+	fi
+}
