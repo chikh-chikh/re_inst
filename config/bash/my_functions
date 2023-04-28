@@ -263,26 +263,30 @@ set_venv() {
 	fi
 }
 
+# export PyDir=$HOME/.localpython
+# export PyBinDir=$PyDir/bin
 pyENV_x.y.z() {
-	if [ $# -eq 0 ]; then # Для работы скрипта необходим хотя бы один входной параметр.
+	if [ $# -eq 0 ]; then # Для работы скрипта необходим входной параметр.
 		echo "Вызовите сценарий с номером версии: x.y.x "
-		# exit
 	fi
+	PyDir=$HOME/.localpython
+	PyBinDir=$PyDir/bin
+	PyVersion=python"${1%.*}"
 
-	# mkdir ~/src
-	# cd ~/src
 	# wget http://www.python.org/ftp/python/"$1"/Python-"$1".tgz
 	# tar -zxvf Python-"$1".tgz
 	# rm -rf Python-"$1".tgz
 	# cd Python-"$1"
-	# mkdir ~/.localpython
+	# mkdir -p $PyDir
 	# ./configure --prefix=$HOME/.localpython
 	# make
 	# make install
+	# cd -
+	# rm Python-"$1"
 
-	print "${1%.*}"
-	# $HOME/.localpython/bin/python"${1##*.}" -m venv venv"$1"
-	# source venv"$1"/bin/activate
+	# print python"${1%.*}"
+	$PyBinDir/$PyVersion -m venv venv"$1"
+	source venv"$1"/bin/activate
 }
 
 # source ~/venv/py3.7/bin/activate'
