@@ -32,3 +32,9 @@ if [ -d "$HOME/.cargo/bin" ] ; then
 fi
 
 . "$HOME/.cargo/env"
+# if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+#   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
+# if command -v zoxide > /dev/null; then
+#   eval "$(zoxide init bash)"
+# fi
