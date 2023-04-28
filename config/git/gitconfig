@@ -63,9 +63,9 @@
 ; [branch] 
 ;   autosetuprebase = always 
 ;
-; [init] 
-;     defaultBranch = main 
-;
+[init] 
+    defaultBranch = main 
+
 ; [merge] 
 ;     conflictstyle = diff3 
 ;
