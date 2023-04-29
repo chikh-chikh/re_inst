@@ -273,7 +273,7 @@ pyVenv() {
 	PyBinDir=$PyVersionDir/bin
 	PySrcDir=$PyVersionDir
 	PyVersion=python"${1%.*}"
-	PyVenvName=venv"$1" #ошибка,если не venv в 3.6.9, в 3.5.7 - норм
+	PyVenvName=venv"$1" #ошибка,если не venv в 3.6.9, в 3.5.7, 3.9.1 - норм
 
 	if [[ ! -d $PyVersionDir ]]; then
 		mkdir -p $PyVersionDir
@@ -281,6 +281,8 @@ pyVenv() {
 
 	if [[ ! -d $PySrcDir ]]; then
 		mkdir -p $PySrcDir
+	fi
+	if [[ ! -d $PyBinDir ]]; then
 		cd $PySrcDir
 		wget http://www.python.org/ftp/python/"$1"/Python-"$1".tgz
 		tar -zxvf Python-"$1".tgz
