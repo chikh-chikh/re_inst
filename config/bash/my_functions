@@ -263,30 +263,37 @@ set_venv() {
 	fi
 }
 
-# export PyDir=$HOME/.localpython
-# export PyBinDir=$PyDir/bin
-pyENV_x.y.z() {
+pyVenv() {
 	if [ $# -eq 0 ]; then # Для работы скрипта необходим входной параметр.
 		echo "Вызовите сценарий с номером версии: x.y.x "
 	fi
-	PyDir=$HOME/.localpython
-	PyBinDir=$PyDir/bin
+
+	PyVenvDir=$(pwd)
+	PyVersionDir=$HOME/.localpython/"$1"
+	PyBinDir=$PyVersionDir/bin
+	PySrcDir=$PyVersionDir
 	PyVersion=python"${1%.*}"
+	PyVenvName=venv"$1" #ошибка,если не venv в 3.6.9, в 3.5.7 - норм
 
-	# wget http://www.python.org/ftp/python/"$1"/Python-"$1".tgz
-	# tar -zxvf Python-"$1".tgz
-	# rm -rf Python-"$1".tgz
-	# cd Python-"$1"
-	# mkdir -p $PyDir
-	# ./configure --prefix=$HOME/.localpython
-	# make
-	# make install
-	# cd -
-	# rm Python-"$1"
+	if [[ ! -d $PyVersionDir ]]; then
+		mkdir -p $PyVersionDir
+	fi
 
-	# print python"${1%.*}"
-	$PyBinDir/$PyVersion -m venv venv"$1"
-	source venv"$1"/bin/activate
+	if [[ ! -d $PySrcDir ]]; then
+		mkdir -p $PySrcDir
+		cd $PySrcDir
+		wget http://www.python.org/ftp/python/"$1"/Python-"$1".tgz
+		tar -zxvf Python-"$1".tgz
+		rm -rf Python-"$1".tgz
+		cd Python-"$1"
+		./configure --prefix=$PyVersionDir
+		make
+		make install
+		cd $PyVenvDir
+	fi
+	# if [[ ! -d $PyVenvName ]]; then
+	$PyBinDir/$PyVersion -m venv $PyVenvName
+	# fi
+
+	source $PyVenvName/bin/activate
 }
-
-# source ~/venv/py3.7/bin/activate'
