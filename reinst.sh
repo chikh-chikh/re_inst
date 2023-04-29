@@ -206,23 +206,32 @@ function install_neovim {
 
 	echo -e "\u001b[7m Installing nvim version managers... \u001b[0m"
 	cargo install bob-nvim
-	bob use stable
+	# bob use stable
 
 	sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
 
 	echo -e "\u001b[7m Cloning repos... \u001b[0m"
 	mkdir -p ~/git/editors
 	git clone https://github.com/RU927/editors.git ~/git/editors
-	git clone https://github.com/NvChad/NvChad ~/.config/NvChad --depth 1
 
+	# NvChad
+	# git clone https://github.com/NvChad/NvChad ~/.config/NvChad --depth 1
+	rm -rf ~/.config/nvim-NvChad/lua/custom
+	ln -vsf ~/git/editors/nvim-NvChad/lua/custom ~/.config/nvim-NvChad/lua
+	ln -vsf ~/git/editors/tex ~/git/editors/nvim-NvChad/lua/custom/
+
+	rm -rf ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim
+	ln -svf ~/.config/nvim-NvChad ~/.config/nvim
+	ln -svf ~/.local/share/nvim-NvChad ~/.local/share/nvim
+	ln -svf ~/.local/state/nvim-NvChad ~/.local/state/nvim
+
+	# Lunarvim
 	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) -y
-
-	echo -e "\u001b[7m Symlinks ... \u001b[0m"
-	ln -vsf ~/git/editors/NvChad/lua/custom ~/.config/NvChad/lua
-	ln -vsf ~/git/editors/tex ~/git/editors/NvChad/lua/custom/
-
 	ln -svf ~/git/editors/lvim ~/.config/
 
+	# AstroNvim
+	rm -rf ~/.config/nvim-AstroNvim/lua/user/
+	ln -vsf /home/ru/git/editors/AstroNvim/lua/user ~/.config/nvim-AstroNvim/lua
 	# git remote add origin git@github.com:RU927/editors
 	# ln -sfnv "~/git/editors/latex/"         ~/.config/
 }
