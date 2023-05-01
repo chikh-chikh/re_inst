@@ -55,8 +55,6 @@ function backup_configs {
 	mv -iv ~/.config/lazygit/ ~/.config/lazygit.old
 	# mv -iv ~/.config/    ~/.config/
 	# mv -iv ~/.config/    ~/.config/
-	# mv -iv ~/.config/    ~/.config/
-	# mv -iv ~/.config/    ~/.config/
 
 	mv -iv ~/.zshrc ~/.zshrc.old
 	# mv -iv ~/.bashrc              ~/.bashrc.old
@@ -68,84 +66,58 @@ function backup_configs {
 	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
 }
 ## -f удаляет имеющийся линк
+dothome=$HOME/REPOS/reinst
+
 function setup_symlinks {
 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
 	mkdir -p ~/.config
-	# ln -sfnv "$PWD/config/awesome/"       ~/.config/
-	ln -sfnv "$PWD/config/alacritty/" ~/.config/
-	ln -sfnv "$PWD/config/ranger/" ~/.config/
-	ln -sfnv "$PWD/config/rofi/" ~/.config/
-	ln -sfnv "$PWD/config/xplr/" ~/.config/
-	ln -sfnv "$PWD/config/vifm/" ~/.config/
-	ln -sfnv "$PWD/config/zathura/" ~/.config/
-	# ln -sfnv "$PWD/config/nvim/"          ~/.config/
-	ln -sfnv "$PWD/config/tmux/" ~/.config/
-	ln -sfnv "$PWD/config/zsh/" ~/.config/
-	ln -sfnv "$PWD/config/htop/" ~/.config/
-	ln -sfnv "$PWD/config/lazygit/" ~/.config/
-	ln -sfnv "$PWD/config/sheldon/" ~/.config/
-	ln -sfnv "$PWD/config/greenclip.cfg" ~/.config/
-	ln -sfnv "$PWD/config/greenclip.toml" ~/.config/
+	ln -sfnv "$dothome"/config/alacritty/ ~/.config/
+	ln -sfnv "$dothome"/config/ranger/ ~/.config/
+	ln -sfnv "$dothome"/config/rofi/ ~/.config/
+	ln -sfnv "$dothome"/config/xplr/ ~/.config/
+	ln -sfnv "$dothome"/config/vifm/ ~/.config/
+	ln -sfnv "$dothome"/config/zathura/ ~/.config/
+	# ln -sfnv "$dothome"/config/nvim/          ~/.config/
+	ln -sfnv "$dothome"/config/tmux/ ~/.config/
+	ln -sfnv "$dothome"/config/zsh/ ~/.config/
+	ln -sfnv "$dothome"/config/htop/ ~/.config/
+	ln -sfnv "$dothome"/config/lazygit/ ~/.config/
+	ln -sfnv "$dothome"/config/sheldon/ ~/.config/
+	ln -sfnv "$dothome"/config/greenclip.cfg ~/.config/
+	ln -sfnv "$dothome"/config/greenclip.toml ~/.config/
 
-	ln -sfnv "$PWD/shell/zshrc" ~/.zshrc
-	ln -sfnv "$PWD/shell/zshenv" ~/.zshenv
-	ln -sfnv "$PWD/shell/bashrc" ~/.bashrc
-	ln -sfnv "$PWD/profile" ~/.profile
-	ln -sfnv "$PWD/xinitrc" ~/.xinitrc
-	ln -sfnv "$PWD/Rprofile" ~/.Rprofile
-	ln -sfnv "$PWD/Renviron" ~/.Renviron
-	# ln -sfnv "$PWD/"                ~/.
-	# ln -sfnv "$PWD/"                ~/.
-	# ln -sfnv "$PWD/"                ~/.
-	# ln -sfnv "$PWD/"                ~/.
-	# ln -sfnv "$PWD/"                ~/.
+	ln -sfnv "$dothome"/config/bash/zshrc ~/.zshrc
+	ln -sfnv "$dothome"/zshenv ~/.zshenv
+	ln -sfnv "$dothome"/config/bash/bashrc ~/.bashrc
+	ln -sfnv "$dothome"/profile ~/.profile
+	ln -sfnv "$dothome"/xinitrc ~/.xinitrc
+	ln -sfnv "$dothome"/Rprofile ~/.Rprofile
+	ln -sfnv "$dothome"/Renviron ~/.Renviron
+	# ln -sfnv "$dothome"/"                ~/.
+	# ln -sfnv "$dothome"/"                ~/.
 
-	# ln -sfnv "$PWD/.bashrc" ~/
-	# ln -sfnv "$PWD/.dircolors" ~/
-	# ln -sfnv "$PWD/.dmenurc" ~/
-	# ln -sfnv "$PWD/.gitconfig" ~/
-	# ln -sfnv "$PWD/.gitignore.global" ~/
-	# ln -sfnv "$PWD/.p10k.zsh" ~/
+	# ln -sfnv "$dothome"/.gitconfig" ~/
+	# ln -sfnv "$dothome"/.gitignore.global" ~/
 
 }
 
-function install_awesome {
-	echo -e "\u001b[7m Installing Lua...\u001b[0m"
-	# Lua
-	# mkdir -p ~/Downloads
-	# cd ~/Downloads
-	curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
-	tar -zxf lua-5.3.5.tar.gz
-	rm -rf lua-5.3.5.tar.gz
-	cd lua-5.3.5
-	make linux test
-	sudo make install
-	cd -
-	rm -rf lua-5.3.5
-	# Luarocks
-	echo -e "\u001b[7m Installing Luarocks...\u001b[0m"
-	# cd ~/Downloads
-	wget https://luarocks.org/releases/luarocks-3.8.0.tar.gz
-	tar -zxpf luarocks-3.8.0.tar.gz
-	rm -rf luarocks-3.8.0.tar.gz
-	cd luarocks-3.8.0
-	./configure --with-lua-include=/usr/local/include
-	make
-	sudo make install
-	cd -
-	rm -rf luarocks-3.8.0
-	# Awesome
-	echo -e "\u001b[7m Installing Awesome...\u001b[0m"
-	# cd ~/downloads/
-	sudo apt install awesome awesome-extra
+function clone_repo_wm {
+	echo -e "\u001b[7m Cloning repo...\u001b[0m"
 
-	mkdir -p ~/git/wm
-	git clone https://github.com/RU927/wm ~/git/wm
-	# git clone git@github.com:RU927/wm.git ~/git/wm
-	rm -r ~/.config/awesome/
-	ln -s ~/git/wm/awesome ~/.config/
+	mkdir -p ~/REPOS/wm
+	git clone https://github.com/RU927/wm ~/REPOS/wm
+	bash ~/REPOS/wm/install_wm.sh
+
 	# git remote add origin git@github.com:RU927/wm
+}
+function clone_repo_editors {
+	echo -e "\u001b[7m Cloning repo...\u001b[0m"
 
+	mkdir -p ~/REPOS/editors
+	git clone https://github.com/RU927/editors ~/REPOS/editors
+	bash ~/REPOS/editors/install_editors.sh
+
+	# git remote add origin git@github.com:RU927/editors
 }
 
 function install_alacritty {
@@ -172,17 +144,6 @@ function install_sheldon {
 	chsh -s $(which zsh)
 }
 
-function install_nodejs {
-	echo -e "\u001b[7m Installing NodeJS... \u001b[0m"
-	# nodejs
-	sudo apt remove nodejs
-	sudo apt autoremove
-	curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-	sudo apt install -y nodejs
-	node -v
-	npm -v
-}
-
 function install_r {
 	echo -e "\u001b[7m Installing R... \u001b[0m"
 	#R
@@ -196,84 +157,6 @@ function install_r {
 	# sudo apt install --no-install-recommends r-cran-tidyverse
 	# deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
 	R --version
-}
-
-function install_neovim {
-	echo -e "\u001b[7m Installing depth... \u001b[0m"
-	pip3 install pynvim
-	pip3 install neovim-remote
-	npm i -g neovim
-
-	echo -e "\u001b[7m Installing nvim version managers... \u001b[0m"
-	cargo install bob-nvim
-	# bob use stable
-
-	sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 70
-
-	echo -e "\u001b[7m Cloning repos... \u001b[0m"
-	mkdir -p ~/git/editors
-	git clone https://github.com/RU927/editors.git ~/git/editors
-
-	# NvChad
-	# git clone https://github.com/NvChad/NvChad ~/.config/NvChad --depth 1
-	rm -rf ~/.config/nvim-NvChad/lua/custom
-	ln -vsf ~/git/editors/nvim-NvChad/lua/custom ~/.config/nvim-NvChad/lua
-	ln -vsf ~/git/editors/tex ~/git/editors/nvim-NvChad/lua/custom/
-
-	rm -rf ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim
-	ln -svf ~/.config/nvim-NvChad ~/.config/nvim
-	ln -svf ~/.local/share/nvim-NvChad ~/.local/share/nvim
-	ln -svf ~/.local/state/nvim-NvChad ~/.local/state/nvim
-
-	# Lunarvim
-	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) -y
-	ln -svf ~/git/editors/lvim ~/.config/
-
-	# AstroNvim
-	rm -rf ~/.config/nvim-AstroNvim/lua/user/
-	ln -vsf /home/ru/git/editors/AstroNvim/lua/user ~/.config/nvim-AstroNvim/lua
-	# git remote add origin git@github.com:RU927/editors
-	# ln -sfnv "~/git/editors/latex/"         ~/.config/
-}
-
-function install_greenclip {
-	echo -e "\u001b[7m Installing greenclip \u001b[0m"
-	#Greenclip (rofi clipboard manager)
-	wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
-	mkdir -p ~/.local/bin
-	mv greenclip ~/.local/bin
-	chmod 775 ~/.local/bin/greenclip
-}
-
-function install_latex {
-	echo -e "\u001b[7m Installing latex \u001b[0m"
-	sudo apt install texlive
-	# sudo apt install texlive-latex-extra
-	# sudo apt install texlive-full
-	latexmk --version
-}
-
-function install_zotero_bibtex {
-	echo -e "\u001b[7m Installing zotero  \u001b[0m"
-	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
-	sudo apt update
-	sudo apt install zotero
-	# https://www.zotero.org/download/
-	# tar -xvf Zotero*
-	# sudo mv ~/Downloads/Zotero_linux-x86_64 /opt/zotero
-	# cd /opt/zotero
-	# sudo ./set_launcher_icon
-	# sudo ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
-
-	echo -e "\u001b[7m Installing bibtex  \u001b[0m"
-	BIBTEX_VERSION=$(curl -s "https://api.github.com/repos/retorquere/zotero-better-bibtex/releases/latest" |
-		grep -Po '"tag_name": "v\K[^"]*')
-	curl -Lo zotero-better-bibtex${BIBTEX_VERSION}.xpi \
-		"https://github.com/retorquere/zotero-better-bibtex/releases/download/v${BIBTEX_VERSION}\
-          /zotero-better-bibtex-${BIBTEX_VERSION}.xpi"
-
-	# mkdir -p ~/texmf/bibtex/bib
-	# ln -svf "~/git/editors/latex/bst" ~/texmf/bibtex
 }
 
 function install_lazygit {
@@ -304,12 +187,11 @@ function install_fonts {
 	#fonts
 	mkdir -p ~/Downloads
 	cd ~/Downloads
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+	# wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
 	mkdir -p ~/.local/share/fonts
-	unzip JetBrainsMono.zip -d ~/.local/share/fonts/
+	# unzip JetBrainsMono.zip -d ~/.local/share/fonts/
 	unzip RobotoMono.zip -d ~/.local/share/fonts/
-	cp $PWD/set/awesomewm-font.ttf ~/.local/share/fonts/
 	sudo fc-cache -fr
 }
 
@@ -329,32 +211,43 @@ function install_telegram {
 	sudo chmod -R 775 /opt/Telegram
 }
 
+function install_greenclip {
+	echo -e "\u001b[7m Installing greenclip \u001b[0m"
+	#Greenclip (rofi clipboard manager)
+	wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+	mkdir -p ~/.local/bin
+	mv greenclip ~/.local/bin
+	chmod 775 ~/.local/bin/greenclip
+}
+
 function all {
 	echo -e "\u001b[7m Setting up Dotfiles... \u001b[0m"
 	install_packages
 	backup_configs
 	setup_symlinks
-	install_awesome
+	clone_repo_wm
+	clone_repo_editors
 	install_alacritty
 	install_sheldon
-	install_nodejs
 	install_r
-	install_neovim
-	install_greenclip
-	install_latex
-	install_zotero_bibtex
 	install_lazygit
 	install_file_managers
 	install_fonts
 	install_debget
 	install_telegram
+	install_greenclip
 	echo -e "\u001b[7m Done! \u001b[0m"
 }
 
 function wm {
 	echo -e "\u001b[7m Setting up Windows Managers... \u001b[0m"
-	install_awesome
-	install_fonts
+	clone_repo_wm
+	echo -e "\u001b[7m Done! \u001b[0m"
+}
+
+function editors {
+	echo -e "\u001b[7m Setting up Editors... \u001b[0m"
+	clone_repo_editors
 	echo -e "\u001b[7m Done! \u001b[0m"
 }
 
@@ -362,17 +255,6 @@ function terminals {
 	echo -e "\u001b[7m Setting up Terminals... \u001b[0m"
 	install_alacritty
 	install_sheldon
-	install_lazygit
-	echo -e "\u001b[7m Done! \u001b[0m"
-}
-
-function editors {
-	echo -e "\u001b[7m Setting up Editors \u001b[0m"
-	install_nodejs
-	install_neovim
-	install_greenclip
-	install_latex
-	install_zotero_bibtex
 	echo -e "\u001b[7m Done! \u001b[0m"
 }
 
@@ -381,6 +263,7 @@ function changers {
 	install_file_managers
 	install_debget
 	install_telegram
+	install_greenclip
 	echo -e "\u001b[7m Done! \u001b[0m"
 }
 
@@ -393,28 +276,23 @@ fi
 echo -e "\u001b[32;1m Setting up Dotfiles...\u001b[0m"
 
 echo -e " \u001b[37;1m\u001b[4mSelect an option:\u001b[0m"
-echo -e "  \u001b[34;1m (a) ALL(1-17) \u001b[0m"
-echo -e "  \u001b[34;1m (w) WINDOWS MANAGER(4,15) \u001b[0m"
-echo -e "  \u001b[34;1m (t) TERMINAL(5,6,13) \u001b[0m"
-echo -e "  \u001b[34;1m (e) EDITOR(7,9-12) \u001b[0m"
-echo -e "  \u001b[34;1m (f) CHANGERS(14,16,17) \u001b[0m"
+echo -e "  \u001b[34;1m (a) ALL(1-14) \u001b[0m"
+echo -e "  \u001b[34;1m (t) TERMINAL(6,7) \u001b[0m"
+echo -e "  \u001b[34;1m (f) CHANGERS(10,12,13) \u001b[0m"
 echo -e "  \u001b[34;1m (1) Install packages \u001b[0m"
 echo -e "  \u001b[34;1m (2) Backup current config \u001b[0m"
 echo -e "  \u001b[34;1m (3) Setup symlinks \u001b[0m"
-echo -e "  \u001b[34;1m (4) Install awesome \u001b[0m"
-echo -e "  \u001b[34;1m (5) Install alacritty \u001b[0m"
-echo -e "  \u001b[34;1m (6) Install sheldon \u001b[0m"
-echo -e "  \u001b[34;1m (7) Install nodejs \u001b[0m"
+echo -e "  \u001b[34;1m (4) Clone repo wm \u001b[0m"
+echo -e "  \u001b[34;1m (5) Clone repo editors \u001b[0m"
+echo -e "  \u001b[34;1m (6) Install alacritty \u001b[0m"
+echo -e "  \u001b[34;1m (7) Install sheldon \u001b[0m"
 echo -e "  \u001b[34;1m (8) Install r \u001b[0m"
-echo -e "  \u001b[34;1m (9) Install neovim \u001b[0m"
-echo -e "  \u001b[34;1m (10) Install greenclip \u001b[0m"
-echo -e "  \u001b[34;1m (11) Install latex \u001b[0m"
-echo -e "  \u001b[34;1m (12) Install zotero bibtex \u001b[0m"
-echo -e "  \u001b[34;1m (13) Install lazygit \u001b[0m"
-echo -e "  \u001b[34;1m (14) Install file managers \u001b[0m"
-echo -e "  \u001b[34;1m (15) Install fonts \u001b[0m"
-echo -e "  \u001b[34;1m (16) Install deb-get \u001b[0m"
-echo -e "  \u001b[34;1m (17) Install telegram \u001b[0m"
+echo -e "  \u001b[34;1m (9) Install lazygit \u001b[0m"
+echo -e "  \u001b[34;1m (10) Install file managers \u001b[0m"
+echo -e "  \u001b[34;1m (11) Install fonts \u001b[0m"
+echo -e "  \u001b[34;1m (12) Install deb-get \u001b[0m"
+echo -e "  \u001b[34;1m (13) Install telegram \u001b[0m"
+echo -e "  \u001b[34;1m (14) Install greenclip \u001b[0m"
 echo -e "  \u001b[31;1m (*) Anything else to exit \u001b[0m"
 
 echo -en "\u001b[32;1m ==> \u001b[0m"
@@ -427,16 +305,8 @@ case $option in
 	all
 	;;
 
-"w")
-	wm
-	;;
-
 "t")
 	terminals
-	;;
-
-"e")
-	editors
 	;;
 
 "f")
@@ -456,19 +326,19 @@ case $option in
 	;;
 
 "4")
-	install_awesome
+	wm
 	;;
 
 "5")
-	install_alacritty
+	editors
 	;;
 
 "6")
-	install_sheldon
+	install_alacritty
 	;;
 
 "7")
-	install_nodejs
+	install_sheldon
 	;;
 
 "8")
@@ -476,39 +346,27 @@ case $option in
 	;;
 
 "9")
-	install_neovim
-	;;
-
-"10")
-	install_greenclip
-	;;
-
-"11")
-	install_latex
-	;;
-
-"12")
-	install_zotero_bibtex
-	;;
-
-"13")
 	install_lazygit
 	;;
 
-"14")
+"10")
 	install_file_managers
 	;;
 
-"15")
+"11")
 	install_fonts
 	;;
 
-"16")
+"12")
 	install_debget
 	;;
 
-"17")
+"13")
 	install_telegram
+	;;
+
+"14")
+	install_greenclip
 	;;
 
 *)
