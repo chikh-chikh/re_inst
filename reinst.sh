@@ -44,9 +44,9 @@ DOT_CFG_PATH=$DOTHOME/config
 HOME_CFG_PATH=$HOME/.config
 # HOME_CFG_PATH=$DOTHOME/test
 
-DOT_CFG_DIRS=$(ls $DOT_CFG_PATH | grep -E '^d')
-DOT_CFG_FILES=$(ls $DOT_CFG_PATH | grep -E -v '^d')
-DOT_HOME_FILES=$(ls $DOTHOME/home | grep -E -v '^d')
+DOT_CFG_DIRS=$(ls -l $DOT_CFG_PATH | grep '^d' | awk '{print $9}')
+DOT_CFG_FILES=$(ls -l $DOT_CFG_PATH | grep -v '^d' | awk '{print $9}')
+DOT_HOME_FILES=$(ls -l $DOTHOME/home | grep -v '^d' | awk '{print $9}')
 
 function backup_configs {
 	echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
@@ -97,6 +97,7 @@ function setup_symlinks {
 
 	for file in ${DOT_HOME_FILES}; do
 		ln -svf ${DOTHOME}/home/${file} ${HOME}/.${file}
+		# ln -svf ${DOTHOME}/home/${file} ${DOTHOME}/test/.${file}
 	done
 }
 
