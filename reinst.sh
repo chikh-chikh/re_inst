@@ -31,74 +31,89 @@ function install_packages {
 	# localectl set-locale LANG=ru_RU.UTF-8;
 }
 
-# function install_ {
-#     echo -e "\u001b[7m Installing  \u001b[0m"
-#
-# }
+DOTHOME=$HOME/REPOS/reinst
+DOT_CFG_HOME=$DOTHOME/config
+CFG_HOME=$HOME/.config
+# CFG_HOME=$DOTHOME
+
+dirExists() {
+	[[ -d "$1" ]]
+}
+
+fileExists() {
+	[[ -f "$1" ]]
+}
+
+DIRS="
+alacritty
+htop
+lazygit
+nvim.old
+ranger
+rofi
+tmux
+vifm
+xplr
+zathura
+"
+FILES_CFG="
+greenclip.cfg
+greenclip.toml
+user-dirs.dirs
+"
+FILES_HOME="
+xinitrc
+Rprofile
+Renviron
+gitconfig
+gitignore_global
+"
 
 function backup_configs {
 	echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
-	mv -iv ~/.config/awesome/ ~/.config/awesome.old/
-	mv -iv ~/.config/alacritty/ ~/.config/alacritty.old/
-	mv -iv ~/.config/ranger/ ~/.config/ranger.old/
-	mv -iv ~/.config/rofi/ ~/.config/rofi.old/
-	mv -iv ~/.config/xplr/ ~/.config/xplr.old/
-	mv -iv ~/.config/vifm/ ~/.config/vifm.old/
-	mv -iv ~/.config/zathura/ ~/.config/zathura.old/
-	mv -iv ~/.config/nvim/ ~/.config/nvim.old/
-	mv -iv ~/.config/tmux/ ~/.config/tmux.old/
-	mv -iv ~/.config/zsh/ ~/.config/zsh.old/
-	mv -iv ~/.config/sheldon/ ~/.config/sheldon.old/
-	mv -iv ~/.config/htop/ ~/.config/htop.old/
-	mv -iv ~/.config/greenclip.cfg ~/.config/greenclip.cfg.old
-	mv -iv ~/.config/greenclip.toml ~/.config/greenclip.toml.old
-	mv -iv ~/.config/lazygit/ ~/.config/lazygit.old
-	# mv -iv ~/.config/    ~/.config/
-	# mv -iv ~/.config/    ~/.config/
+	for dir in ${DIRS}; do
+		if dirExists ${CFG_HOME}/${dir}; then
+			echo -e "${YELLOW}Moving old config dir to ${CFG_HOME}/${dir}.old${RC}"
+			if ! mv -iv ${CFG_HOME}/${dir} ${CFG_HOME}/${dir}.old; then
+				echo -e "${RED}Can't move the old config dir!${RC}"
+				exit 1
+			fi
+		fi
+	done
 
-	mv -iv ~/.zshrc ~/.zshrc.old
-	# mv -iv ~/.bashrc              ~/.bashrc.old
-	mv -iv ~/.profile ~/.profile.old
-	mv -iv ~/.xinitrc ~/.xinitrc.old
-	# mv -iv ~/.            ~/.
-	# mv -iv ~/.            ~/.
-	# mv -iv ~/.            ~/.
+	for file in $FILES_CFG; do
+		if fileExists $CFG_HOME/$file; then
+			echo -e "${YELLOW}Moving old config file ${CFG_HOME}/${file}.old${RC}"
+			if ! mv -iv ${CFG_HOME}/${file} ${CFG_HOME}/${file}.old; then
+				echo -e "${RED}Can't move the old config file!${RC}"
+				exit 1
+			fi
+		fi
+	done
 	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
 }
-## -f удаляет имеющийся линк
-dothome=$HOME/REPOS/reinst
 
 function setup_symlinks {
 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
 	mkdir -p ~/.config
-	ln -sfnv "$dothome"/config/alacritty/ ~/.config/
-	ln -sfnv "$dothome"/config/ranger/ ~/.config/
-	ln -sfnv "$dothome"/config/rofi/ ~/.config/
-	ln -sfnv "$dothome"/config/xplr/ ~/.config/
-	ln -sfnv "$dothome"/config/vifm/ ~/.config/
-	ln -sfnv "$dothome"/config/zathura/ ~/.config/
-	# ln -sfnv "$dothome"/config/nvim/          ~/.config/
-	ln -sfnv "$dothome"/config/tmux/ ~/.config/
-	ln -sfnv "$dothome"/config/zsh/ ~/.config/
-	ln -sfnv "$dothome"/config/htop/ ~/.config/
-	ln -sfnv "$dothome"/config/lazygit/ ~/.config/
-	ln -sfnv "$dothome"/config/sheldon/ ~/.config/
-	ln -sfnv "$dothome"/config/greenclip.cfg ~/.config/
-	ln -sfnv "$dothome"/config/greenclip.toml ~/.config/
 
-	ln -sfnv "$dothome"/config/bash/zshrc ~/.zshrc
-	ln -sfnv "$dothome"/zshenv ~/.zshenv
-	ln -sfnv "$dothome"/config/bash/bashrc ~/.bashrc
-	ln -sfnv "$dothome"/profile ~/.profile
-	ln -sfnv "$dothome"/xinitrc ~/.xinitrc
-	ln -sfnv "$dothome"/Rprofile ~/.Rprofile
-	ln -sfnv "$dothome"/Renviron ~/.Renviron
-	# ln -sfnv "$dothome"/"                ~/.
-	# ln -sfnv "$dothome"/"                ~/.
+	for dir in ${DIRS}; do
+		if dirExists ${DOT_CFG_HOME}/${dir}; then
+			ln -svnf ${DOT_CFG_HOME}/${dir} ${CFG_HOME}/${dir}
+		fi
+	done
 
-	# ln -sfnv "$dothome"/.gitconfig" ~/
-	# ln -sfnv "$dothome"/.gitignore.global" ~/
+	for file in ${FILES_CFG}; do
+		if fileExists ${DOT_CFG_HOME}/${file}; then
+			ln -svnf ${DOT_CFG_HOME}/${file} ${CFG_HOME}/${file}
+		fi
+	done
 
+	for file in ${FILES_HOME}; do
+		if fileExists ${DOTHOME}/${file}; then
+			ln -svnf ${DOTHOME}/${file} ${HOME}/.${file} #${HOME}/.${file}
+		fi
+	done
 }
 
 function clone_repo_wm {
