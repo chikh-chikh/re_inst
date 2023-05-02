@@ -31,11 +31,6 @@ function install_packages {
 	# localectl set-locale LANG=ru_RU.UTF-8;
 }
 
-DOTHOME=$HOME/REPOS/reinst
-DOT_CFG_HOME=$DOTHOME/config
-CFG_HOME=$HOME/.config
-# CFG_HOME=$DOTHOME
-
 dirExists() {
 	[[ -d "$1" ]]
 }
@@ -44,52 +39,47 @@ fileExists() {
 	[[ -f "$1" ]]
 }
 
-DIRS="
-alacritty
-htop
-lazygit
-nvim.old
-ranger
-rofi
-tmux
-vifm
-xplr
-zathura
-"
-FILES_CFG="
-greenclip.cfg
-greenclip.toml
-user-dirs.dirs
-"
-FILES_HOME="
-xinitrc
-Rprofile
-Renviron
-gitconfig
-gitignore_global
-"
+DOTHOME=$HOME/REPOS/reinst
+DOT_CFG_PATH=$DOTHOME/config
+HOME_CFG_PATH=$HOME/.config
+# HOME_CFG_PATH=$DOTHOME/test
+
+DOT_CFG_DIRS=$(ls $DOT_CFG_PATH | grep -E '^d')
+DOT_CFG_FILES=$(ls $DOT_CFG_PATH | grep -E -v '^d')
+DOT_HOME_FILES=$(ls $DOTHOME/home | grep -E -v '^d')
 
 function backup_configs {
 	echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
-	for dir in ${DIRS}; do
-		if dirExists ${CFG_HOME}/${dir}; then
-			echo -e "${YELLOW}Moving old config dir to ${CFG_HOME}/${dir}.old${RC}"
-			if ! mv -iv ${CFG_HOME}/${dir} ${CFG_HOME}/${dir}.old; then
+	for dir in ${DOT_CFG_DIRS}; do
+		if dirExists ${HOME_CFG_PATH}/${dir}; then
+			echo -e "${YELLOW}Moving old config dir to ${HOME_CFG_PATH}/${dir}.old${RC}"
+			if ! mv -iv ${HOME_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}.old; then
 				echo -e "${RED}Can't move the old config dir!${RC}"
 				exit 1
 			fi
 		fi
 	done
 
-	for file in $FILES_CFG; do
-		if fileExists $CFG_HOME/$file; then
-			echo -e "${YELLOW}Moving old config file ${CFG_HOME}/${file}.old${RC}"
-			if ! mv -iv ${CFG_HOME}/${file} ${CFG_HOME}/${file}.old; then
+	for file in $DOT_CFG_FILES; do
+		if fileExists $HOME_CFG_PATH/$file; then
+			echo -e "${YELLOW}Moving old config file ${HOME_CFG_PATH}/${file}.old${RC}"
+			if ! mv -iv ${HOME_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}.old; then
 				echo -e "${RED}Can't move the old config file!${RC}"
 				exit 1
 			fi
 		fi
 	done
+
+	for file in $DOT_HOME_FILES; do
+		if fileExists $HOME/.$file; then
+			echo -e "${YELLOW}Moving old config file ${HOME}/.${file}.old${RC}"
+			if ! mv -iv ${HOME}/.${file} ${HOME}/.${file}.old; then
+				echo -e "${RED}Can't move the old config file!${RC}"
+				exit 1
+			fi
+		fi
+	done
+
 	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
 }
 
@@ -97,22 +87,16 @@ function setup_symlinks {
 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
 	mkdir -p ~/.config
 
-	for dir in ${DIRS}; do
-		if dirExists ${DOT_CFG_HOME}/${dir}; then
-			ln -svnf ${DOT_CFG_HOME}/${dir} ${CFG_HOME}/${dir}
-		fi
+	for dir in ${DOT_CFG_DIRS}; do
+		ln -svf ${DOT_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}
 	done
 
-	for file in ${FILES_CFG}; do
-		if fileExists ${DOT_CFG_HOME}/${file}; then
-			ln -svnf ${DOT_CFG_HOME}/${file} ${CFG_HOME}/${file}
-		fi
+	for file in ${DOT_CFG_FILES}; do
+		ln -svf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
 	done
 
-	for file in ${FILES_HOME}; do
-		if fileExists ${DOTHOME}/${file}; then
-			ln -svnf ${DOTHOME}/${file} ${HOME}/.${file} #${HOME}/.${file}
-		fi
+	for file in ${DOT_HOME_FILES}; do
+		ln -svf ${DOTHOME}/home/${file} ${HOME}/.${file}
 	done
 }
 
