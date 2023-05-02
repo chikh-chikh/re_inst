@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fetch submodules
-git submodule update --init --recursive
+# git submodule update --init --recursive
 
 # Setup script for Dotfiles
 function install_packages {
@@ -32,11 +32,11 @@ function install_packages {
 }
 
 dirExists() {
-	[[ -d "$1" ]]
+	[[ -d "$1" ]] && [[ ! -L "$1" ]]
 }
 
 fileExists() {
-	[[ -f "$1" ]]
+	[[ -f "$1" ]] && [[ ! -L "$1" ]]
 }
 
 DOTHOME=$HOME/REPOS/reinst
@@ -87,8 +87,8 @@ function setup_symlinks {
 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
 	mkdir -p ~/.config
 
-	for dir in ${DOT_CFG_DIRS}; do
-		ln -svf ${DOT_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}
+	for dirs in ${DOT_CFG_DIRS}; do
+		ln -svf ${DOT_CFG_PATH}/${dirs} ${HOME_CFG_PATH}/${dirs}
 	done
 
 	for file in ${DOT_CFG_FILES}; do
@@ -97,7 +97,6 @@ function setup_symlinks {
 
 	for file in ${DOT_HOME_FILES}; do
 		ln -svf ${DOTHOME}/home/${file} ${HOME}/.${file}
-		# ln -svf ${DOTHOME}/home/${file} ${DOTHOME}/test/.${file}
 	done
 }
 
