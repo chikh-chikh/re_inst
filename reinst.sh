@@ -49,6 +49,7 @@ DOT_CFG_FILES=$(ls -l $DOT_CFG_PATH | grep -v '^d' | awk '{print $9}')
 DOT_HOME_FILES=$(ls -l $DOTHOME/home | grep -v '^d' | awk '{print $9}')
 
 function backup_configs {
+	# делает бекапы только тех пользовательских конфикураций, файлы которых есть в ./config ./home
 	echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
 	for dir in ${DOT_CFG_DIRS}; do
 		if dirExists ${HOME_CFG_PATH}/${dir}; then
