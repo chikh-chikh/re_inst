@@ -1,0 +1,69 @@
+
+
+
+" Window Splits
+set splitbelow splitright
+" Remap splits navigation to just CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize -3<CR>
+noremap <silent> <C-Down> :resize +3<CR>
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
+" General Settings
+set number                      " set line numbers
+set updatetime=100              " set update time for gitgutter update
+set mouse=a
+let mapleader = " "
+set ignorecase
+set smartcase
+set hlsearch                    " Подсвечивать результаты поиска:
+set incsearch                   " первое вхождение при вводе шаблона
+
+set noswapfile                  " no swap
+set clipboard=unnamedplus       " Copy/paste between vim and other programs. '"+y' then middlemouse
+" tabs and spaces
+set expandtab                   " Use spaces instead of tabs.
+set smarttab                    " Uses shiftwidth and tabstap to insert blanks when <Tab>
+set shiftwidth=2                " One tab == four spaces.
+set tabstop=2                   " One tab == four spaces.<Paste>
+"Без звука
+set noerrorbells
+set novisualbell
+
+" стандарт использования символов переноса строки
+set ffs=unix,dos,mac
+" remap
+:imap ii <Esc>
+" python alias (,p runs python on script. ,t times python script)
+nmap ,p :w<CR>:!python3 %<CR>
+nmap ,t :w<CR>:!time python3 %<CR>
+
+" сочетание клавиш для быстрого сохранения:
+nmap <leader>w :w!<cr>
+" сочетание клавиш для быстрого выхода:
+nmap wq :wq<cr>
+
+map <leader>ss :setlocal spell!<CR>
+" sudo apt install vim-gtk
+inoremap <C-v> <ESC>"+pa
+vnoremap <C-c> "+y
+vnoremap <C-d> "+d
+
+" с помощью команды :W можно было сохранить файл, если он открыт не через sudo
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+" git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
+" vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c q
+nmap <F6> :NERDTreeToggle<CR>
+"git clone https://tpope.io/vim/eunuch.git ~/.vim/pack/vendor/start/eunuch
+"vim -u NONE -c "helptags ~/.vim/pack/vendor/start/eunuch/doc" -c q
+map <F3> <Esc>:read !ls
+map H :bprev<cr>
+map L :bnext<cr>
