@@ -88,15 +88,15 @@ function setup_symlinks {
 	mkdir -p ~/.config
 
 	for dirs in ${DOT_CFG_DIRS}; do
-		ln -svf ${DOT_CFG_PATH}/${dirs} ${HOME_CFG_PATH}/${dirs}
+		ln -svnf ${DOT_CFG_PATH}/$dirs ${HOME_CFG_PATH}/$dirs
 	done
 
 	for file in ${DOT_CFG_FILES}; do
-		ln -svf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
+		ln -svnf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
 	done
 
 	for file in ${DOT_HOME_FILES}; do
-		ln -svf ${DOTHOME}/home/${file} ${HOME}/.${file}
+		ln -svnf ${DOTHOME}/home/${file} ${HOME}/.${file}
 	done
 }
 
