@@ -39,6 +39,11 @@ fileExists() {
 	[[ -f "$1" ]] && [[ ! -L "$1" ]]
 }
 
+RC='\e[0m'
+RED='\e[31m'
+YELLOW='\e[33m'
+GREEN='\e[32m'
+
 DOTHOME=$HOME/REPOS/reinst
 DOT_CFG_PATH=$DOTHOME/config
 HOME_CFG_PATH=$HOME/.config
@@ -48,58 +53,76 @@ DOT_CFG_DIRS=$(ls -l $DOT_CFG_PATH | grep '^d' | awk '{print $9}')
 DOT_CFG_FILES=$(ls -l $DOT_CFG_PATH | grep -v '^d' | awk '{print $9}')
 DOT_HOME_FILES=$(ls -l $DOTHOME/home | grep -v '^d' | awk '{print $9}')
 
-function backup_configs {
-	# делает бекапы только тех пользовательских конфикураций, файлы которых есть в ./config ./home
-	echo -e "\u001b[33;1m Backing up existing files... \u001b[0m"
+function back_sym {
+	# перед создание линков делает бекапы только тех пользовательских конфикураций,
+	# файлы которых есть в ./config ./home
+	mkdir -p ~/.config
+
+	echo -e "\u001b${YELLOW} Backing up existing files... ${RC}"
 	for dir in ${DOT_CFG_DIRS}; do
 		if dirExists ${HOME_CFG_PATH}/${dir}; then
-			echo -e "${YELLOW}Moving old config dir to ${HOME_CFG_PATH}/${dir}.old${RC}"
-			if ! mv -iv ${HOME_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}.old; then
+			echo -e "${YELLOW}Moving old config dir ${HOME_CFG_PATH}/${dir} to ${HOME_CFG_PATH}/${dir}.old${RC}"
+			if ! mv ${HOME_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}.old; then
 				echo -e "${RED}Can't move the old config dir!${RC}"
 				exit 1
 			fi
+		fi
+		echo -e "${GREEN}Linking new config dir ${DOT_CFG_PATH}/${dir} to ${HOME_CFG_PATH}/${dir}${RC}"
+		if ! ln -snf ${DOT_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}; then
+			echo echo -e "${RED}Can't link the config dir!${RC}"
+			exit 1
 		fi
 	done
 
 	for file in $DOT_CFG_FILES; do
 		if fileExists $HOME_CFG_PATH/$file; then
-			echo -e "${YELLOW}Moving old config file ${HOME_CFG_PATH}/${file}.old${RC}"
-			if ! mv -iv ${HOME_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}.old; then
+			echo -e "${YELLOW}Moving old config file ${HOME_CFG_PATH}/${file} to ${HOME_CFG_PATH}/${file}.old${RC}"
+			if ! mv ${HOME_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}.old; then
 				echo -e "${RED}Can't move the old config file!${RC}"
 				exit 1
 			fi
 		fi
+		echo -e "${GREEN}Linking config file ${DOT_CFG_PATH}/${file} to ${HOME_CFG_PATH}/${file}${RC}"
+		if ! ln -snf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}; then
+			echo echo -e "${RED}Can't link the config dir!${RC}"
+			exit 1
+		fi
 	done
 
 	for file in $DOT_HOME_FILES; do
-		if fileExists $HOME/.$file; then
-			echo -e "${YELLOW}Moving old config file ${HOME}/.${file}.old${RC}"
-			if ! mv -iv ${HOME}/.${file} ${HOME}/.${file}.old; then
+		if fileExists $HOME/.${file}; then
+			echo -e "${YELLOW}Moving old config file ${HOME}/.${file} to ${HOME}/.${file}.old${RC}"
+			if ! mv ${HOME}/.${file} ${HOME}/.${file}.old; then
 				echo -e "${RED}Can't move the old config file!${RC}"
 				exit 1
 			fi
+		fi
+		echo -e "${GREEN}Linking config file ${DOTHOME}/home/${file} to ${HOME}/.${file}${RC}"
+		if ! ln -snf ${DOTHOME}/home/${file} ${HOME}/.${file}; then
+			echo echo -e "${RED}Can't link the config file!${RC}"
+			exit 1
 		fi
 	done
 
 	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
 }
 
-function setup_symlinks {
-	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
-	mkdir -p ~/.config
-
-	for dirs in ${DOT_CFG_DIRS}; do
-		ln -svnf ${DOT_CFG_PATH}/$dirs ${HOME_CFG_PATH}/$dirs
-	done
-
-	for file in ${DOT_CFG_FILES}; do
-		ln -svnf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
-	done
-
-	for file in ${DOT_HOME_FILES}; do
-		ln -svnf ${DOTHOME}/home/${file} ${HOME}/.${file}
-	done
-}
+# function setup_symlinks {
+# 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
+# 	mkdir -p ~/.config
+#
+# 	for dir in ${DOT_CFG_DIRS}; do
+# 		ln -svnf ${DOT_CFG_PATH}/$dir ${HOME_CFG_PATH}/$dir
+# 	done
+#
+# 	for file in ${DOT_CFG_FILES}; do
+# 		ln -svnf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
+# 	done
+#
+# 	for file in ${DOT_HOME_FILES}; do
+# 		ln -svnf ${DOTHOME}/home/${file} ${HOME}/.${file}
+# 	done
+# }
 
 function clone_repo_wm {
 	echo -e "\u001b[7m Cloning repo...\u001b[0m"
@@ -223,7 +246,7 @@ function install_greenclip {
 function all {
 	echo -e "\u001b[7m Setting up Dotfiles... \u001b[0m"
 	install_packages
-	backup_configs
+	back_sym
 	setup_symlinks
 	clone_repo_wm
 	clone_repo_editors
@@ -318,7 +341,7 @@ case $option in
 	;;
 
 "2")
-	backup_configs
+	back_sym
 	;;
 
 "3")
