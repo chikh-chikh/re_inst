@@ -3,34 +3,6 @@
 # Fetch submodules
 # git submodule update --init --recursive
 
-# Setup script for Dotfiles
-function install_packages {
-	echo -e "\u001b[7m Installing required packages... \u001b[0m"
-	sudo apt install \
-		xauth xorg \
-		build-essential libreadline-dev unzip curl wget python3 pipx \
-		cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
-		libxml2-dev \
-		libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
-		connman cmst connman-gtk connman-ui \
-		pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
-		aptitude nala exa zsh \
-		cmus tmux picom fzf htop gh rofi \
-		zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
-		pandoc pandoc-citeproc \
-		atool bat fd-find fasd silversearcher-ag \
-		ripgrep xsel ncdu powerline autorandr libnotify-bin \
-		locales language-pack-ru console-cyrillic
-
-	# sudo ln -sfnv /usr/bin/fdfind /usr/bin/fd;
-	# sudo ln -sfnv /usr/bin/batcat /usr/bin/bat;
-
-	# sudo dpkg-reconfigure console-setup;
-	# sudo dpkg-reconfigure locales;
-
-	# localectl set-locale LANG=ru_RU.UTF-8;
-}
-
 RC='\e[0m'
 RED='\e[31m'
 YELLOW='\e[33m'
@@ -45,6 +17,70 @@ USR_CFG_PATH=$HOME/.config
 
 configExists() {
 	[[ -e "$1" ]] && [[ ! -L "$1" ]]
+}
+
+command_exists() {
+	command -v $1 >/dev/null 2>&1
+}
+
+checkEnv() {
+	## Check Package Handeler
+	PACKAGEMANAGER='apt dnf pacman'
+	for pgm in ${PACKAGEMANAGER}; do
+		if command_exists ${pgm}; then
+			PACKAGER=${pgm}
+			echo -e "Using ${pgm}"
+		fi
+	done
+
+	if [ -z "${PACKAGER}" ]; then
+		echo -e "${RED}Can't find a supported package manager"
+		exit 1
+	fi
+
+	## Check if the current directory is writable.
+	PATHs="$THIS_REPO_PATH $USR_CFG_PATH"
+	for path in $PATHs; do
+		if [[ ! -w ${path} ]]; then
+			echo -e "${RED}Can't write to ${path}${RC}"
+			exit 1
+		fi
+	done
+}
+
+checkEnv
+
+function install_packages {
+	## Check for dependencies.
+	DEPENDENCIES='xauth xorg \
+		build-essential libreadline-dev unzip curl wget python3 pipx \
+		cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
+		libxml2-dev \
+		libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
+		connman cmst connman-gtk connman-ui \
+		pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
+		aptitude nala exa zsh \
+		cmus tmux picom fzf htop gh rofi \
+		zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
+		pandoc pandoc-citeproc \
+		atool bat fd-find fasd silversearcher-ag \
+		ripgrep xsel ncdu powerline autorandr libnotify-bin \
+		locales language-pack-ru console-cyrillic'
+
+	echo -e "${YELLOW}Installing required packages...${RC}"
+	if [[ $PACKAGER == "pacman" ]]; then
+		if ! command_exists yay; then
+			echo "Installing yay..."
+			sudo "${PACKAGER} --noconfirm -S base-devel"
+			$(cd /opt && sudo git clone https://aur.archlinux.org/yay-git.git && sudo chown -R \
+				${USER}:${USER} ./yay-git && cd yay-git && makepkg --noconfirm -si)
+		else
+			echo "Command yay already installed"
+		fi
+		yay --noconfirm -S ${DEPENDENCIES}
+	else
+		sudo ${PACKAGER} install -yq ${DEPENDENCIES}
+	fi
 }
 
 function back_sym {
