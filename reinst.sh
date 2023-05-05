@@ -7,6 +7,11 @@ RC='\e[0m'
 RED='\e[31m'
 YELLOW='\e[33m'
 GREEN='\e[32m'
+GREEN2='[32;1m'
+WHITE='[37;1m'
+BLUE='[34;1m'
+
+RV='\u001b[7m'
 
 THIS_REPO_PATH="$(dirname "$(realpath "$0")")"
 # THIS_REPO_PATH=$HOME/REPOS/reinst
@@ -14,6 +19,7 @@ DOT_CFG_PATH=$THIS_REPO_PATH/config
 DOT_HOME_PATH=$THIS_REPO_PATH/home
 USR_CFG_PATH=$HOME/.config
 # USR_CFG_PATH=$THIS_REPO_PATH/test
+mkdir -p "$USR_CFG_PATH"
 
 configExists() {
 	[[ -e "$1" ]] && [[ ! -L "$1" ]]
@@ -29,7 +35,7 @@ checkEnv() {
 	for pgm in ${PACKAGEMANAGER}; do
 		if command_exists ${pgm}; then
 			PACKAGER=${pgm}
-			echo -e "Using ${pgm}"
+			echo -e ${RV}"Using ${pgm}"
 		fi
 	done
 
@@ -51,7 +57,6 @@ checkEnv() {
 checkEnv
 
 function install_packages {
-	## Check for dependencies.
 	DEPENDENCIES='xauth xorg \
 		build-essential libreadline-dev unzip curl wget python3 pipx \
 		cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
@@ -86,8 +91,6 @@ function install_packages {
 function back_sym {
 	# перед создание линков делает бекапы только тех пользовательских конфикураций,
 	# файлы которых есть в ./config ./home
-	mkdir -p "$USR_CFG_PATH"
-
 	echo -e "\u001b${YELLOW} Backing up existing files... ${RC}"
 	for config in $(ls ${DOT_CFG_PATH}); do
 		if configExists "${USR_CFG_PATH}/${config}"; then
@@ -119,11 +122,11 @@ function back_sym {
 		fi
 	done
 
-	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. \u001b[0m"
+	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. ${RC}"
 }
 
 # function setup_symlinks {
-# 	echo -e "\u001b[7m Setting up symlinks... \u001b[0m"
+# 	echo -e "${RV} Setting up symlinks... ${RC}"
 # 	mkdir -p ~/.config
 #
 # 	for dir in ${DOT_CFG_DIRS}; do
@@ -140,7 +143,7 @@ function back_sym {
 # }
 
 function clone_repo_wm {
-	echo -e "\u001b[7m Cloning repo...\u001b[0m"
+	echo -e "${RV} Cloning repo...${RC}"
 
 	mkdir -p ~/REPOS/wm
 	git clone https://github.com/RU927/wm ~/REPOS/wm
@@ -149,7 +152,7 @@ function clone_repo_wm {
 	# git remote add origin git@github.com:RU927/wm
 }
 function clone_repo_editors {
-	echo -e "\u001b[7m Cloning repo...\u001b[0m"
+	echo -e "${RV} Cloning repo...${RC}"
 
 	mkdir -p ~/REPOS/editors
 	git clone https://github.com/RU927/editors ~/REPOS/editors
@@ -159,14 +162,14 @@ function clone_repo_editors {
 }
 
 function install_alacritty {
-	echo -e "\u001b[7m Install Dependens \u001b[0m"
+	echo -e "${RV} Install Dependens ${RC}"
 	sudo apt install libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
-	echo -e "\u001b[7m Installing Rust \u001b[0m"
+	echo -e "${RV} Installing Rust ${RC}"
 	# Rust,Cargo
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 	source "~/.cargo/env/"
 	# Alacritty
-	echo -e "\u001b[7m Compiling Alacritty... \u001b[0m"
+	echo -e "${RV} Compiling Alacritty... ${RC}"
 	# git clone https://github.com/alacritty/alacritty.git
 	# cd alacritty
 	# cargo build --release
@@ -175,7 +178,7 @@ function install_alacritty {
 
 function install_sheldon {
 
-	echo -e "\u001b[7m Compiling Sheldon...\u001b[0m"
+	echo -e "${RV} Compiling Sheldon...${RC}"
 	cargo install sheldon
 	sheldon lock
 
@@ -183,7 +186,7 @@ function install_sheldon {
 }
 
 function install_r {
-	echo -e "\u001b[7m Installing R... \u001b[0m"
+	echo -e "${RV} Installing R... ${RC}"
 	#R
 	wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 	gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
@@ -198,7 +201,7 @@ function install_r {
 }
 
 function install_lazygit {
-	echo -e "\u001b[7m Installing  \u001b[0m"
+	echo -e "${RV} Installing  ${RC}"
 	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" |
 		grep -Po '"tag_name": "v\K[^"]*')
 	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_\
@@ -210,7 +213,7 @@ function install_lazygit {
 }
 
 function install_file_managers {
-	echo -e "\u001b[7m Installing file managers \u001b[0m"
+	echo -e "${RV} Installing file managers ${RC}"
 	sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus ranger vifm
 	pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
 	mkdir -p ~/.local/bin
@@ -221,7 +224,7 @@ function install_file_managers {
 }
 
 function install_fonts {
-	echo -e "\u001b[7m Installing fonts \u001b[0m"
+	echo -e "${RV} Installing fonts ${RC}"
 	#fonts
 	mkdir -p ~/Downloads
 	cd ~/Downloads
@@ -234,14 +237,14 @@ function install_fonts {
 }
 
 function install_debget {
-	echo -e "\u001b[7m Installing deb-get \u001b[0m"
+	echo -e "${RV} Installing deb-get ${RC}"
 	#deb-get
 	curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 	deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
 }
 
 function install_telegram {
-	echo -e "\u001b[7m Installing telegram \u001b[0m"
+	echo -e "${RV} Installing telegram ${RC}"
 	#Telegramm
 	wget https://telegram.org/dl/desktop/linux
 	sudo tar -xpf linux -C /opt
@@ -250,7 +253,7 @@ function install_telegram {
 }
 
 function install_greenclip {
-	echo -e "\u001b[7m Installing greenclip \u001b[0m"
+	echo -e "${RV} Installing greenclip ${RC}"
 	#Greenclip (rofi clipboard manager)
 	wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
 	mkdir -p ~/.local/bin
@@ -259,7 +262,7 @@ function install_greenclip {
 }
 
 function all {
-	echo -e "\u001b[7m Setting up Dotfiles... \u001b[0m"
+	echo -e "${RV} Setting up Dotfiles... ${RC}"
 	install_packages
 	back_sym
 	setup_symlinks
@@ -274,35 +277,35 @@ function all {
 	install_debget
 	install_telegram
 	install_greenclip
-	echo -e "\u001b[7m Done! \u001b[0m"
+	echo -e "${RV} Done! ${RC}"
 }
 
 function wm {
-	echo -e "\u001b[7m Setting up Windows Managers... \u001b[0m"
+	echo -e "${RV} Setting up Windows Managers... ${RC}"
 	clone_repo_wm
-	echo -e "\u001b[7m Done! \u001b[0m"
+	echo -e "${RV} Done! ${RC}"
 }
 
 function editors {
-	echo -e "\u001b[7m Setting up Editors... \u001b[0m"
+	echo -e "${RV} Setting up Editors... ${RC}"
 	clone_repo_editors
-	echo -e "\u001b[7m Done! \u001b[0m"
+	echo -e "${RV} Done! ${RC}"
 }
 
 function terminals {
-	echo -e "\u001b[7m Setting up Terminals... \u001b[0m"
+	echo -e "${RV} Setting up Terminals... ${RC}"
 	install_alacritty
 	install_sheldon
-	echo -e "\u001b[7m Done! \u001b[0m"
+	echo -e "${RV} Done! ${RC}"
 }
 
 function changers {
-	echo -e "\u001b[7m Setting up Changers  \u001b[0m"
+	echo -e "${RV} Setting up Changers  ${RC}"
 	install_file_managers
 	install_debget
 	install_telegram
 	install_greenclip
-	echo -e "\u001b[7m Done! \u001b[0m"
+	echo -e "${RV} Done! ${RC}"
 }
 
 if [ "$1" = "--all" -o "$1" = "-a" ]; then
@@ -311,29 +314,29 @@ if [ "$1" = "--all" -o "$1" = "-a" ]; then
 fi
 
 # Menu TUI
-echo -e "\u001b[32;1m Setting up Dotfiles...\u001b[0m"
+echo -e "\u001b${GREEN} Setting up Dotfiles...${RC}"
 
-echo -e " \u001b[37;1m\u001b[4mSelect an option:\u001b[0m"
-echo -e "  \u001b[34;1m (a) ALL(1-14) \u001b[0m"
-echo -e "  \u001b[34;1m (t) TERMINAL(6,7) \u001b[0m"
-echo -e "  \u001b[34;1m (f) CHANGERS(10,12,13) \u001b[0m"
-echo -e "  \u001b[34;1m (1) Install packages \u001b[0m"
-echo -e "  \u001b[34;1m (2) Backup current config \u001b[0m"
-echo -e "  \u001b[34;1m (3) Setup symlinks \u001b[0m"
-echo -e "  \u001b[34;1m (4) Clone repo wm \u001b[0m"
-echo -e "  \u001b[34;1m (5) Clone repo editors \u001b[0m"
-echo -e "  \u001b[34;1m (6) Install alacritty \u001b[0m"
-echo -e "  \u001b[34;1m (7) Install sheldon \u001b[0m"
-echo -e "  \u001b[34;1m (8) Install r \u001b[0m"
-echo -e "  \u001b[34;1m (9) Install lazygit \u001b[0m"
-echo -e "  \u001b[34;1m (10) Install file managers \u001b[0m"
-echo -e "  \u001b[34;1m (11) Install fonts \u001b[0m"
-echo -e "  \u001b[34;1m (12) Install deb-get \u001b[0m"
-echo -e "  \u001b[34;1m (13) Install telegram \u001b[0m"
-echo -e "  \u001b[34;1m (14) Install greenclip \u001b[0m"
-echo -e "  \u001b[31;1m (*) Anything else to exit \u001b[0m"
+echo -e " \u001b${WHITE}\u001b[4mSelect an option:${RC}"
+echo -e "  \u001b${BLUE} (a) ALL(1-14) ${RC}"
+echo -e "  \u001b${BLUE} (t) TERMINAL(6,7) ${RC}"
+echo -e "  \u001b${BLUE} (f) CHANGERS(10,12,13) ${RC}"
+echo -e "  \u001b${BLUE} (1) Install packages ${RC}"
+echo -e "  \u001b${BLUE} (2) Backup current config ${RC}"
+echo -e "  \u001b${BLUE} (3) Setup symlinks ${RC}"
+echo -e "  \u001b${BLUE} (4) Clone repo wm ${RC}"
+echo -e "  \u001b${BLUE} (5) Clone repo editors ${RC}"
+echo -e "  \u001b${BLUE} (6) Install alacritty ${RC}"
+echo -e "  \u001b${BLUE} (7) Install sheldon ${RC}"
+echo -e "  \u001b${BLUE} (8) Install r ${RC}"
+echo -e "  \u001b${BLUE} (9) Install lazygit ${RC}"
+echo -e "  \u001b${BLUE} (10) Install file managers ${RC}"
+echo -e "  \u001b${BLUE} (11) Install fonts ${RC}"
+echo -e "  \u001b${BLUE} (12) Install deb-get ${RC}"
+echo -e "  \u001b${BLUE} (13) Install telegram ${RC}"
+echo -e "  \u001b${BLUE} (14) Install greenclip ${RC}"
+echo -e "  \u001b${RED} (*) Anything else to exit ${RC}"
 
-echo -en "\u001b[32;1m ==> \u001b[0m"
+echo -en "\u001b${GREEN2} ==> ${RC}"
 
 read -r option
 
@@ -408,7 +411,7 @@ case $option in
 	;;
 
 *)
-	echo -e "\u001b[31;1m Invalid option entered, Bye! \u001b[0m"
+	echo -e "\u001b[31;1m Invalid option entered, Bye! ${RC}"
 	exit 0
 	;;
 esac
