@@ -31,75 +31,54 @@ function install_packages {
 	# localectl set-locale LANG=ru_RU.UTF-8;
 }
 
-dirExists() {
-	[[ -d "$1" ]] && [[ ! -L "$1" ]]
-}
-
-fileExists() {
-	[[ -f "$1" ]] && [[ ! -L "$1" ]]
-}
-
 RC='\e[0m'
 RED='\e[31m'
 YELLOW='\e[33m'
 GREEN='\e[32m'
 
-DOTHOME=$HOME/REPOS/reinst
-DOT_CFG_PATH=$DOTHOME/config
-HOME_CFG_PATH=$HOME/.config
-# HOME_CFG_PATH=$DOTHOME/test
+THIS_REPO_PATH="$(dirname "$(realpath "$0")")"
+# THIS_REPO_PATH=$HOME/REPOS/reinst
+DOT_CFG_PATH=$THIS_REPO_PATH/config
+DOT_HOME_PATH=$THIS_REPO_PATH/home
+USR_CFG_PATH=$HOME/.config
+# USR_CFG_PATH=$THIS_REPO_PATH/test
 
-DOT_CFG_DIRS=$(ls -l $DOT_CFG_PATH | grep '^d' | awk '{print $9}')
-DOT_CFG_FILES=$(ls -l $DOT_CFG_PATH | grep -v '^d' | awk '{print $9}')
-DOT_HOME_FILES=$(ls -l $DOTHOME/home | grep -v '^d' | awk '{print $9}')
+configExists() {
+	[[ -e "$1" ]] && [[ ! -L "$1" ]]
+}
 
 function back_sym {
 	# перед создание линков делает бекапы только тех пользовательских конфикураций,
 	# файлы которых есть в ./config ./home
-	mkdir -p ~/.config
+	mkdir -p "$USR_CFG_PATH"
 
 	echo -e "\u001b${YELLOW} Backing up existing files... ${RC}"
-	for dir in ${DOT_CFG_DIRS}; do
-		if dirExists ${HOME_CFG_PATH}/${dir}; then
-			echo -e "${YELLOW}Moving old config dir ${HOME_CFG_PATH}/${dir} to ${HOME_CFG_PATH}/${dir}.old${RC}"
-			if ! mv ${HOME_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}.old; then
-				echo -e "${RED}Can't move the old config dir!${RC}"
+	for config in $(ls ${DOT_CFG_PATH}); do
+		if configExists "${USR_CFG_PATH}/${config}"; then
+			echo -e "${YELLOW}Moving old config ${USR_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}.old${RC}"
+			if ! mv "${USR_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}.old"; then
+				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
 		fi
-		echo -e "${GREEN}Linking new config dir ${DOT_CFG_PATH}/${dir} to ${HOME_CFG_PATH}/${dir}${RC}"
-		if ! ln -snf ${DOT_CFG_PATH}/${dir} ${HOME_CFG_PATH}/${dir}; then
-			echo echo -e "${RED}Can't link the config dir!${RC}"
+		echo -e "${GREEN}Linking ${DOT_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}${RC}"
+		if ! ln -snf "${DOT_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}"; then
+			echo echo -e "${RED}Can't link the config!${RC}"
 			exit 1
 		fi
 	done
 
-	for file in $DOT_CFG_FILES; do
-		if fileExists $HOME_CFG_PATH/$file; then
-			echo -e "${YELLOW}Moving old config file ${HOME_CFG_PATH}/${file} to ${HOME_CFG_PATH}/${file}.old${RC}"
-			if ! mv ${HOME_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}.old; then
-				echo -e "${RED}Can't move the old config file!${RC}"
+	for config in $(ls ${DOT_HOME_PATH}); do
+		if configExists "$HOME/.${config}"; then
+			echo -e "${YELLOW}Moving old config ${HOME}/.${config} to ${HOME}/.${config}.old${RC}"
+			if ! mv "${HOME}/.${config}" "${HOME}/.${config}.old"; then
+				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
 		fi
-		echo -e "${GREEN}Linking config file ${DOT_CFG_PATH}/${file} to ${HOME_CFG_PATH}/${file}${RC}"
-		if ! ln -snf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}; then
-			echo echo -e "${RED}Can't link the config dir!${RC}"
-			exit 1
-		fi
-	done
-
-	for file in $DOT_HOME_FILES; do
-		if fileExists $HOME/.${file}; then
-			echo -e "${YELLOW}Moving old config file ${HOME}/.${file} to ${HOME}/.${file}.old${RC}"
-			if ! mv ${HOME}/.${file} ${HOME}/.${file}.old; then
-				echo -e "${RED}Can't move the old config file!${RC}"
-				exit 1
-			fi
-		fi
-		echo -e "${GREEN}Linking config file ${DOTHOME}/home/${file} to ${HOME}/.${file}${RC}"
-		if ! ln -snf ${DOTHOME}/home/${file} ${HOME}/.${file}; then
-			echo echo -e "${RED}Can't link the config file!${RC}"
+		echo -e "${GREEN}Linking ${DOT_HOME_PATH}/${config} to ${HOME}/.${config}${RC}"
+		if ! ln -snf "${DOT_HOME_PATH}/${config}" "${HOME}/.${config}"; then
+			echo echo -e "${RED}Can't link the config!${RC}"
 			exit 1
 		fi
 	done
@@ -112,15 +91,15 @@ function back_sym {
 # 	mkdir -p ~/.config
 #
 # 	for dir in ${DOT_CFG_DIRS}; do
-# 		ln -svnf ${DOT_CFG_PATH}/$dir ${HOME_CFG_PATH}/$dir
+# 		ln -svnf ${DOT_CFG_PATH}/$dir ${USR_CFG_PATH}/$dir
 # 	done
 #
 # 	for file in ${DOT_CFG_FILES}; do
-# 		ln -svnf ${DOT_CFG_PATH}/${file} ${HOME_CFG_PATH}/${file}
+# 		ln -svnf ${DOT_CFG_PATH}/${file} ${USR_CFG_PATH}/${file}
 # 	done
 #
 # 	for file in ${DOT_HOME_FILES}; do
-# 		ln -svnf ${DOTHOME}/home/${file} ${HOME}/.${file}
+# 		ln -svnf ${DOT_HOME_PATH}/${file} ${HOME}/.${file}
 # 	done
 # }
 
