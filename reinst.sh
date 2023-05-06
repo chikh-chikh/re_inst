@@ -161,30 +161,6 @@ function clone_repo_editors {
 	# git remote add origin git@github.com:RU927/editors
 }
 
-function install_alacritty {
-	echo -e "${RV} Install Dependens ${RC}"
-	sudo apt install libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
-	echo -e "${RV} Installing Rust ${RC}"
-	# Rust,Cargo
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	source "~/.cargo/env/"
-	# Alacritty
-	echo -e "${RV} Compiling Alacritty... ${RC}"
-	# git clone https://github.com/alacritty/alacritty.git
-	# cd alacritty
-	# cargo build --release
-	cargo install alacritty
-}
-
-function install_sheldon {
-
-	echo -e "${RV} Compiling Sheldon...${RC}"
-	cargo install sheldon
-	sheldon lock
-
-	chsh -s $(which zsh)
-}
-
 function install_r {
 	echo -e "${RV} Installing R... ${RC}"
 	#R
