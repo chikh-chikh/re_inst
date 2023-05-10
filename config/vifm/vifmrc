@@ -36,6 +36,7 @@ set syscalls
 " This probably shouldn't be an option.
 
 set trash
+" set trashdir="~/.local/share/vifm/Trash
 
 " This is how many directories to store in the directory history.
 
@@ -48,7 +49,7 @@ set nofollowlinks
 " With this option turned on you can run partially entered commands with
 " unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
 
-" set fastrun
+set fastrun
 
 " Natural sort of (version) numbers within text.
 
@@ -61,7 +62,7 @@ set undolevels=100
 " If you installed the vim.txt help file set vimhelp.
 " If would rather use a plain text help file set novimhelp.
 
-set novimhelp
+set vimhelp
 
 " If you would like to run an executable file when you
 " press return on the file name set this.
@@ -106,7 +107,7 @@ set incsearch
 
 " Try to leave some space from cursor to upper/lower border in lists
 
-set scrolloff=4
+set scrolloff=7
 
 " Don't do too many requests to slow file systems
 
@@ -125,6 +126,7 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 " :mark mark /full/directory/path [filename]
 
 mark h ~/
+mark b ~/.local/bin/
 
 " ------------------------------------------------------------------------------
 
@@ -141,13 +143,14 @@ mark h ~/
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
+command! diff nvim -d %f %F
 command! zip zip -r %f.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart
+command! pv sxiv -tr %d
 
 " ------------------------------------------------------------------------------
 
@@ -314,6 +317,14 @@ nnoremap s :shell<cr>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
+
+nnoremap . zathura
+nnoremap <space> t
+
+nnoremap <space>t :tabnew<cr>
+nnoremap <space>j :tabprevious<cr>
+nnoremap <space>k :tabnext<cr>
+nnoremap <space>x :tabclose<cr>
 
 " Toggle visibility of preview window
 nnoremap w :view<cr>
