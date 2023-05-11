@@ -66,7 +66,7 @@ function install_packages {
 		pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
 		aptitude nala exa zsh \
 		cmus tmux picom fzf htop gh rofi \
-		zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-l10n-ru \
+		zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-writer libreoffice-l11n-ru \
 		pandoc pandoc-citeproc \
 		atool bat fd-find fasd silversearcher-ag \
 		ripgrep xsel ncdu powerline autorandr libnotify-bin \
