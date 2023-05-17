@@ -79,8 +79,7 @@ configuration {
     display-ssh: "SSH";
     display-combi: "Combi";
     display-keys: "Keys";
-
-    display-clipboard: "Clip";
+    display-clipboard: "clipboard";
 
 /*---- Misc setting ----*/
     terminal: "rofi-sensible-terminal";

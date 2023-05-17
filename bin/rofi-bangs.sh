@@ -37,8 +37,7 @@ LABELS["websearch"]=""
 
 # greenclip clipboard history
 # source: https://github.com/erebe/greenclip
-# COMMANDS["clipboard"]='rofi -modi "clipboard:greenclip print" -show clipboard'
-COMMANDS["clipboard"]='rofi -modi "clipboard:/home/ru/.local/bin/greenclip print" -show clipboard'
+COMMANDS["clipboard"]='rofi -modi "clipboard:greenclip print" -show clipboard'
 LABELS["clipboard"]=""
 
 # references --------------------------
