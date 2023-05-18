@@ -13,13 +13,17 @@ BLUE='[34;1m'
 
 RV='\u001b[7m'
 
+ALL_REPOS_DIR=$HOME/REPOS
+
 THIS_REPO_PATH="$(dirname "$(realpath "$0")")"
 # THIS_REPO_PATH=$HOME/REPOS/reinst
 DOT_CFG_PATH=$THIS_REPO_PATH/config
 DOT_HOME_PATH=$THIS_REPO_PATH/home
 USR_CFG_PATH=$HOME/.config
 # USR_CFG_PATH=$THIS_REPO_PATH/test
-mkdir -p "$USR_CFG_PATH"
+
+SRC_DIR=$HOME/src
+FONT_DIR=$HOME/.local/share/fonts
 
 configExists() {
 	[[ -e "$1" ]] && [[ ! -L "$1" ]]
@@ -53,8 +57,9 @@ checkEnv() {
 		fi
 	done
 }
-
 checkEnv
+
+mkdir -p "$USR_CFG_PATH" "$SRC_DIR" "$FONT_DIR"
 
 function install_packages {
 	DEPENDENCIES='xauth xorg \
@@ -99,6 +104,7 @@ function back_sym {
 				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
+			echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'${RC}"
 		fi
 		echo -e "${GREEN}Linking ${DOT_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}${RC}"
 		if ! ln -snf "${DOT_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}"; then
@@ -121,44 +127,33 @@ function back_sym {
 			exit 1
 		fi
 	done
-
-	echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'. ${RC}"
 }
 
-# function setup_symlinks {
-# 	echo -e "${RV} Setting up symlinks... ${RC}"
-# 	mkdir -p ~/.config
-#
-# 	for dir in ${DOT_CFG_DIRS}; do
-# 		ln -svnf ${DOT_CFG_PATH}/$dir ${USR_CFG_PATH}/$dir
-# 	done
-#
-# 	for file in ${DOT_CFG_FILES}; do
-# 		ln -svnf ${DOT_CFG_PATH}/${file} ${USR_CFG_PATH}/${file}
-# 	done
-#
-# 	for file in ${DOT_HOME_FILES}; do
-# 		ln -svnf ${DOT_HOME_PATH}/${file} ${HOME}/.${file}
-# 	done
-# }
-
 function clone_repo_wm {
-	echo -e "${RV} Cloning repo...${RC}"
-
-	mkdir -p ~/REPOS/wm
-	git clone https://github.com/RU927/wm ~/REPOS/wm
-	bash ~/REPOS/wm/install_wm.sh
+	echo -e "${RV} Cloning repo wm...${RC}"
+	mkdir -p "${ALL_REPOS_DIR}"/wm
+	git clone https://github.com/RU927/wm "${ALL_REPOS_DIR}"/wm
+	bash "${ALL_REPOS_DIR}"/wm/install_wm.sh
 
 	# git remote add origin git@github.com:RU927/wm
 }
-function clone_repo_editors {
-	echo -e "${RV} Cloning repo...${RC}"
 
-	mkdir -p ~/REPOS/editors
-	git clone https://github.com/RU927/editors ~/REPOS/editors
-	bash ~/REPOS/editors/install_editors.sh
+function clone_repo_editors {
+	echo -e "${RV} Cloning repo editors...${RC}"
+	mkdir -p "${ALL_REPOS_DIR}"/editors
+	git clone https://github.com/RU927/editors "${ALL_REPOS_DIR}"/editors
+	bash "${ALL_REPOS_DIR}"/editors/install_editors.sh
 
 	# git remote add origin git@github.com:RU927/editors
+}
+
+function clone_repo_shells {
+	echo -e "${RV} Cloning repo shells...${RC}"
+	mkdir -p "${ALL_REPOS_DIR}"/shells
+	git clone https://github.com/RU927/shells "${ALL_REPOS_DIR}"/shells
+	bash "${ALL_REPOS_DIR}"/shells/reshells.sh
+
+	# git remote add origin git@github.com:RU927/shells
 }
 
 function install_r {
@@ -201,14 +196,11 @@ function install_file_managers {
 
 function install_fonts {
 	echo -e "${RV} Installing fonts ${RC}"
-	#fonts
-	mkdir -p ~/Downloads
-	cd ~/Downloads
+	mkdir -p "${SRC_DIR}"/fonts
 	# wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip
-	mkdir -p ~/.local/share/fonts
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip -P "${SRC_DIR}"/fonts
 	# unzip JetBrainsMono.zip -d ~/.local/share/fonts/
-	unzip RobotoMono.zip -d ~/.local/share/fonts/
+	unzip "${SRC_DIR}"/fonts/RobotoMono.zip -d "${FONT_DIR}"
 	sudo fc-cache -fr
 }
 
@@ -241,11 +233,9 @@ function all {
 	echo -e "${RV} Setting up Dotfiles... ${RC}"
 	install_packages
 	back_sym
-	setup_symlinks
 	clone_repo_wm
 	clone_repo_editors
-	install_alacritty
-	install_sheldon
+	clone_repo_shells
 	install_r
 	install_lazygit
 	install_file_managers
@@ -256,31 +246,11 @@ function all {
 	echo -e "${RV} Done! ${RC}"
 }
 
-function wm {
-	echo -e "${RV} Setting up Windows Managers... ${RC}"
-	clone_repo_wm
-	echo -e "${RV} Done! ${RC}"
-}
-
-function editors {
+function repos {
 	echo -e "${RV} Setting up Editors... ${RC}"
 	clone_repo_editors
-	echo -e "${RV} Done! ${RC}"
-}
-
-function terminals {
-	echo -e "${RV} Setting up Terminals... ${RC}"
-	install_alacritty
-	install_sheldon
-	echo -e "${RV} Done! ${RC}"
-}
-
-function changers {
-	echo -e "${RV} Setting up Changers  ${RC}"
-	install_file_managers
-	install_debget
-	install_telegram
-	install_greenclip
+	clone_repo_wm
+	clone_repo_shells
 	echo -e "${RV} Done! ${RC}"
 }
 
@@ -293,23 +263,20 @@ fi
 echo -e "\u001b${GREEN} Setting up Dotfiles...${RC}"
 
 echo -e " \u001b${WHITE}\u001b[4mSelect an option:${RC}"
-echo -e "  \u001b${BLUE} (a) ALL(1-14) ${RC}"
-echo -e "  \u001b${BLUE} (t) TERMINAL(6,7) ${RC}"
-echo -e "  \u001b${BLUE} (f) CHANGERS(10,12,13) ${RC}"
+echo -e "  \u001b${BLUE} (a) ALL(1-12) ${RC}"
+echo -e "  \u001b${BLUE} (r) Clone all repos (3,4,5) ${RC}"
 echo -e "  \u001b${BLUE} (1) Install packages ${RC}"
-echo -e "  \u001b${BLUE} (2) Backup current config ${RC}"
-echo -e "  \u001b${BLUE} (3) Setup symlinks ${RC}"
-echo -e "  \u001b${BLUE} (4) Clone repo wm ${RC}"
-echo -e "  \u001b${BLUE} (5) Clone repo editors ${RC}"
-echo -e "  \u001b${BLUE} (6) Install alacritty ${RC}"
-echo -e "  \u001b${BLUE} (7) Install sheldon ${RC}"
-echo -e "  \u001b${BLUE} (8) Install r ${RC}"
-echo -e "  \u001b${BLUE} (9) Install lazygit ${RC}"
-echo -e "  \u001b${BLUE} (10) Install file managers ${RC}"
-echo -e "  \u001b${BLUE} (11) Install fonts ${RC}"
-echo -e "  \u001b${BLUE} (12) Install deb-get ${RC}"
-echo -e "  \u001b${BLUE} (13) Install telegram ${RC}"
-echo -e "  \u001b${BLUE} (14) Install greenclip ${RC}"
+echo -e "  \u001b${BLUE} (2) Backup config and setup symlinks ${RC}"
+echo -e "  \u001b${BLUE} (3) Clone repo wm ${RC}"
+echo -e "  \u001b${BLUE} (4) Clone repo editors ${RC}"
+echo -e "  \u001b${BLUE} (5) Clone repo shells ${RC}"
+echo -e "  \u001b${BLUE} (6) Install r ${RC}"
+echo -e "  \u001b${BLUE} (7) Install lazygit ${RC}"
+echo -e "  \u001b${BLUE} (8) Install file managers ${RC}"
+echo -e "  \u001b${BLUE} (9) Install fonts ${RC}"
+echo -e "  \u001b${BLUE} (10) Install deb-get ${RC}"
+echo -e "  \u001b${BLUE} (11) Install telegram ${RC}"
+echo -e "  \u001b${BLUE} (12) Install greenclip ${RC}"
 echo -e "  \u001b${RED} (*) Anything else to exit ${RC}"
 
 echo -en "\u001b${GREEN2} ==> ${RC}"
@@ -322,12 +289,8 @@ case $option in
 	all
 	;;
 
-"t")
-	terminals
-	;;
-
-"f")
-	changers
+"r")
+	repos
 	;;
 
 "1")
@@ -339,23 +302,15 @@ case $option in
 	;;
 
 "3")
-	setup_symlinks
+	clone_repo_wm
 	;;
 
 "4")
-	wm
+	clone_repo_editors
 	;;
 
 "5")
-	editors
-	;;
-
-"6")
-	install_alacritty
-	;;
-
-"7")
-	install_sheldon
+	clone_repo_shells
 	;;
 
 "8")
