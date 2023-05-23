@@ -7,3 +7,4 @@ config/ranger/plugins/__pycache__
 config/nvim/lazy-lock.json
 config/vifm/vifminfo.json
 config/lazygit/state.yml
+home/jupyter/migrated
