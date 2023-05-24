@@ -104,7 +104,7 @@ function back_sym {
 				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
-			echo -e "\u001b[36;1m Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old'${RC}"
+			echo -e "${WHITE} Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old' ${RC}"
 		fi
 		echo -e "${GREEN}Linking ${DOT_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}${RC}"
 		if ! ln -snf "${DOT_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}"; then
@@ -120,6 +120,7 @@ function back_sym {
 				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
+			echo -e "${WHITE} Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old' ${RC}"
 		fi
 		echo -e "${GREEN}Linking ${DOT_HOME_PATH}/${config} to ${HOME}/.${config}${RC}"
 		if ! ln -snf "${DOT_HOME_PATH}/${config}" "${HOME}/.${config}"; then
@@ -131,29 +132,38 @@ function back_sym {
 
 function clone_repo_wm {
 	echo -e "${RV} Cloning repo wm...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/wm
-	git clone https://github.com/RU927/wm "${ALL_REPOS_DIR}"/wm
-	bash "${ALL_REPOS_DIR}"/wm/install_wm.sh
+	mkdir -p "${ALL_REPOS_DIR}"/re_slider
+	git clone https://github.com/RU927/re_slider "${ALL_REPOS_DIR}"/re_slider
+	bash "${ALL_REPOS_DIR}"/re_slider/reslider.sh
 
-	# git remote add origin git@github.com:RU927/wm
+	# git remote add origin git@github.com:RU927/re_slider
 }
 
 function clone_repo_editors {
 	echo -e "${RV} Cloning repo editors...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/editors
-	git clone https://github.com/RU927/editors "${ALL_REPOS_DIR}"/editors
-	bash "${ALL_REPOS_DIR}"/editors/install_editors.sh
+	mkdir -p "${ALL_REPOS_DIR}"/re_writer
+	git clone https://github.com/RU927/re_writer "${ALL_REPOS_DIR}"/re_writer
+	bash "${ALL_REPOS_DIR}"/re_writer/rewriter.sh
 
-	# git remote add origin git@github.com:RU927/editors
+	# git remote add origin git@github.com:RU927/re_writer
 }
 
 function clone_repo_shells {
 	echo -e "${RV} Cloning repo shells...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/shells
-	git clone https://github.com/RU927/shells "${ALL_REPOS_DIR}"/shells
-	bash "${ALL_REPOS_DIR}"/shells/reshells.sh
+	mkdir -p "${ALL_REPOS_DIR}"/re_shell
+	git clone https://github.com/RU927/re_shell "${ALL_REPOS_DIR}"/re_shell
+	bash "${ALL_REPOS_DIR}"/re_shell/reshell.sh
 
-	# git remote add origin git@github.com:RU927/shells
+	# git remote add origin git@github.com:RU927/re_shell
+}
+
+function clone_repo_starter {
+	echo -e "${RV} Cloning repo rofi...${RC}"
+	mkdir -p "${ALL_REPOS_DIR}"/re_starter
+	git clone https://github.com/RU927/re_starter "${ALL_REPOS_DIR}"/re_starter
+	bash "${ALL_REPOS_DIR}"/re_starter/restarter.sh
+
+	# git remote add origin git@github.com:RU927/re_starter
 }
 
 function install_r {
@@ -169,18 +179,6 @@ function install_r {
 	# sudo apt install --no-install-recommends r-cran-tidyverse
 	# deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
 	R --version
-}
-
-function install_lazygit {
-	echo -e "${RV} Installing  ${RC}"
-	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" |
-		grep -Po '"tag_name": "v\K[^"]*')
-	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_\
-          ${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-	tar xf lazygit.tar.gz lazygit
-	sudo install lazygit /usr/local/bin
-	rm -rf lazygit.tar.gz
-	lazygit --version
 }
 
 function install_file_managers {
@@ -220,15 +218,6 @@ function install_telegram {
 	sudo chmod -R 775 /opt/Telegram
 }
 
-function install_greenclip {
-	echo -e "${RV} Installing greenclip ${RC}"
-	#Greenclip (rofi clipboard manager)
-	wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
-	mkdir -p ~/.local/bin
-	mv greenclip ~/.local/bin
-	chmod 775 ~/.local/bin/greenclip
-}
-
 function all {
 	echo -e "${RV} Setting up Dotfiles... ${RC}"
 	install_packages
@@ -236,13 +225,12 @@ function all {
 	clone_repo_wm
 	clone_repo_editors
 	clone_repo_shells
+	clone_repo_starter
 	install_r
-	install_lazygit
 	install_file_managers
 	install_fonts
 	install_debget
 	install_telegram
-	install_greenclip
 	echo -e "${RV} Done! ${RC}"
 }
 
@@ -251,6 +239,7 @@ function repos {
 	clone_repo_editors
 	clone_repo_wm
 	clone_repo_shells
+	clone_repo_starter
 	echo -e "${RV} Done! ${RC}"
 }
 
@@ -264,19 +253,18 @@ echo -e "\u001b${GREEN} Setting up Dotfiles...${RC}"
 
 echo -e " \u001b${WHITE}\u001b[4mSelect an option:${RC}"
 echo -e "  \u001b${BLUE} (a) ALL(1-12) ${RC}"
-echo -e "  \u001b${BLUE} (r) Clone all repos (3,4,5) ${RC}"
+echo -e "  \u001b${BLUE} (r) Clone all repos (3,4,5,6) ${RC}"
 echo -e "  \u001b${BLUE} (1) Install packages ${RC}"
 echo -e "  \u001b${BLUE} (2) Backup config and setup symlinks ${RC}"
 echo -e "  \u001b${BLUE} (3) Clone repo wm ${RC}"
 echo -e "  \u001b${BLUE} (4) Clone repo editors ${RC}"
 echo -e "  \u001b${BLUE} (5) Clone repo shells ${RC}"
-echo -e "  \u001b${BLUE} (6) Install r ${RC}"
-echo -e "  \u001b${BLUE} (7) Install lazygit ${RC}"
+echo -e "  \u001b${BLUE} (6) Clone repo starter ${RC}"
+echo -e "  \u001b${BLUE} (7) Install r ${RC}"
 echo -e "  \u001b${BLUE} (8) Install file managers ${RC}"
 echo -e "  \u001b${BLUE} (9) Install fonts ${RC}"
 echo -e "  \u001b${BLUE} (10) Install deb-get ${RC}"
 echo -e "  \u001b${BLUE} (11) Install telegram ${RC}"
-echo -e "  \u001b${BLUE} (12) Install greenclip ${RC}"
 echo -e "  \u001b${RED} (*) Anything else to exit ${RC}"
 
 echo -en "\u001b${GREEN2} ==> ${RC}"
@@ -313,32 +301,28 @@ case $option in
 	clone_repo_shells
 	;;
 
-"8")
+"6")
+	clone_repo_starter
+	;;
+
+"7")
 	install_r
 	;;
 
-"9")
-	install_lazygit
-	;;
-
-"10")
+"8")
 	install_file_managers
 	;;
 
-"11")
+"9")
 	install_fonts
 	;;
 
-"12")
+"10")
 	install_debget
 	;;
 
-"13")
+"11")
 	install_telegram
-	;;
-
-"14")
-	install_greenclip
 	;;
 
 *)
