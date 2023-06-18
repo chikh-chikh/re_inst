@@ -133,8 +133,8 @@ function back_sym {
 function clone_repo_wm {
 	echo -e "${RV} Cloning repo wm...${RC}"
 	mkdir -p "${ALL_REPOS_DIR}"/re_slider
-	git clone https://github.com/RU927/re_slider "${ALL_REPOS_DIR}"/re_slider
-	bash "${ALL_REPOS_DIR}"/re_slider/reslider.sh
+	git clone https://github.com/RU927/re_tile "${ALL_REPOS_DIR}"/re_tile
+	bash "${ALL_REPOS_DIR}"/re_tile/retile.sh
 
 	# git remote add origin git@github.com:RU927/re_slider
 }
@@ -160,8 +160,8 @@ function clone_repo_shells {
 function clone_repo_starter {
 	echo -e "${RV} Cloning repo rofi...${RC}"
 	mkdir -p "${ALL_REPOS_DIR}"/re_starter
-	git clone https://github.com/RU927/re_starter "${ALL_REPOS_DIR}"/re_starter
-	bash "${ALL_REPOS_DIR}"/re_starter/restarter.sh
+	git clone https://github.com/RU927/re_run "${ALL_REPOS_DIR}"/re_run
+	bash "${ALL_REPOS_DIR}"/re_run/rerun.sh
 
 	# git remote add origin git@github.com:RU927/re_starter
 }
@@ -186,8 +186,8 @@ function install_file_managers {
 	sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus ranger vifm
 	pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
 	mkdir -p ~/.local/bin
-	ln -s "$PWD/config/vifm/scripts/vifmrun" ~/.local/bin
-	ln -s "$PWD/config/vifm/scripts/vifmimg" ~/.local/bin
+	# ln -s "$PWD/config/vifm/scripts/vifmrun" ~/.local/bin
+	# ln -s "$PWD/config/vifm/scripts/vifmimg" ~/.local/bin
 	# pip3 install ranger-fm
 	# pipx run --spec ranger-fm ranger
 }
