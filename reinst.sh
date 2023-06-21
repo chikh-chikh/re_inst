@@ -132,7 +132,7 @@ function back_sym {
 
 function clone_repo_wm {
 	echo -e "${RV} Cloning repo wm...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_slider
+	mkdir -p "${ALL_REPOS_DIR}"/re_tile
 	git clone https://github.com/RU927/re_tile "${ALL_REPOS_DIR}"/re_tile
 	bash "${ALL_REPOS_DIR}"/re_tile/retile.sh
 
@@ -159,7 +159,7 @@ function clone_repo_shells {
 
 function clone_repo_starter {
 	echo -e "${RV} Cloning repo rofi...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_starter
+	mkdir -p "${ALL_REPOS_DIR}"/re_run
 	git clone https://github.com/RU927/re_run "${ALL_REPOS_DIR}"/re_run
 	bash "${ALL_REPOS_DIR}"/re_run/rerun.sh
 
