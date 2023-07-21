@@ -17,12 +17,16 @@ fi
 # 	eval $(luarocks path --bin)
 # fi
 
-setxkbmap -option grp:alt_shift_toggle -layout us,ru &
+# setxkbmap -option grp:alt_shift_toggle -layout us,ru &
 
-gxkb &
+# индикатор и переключатель раскладки клавиатуры для X11.
+# gxkb &
+
+# sxhkd & # -c $HOME/.config/sxhkd/sxhkdrc
 
 # systemctl --user import-environment DISPLAY &
 
 # greenclip daemon &
 
 exec awesome
+# exex herbstluftwm
