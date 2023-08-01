@@ -8,3 +8,4 @@ config/nvim/lazy-lock.json
 config/vifm/vifminfo.json
 config/lazygit/state.yml
 home/jupyter/migrated
+config/gh/.nvimlog
