@@ -30,16 +30,16 @@ configExists() {
 }
 
 command_exists() {
-	command -v $1 >/dev/null 2>&1
+	command -v "$1" >/dev/null 2>&1
 }
 
 checkEnv() {
 	## Check Package Handeler
-	PACKAGEMANAGER='apt dnf pacman'
+	PACKAGEMANAGER='apt dnf'
 	for pgm in ${PACKAGEMANAGER}; do
-		if command_exists ${pgm}; then
+		if command_exists "${pgm}"; then
 			PACKAGER=${pgm}
-			echo -e ${RV}"Using ${pgm}"
+			echo -e "${RV}Using ${pgm}"
 		fi
 	done
 
@@ -78,19 +78,7 @@ function install_packages {
 		locales language-pack-ru console-cyrillic'
 
 	echo -e "${YELLOW}Installing required packages...${RC}"
-	if [[ $PACKAGER == "pacman" ]]; then
-		if ! command_exists yay; then
-			echo "Installing yay..."
-			sudo "${PACKAGER} --noconfirm -S base-devel"
-			$(cd /opt && sudo git clone https://aur.archlinux.org/yay-git.git && sudo chown -R \
-				${USER}:${USER} ./yay-git && cd yay-git && makepkg --noconfirm -si)
-		else
-			echo "Command yay already installed"
-		fi
-		yay --noconfirm -S ${DEPENDENCIES}
-	else
-		sudo ${PACKAGER} install -yq ${DEPENDENCIES}
-	fi
+	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
 }
 
 function back_sym {
@@ -166,19 +154,8 @@ function clone_repo_starter {
 	# git remote add origin git@github.com:RU927/re_starter
 }
 
-function install_r {
-	echo -e "${RV} Installing R... ${RC}"
-	#R
-	wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-	gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-	sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/"
-	sudo apt-get update
-	sudo apt-get install r-base
-	sudo apt-get install r-base-dev libxml2-dev
-	sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
-	# sudo apt install --no-install-recommends r-cran-tidyverse
-	# deb https://<my.favorite.ubuntu.mirror>/ focal-backports main restricted universe
-	R --version
+function install_x {
+	echo "hello"
 }
 
 function install_file_managers {
@@ -260,7 +237,7 @@ echo -e "  \u001b${BLUE} (3) Clone repo wm ${RC}"
 echo -e "  \u001b${BLUE} (4) Clone repo editors ${RC}"
 echo -e "  \u001b${BLUE} (5) Clone repo shells ${RC}"
 echo -e "  \u001b${BLUE} (6) Clone repo starter ${RC}"
-echo -e "  \u001b${BLUE} (7) Install r ${RC}"
+echo -e "  \u001b${BLUE} (7) Install x ${RC}"
 echo -e "  \u001b${BLUE} (8) Install file managers ${RC}"
 echo -e "  \u001b${BLUE} (9) Install fonts ${RC}"
 echo -e "  \u001b${BLUE} (10) Install deb-get ${RC}"
@@ -306,7 +283,7 @@ case $option in
 	;;
 
 "7")
-	install_r
+	install_x
 	;;
 
 "8")
