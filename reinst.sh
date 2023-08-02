@@ -118,45 +118,47 @@ function back_sym {
 	done
 }
 
-function clone_repo_wm {
-	echo -e "${RV} Cloning repo wm...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_tile
-	git clone https://github.com/RU927/re_tile "${ALL_REPOS_DIR}"/re_tile
-	bash "${ALL_REPOS_DIR}"/re_tile/retile.sh
+git_http_addres="https://github.com"
+# git_ssh_addres="git@github.com"
+git_user="RU927"
+my_re_repo=("lang_env_packagemanager" "shell" "tile" "writer" "run")
 
-	# git remote add origin git@github.com:RU927/re_slider
+function clone_my_re_repo {
+	for r in "${my_re_repo[@]}"; do
+		echo -e "${RV} Cloning repo re_$r...${RC}"
+		mkdir -p "$ALL_REPOS_DIR/re_$r"
+		git clone "$git_http_addres/$git_user/re_$r" "$ALL_REPOS_DIR/re_$r"
+		cd "$ALL_REPOS_DIR/re_$r" || exit
+		bash "$ALL_REPOS_DIR/re_$r/$r.sh"
+	done
 }
 
-function clone_repo_editors {
-	echo -e "${RV} Cloning repo editors...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_writer
-	git clone https://github.com/RU927/re_writer "${ALL_REPOS_DIR}"/re_writer
-	bash "${ALL_REPOS_DIR}"/re_writer/rewriter.sh
+# if ! command -v gh >/dev/null 2>&1; then
+#     echo "Install gh first"
+#     exit 1
+# fi
+#
+# if ! gh auth status >/dev/null 2>&1; then
+#     echo "You need to login: gh auth login"
+#     exit 1
+# fi
+# git remote add origin "$git_ssh_addres:$git_user/re_$r"
 
-	# git remote add origin git@github.com:RU927/re_writer
-}
-
-function clone_repo_shells {
-	echo -e "${RV} Cloning repo shells...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_shell
-	git clone https://github.com/RU927/re_shell "${ALL_REPOS_DIR}"/re_shell
-	bash "${ALL_REPOS_DIR}"/re_shell/reshell.sh
-
-	# git remote add origin git@github.com:RU927/re_shell
-}
-
-function clone_repo_starter {
-	echo -e "${RV} Cloning repo rofi...${RC}"
-	mkdir -p "${ALL_REPOS_DIR}"/re_run
-	git clone https://github.com/RU927/re_run "${ALL_REPOS_DIR}"/re_run
-	bash "${ALL_REPOS_DIR}"/re_run/rerun.sh
-
-	# git remote add origin git@github.com:RU927/re_starter
-}
-
-function install_x {
-	echo "hello"
-}
+# function xyz {
+#  print hello
+# }
+#
+# function xyz {
+#  print hello
+# }
+#
+# function xyz {
+#  print hello
+# }
+#
+# function xyz {
+#  print hello
+# }
 
 function install_file_managers {
 	echo -e "${RV} Installing file managers ${RC}"
@@ -179,13 +181,6 @@ function install_fonts {
 	sudo fc-cache -fr
 }
 
-function install_debget {
-	echo -e "${RV} Installing deb-get ${RC}"
-	#deb-get
-	curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
-	deb-get install google-chrome-stable zoom exodus discord flameshot balena-etcher-electron whatsapp-for-linux
-}
-
 function install_telegram {
 	echo -e "${RV} Installing telegram ${RC}"
 	#Telegramm
@@ -199,11 +194,11 @@ function all {
 	echo -e "${RV} Setting up Dotfiles... ${RC}"
 	install_packages
 	back_sym
-	clone_repo_wm
-	clone_repo_editors
-	clone_repo_shells
-	clone_repo_starter
-	install_r
+	# clone_repo_wm
+	# clone_repo_editors
+	# clone_repo_shells
+	# clone_repo_starter
+	clone_my_re_repo
 	install_file_managers
 	install_fonts
 	install_debget
@@ -211,14 +206,14 @@ function all {
 	echo -e "${RV} Done! ${RC}"
 }
 
-function repos {
-	echo -e "${RV} Setting up Editors... ${RC}"
-	clone_repo_editors
-	clone_repo_wm
-	clone_repo_shells
-	clone_repo_starter
-	echo -e "${RV} Done! ${RC}"
-}
+# function repos {
+# 	echo -e "${RV} Setting up Editors... ${RC}"
+# 	clone_repo_editors
+# 	clone_repo_wm
+# 	clone_repo_shells
+# 	clone_repo_starter
+# 	echo -e "${RV} Done! ${RC}"
+# }
 
 if [ "$1" = "--all" -o "$1" = "-a" ]; then
 	all
@@ -230,14 +225,14 @@ echo -e "\u001b${GREEN} Setting up Dotfiles...${RC}"
 
 echo -e " \u001b${WHITE}\u001b[4mSelect an option:${RC}"
 echo -e "  \u001b${BLUE} (a) ALL(1-12) ${RC}"
-echo -e "  \u001b${BLUE} (r) Clone all repos (3,4,5,6) ${RC}"
+# echo -e "  \u001b${BLUE} (r) Clone all repos (3,4,5,6) ${RC}"
 echo -e "  \u001b${BLUE} (1) Install packages ${RC}"
 echo -e "  \u001b${BLUE} (2) Backup config and setup symlinks ${RC}"
-echo -e "  \u001b${BLUE} (3) Clone repo wm ${RC}"
-echo -e "  \u001b${BLUE} (4) Clone repo editors ${RC}"
-echo -e "  \u001b${BLUE} (5) Clone repo shells ${RC}"
-echo -e "  \u001b${BLUE} (6) Clone repo starter ${RC}"
-echo -e "  \u001b${BLUE} (7) Install x ${RC}"
+# echo -e "  \u001b${BLUE} (3) Clone repo wm ${RC}"
+# echo -e "  \u001b${BLUE} (4) Clone repo editors ${RC}"
+# echo -e "  \u001b${BLUE} (5) Clone repo shells ${RC}"
+# echo -e "  \u001b${BLUE} (6) Clone repo starter ${RC}"
+echo -e "  \u001b${BLUE} (7) Clone all re_repo ${RC}"
 echo -e "  \u001b${BLUE} (8) Install file managers ${RC}"
 echo -e "  \u001b${BLUE} (9) Install fonts ${RC}"
 echo -e "  \u001b${BLUE} (10) Install deb-get ${RC}"
@@ -254,9 +249,9 @@ case $option in
 	all
 	;;
 
-"r")
-	repos
-	;;
+# "r")
+# 	repos
+# 	;;
 
 "1")
 	install_packages
@@ -266,24 +261,23 @@ case $option in
 	back_sym
 	;;
 
-"3")
-	clone_repo_wm
-	;;
-
-"4")
-	clone_repo_editors
-	;;
-
-"5")
-	clone_repo_shells
-	;;
-
-"6")
-	clone_repo_starter
-	;;
-
+# "3")
+# 	clone_repo_wm
+# 	;;
+#
+# "4")
+# 	clone_repo_editors
+# 	;;
+#
+# "5")
+# 	clone_repo_shells
+# 	;;
+#
+# "6")
+# 	clone_repo_starter
+# 	;;
 "7")
-	install_x
+	clone_my_re_repo
 	;;
 
 "8")
