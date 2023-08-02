@@ -129,7 +129,7 @@ function clone_my_re_repo {
 		mkdir -p "$ALL_REPOS_DIR/re_$r"
 		git clone "$git_http_addres/$git_user/re_$r" "$ALL_REPOS_DIR/re_$r"
 		cd "$ALL_REPOS_DIR/re_$r" || exit
-		bash "$ALL_REPOS_DIR/re_$r/$r.sh"
+		bash "$ALL_REPOS_DIR/re_$r/re$r.sh"
 	done
 }
 
