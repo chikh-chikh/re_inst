@@ -85,7 +85,7 @@ function back_sym {
 	# перед создание линков делает бекапы только тех пользовательских конфикураций,
 	# файлы которых есть в ./config ./home
 	echo -e "\u001b${YELLOW} Backing up existing files... ${RC}"
-	for config in $(ls ${DOT_CFG_PATH}); do
+	for config in $(command ls "${DOT_CFG_PATH}"); do
 		if configExists "${USR_CFG_PATH}/${config}"; then
 			echo -e "${YELLOW}Moving old config ${USR_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}.old${RC}"
 			if ! mv "${USR_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}.old"; then
@@ -101,7 +101,7 @@ function back_sym {
 		fi
 	done
 
-	for config in $(ls ${DOT_HOME_PATH}); do
+	for config in $(command ls "${DOT_HOME_PATH}"); do
 		if configExists "$HOME/.${config}"; then
 			echo -e "${YELLOW}Moving old config ${HOME}/.${config} to ${HOME}/.${config}.old${RC}"
 			if ! mv "${HOME}/.${config}" "${HOME}/.${config}.old"; then
@@ -162,7 +162,7 @@ function clone_my_re_repo {
 
 function install_file_managers {
 	echo -e "${RV} Installing file managers ${RC}"
-	sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus ranger vifm
+	sudo apt install libjpeg-dev zlib1g-dev python3-dev libxtst-dev nautilus
 	pip3 install ./set/ueberzug_18.1.9.orig.tar.gz
 	mkdir -p ~/.local/bin
 	# ln -s "$PWD/config/vifm/scripts/vifmrun" ~/.local/bin
@@ -183,9 +183,10 @@ function install_fonts {
 
 function install_telegram {
 	echo -e "${RV} Installing telegram ${RC}"
+	mkdir -p "${SRC_DIR}"/tetegram
 	#Telegramm
-	wget https://telegram.org/dl/desktop/linux
-	sudo tar -xpf linux -C /opt
+	wget https://telegram.org/dl/desktop/linux -P "${SRC_DIR}"/tetegram
+	sudo tar -xpf "${SRC_DIR}"/tetegram/linux -C /opt
 	sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
 	sudo chmod -R 775 /opt/Telegram
 }
