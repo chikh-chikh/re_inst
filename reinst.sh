@@ -121,7 +121,7 @@ function back_sym {
 git_http_addres="https://github.com"
 # git_ssh_addres="git@github.com"
 git_user="RU927"
-my_re_repo=("lang_env_packagemanager" "shell" "tile" "writer" "run" "net")
+my_re_repo=("paenlare" "shell" "tile" "writer" "run" "net" "viewers")
 
 function clone_my_re_repo {
 	for r in "${my_re_repo[@]}"; do
