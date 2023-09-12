@@ -15,15 +15,13 @@ RV='\u001b[7m'
 
 ALL_REPOS_DIR=$HOME/REPOS
 
-THIS_REPO_PATH="$(dirname "$(realpath "$0")")"
-# THIS_REPO_PATH=$HOME/REPOS/re_inst
-DOT_CFG_PATH=$THIS_REPO_PATH/config
-DOT_HOME_PATH=$THIS_REPO_PATH/home
-USR_CFG_PATH=$HOME/.config
-# USR_CFG_PATH=$THIS_REPO_PATH/test
+this_dir="$(dirname "$(realpath "$0")")"
+dot_config=$this_dir/config
+dot_home=$this_dir/home
+config_dir=$HOME/.config
 
-SRC_DIR=$HOME/src
-FONT_DIR=$HOME/.local/share/fonts
+src_dir=$HOME/src
+font_dir=$HOME/.local/share/fonts
 
 configExists() {
 	[[ -e "$1" ]] && [[ ! -L "$1" ]]
@@ -49,7 +47,7 @@ checkEnv() {
 	fi
 
 	## Check if the current directory is writable.
-	PATHs="$THIS_REPO_PATH $USR_CFG_PATH"
+	PATHs="$this_dir $config_dir"
 	for path in $PATHs; do
 		if [[ ! -w ${path} ]]; then
 			echo -e "${RED}Can't write to ${path}${RC}"
@@ -59,7 +57,7 @@ checkEnv() {
 }
 checkEnv
 
-mkdir -p "$USR_CFG_PATH" "$SRC_DIR" "$FONT_DIR"
+mkdir -p "$config_dir" "$src_dir" "$font_dir"
 
 function install_packages {
 	DEPENDENCIES='xauth xorg \
@@ -78,30 +76,30 @@ function install_packages {
 		locales language-pack-ru console-cyrillic'
 
 	echo -e "${YELLOW}Installing required packages...${RC}"
-	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
+	sudo "${PACKAGER}" install -yq "${DEPENDENCIES}"
 }
 
 function back_sym {
 	# перед создание линков делает бекапы только тех пользовательских конфикураций,
 	# файлы которых есть в ./config ./home
 	echo -e "\u001b${YELLOW} Backing up existing files... ${RC}"
-	for config in $(command ls "${DOT_CFG_PATH}"); do
-		if configExists "${USR_CFG_PATH}/${config}"; then
-			echo -e "${YELLOW}Moving old config ${USR_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}.old${RC}"
-			if ! mv "${USR_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}.old"; then
+	for config in $(command ls "${dot_config}"); do
+		if configExists "${config_dir}/${config}"; then
+			echo -e "${YELLOW}Moving old config ${config_dir}/${config} to ${config_dir}/${config}.old${RC}"
+			if ! mv "${config_dir}/${config}" "${config_dir}/${config}.old"; then
 				echo -e "${RED}Can't move the old config!${RC}"
 				exit 1
 			fi
 			echo -e "${WHITE} Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old' ${RC}"
 		fi
-		echo -e "${GREEN}Linking ${DOT_CFG_PATH}/${config} to ${USR_CFG_PATH}/${config}${RC}"
-		if ! ln -snf "${DOT_CFG_PATH}/${config}" "${USR_CFG_PATH}/${config}"; then
+		echo -e "${GREEN}Linking ${dot_config}/${config} to ${config_dir}/${config}${RC}"
+		if ! ln -snf "${dot_config}/${config}" "${config_dir}/${config}"; then
 			echo echo -e "${RED}Can't link the config!${RC}"
 			exit 1
 		fi
 	done
 
-	for config in $(command ls "${DOT_HOME_PATH}"); do
+	for config in $(command ls "${dot_home}"); do
 		if configExists "$HOME/.${config}"; then
 			echo -e "${YELLOW}Moving old config ${HOME}/.${config} to ${HOME}/.${config}.old${RC}"
 			if ! mv "${HOME}/.${config}" "${HOME}/.${config}.old"; then
@@ -110,8 +108,8 @@ function back_sym {
 			fi
 			echo -e "${WHITE} Remove backups with 'rm -ir ~/.*.old && rm -ir ~/.config/*.old' ${RC}"
 		fi
-		echo -e "${GREEN}Linking ${DOT_HOME_PATH}/${config} to ${HOME}/.${config}${RC}"
-		if ! ln -snf "${DOT_HOME_PATH}/${config}" "${HOME}/.${config}"; then
+		echo -e "${GREEN}Linking ${dot_home}/${config} to ${HOME}/.${config}${RC}"
+		if ! ln -snf "${dot_home}/${config}" "${HOME}/.${config}"; then
 			echo echo -e "${RED}Can't link the config!${RC}"
 			exit 1
 		fi
@@ -173,20 +171,20 @@ function install_file_managers {
 
 function install_fonts {
 	echo -e "${RV} Installing fonts ${RC}"
-	mkdir -p "${SRC_DIR}"/fonts
+	mkdir -p "${src_dir}"/fonts
 	# wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip -P "${SRC_DIR}"/fonts
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/RobotoMono.zip -P "${src_dir}"/fonts
 	# unzip JetBrainsMono.zip -d ~/.local/share/fonts/
-	unzip "${SRC_DIR}"/fonts/RobotoMono.zip -d "${FONT_DIR}"
+	unzip "${src_dir}"/fonts/RobotoMono.zip -d "${font_dir}"
 	sudo fc-cache -fr
 }
 
 function install_telegram {
 	echo -e "${RV} Installing telegram ${RC}"
-	mkdir -p "${SRC_DIR}"/tetegram
+	mkdir -p "${src_dir}"/tetegram
 	#Telegramm
-	wget https://telegram.org/dl/desktop/linux -P "${SRC_DIR}"/tetegram
-	sudo tar -xpf "${SRC_DIR}"/tetegram/linux -C /opt
+	wget https://telegram.org/dl/desktop/linux -P "${src_dir}"/tetegram
+	sudo tar -xpf "${src_dir}"/tetegram/linux -C /opt
 	sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop
 	sudo chmod -R 775 /opt/Telegram
 }
