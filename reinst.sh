@@ -13,7 +13,7 @@ BLUE='[34;1m'
 
 RV='\u001b[7m'
 
-ALL_REPOS_DIR=$HOME/REPOS
+all_repos_dir=$HOME/REPOS
 
 this_dir="$(dirname "$(realpath "$0")")"
 dot_config=$this_dir/config
@@ -116,18 +116,43 @@ function back_sym {
 	done
 }
 
-git_http_addres="https://github.com"
+git_user="chikh-chikh"
+git_https_addres="https://github.com"
+git=$git_https_addres/$git_user
 # git_ssh_addres="git@github.com"
-git_user="RU927"
-my_re_repo=("paenlare" "shell" "tile" "viser" "run" "net" "watcher")
+# git=$git_ssh_addres:$git_user
 
-function clone_my_re_repo {
+my_re_repo=("paenlare" "shell" "tile" "viser" "run" "net")
+my_md_repo=("watcher")
+my_ex_repo=("change")
+
+function clone_re_repo {
 	for r in "${my_re_repo[@]}"; do
-		echo -e "${RV} Cloning repo re_$r...${RC}"
-		mkdir -p "$ALL_REPOS_DIR/re_$r"
-		git clone "$git_http_addres/$git_user/re_$r" "$ALL_REPOS_DIR/re_$r"
-		cd "$ALL_REPOS_DIR/re_$r" || exit
-		bash "$ALL_REPOS_DIR/re_$r/re$r.sh"
+		echo -e "${RV} cloning re_$r...${RC}"
+		mkdir -p "$all_repos_dir/re_$r"
+		git clone "$git/re_$r" "$all_repos_dir/re_$r"
+		# cd "$all_repos_dir/re_$r" || exit
+		# bash "$all_repos_dir/re_$r/re$r.sh"
+	done
+}
+
+function clone_md_repo {
+	for r in "${my_md_repo[@]}"; do
+		echo -e "${RV} cloning md_$r...${RC}"
+		mkdir -p "$all_repos_dir/md_$r"
+		git clone "$git/md_$r" "$all_repos_dir/md_$r"
+		# cd "$all_repos_dir/md_$r" || exit
+		# bash "$all_repos_dir/md_$r/md$r.sh"
+	done
+}
+
+function clone_ex_repo {
+	for r in "${my_ex_repo[@]}"; do
+		echo -e "${RV} cloning ex_$r...${RC}"
+		mkdir -p "$all_repos_dir/ex_$r"
+		git clone "$git/ex_$r" "$all_repos_dir/ex_$r"
+		# cd "$all_repos_dir/ex_$r" || exit
+		# bash "$all_repos_dir/ex_$r/ex$r.sh"
 	done
 }
 
@@ -141,22 +166,6 @@ function clone_my_re_repo {
 #     exit 1
 # fi
 # git remote add origin "$git_ssh_addres:$git_user/re_$r"
-
-# function xyz {
-#  print hello
-# }
-#
-# function xyz {
-#  print hello
-# }
-#
-# function xyz {
-#  print hello
-# }
-#
-# function xyz {
-#  print hello
-# }
 
 function install_file_managers {
 	echo -e "${RV} Installing file managers ${RC}"
@@ -197,7 +206,9 @@ function all {
 	# clone_repo_editors
 	# clone_repo_shells
 	# clone_repo_starter
-	clone_my_re_repo
+	clone_re_repo
+	clone_md_repo
+	clone_ex_repo
 	install_file_managers
 	install_fonts
 	install_debget
@@ -214,7 +225,7 @@ function all {
 # 	echo -e "${RV} Done! ${RC}"
 # }
 
-if [ "$1" = "--all" -o "$1" = "-a" ]; then
+if [ "$1" = "--all" ] || [ "$1" = "-a" ]; then
 	all
 	exit 0
 fi
