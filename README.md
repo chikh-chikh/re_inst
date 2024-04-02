@@ -1,16 +1,9 @@
-## Скрипт реконфигурации моего ПК на ОС Ubuntu
+## Файлы конфигурации моего ПК на ОС Ubuntu
 
-Этот скрипт клонирует другие re_*, которые обособились для удобства:
-[терминал](https://github.com/RU927/re_shell)
-[оконный менеджер](https://github.com/RU927/re_tile)
-[ридер](https://github.com/RU927/re_writer)
-[лаунчер](https://github.com/RU927/re_run)
-[сеть](https://github.com/RU927/re_net)
-[окружение](https://github.com/RU927/re_lang_env_packagemanager)
-
-<!-- [](https://github.com/RU927/re_) -->
-<!-- [](https://github.com/RU927/re_) -->
-<!-- [](https://github.com/RU927/re_) -->
-<!-- [](https://github.com/RU927/re_) -->
-<!-- [](https://github.com/RU927/re_) -->
-<!-- [](https://github.com/RU927/re_) -->
+Этот скрипт клонирует другие re_*, которые обособлены для удобства:
+- [настройка терминала](https://github.com/chikh-chikh/re_shell)
+- [настройка оконного менеджера](https://github.com/chikh-chikh/re_tile)
+- [настройка редактора](https://github.com/chikh-chikh/re_viser)
+- [настройка лаунчера](https://github.com/chikh-chikh/re_run)
+- [настройка сети](https://github.com/chikh-chikh/re_net)
+- [настройка окружения](https://github.com/chikh-chikh/re_paenlare)
