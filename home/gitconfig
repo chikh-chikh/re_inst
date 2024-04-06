@@ -1,22 +1,16 @@
 [user]
     email = mr.uzairov@gmail.com
     name = Rustam Uzairov
-    signingkey = 451CE394EBEDA10CA4547ACB1713930DAA7A79B4
+    signingkey = 73470C8B5018CC05BF6B9EA28C6BE6143437142E
+    ; signingkey = 451CE394EBEDA10CA4547ACB1713930DAA7A79B4
 
 [commit]
     gpgSign = true 
 
-; [credential] 
-;     helper = cache --timeout 3600 
-; [credential] 
-;   helper = store 
-
 [core]
     editor = nvim
-    ; pager = delta --dark 
     excludesFile = ~/.gitignore.global
-; [core] 
-;   excludesfile = ~/.gitignore_global 
+
 ;   editor       = vim 
 ;   autocrlf     = input 
 ;   eol          = lf 
@@ -38,72 +32,29 @@
 [code]
   pager = cat
 
-
-; [interactive] 
-;     diffFilter = delta --color-only --highlight-removed 
-;
-; [color] 
-;     ui = true 
-;
-; [protocol] 
-;     version = 2 
-
 ; [push] 
-;     autoSetupRemote = true 
-; [push] 
+;   autoSetupRemote = true 
 ;   default = simple 
-;
 ; [pull] 
-;     rebase = true 
-;
+;   rebase = true 
 ; [rebase] 
-;     autoStash = true 
-; [rebase] 
-;   autoSquash = true 
+;   autoStash = true 
 ; [branch] 
 ;   autosetuprebase = always 
-;
+; [fetch] 
+;   prune = true 
+
 [init] 
     defaultBranch = main 
 
-; [merge] 
-;     conflictstyle = diff3 
-;
-; [diff] 
-;     colorMoved = default 
-; [diff] 
-; 	tool = meld 
-;
-; [include] 
-;     path = ~/.config/delta/delta.gitconfig 
-; [include] 
-;     path = ~/git/ssh/gitconfig-private 
-;
-; [delta] 
-;     features = mantis-shrimp 
-;
-; [filter "lfs"] 
-; 	clean = git-lfs clean -- %f 
-; 	process = git-lfs filter-process 
-; 	required = true 
-; 	smudge = git-lfs smudge -- %f 
-;
-; [rerere] 
-;   autoupdate = true 
-;   enable     = true 
-;
 [gpg] 
   program = gpg 
-;
-; [fetch] 
-;   prune = true 
-;
-; [gc] 
-;   auto = 256 
-;
-;
-; [help] 
-; 	format = html 
+
+[credential]
+	helper = cache
+; [http]
+; 	sslVerify = true
+; 	sslBackend = schannel
 
 [alias]
   br     = branch
@@ -116,9 +67,8 @@
   to     = log  --no-walk  --tags  --pretty=format:'%C(auto)%aI  %H  %d'  --decorate=full
   tt     = log  --no-walk  --tags  --pretty=format:'%C(auto)%H  %d'  --decorate=full
   t3     = log  --no-walk  --tags  --pretty=format:'%C(auto)%h  %d'  --decorate=full
-  master = checkout  master
-  pf     = push  --force
-  pom    = push  origin  master
+  main = checkout main
+  pom    = push  origin  main
   rbc    = rebase  --continue
   rbi    = rebase  -i  origin/master
   rbs    = rebase  --skip
@@ -131,8 +81,4 @@
   st     = status  --short  --branch
   undo   = "!f()  {  git  reset  --hard  $(git  rev-parse  --abbrev-ref  HEAD)@{${1-1}};  };  f"
   pushup = push  -u  origin  HEAD
-[credential]
-	helper = cache
-; [http]
-; 	sslVerify = true
-; 	sslBackend = schannel
+
