@@ -60,22 +60,22 @@ checkEnv
 mkdir -p "$config_dir" "$src_dir" "$font_dir"
 
 function install_packages {
-	DEPENDENCIES="xauth xorg \
-		build-essential libreadline-dev unzip curl wget python3 pipx \
-		cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
-		libxml2-dev \
-		libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
-		pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
-		aptitude nala exa zsh \
-		cmus tmux picom fzf htop gh rofi \
-		zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-writer libreoffice-l10n-ru \
-		pandoc pandoc-citeproc \
-		atool bat fd-find fasd silversearcher-ag \
-		ripgrep xsel ncdu powerline autorandr libnotify-bin \
-		locales language-pack-ru console-cyrillic"
+	DEPENDENCIES=(xauth xorg \
+  build-essential libreadline-dev unzip curl wget python3 pipx \
+  cmake pkg-config xclip libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev \
+  libxml2-dev \
+  libfontconfig1-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev \
+  pulseaudio alsa alsa-utils alsa-tools alsa-oss mplayer mirage rhythmbox moc mpv \
+  aptitude nala exa zsh \
+  cmus tmux picom fzf htop gh rofi \
+  zathura zathura-pdf-poppler zathura-djvu zathura-ps zathura-cb libreoffice-writer libreoffice-l10n-ru \
+  pandoc pandoc-citeproc \
+  atool bat fd-find fasd silversearcher-ag \
+  ripgrep xsel ncdu powerline autorandr libnotify-bin \
+  locales language-pack-ru console-cyrillic)
 
 	echo -e "${YELLOW}Installing required packages...${RC}"
-	sudo "${PACKAGER}" install ${DEPENDENCIES}
+	sudo "${PACKAGER}" install "${DEPENDENCIES[@]}"
 }
 
 function back_sym {
