@@ -13,7 +13,7 @@ BLUE='[34;1m'
 
 RV='\u001b[7m'
 
-all_repos_dir=$HOME/REPOS
+all_repos_dir=$HOME/aggregate
 
 this_dir="$(dirname "$(realpath "$0")")"
 dot_config=$this_dir/config
