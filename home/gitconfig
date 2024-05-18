@@ -1,60 +1,61 @@
 [user]
-    email = mr.uzairov@gmail.com
-    name = Rustam Uzairov
-    signingkey = 73470C8B5018CC05BF6B9EA28C6BE6143437142E
-    ; signingkey = 451CE394EBEDA10CA4547ACB1713930DAA7A79B4
+  email = mr.uzairov@gmail.com
+  name = Rustam Uzairov
+  signingkey = 73470C8B5018CC05BF6B9EA28C6BE6143437142E
+  ; signingkey = 451CE394EBEDA10CA4547ACB1713930DAA7A79B4
+
+[init] 
+  defaultBranch = main 
 
 [commit]
-    gpgSign = true 
+  gpgSign = true 
+
+[gpg] 
+  program = gpg 
 
 [core]
-    editor = nvim
-    excludesFile = ~/.gitignore.global
+  editor = nvim
+  excludesFile = ~/.gitignore.global
 
-;   editor       = vim 
-;   autocrlf     = input 
-;   eol          = lf 
-;   preloadindex = true 
-;   fscache      = true 
+[code]
+  pager = cat
+
+[branch] 
+  autosetuprebase = remote 
+
+[pull]
+	rebase = true
+
+; [fetch] 
+;   prune = true 
+
+; [push] 
+;   autoSetupRemote = true 
+;   default = simple 
+
+[rebase] 
+  autoStash = true 
+
+; [advice]
+; 	addIgnoredFile = false
+
+; [http]
+; 	sslVerify = true
+; 	sslBackend = schannel
+
+[credential]
+	helper = cache
 
 [color]
   ui          = auto
   branch      = auto
   diff        = auto
   interactive = auto
-  status      = auto
 
 [color  "status"]
   added     = green
   changed   = yellow  bold
   untracked = red  bold
-
-[code]
-  pager = cat
-
-; [push] 
-;   autoSetupRemote = true 
-;   default = simple 
-; [pull] 
-;   rebase = true 
-; [rebase] 
-;   autoStash = true 
-; [branch] 
-;   autosetuprebase = always 
-; [fetch] 
-;   prune = true 
-
-[init] 
-    defaultBranch = main 
-
-[gpg] 
-  program = gpg 
-
-[credential]
-	helper = cache
-; [http]
-; 	sslVerify = true
-; 	sslBackend = schannel
 
 [alias]
   br     = branch
