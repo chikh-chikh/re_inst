@@ -14,11 +14,23 @@
   program = gpg 
 
 [core]
-  editor = nvim
   excludesFile = ~/.gitignore.global
+  editor = nvim
+  ; pager = delta
+  pager = diff-so-fancy | less
 
-[code]
-  pager = cat
+; [interactive]
+;     diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
 
 [branch] 
   autosetuprebase = remote 
