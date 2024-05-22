@@ -115,7 +115,7 @@ function back_sym {
 	done
 }
 
-git_user="chikh-chikh"
+git_user="svrvt"
 git_https_addres="https://github.com"
 git=$git_https_addres/$git_user
 # git_ssh_addres="git@github.com"
